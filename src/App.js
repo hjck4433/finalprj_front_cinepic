@@ -49,9 +49,12 @@ function App() {
               <Route path="/moviesearch" element={<MovieSearch />} />
               <Route path="/moviesearch/:id" element={<MovieInfo />} />
               <Route path="/board/:category" element={<Board />} />
-              <Route path="/post/new" element={<NewPost />} />
-              <Route path="/post/:postId" element={<Post />} />
-              <Route path="/post/revise/:postId" element={<PostRevise />} />
+              <Route path="/board/post/new" element={<NewPost />} />
+              <Route path="/board/post/:postId" element={<Post />} />
+              <Route
+                path="/board/post/revise/:postId"
+                element={<PostRevise />}
+              />
               <Route path="/chatlist" element={<ChatList />} />
               <Route path="/chatlist/:roodId" element={<Chat />} />
               <Route path="/payment" element={<Payment />} />
