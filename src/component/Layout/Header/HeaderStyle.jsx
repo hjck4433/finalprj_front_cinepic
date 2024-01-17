@@ -27,7 +27,7 @@ const HeaderComp = styled.header`
       flex-grow: 1;
       align-items: center;
       img {
-        height: 60%;
+        height: 50%;
         cursor: pointer;
       }
     }
@@ -46,7 +46,7 @@ const HeaderComp = styled.header`
           height: 100%;
           flex-grow: 1;
           position: relative;
-          font-size: 1.2em;
+          font-size: 1.1em;
           font-weight: 600;
           padding: 10px 20px;
           cursor: pointer;
@@ -72,7 +72,7 @@ const HeaderComp = styled.header`
             transition: height 0.8s ease-out;
             li {
               background-color: var(--GREY);
-              font-size: 1.2rem;
+              font-size: 1em;
               font-weight: 400;
               color: #333;
               transition: 0.2s ease-in;
@@ -146,7 +146,7 @@ const HeaderComp = styled.header`
             padding: 0 20px;
             position: static;
             .m-title {
-              font-size: 1.3em;
+              font-size: 1.2em;
               padding: 20px 0;
               background-color: var(--IVORY);
             }
@@ -155,7 +155,7 @@ const HeaderComp = styled.header`
               position: static;
               border-radius: 0;
               li {
-                font-size: 1.2em;
+                font-size: 1em;
                 padding: 20px 0;
               }
             }
