@@ -19,7 +19,6 @@ import PostRevise from "./pages/PostRevise";
 import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
 import Payment from "./pages/Payment";
-import PaymentRst from "./pages/PaymentRst";
 import Preference from "./pages/Preference";
 import UtilTest from "./pages/UtilTest";
 import Theater from "./pages/Theater";
@@ -58,7 +57,6 @@ function App() {
               <Route path="/chatlist" element={<ChatList />} />
               <Route path="/chatlist/:roodId" element={<Chat />} />
               <Route path="/payment" element={<Payment />} />
-              <Route path="/payment/result" element={<PaymentRst />} />
               <Route path="/theater" element={<Theater />} />
               <Route path="/utiltest" element={<UtilTest />} />
             </Route>
