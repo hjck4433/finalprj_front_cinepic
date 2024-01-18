@@ -1,7 +1,11 @@
+import ChatBanner from "../component/ChatList/ChatBanner";
+import ChatRoomList from "../component/ChatList/ChatRoomList";
+
 const ChatList = () => {
   return (
     <>
-      <div className="container">채팅목록 페이지</div>
+      <ChatBanner />
+      <ChatRoomList />
     </>
   );
 };
