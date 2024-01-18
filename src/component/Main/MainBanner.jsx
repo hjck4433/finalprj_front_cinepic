@@ -4,8 +4,8 @@ const MainBannerComp = styled.section`
   width: 100%;
   height: 400px;
   background-image: url(${mainImg});
-  background-size: 125%;
-  background-position: center;
+  background-size: cover;
+  background-position: left;
   .container {
     width: 100%;
     .textBox {
