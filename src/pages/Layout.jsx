@@ -6,6 +6,7 @@ import { UserContext } from "../context/UserStore";
 import ScrollToTop from "../component/Layout/ScrollToTop";
 import Modal from "../util/Modal";
 import { useNavigate } from "react-router-dom";
+import Ad from "../component/Layout/Ad";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ const Layout = () => {
       <Header />
       <main>
         <Outlet />
+        <Ad />
         {/* 로그인 여부를 props로 전달 */}
         {/* {!isKikiMember && <Advertise isLogin={loginStatus} />} */}
       </main>
