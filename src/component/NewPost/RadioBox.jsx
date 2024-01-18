@@ -29,7 +29,7 @@ export const RadioBox = styled.div`
       margin-right: 20px;
       accent-color: var(--BLACK);
 
-      /* 체크박스를 라벨 내에 위치 */
+      // 체크박스를 라벨 안으로 이동
       input[type="radio"] {
         margin: 0 8px 0 0;
       }
@@ -60,7 +60,7 @@ export const RadioBox = styled.div`
       align-items: center;
       accent-color: var(--BLACK);
 
-      /* 체크박스를 라벨 내에 위치 */
+      // 체크박스를 라벨 안으로 이동
       input[type="radio"] {
         margin: 0 8px 0 0;
       }
