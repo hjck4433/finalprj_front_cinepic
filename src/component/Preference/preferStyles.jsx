@@ -36,6 +36,11 @@ const PreferComp = styled.section`
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        @media screen and (max-width: 480px) {
+          height: 240px;
+          text-align: center;
+        }
+
         // 검색창+돋보기 아이콘
         .search {
           display: flex;
@@ -45,6 +50,10 @@ const PreferComp = styled.section`
           border-bottom: 1px solid var(--BLACK);
           cursor: pointer;
           text-align: center;
+          @media screen and (max-width: 480px) {
+            width: 70%;
+            margin-bottom: 10px;
+          }
           // 검색창
           input {
             border: none;
@@ -52,6 +61,10 @@ const PreferComp = styled.section`
             text-align: left;
             font-size: 1.1em;
             padding: 5px;
+            @media screen and (max-width: 280px) {
+              width: 100%;
+              font-size: 0.9em;
+            }
           }
         }
         // 선택된 내용 나오는 것
@@ -59,12 +72,19 @@ const PreferComp = styled.section`
           display: flex;
           justify-content: space-between;
           margin-bottom: 35px;
+          @media screen and (max-width: 480px) {
+            display: block;
+          }
           // 검색 된 이름 나옴
           .sel {
             background-color: rgba(204, 204, 204, 0.5);
             border-radius: 50px;
             padding: 13px;
             margin-right: 20px;
+            @media screen and (max-width: 480px) {
+              margin-bottom: 10px;
+              padding-left: 20px;
+            }
             span:nth-child(1) {
               margin-right: 10px;
               font-weight: bold;
@@ -96,6 +116,9 @@ const PreferComp = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
+        @media screen and (max-width: 768px) {
+          padding-right: 3%;
+        }
         // 여성,남성 버튼
         .form_radio_btn {
           width: 18%;
@@ -103,6 +126,9 @@ const PreferComp = styled.section`
           border: 1px solid var(--GREY);
           border-radius: 10px;
           margin-left: 5%;
+          @media screen and (max-width: 768px) {
+            width: 40%;
+          }
         }
         .form_radio_btn input[type="radio"] {
           display: none;
@@ -154,12 +180,15 @@ const PreferComp = styled.section`
         grid-template-columns: 20% 20% 20% 20%;
         grid-template-rows: 15% 15% 15%;
         gap: 30px;
-        @media screen and (max-width: 560px) {
+        @media screen and (max-width: 768px) {
           height: 550px;
           display: grid;
           grid-template-columns: 45% 45%;
           grid-template-rows: 10%;
           gap: 15px;
+        }
+        @media screen and (max-width: 280px) {
+          font-size: 0.9em;
         }
         .form_checkbox_btn {
           height: 47px;
@@ -199,8 +228,13 @@ const PreferComp = styled.section`
       button {
         margin: 40px;
         @media screen and (max-width: 560px) {
+          margin: 15px;
           width: 25%;
           height: 40px;
+          font-size: 15px;
+        }
+        @media screen and (max-width: 280px) {
+          font-size: 12px;
         }
       }
     }
