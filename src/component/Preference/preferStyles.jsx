@@ -2,6 +2,9 @@ import { styled } from "styled-components";
 
 const PreferComp = styled.section`
   padding-bottom: 50px;
+  @media screen and (max-width: 560px) {
+    padding-bottom: 20px;
+  }
   .container {
     padding-top: 50px;
     h2 {
@@ -76,14 +79,14 @@ const PreferComp = styled.section`
       .form_toggle {
         width: 80%;
         height: 100px;
-        margin-left: 10%;
+        margin: 0 auto;
         text-align: center;
         border: 1px solid var(--BLACK);
         display: flex;
         justify-content: center;
         align-items: center;
         .form_radio_btn {
-          width: 20%;
+          width: 18%;
           height: 47px;
           border: 1px solid var(--GREY);
           border-radius: 10px;
@@ -127,20 +130,27 @@ const PreferComp = styled.section`
       }
       .genre {
         width: 80%;
-        height: 400px;
-        margin-left: 10%;
+        height: 350px;
+        margin: 0 auto;
+        padding: 5% 3%;
         text-align: center;
+        justify-content: center;
         border: 1px solid var(--BLACK);
         display: grid;
         grid-template-columns: 20% 20% 20% 20%;
         grid-template-rows: 15% 15% 15%;
         gap: 30px;
+        @media screen and (max-width: 560px) {
+          height: 550px;
+          display: grid;
+          grid-template-columns: 45% 45%;
+          grid-template-rows: 10%;
+          gap: 15px;
+        }
         .form_checkbox_btn {
-          width: 100%;
           height: 47px;
           border: 1px solid var(--GREY);
           border-radius: 10px;
-          margin: 40px 50px;
         }
         .form_checkbox_btn input[type="checkbox"] {
           display: none;
@@ -174,6 +184,10 @@ const PreferComp = styled.section`
       text-align: center;
       button {
         margin: 40px;
+        @media screen and (max-width: 560px) {
+          width: 25%;
+          height: 40px;
+        }
       }
     }
   }
