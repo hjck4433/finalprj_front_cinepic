@@ -66,11 +66,14 @@ const MyInfoComp = styled.section`
     }
     .buttonBox {
       display: flex;
-      justify-content: space-between;
-      padding-right: 10%;
+      justify-content: end;
+      outline: 1px solid red;
       margin-top: 40px;
       button {
-        margin-left: 10px;
+        margin-left: 50px;
+        letter-spacing: -0.8px;
+        word-break: keep-all;
+        line-height: 1.4;
       }
     }
     @media only screen and (max-width: 768px) {
@@ -98,6 +101,9 @@ const MyInfoComp = styled.section`
             padding-right: 0;
             justify-content: center;
             margin-top: 70px;
+            button {
+              font-size: 1.2em;
+            }
           }
         }
       }
@@ -125,8 +131,8 @@ const MyInfo = ({ memberInfo }) => {
   const toinfochange = () => {
     navigate("/mypage/infochange");
   };
-  const toinfolike = () => {
-    navigate("/mypage/infolike"); //이 부분 연결 위치주소 수정하기
+  const toinfopreference = () => {
+    navigate("/preference/revise");
   };
   return (
     <>
@@ -174,25 +180,25 @@ const MyInfo = ({ memberInfo }) => {
                   children="수정하기"
                   active={true}
                   height="45px"
-                  width="120px"
-                  fontSize="1em"
+                  width="24%"
+                  fontSize=".9em"
                   clickEvt={toinfochange}
                 />
                 <Button
                   children="내 글 관리하기"
                   active={true}
                   height="45px"
-                  width="120px"
-                  fontSize="1em"
+                  width="24%"
+                  fontSize=".9em"
                   clickEvt={tomemberpost}
                 />
                 <Button
                   children="내 취향 관리"
                   active={true}
                   height="45px"
-                  width="120px"
-                  fontSize="1em"
-                  clickEvt={toinfolike}
+                  width="24%"
+                  fontSize=".9em"
+                  clickEvt={toinfopreference}
                 />
               </div>
             </div>
