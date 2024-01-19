@@ -92,7 +92,7 @@ const Theater = () => {
             {/* CGV 청주(서문) */}
             <h3>CGV 청주(서문)</h3>
             <div className="basicInfo1">
-              <h4>| 기본정보</h4>
+              <h3>| 기본정보</h3>
               <div className="content1">
                 <div>
                   <span>상영관 </span>CGV 청주(서문)
@@ -110,7 +110,7 @@ const Theater = () => {
               </div>
             </div>
             <div className="basicInfo2">
-              <h4>| 스크린관 정보</h4>
+              <h3>| 스크린관 정보</h3>
               <div className="content2">
                 <div>
                   <span>총 스크린 수 </span>

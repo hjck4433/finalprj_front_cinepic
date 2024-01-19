@@ -40,6 +40,9 @@ const TheaterComp = styled.section`
             border: none;
             outline: none;
             margin-right: 10px;
+            @media screen and (max-width: 840px) {
+              font-size: 0.7em;
+            }
           }
           // 아이콘
           svg {
@@ -51,37 +54,47 @@ const TheaterComp = styled.section`
     // 정보박스 전체 영역
     .infoContainer {
       border: 1px solid var(--BLACK);
-      padding-top: 30px;
+      padding: 40px;
       margin: 0 auto;
       width: 80%;
       // 상영관 이름
       h3 {
-        padding-left: 5%;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
       }
       // 기본정보 박스 영역
       .basicInfo1 {
         margin-bottom: 40px;
+        @media screen and (max-width: 840px) {
+          margin-right: 15px;
+        }
         // 기본정보 제목
-        h4 {
+        h3 {
           color: var(--RED);
-          margin-left: 35px;
+          margin-bottom: 5%;
+          @media screen and (max-width: 840px) {
+            padding-bottom: 5px;
+          }
         }
         // 박스 안에 내용
         .content1 {
-          width: 90%;
           border: 1px solid var(--BLACK);
-          margin: 20px 35px;
-          padding: 15px 30px;
+          padding: 25px;
           line-height: 40px;
           div {
             display: flex;
             flex-direction: row;
+            @media screen and (max-width: 700px) {
+              font-size: 0.8em;
+            }
             span {
               display: inline-block;
               width: 120px;
               margin-right: 10px;
               position: relative;
+              font-weight: 600;
+              @media screen and (max-width: 610px) {
+                margin-right: 0;
+              }
               &::after {
                 display: block;
                 content: "";
@@ -91,6 +104,12 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
+                @media screen and (max-width: 700px) {
+                  right: 20px;
+                }
+                @media screen and (max-width: 610px) {
+                  right: 45px;
+                }
               }
             }
           }
@@ -98,28 +117,47 @@ const TheaterComp = styled.section`
       }
       // 스크린관 정보 박스 영역
       .basicInfo2 {
+        @media screen and (max-width: 840px) {
+          width: 97%;
+        }
         // 스크린관 정보 제목
-        h4 {
+        h3 {
           color: var(--RED);
-          margin-left: 35px;
+          margin-bottom: 5%;
         }
         // 스크린관 정보 내용
         .content2 {
-          width: 90%;
           border: 1px solid var(--BLACK);
           display: grid;
-          grid-template-columns: 30% 30% 30%;
+          grid-template-columns: 31% 31% 31%;
           grid-template-rows: repeat(3fr);
-          gap: 5%;
-          margin: 25px 35px;
-          padding: 20px 30px;
-          line-height: 40px;
+          gap: 6%;
+          padding: 30px;
+          line-height: 37px;
+          @media screen and (max-width: 840px) {
+            grid-template-columns: 55% 45%;
+            grid-template-rows: 25% 25% 25%;
+            gap: 1px;
+          }
+          @media screen and (max-width: 700px) {
+            padding: 20px;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 23% 23% 23%;
+            gap: 4px;
+          }
           div {
+            @media screen and (max-width: 700px) {
+              font-size: 0.8em;
+            }
             span {
               width: 120px;
               display: inline-block;
               margin-right: 10px;
               position: relative;
+              font-weight: 600;
+              @media screen and (max-width: 610px) {
+                margin-right: -15px;
+              }
               &::after {
                 display: block;
                 content: "";
@@ -129,46 +167,12 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: 840px) {
-    .container {
-      h2 {
-      }
-      .searchContainer {
-        .inputWapper {
-          input {
-            font-size: 0.7em;
-          }
-        }
-      }
-      .infoContainer {
-        .basicInfo1 {
-          margin-right: 15px;
-          h4 {
-            padding-bottom: 5px;
-            .content1 {
-              div {
-                span {
-                  width: 90px;
+                @media screen and (max-width: 700px) {
+                  right: 20px;
                 }
-              }
-            }
-          }
-        }
-        .basicInfo2 {
-          width: 97%;
-          .content2 {
-            grid-template-columns: 55% 45%;
-            grid-template-rows: 25% 25% 25%;
-            gap: 1px;
-            div {
-              span {
+                @media screen and (max-width: 610px) {
+                  right: 40px;
+                }
               }
             }
           }
