@@ -87,51 +87,49 @@ const Theater = () => {
             </div>
           </div>
           <div className="infoContainer">
-            <div className="infoContent">
-              <h3>CGV 청주(서문)</h3>
-              <div className="basicInfo1">
-                <h4>| 기본정보</h4>
-                <div className="content1">
-                  <span>
-                    <h5>상영관 </h5>CGV 청주(서문)
-                  </span>
-                  <span>
-                    <h5>주소 </h5>
-                    충청북도 청주시 상당구 서문동 29-2번지
-                  </span>
-                  <span>
-                    <h5>전화번호 </h5>1544-0070
-                  </span>
-                  <span>
-                    <h5>총 좌석 수 </h5>1,821석
-                  </span>
+            <h3>CGV 청주(서문)</h3>
+            <div className="basicInfo1">
+              <h4>| 기본정보</h4>
+              <div className="content1">
+                <div>
+                  <span>상영관 </span>CGV 청주(서문)
+                </div>
+                <div>
+                  <span>주소 </span>
+                  충청북도 청주시 상당구 서문동 29-2번지
+                </div>
+                <div>
+                  <span>전화번호 </span>1544-0070
+                </div>
+                <div>
+                  <span>총 좌석 수 </span>1,821석
                 </div>
               </div>
-              <div className="basicInfo2">
-                <h4>| 스크린관 정보</h4>
-                <div className="content2">
-                  <span>
-                    <h5>총 스크린 수 </h5>
-                    10개
-                  </span>
-                  <span>
-                    <h5>특별관 운영 여부 </h5>있음
-                  </span>
-                  <span>
-                    <h5>필름 상영관 수 </h5>-
-                  </span>
-                  <span>
-                    <h5> 2D 상영관 수 </h5>10개
-                  </span>
-                  <span>
-                    <h5>3D 상영관 수 </h5>3개
-                  </span>
-                  <span>
-                    <h5>4D 상영관 수 </h5>-
-                  </span>
-                  <span>
-                    <h5> IMAX 상영관 수 </h5>-
-                  </span>
+            </div>
+            <div className="basicInfo2">
+              <h4>| 스크린관 정보</h4>
+              <div className="content2">
+                <div>
+                  <span>총 스크린 수 </span>
+                  10개
+                </div>
+                <div>
+                  <span>특별관 운영 여부 </span>있음
+                </div>
+                <div>
+                  <span>필름 상영관 수 </span>-
+                </div>
+                <div>
+                  <span> 2D 상영관 수 </span>10개
+                </div>
+                <div>
+                  <span>3D 상영관 수 </span>3개
+                </div>
+                <div>
+                  <span>4D 상영관 수 </span>-
+                </div>
+                <div>
+                  <span> IMAX 상영관 수 </span>-
                 </div>
               </div>
             </div>
