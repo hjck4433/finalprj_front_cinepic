@@ -50,6 +50,12 @@ const MemberApi = {
     return await axios.post(Common.CP_DOMAIN + "/auth/login", data);
   },
   // 회원 상세 조회
+  getMemberDetail: async () => {
+    return await axios.get(
+      Common.MV_DOMAIN + "/member/detail",
+      Common.tokenHeader()
+    );
+  },
 
   // 회원 정보 수정
   changeMemberInfo: async (

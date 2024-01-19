@@ -1,7 +1,9 @@
+import MyInfo from "../component/MyPage/MyInfo";
+
 const MyPage = () => {
   return (
     <>
-      <div className="container">마이페이지</div>
+      <MyInfo />
     </>
   );
 };
