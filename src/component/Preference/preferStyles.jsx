@@ -62,6 +62,58 @@ const PreferComp = styled.section`
         }
       }
     }
+    .genderSel {
+      padding-top: 50px;
+      h3 {
+        color: var(--RED);
+        margin-left: 10%;
+        padding-bottom: 30px;
+      }
+
+      .form_toggle {
+        width: 80%;
+        height: 100px;
+        margin-left: 10%;
+        text-align: center;
+        border: 1px solid var(--BLACK);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .form_radio_btn {
+          width: 20%;
+          height: 47px;
+          border: 1px solid var(--GREY);
+          border-radius: 10px;
+          margin-left: 5%;
+        }
+        .form_radio_btn input[type="radio"] {
+          display: none;
+        }
+        .form_radio_btn label {
+          display: block;
+          border-radius: 10px;
+          margin: 0 auto;
+          text-align: center;
+          line-height: 45px;
+        }
+        /* Checked */
+        .form_radio_btn input[type="radio"]:checked + label {
+          color: var(--RED);
+          border: 1px solid var(--RED);
+        }
+        /* Hover */
+        .form_radio_btn label:hover {
+          color: var(--RED);
+          border: 1px solid var(--RED);
+          cursor: pointer;
+        }
+
+        /* Disabled */
+        .form_radio_btn input[type="radio"] + label {
+          color: var(--grey);
+        }
+      }
+    }
   }
 `;
 

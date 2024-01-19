@@ -58,6 +58,25 @@ const Preference = () => {
               </div>
             </div>
           </div>
+          <div className="genderSel">
+            <h3>| 성별 선택</h3>
+            <div class="form_toggle">
+              <div className="form_radio_btn radio_female">
+                <input
+                  id="radio-1"
+                  type="radio"
+                  name="성별"
+                  value="female"
+                  checked
+                />
+                <label htmlFor="radio-1">여성</label>
+              </div>
+              <div className="form_radio_btn">
+                <input id="radio-2" type="radio" name="성별" value="male" />
+                <label htmlFor="radio-2">남성</label>
+              </div>
+            </div>
+          </div>
         </div>
       </PreferComp>
     </>
