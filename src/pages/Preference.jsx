@@ -2,6 +2,7 @@ import React from "react";
 import PreferComp from "../component/Preference/preferStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Button from "../util/Button";
 
 const Preference = () => {
   return (
@@ -76,6 +77,98 @@ const Preference = () => {
                 <label htmlFor="radio-2">남성</label>
               </div>
             </div>
+          </div>
+          <div className="selectGenre">
+            <h3>| 영화 장르 선택(최대 3개)</h3>
+            <div className="genre">
+              <div className="form_checkbox_btn">
+                <input type="checkbox" id="다큐멘터리" />
+                <label htmlFor="다큐멘터리">다큐멘터리</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="역사" />
+                <label htmlFor="역사">역사</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="선택" />
+                <label htmlFor="선택">액션</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="로맨스" />
+                <label htmlFor="로맨스">로맨스</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="애니메이션" />
+                <label htmlFor="애니메이션">애니메이션</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="재난" />
+                <label htmlFor="재난">재난</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="스릴러" />
+                <label htmlFor="스릴러">스릴러</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="코미디" />
+                <label htmlFor="코미디">코미디</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="가족" />
+                <label htmlFor="가족">가족</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="추리물" />
+                <label htmlFor="추리물">추리물</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="종교" />
+                <label htmlFor="종교">종교</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="SF" />
+                <label htmlFor="SF">SF</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="전쟁" />
+                <label htmlFor="전쟁">전쟁</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="판타지" />
+                <label htmlFor="판타지">판타지</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="미스테리" />
+                <label htmlFor="미스테리">미스테리</label>
+              </div>
+              <div className="form_checkbox_btn">
+                <input type="checkbox" name="선택" id="독립" />
+                <label htmlFor="독립">독립</label>
+              </div>
+            </div>
+          </div>
+          <div className="buttonBox">
+            <Button
+              children="등록하기"
+              front={"var(--RED)"}
+              back={"var(--DARKRED)"}
+              width="200px"
+              height="50px"
+              fontSize="20px"
+              active={true}
+              // clickEvt={test}
+            />
+            <Button
+              children="취소하기"
+              front="var(--GREY)"
+              back="var(--DARKGREY)"
+              width="200Px"
+              height="50px"
+              fontSize="20px"
+              active={true}
+              // clickEvt={test}
+            />
+            {/* <Button children="활성화" clickEvt={activate} active={true} /> */}
           </div>
         </div>
       </PreferComp>

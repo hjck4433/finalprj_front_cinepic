@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 const PreferComp = styled.section`
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   .container {
     padding-top: 50px;
     h2 {
@@ -16,6 +16,7 @@ const PreferComp = styled.section`
         margin-left: 10%;
         color: var(--RED);
         padding-bottom: 30px;
+        font-weight: 600;
       }
       .searchBar {
         width: 80%;
@@ -40,6 +41,7 @@ const PreferComp = styled.section`
             outline: none;
             text-align: left;
             font-size: 1.1em;
+            padding: 5px;
           }
         }
         .selBox {
@@ -68,6 +70,7 @@ const PreferComp = styled.section`
         color: var(--RED);
         margin-left: 10%;
         padding-bottom: 30px;
+        font-weight: 600;
       }
 
       .form_toggle {
@@ -112,6 +115,65 @@ const PreferComp = styled.section`
         .form_radio_btn input[type="radio"] + label {
           color: var(--grey);
         }
+      }
+    }
+    .selectGenre {
+      padding-top: 50px;
+      h3 {
+        color: var(--RED);
+        margin-left: 10%;
+        padding-bottom: 30px;
+        font-weight: 600;
+      }
+      .genre {
+        width: 80%;
+        height: 400px;
+        margin-left: 10%;
+        text-align: center;
+        border: 1px solid var(--BLACK);
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        grid-template-rows: 15% 15% 15%;
+        gap: 30px;
+        .form_checkbox_btn {
+          width: 100%;
+          height: 47px;
+          border: 1px solid var(--GREY);
+          border-radius: 10px;
+          margin: 40px 50px;
+        }
+        .form_checkbox_btn input[type="checkbox"] {
+          display: none;
+        }
+        .form_checkbox_btn label {
+          display: block;
+          border-radius: 10px;
+          margin: 0 auto;
+          text-align: center;
+          line-height: 45px;
+        }
+        /* Checked */
+        .form_checkbox_btn input[type="checkbox"]:checked + label {
+          color: var(--RED);
+          border: 1px solid var(--RED);
+        }
+        /* Hover */
+        .form_checkbox_btn label:hover {
+          color: var(--RED);
+          border: 1px solid var(--RED);
+          cursor: pointer;
+        }
+
+        /* Disabled */
+        .form_checkbox_btn input[type="checkbox"] + label {
+          color: var(--grey);
+        }
+      }
+    }
+    .buttonBox {
+      text-align: center;
+      button {
+        margin: 40px;
       }
     }
   }
