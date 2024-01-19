@@ -348,7 +348,7 @@ const Join = ({ email, profile, kakaoId }) => {
         Common.setAccessToken(res.data.accessToken);
         Common.setRefreshToken(res.data.refreshToken);
         setLoginStatus(true);
-        navigate("/");
+        navigate("/preference/new");
       }
     } catch (err) {
       console.log("로그인 에러 : " + err);

@@ -16,7 +16,7 @@ import Logo from "../../../images/cinepic_logo.png";
 const Header = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { loginStatus, setLoginStatus, setIsKikiMember } = context;
+  const { loginStatus, setLoginStatus, setIsMembership } = context;
 
   const [active, setOpen] = useState("");
   const [icon, setIcon] = useState(active === "" ? faBars : faXmark);
@@ -39,7 +39,7 @@ const Header = () => {
 
   const onLogOutClick = () => {
     setLoginStatus("");
-    setIsKikiMember("");
+    setIsMembership("");
     console.log(
       "유저로그아웃 확인 상태" + window.localStorage.getItem("loginStatus")
     );

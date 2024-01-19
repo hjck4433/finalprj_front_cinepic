@@ -16,7 +16,7 @@ const KakaoApi = {
     });
   },
   getInfo: async (token) => {
-    return await axios.post(Common.CP_DOMAIN + `/kako/ismember`, token);
+    return await axios.post(Common.CP_DOMAIN + `/kakao/ismember`, token);
   },
 };
 export default KakaoApi;
