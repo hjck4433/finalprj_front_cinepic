@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const CinePickComp = styled.section`
-  width: 100%;
+  .container {
+    width: 100%;
+  }
 `;
 
 const CinePick = () => {
