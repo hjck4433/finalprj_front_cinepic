@@ -5,22 +5,27 @@ const PreferComp = styled.section`
   @media screen and (max-width: 560px) {
     padding-bottom: 20px;
   }
+  // 전체 영역
   .container {
     padding-top: 50px;
+    // 제목
     h2 {
       margin-left: 10%;
       padding-bottom: 30px;
     }
+    // 선호 배우,감독
     .searchSel {
       &.selDirector {
         margin-bottom: 50px;
       }
+      // 선호 배우,감독 제목
       h3 {
         margin-left: 10%;
         color: var(--RED);
         padding-bottom: 30px;
         font-weight: 600;
       }
+      // 검색 바 영역
       .searchBar {
         width: 80%;
         height: 210px;
@@ -31,6 +36,7 @@ const PreferComp = styled.section`
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        // 검색창+돋보기 아이콘
         .search {
           display: flex;
           padding: 0 5px;
@@ -39,6 +45,7 @@ const PreferComp = styled.section`
           border-bottom: 1px solid var(--BLACK);
           cursor: pointer;
           text-align: center;
+          // 검색창
           input {
             border: none;
             outline: none;
@@ -47,10 +54,12 @@ const PreferComp = styled.section`
             padding: 5px;
           }
         }
+        // 선택된 내용 나오는 것
         .selBox {
           display: flex;
           justify-content: space-between;
           margin-bottom: 35px;
+          // 검색 된 이름 나옴
           .sel {
             background-color: rgba(204, 204, 204, 0.5);
             border-radius: 50px;
@@ -67,15 +76,17 @@ const PreferComp = styled.section`
         }
       }
     }
+    // 성별 영역
     .genderSel {
       padding-top: 50px;
+      // 성별 제목
       h3 {
         color: var(--RED);
         margin-left: 10%;
         padding-bottom: 30px;
         font-weight: 600;
       }
-
+      // 여성,남성 선택 영역
       .form_toggle {
         width: 80%;
         height: 100px;
@@ -85,6 +96,7 @@ const PreferComp = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
+        // 여성,남성 버튼
         .form_radio_btn {
           width: 18%;
           height: 47px;
@@ -120,6 +132,7 @@ const PreferComp = styled.section`
         }
       }
     }
+    // 영화 장르 영역
     .selectGenre {
       padding-top: 50px;
       h3 {
@@ -128,6 +141,7 @@ const PreferComp = styled.section`
         padding-bottom: 30px;
         font-weight: 600;
       }
+      // 영화장르 선택버튼
       .genre {
         width: 80%;
         height: 350px;

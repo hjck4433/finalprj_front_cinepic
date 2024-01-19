@@ -1,18 +1,22 @@
 import { styled } from "styled-components";
 
 const TheaterComp = styled.section`
+  // 지도 전체 감싸는 영역
   .container {
     padding: 80px 0;
+    // 제목
     h2 {
       padding-left: 10%;
       margin-bottom: 50px;
     }
+    // 지도 영역
     .mapContainer {
       width: 80%;
       height: 500px;
       margin: 0 auto;
       margin-bottom: 50px;
     }
+    // 검색바 감싸는 영역
     .searchContainer {
       margin-bottom: 30px;
       height: 30px;
@@ -22,12 +26,14 @@ const TheaterComp = styled.section`
         width: 80%;
         margin: 0 auto;
         position: relative;
+        // 검색창&돋보기 아이콘
         .searchBox {
           position: absolute;
           right: 0;
           display: flex;
           justify-content: space-between;
           border-bottom: 1px solid var(--BLACK);
+          // 검색창
           input {
             text-align: left;
             font-size: 1em;
@@ -35,28 +41,33 @@ const TheaterComp = styled.section`
             outline: none;
             margin-right: 10px;
           }
+          // 아이콘
           svg {
             cursor: pointer;
           }
         }
       }
     }
+    // 정보박스 전체 영역
     .infoContainer {
       border: 1px solid var(--BLACK);
       padding-top: 30px;
       margin: 0 auto;
       width: 80%;
-
+      // 상영관 이름
       h3 {
         padding-left: 5%;
         margin-bottom: 30px;
       }
+      // 기본정보 박스 영역
       .basicInfo1 {
         margin-bottom: 40px;
+        // 기본정보 제목
         h4 {
           color: var(--RED);
           margin-left: 35px;
         }
+        // 박스 안에 내용
         .content1 {
           width: 90%;
           border: 1px solid var(--BLACK);
@@ -85,11 +96,14 @@ const TheaterComp = styled.section`
           }
         }
       }
+      // 스크린관 정보 박스 영역
       .basicInfo2 {
+        // 스크린관 정보 제목
         h4 {
           color: var(--RED);
           margin-left: 35px;
         }
+        // 스크린관 정보 내용
         .content2 {
           width: 90%;
           border: 1px solid var(--BLACK);

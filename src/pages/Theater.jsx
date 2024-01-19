@@ -7,15 +7,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Theater = () => {
-  // const navigater = useNavigate();
+  const navigater = useNavigate();
   const mapRef = useRef(null); // 지도 링크
   const [location, setLocation] = useState({ lat: 0, long: 0 }); // 위도, 경도
-  // const [searchQuery, setSearchQuery] = useState(""); // 검색어
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어
   const [map, setMap] = useState(null); // 지도
-  // const [text, setText] = useState("");
-  // const [theaterData, setTheaterData] = useState("");
-  // const [selectedPlace, setSelectedPlace] = useState(null);
-  // const [markers, setMarkers] = useState([]);
+  const [text, setText] = useState("");
+  const [theaterData, setTheaterData] = useState("");
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [markers, setMarkers] = useState([]);
 
   // 지도 불러오기
   useEffect(() => {
