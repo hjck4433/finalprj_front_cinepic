@@ -1,6 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import Button from "../../util/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../context/UserStore";
 
 const MyInfoComp = styled.section`
   width: 100%;
@@ -36,6 +40,14 @@ const MyInfoComp = styled.section`
             height: 100%;
             position: absolute;
           }
+          svg {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            color: var(--DARKGREY);
+          }
         }
       }
       .userContent {
@@ -67,7 +79,7 @@ const MyInfoComp = styled.section`
     .buttonBox {
       display: flex;
       justify-content: end;
-      outline: 1px solid red;
+      /* outline: 1px solid red; */
       margin-top: 40px;
       button {
         margin-left: 50px;
@@ -82,7 +94,7 @@ const MyInfoComp = styled.section`
         align-items: center;
         width: 100%;
 
-        .userPrifile {
+        .userProfile {
           width: 100%;
           margin: 0;
           margin-bottom: 40px;
@@ -123,7 +135,8 @@ const MyInfoComp = styled.section`
   }
 `;
 
-const MyInfo = ({ memberInfo }) => {
+const MyInfo = ({ memberInfo, profile }) => {
+  //버튼경로
   const navigate = useNavigate();
   const tomemberpost = () => {
     navigate("/mypage/memberpost");
@@ -134,6 +147,11 @@ const MyInfo = ({ memberInfo }) => {
   const toinfopreference = () => {
     navigate("/preference/revise");
   };
+
+  // 프로필
+  const context = useContext(UserContext);
+  const { setLoginStatus, loginStatus } = context;
+
   return (
     <>
       <MyInfoComp>
@@ -142,16 +160,11 @@ const MyInfo = ({ memberInfo }) => {
           <div className="wrapper">
             <div className="userProfile">
               <div className="profileImg">
-                {/* {
-                  <img
-                    src={
-                      memberInfo && memberInfo.image
-                        ? memberInfo.image
-                        : profileimg
-                    }
-                    alt="profile"
-                  />
-                } */}
+                {memberInfo && memberInfo.image ? (
+                  <img src={memberInfo.image} alt="프로필이미지" />
+                ) : (
+                  <FontAwesomeIcon icon={faUser} />
+                )}
               </div>
             </div>
             <div className="userContent">
