@@ -10,7 +10,8 @@ const CinePickComp = styled.section`
       h3 {
         font-size: 1.5rem;
         font-weight: 400;
-        padding: 40px;
+        padding: 100px 40px 40px 40px;
+
         span {
           font-weight: 600;
         }
@@ -25,8 +26,7 @@ const CinePickComp = styled.section`
     }
     .pickMovieBox {
       width: 100%;
-      padding: 35px;
-      padding-bottom: 100px;
+      padding: 35px 35px 100px 35px;
       /* border: 1px solid blue; */
       display: flex;
       .onePickBox {
@@ -56,7 +56,7 @@ const CinePickComp = styled.section`
           .genre {
             font-size: 1.5em;
             font-weight: 600;
-            padding-top: 5px;
+            padding: 10px 0;
           }
           p {
             color: var(--DARKGREY);
@@ -65,6 +65,7 @@ const CinePickComp = styled.section`
           .story {
             line-height: 1.4;
             font-size: 1.2em;
+            margin-bottom: 20px;
           }
         }
         .otherMovieBox {
@@ -72,8 +73,8 @@ const CinePickComp = styled.section`
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: 0 40px;
-          border: 1px solid orange;
+          padding: 0 40px 100px 40px;
+          /* border: 1px solid orange; */
 
           .movieCard {
             width: 28%;
@@ -110,6 +111,8 @@ const ImgComp = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: drop-shadow(3px 3px 3px #cccccc);
+  border-radius: 5px;
 `;
 const CinePick = () => {
   // const movieData = [{}];

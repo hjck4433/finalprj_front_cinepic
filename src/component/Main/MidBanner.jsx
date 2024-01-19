@@ -50,6 +50,7 @@ const MidBannerComp = styled.section`
         position: relative;
         border-radius: 10px;
         margin: 0 20px;
+
         .funcText {
           position: absolute;
           text-align: center;
@@ -61,9 +62,10 @@ const MidBannerComp = styled.section`
           font-size: 1.3em;
           font-weight: 600;
           color: white;
+          transition: 0.3s ease-in;
           &:hover {
             cursor: pointer;
-            transition: 0.3s ease-in;
+
             background-color: rgba(0, 0, 0, 0.8);
           }
           @media only screen and (max-width: 768px) {
