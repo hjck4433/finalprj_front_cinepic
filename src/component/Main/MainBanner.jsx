@@ -25,6 +25,17 @@ const MainBannerComp = styled.section`
           font-weight: 600;
         }
       }
+      @media only screen and (max-width: 768px) {
+        .textBox {
+          padding: 100px 70px;
+          h4 {
+            font-size: 1em;
+          }
+          h2 {
+            font-size: 2.4em;
+          }
+        }
+      }
     }
   }
 `;

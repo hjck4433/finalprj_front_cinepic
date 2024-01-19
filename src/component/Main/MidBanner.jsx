@@ -16,6 +16,13 @@ const MidBannerComp = styled.section`
         span {
           font-weight: 600;
         }
+        @media only screen and (max-width: 768px) {
+          padding-left: 8%;
+          font-size: 1.9em;
+        }
+        @media only screen and (max-width: 520px) {
+          font-size: 1.5em;
+        }
       }
     }
     .funcBtnBox {
@@ -59,6 +66,17 @@ const MidBannerComp = styled.section`
             transition: 0.3s ease-in;
             background-color: rgba(0, 0, 0, 0.8);
           }
+          @media only screen and (max-width: 768px) {
+            font-size: 1.4em;
+          }
+          @media only screen and (max-width: 520px) {
+            font-size: 1em;
+          }
+        }
+        @media only screen and (max-width: 900px) {
+          width: 20%;
+          padding-bottom: 20%;
+          margin: 0 10px;
         }
       }
     }

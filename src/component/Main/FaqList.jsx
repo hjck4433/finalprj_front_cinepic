@@ -76,12 +76,14 @@ const FaqListComp = styled.section`
     .container {
       .faqHeader {
         margin-bottom: 40px;
+        h3 {
+          font-size: 1.5em;
+        }
       }
       .faqMap {
         width: 95%;
         li {
-          font-size: 0.9rem;
-
+          font-size: 0.7em;
           .faqBox {
             .title {
               color: var(--DARKGREY);
