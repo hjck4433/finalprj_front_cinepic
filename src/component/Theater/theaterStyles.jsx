@@ -14,39 +14,52 @@ const TheaterComp = styled.section`
       margin-bottom: 50px;
     }
     .searchContainer {
+      margin-bottom: 30px;
+      height: 30px;
       .inputWapper {
         text-align: right;
-        margin-right: 10%;
-        padding-bottom: 20px;
-        cursor: pointer;
         font-size: 1.2em;
-        input {
-          text-align: center;
-          font-size: 1em;
-          width: 30%;
-          border: none;
-          border-bottom: 1px solid black;
+        width: 80%;
+        margin: 0 auto;
+        position: relative;
+        .searchBox {
+          position: absolute;
+          right: 0;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid var(--BLACK);
+          input {
+            text-align: left;
+            font-size: 1em;
+            border: none;
+            outline: none;
+            margin-right: 10px;
+          }
+          svg {
+            cursor: pointer;
+          }
         }
       }
     }
     .infoContainer {
-      border: 1px solid #333333;
+      border: 1px solid var(--BLACK);
       padding-top: 30px;
       margin: 0 auto;
       width: 80%;
 
       h3 {
-        margin-left: 35px;
+        padding-left: 5%;
+        margin-bottom: 30px;
       }
       .basicInfo1 {
-        padding-top: 30px;
+        margin-bottom: 40px;
         h4 {
-          color: #bf3131;
+          color: var(--RED);
           margin-left: 35px;
         }
         .content1 {
           width: 90%;
-          border: 1px solid #333333;
+          border: 1px solid var(--BLACK);
           margin: 20px 35px;
           padding: 15px 30px;
           line-height: 40px;
@@ -63,7 +76,7 @@ const TheaterComp = styled.section`
                 content: "";
                 width: 2px;
                 height: 50%;
-                background-color: #cccccc;
+                background-color: var(--GREY);
                 position: absolute;
                 top: 25%;
                 right: 0;
@@ -73,14 +86,13 @@ const TheaterComp = styled.section`
         }
       }
       .basicInfo2 {
-        padding-top: 20px;
         h4 {
-          color: #bf3131;
+          color: var(--RED);
           margin-left: 35px;
         }
         .content2 {
           width: 90%;
-          border: 1px solid #333333;
+          border: 1px solid var(--BLACK);
           display: grid;
           grid-template-columns: 30% 30% 30%;
           grid-template-rows: repeat(3fr);
@@ -99,7 +111,7 @@ const TheaterComp = styled.section`
                 content: "";
                 width: 2px;
                 height: 50%;
-                background-color: #cccccc;
+                background-color: var(--GREY);
                 position: absolute;
                 top: 25%;
                 right: 0;
@@ -110,7 +122,7 @@ const TheaterComp = styled.section`
       }
     }
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 840px) {
     .container {
       h2 {
       }

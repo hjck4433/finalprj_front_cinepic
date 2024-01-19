@@ -71,19 +71,21 @@ const Theater = () => {
           <div className="mapContainer" ref={mapRef}></div>
           <div className="searchContainer">
             <div className="inputWapper">
-              <input
-                type="text"
-                placeholder="지역 또는 구 단위로 입력하세요."
-                // value={searchQuery}
-                // onChange={handleSearchInputChange}
-                // onKeyUp={(e) => {
-                //   if (e.key === "Enter" && searchQuery.trim() !== "") {
-                //     e.preventDefault(); // Enter 키의 기본 동작 방지
-                //     handleSearchButtonClick();
-                //   }
-                // }}
-              />
-              <FontAwesomeIcon icon={faSearch} />
+              <div className="searchBox">
+                <input
+                  type="text"
+                  placeholder="지역 / 구 단위로 입력"
+                  // value={searchQuery}
+                  // onChange={handleSearchInputChange}
+                  // onKeyUp={(e) => {
+                  //   if (e.key === "Enter" && searchQuery.trim() !== "") {
+                  //     e.preventDefault(); // Enter 키의 기본 동작 방지
+                  //     handleSearchButtonClick();
+                  //   }
+                  // }}
+                />
+                <FontAwesomeIcon icon={faSearch} />
+              </div>
             </div>
           </div>
           <div className="infoContainer">
