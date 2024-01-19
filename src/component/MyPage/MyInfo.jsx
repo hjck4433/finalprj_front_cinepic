@@ -41,10 +41,11 @@ const MyInfoComp = styled.section`
       .userContent {
         width: 50%;
         letter-spacing: -0.8px;
+
         .userBox {
           margin-bottom: 20px;
           display: grid;
-          grid-template-columns: 30% 70%;
+          grid-template-columns: 30% 70%; //밑줄 길이 조절
           p {
             padding: 10px 0;
             letter-spacing: 0.8px;
@@ -57,6 +58,57 @@ const MyInfoComp = styled.section`
             &:last-child {
               padding-left: 10px;
               border-bottom: 1px solid #cccccc;
+              line-height: 1.2;
+            }
+          }
+        }
+      }
+    }
+    .buttonBox {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 10%;
+      margin-top: 40px;
+      button {
+        margin-left: 10px;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .userPrifile {
+          width: 100%;
+          margin: 0;
+          margin-bottom: 40px;
+          display: flex;
+          justify-content: center;
+          .profileImg {
+            width: 50%;
+            padding-bottom: 50%;
+          }
+        }
+        .userContent {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+          .buttonBox {
+            padding-right: 0;
+            justify-content: center;
+            margin-top: 70px;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 480px) {
+      .wrapper {
+        .userContent {
+          padding: 0 10px;
+          .userBox {
+            p {
+              font-size: 1.2em;
             }
           }
         }
@@ -74,7 +126,7 @@ const MyInfo = ({ memberInfo }) => {
     navigate("/mypage/infochange");
   };
   const toinfolike = () => {
-    navigate("/mypage/infochange"); //이 부분 연결 주소 수정하기
+    navigate("/mypage/infolike"); //이 부분 연결 위치주소 수정하기
   };
   return (
     <>
