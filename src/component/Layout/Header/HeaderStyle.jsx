@@ -102,7 +102,7 @@ const HeaderComp = styled.header`
       flex-grow: 1;
       display: flex;
       justify-content: right;
-      font-size: 30px;
+      font-size: 40px;
       svg {
         padding: 10px 10px;
         color: var(--GREY);

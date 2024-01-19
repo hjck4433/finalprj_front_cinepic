@@ -13,7 +13,7 @@ const UserStore = (props) => {
 
   // 멤버쉽 여부
   const [isMembership, setIsMembership] = useState(
-    localStorage.getItem("isKikiMembership") || ""
+    localStorage.getItem("isMembership") || ""
   );
   useEffect(() => {
     localStorage.setItem("isMembership", isMembership);
