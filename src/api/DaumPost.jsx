@@ -18,11 +18,11 @@ const PostStyle = styled.div`
     top: 15%;
     .close {
       padding: 10px;
-      background-color: var(--GREY);
+      background-color: var(--RED);
       display: flex;
       justify-content: end;
       button {
-        background-color: var(--RED);
+        background-color: var(--BLACK);
         border: none;
         padding: 10px 12px;
         color: white;

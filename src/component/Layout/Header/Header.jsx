@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faXmark,
-  faUser,
   faRightFromBracket,
+  faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../../../images/cinepic_logo.png";
 
@@ -70,7 +70,7 @@ const Header = () => {
           <div className="log-icon">
             {loginStatus === "" || loginStatus === "RELOGIN" ? (
               <FontAwesomeIcon
-                icon={faUser}
+                icon={faCircleUser}
                 onClick={() => {
                   navigate("/login");
                 }}
