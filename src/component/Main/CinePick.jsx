@@ -27,10 +27,10 @@ const CinePickComp = styled.section`
       width: 100%;
       padding: 35px;
       padding-bottom: 100px;
-      border: 1px solid blue;
+      /* border: 1px solid blue; */
       display: flex;
       .onePickBox {
-        border: 1px solid red;
+        /* border: 1px solid red; */
         width: 30%;
         button {
           display: block;
@@ -38,7 +38,7 @@ const CinePickComp = styled.section`
         }
         .movieCard {
           position: relative;
-          border: 1px solid gray;
+          /* border: 1px solid gray; */
           border-radius: 5px;
           margin-bottom: 15px;
           .label {
@@ -49,7 +49,7 @@ const CinePickComp = styled.section`
       }
       .rightSideBox {
         width: 70%;
-        border: 1px solid gray;
+        /* border: 1px solid gray; */
         .textBox {
           padding: 5px 40px;
 
@@ -67,7 +67,7 @@ const CinePickComp = styled.section`
             font-size: 1.2em;
           }
         }
-        .otherMoviesBox {
+        .otherMovieBox {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -78,7 +78,7 @@ const CinePickComp = styled.section`
           .movieCard {
             width: 28%;
             position: relative;
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
             border-radius: 5px;
             margin-bottom: 15px;
             .label {
@@ -86,6 +86,18 @@ const CinePickComp = styled.section`
               position: absolute;
             }
           }
+          @media only screen and (max-width: 735px) {
+            display: none;
+          }
+        }
+      }
+      @media only screen and (max-width: 735px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .onePickBox {
+          width: 60%;
         }
       }
     }
@@ -139,7 +151,7 @@ const CinePick = () => {
                     아픔도 사라질까요? 사랑은 그렇게 다시 기억된다.
                   </p>
                 </div>
-                <div className="otherMoviesBox">
+                <div className="otherMovieBox">
                   <div className="movieCard">
                     <img src={label} alt="label" className="label" />
                     <ImgComp />
