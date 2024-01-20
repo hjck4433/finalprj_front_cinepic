@@ -4,7 +4,7 @@ import { Map, Marker } from "react-kakao-maps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Theater = ({ data }) => {
+const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
   const [location, setLocation] = useState({ lat: 0, long: 0 }); // 위도, 경도
   const [searchQuery, setSearchQuery] = useState(""); // 검색어
@@ -13,6 +13,7 @@ const Theater = ({ data }) => {
   const [theaterData, setTheaterData] = useState("");
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [markers, setMarkers] = useState([]);
+  // 더미데이터 생성 해보기
   const [list, setList] = useState([
     {
       id: "001224",
@@ -35,12 +36,9 @@ const Theater = ({ data }) => {
     },
   ]);
 
-  // const dataList = list.map((list) => <div key={list.id}></div>);
-
   // 지도 불러오기
   useEffect(() => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
-
     const options = {
       center: new window.kakao.maps.LatLng(37.5665, 126.978),
       level: 5,
@@ -58,13 +56,49 @@ const Theater = ({ data }) => {
 
   // 검색 확인 버튼 누를 시 내용 조회
   const handleSearchButtonClick = async () => {
-    console.log("검색 : ", searchQuery);
-    setText(searchQuery);
-    // const resp = await Api.,mapSearch(searchQuery);
-    // setTheaterData(resp.data);
-    // console.log(resp);
-    setSearchQuery(""); // 엔터 시 글 초기화
+    const query = searchQuery.trim();
+
+    if (query) {
+      // 검색어에 해당하는 데이터 찾기
+      const searchData = list.find(
+        (item) => item.province.includes(query) || item.city.includes(query)
+      );
+
+      if (searchData) {
+        // 검색어에 해당하는 데이터가 있으면 해당 위치에 마커 추가
+        const marker = new window.kakao.maps.Marker({
+          position: new window.kakao.maps.LatLng(
+            searchData.latitude,
+            searchData.longitude
+          ),
+        });
+
+        marker.setMap(map);
+
+        // 기존 마커들 제거
+        markers.forEach((m) => m.setMap(null));
+
+        // 새로운 마커 추가
+        setMarkers([marker]);
+
+        // 선택된 장소 업데이트
+        setSelectedPlace(searchData);
+      }
+    }
+
+    // 검색 완료 후 검색어 초기화
+    setSearchQuery("");
   };
+
+  // 검색 확인 버튼 누를 시 내용 조회
+  // const handleSearchButtonClick = async () => {
+  // console.log("검색 : ", searchQuery);
+  // setText(searchQuery);
+  // const resp = await Api.,mapSearch(searchQuery);
+  // setTheaterData(resp.data);
+  // console.log(resp);
+  // setSearchQuery(""); // 엔터 시 글 초기화
+  // };
 
   // 지도에 마커 표시하기
   // useEffect(() => {
@@ -83,11 +117,6 @@ const Theater = ({ data }) => {
   //   });
   //   setMarkers(newMarkers);
   // }, [theaterData]);
-
-  // if (!data) {
-  //   return <div>Loading...</div>;
-  // }
-  // console.log(data);
 
   return (
     <>
