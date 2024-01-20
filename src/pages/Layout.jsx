@@ -12,7 +12,7 @@ const Layout = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   // 로그인 / 멤버쉽 여부
-  const { loginStatus, setLoginStatus, isKikiMember, setIsKikiMember } =
+  const { loginStatus, setLoginStatus, isMembership, setIsMembership } =
     context;
 
   //Modal
@@ -44,25 +44,26 @@ const Layout = () => {
 
   // const getIsKikiMember = useTokenAxios(fetchIsKikiMember);
 
-  // useEffect(() => {
-  //   // console.log("로그인 여부" + loginStatus);
-  //   // console.log("kiki" + isKikiMember);
-  //   if (loginStatus === "ADMIN") {
-  //     setLoginStatus("");
-  //     window.localStorage.clear();
-  //   } else if (loginStatus === "RELOGIN") {
-  //     console.log("토큰만료");
-  //     setLoginStatus("");
-  //     window.localStorage.clear();
-  //     handleModal(
-  //       "로그인 유효기간 만료",
-  //       "보안을 위해 다시 로그인해주세요",
-  //       true
-  //     );
-  //   } else if (loginStatus) {
-  //     getIsKikiMember();
-  //   }
-  // }, [loginStatus]);
+  useEffect(() => {
+    // console.log("로그인 여부" + loginStatus);
+    // console.log("kiki" + isKikiMember);
+    if (loginStatus === "ADMIN") {
+      setLoginStatus("");
+      window.localStorage.clear();
+    } else if (loginStatus === "RELOGIN") {
+      console.log("토큰만료");
+      setLoginStatus("");
+      window.localStorage.clear();
+      handleModal(
+        "로그인 유효기간 만료",
+        "보안을 위해 다시 로그인해주세요",
+        true
+      );
+    }
+    // else if (loginStatus) {
+    //   getIsKikiMember();
+    // }
+  }, [loginStatus]);
 
   return (
     <>

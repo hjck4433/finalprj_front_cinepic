@@ -10,8 +10,8 @@ const Common = {
   },
 
   // 로컬에 저장된 토큰 정보 가져옴
-  getAccessToken: (token) => {
-    localStorage.getItem("accessToken");
+  getAccessToken: () => {
+    return localStorage.getItem("accessToken");
   },
 
   // 발행된 리프레시 토큰을 로컬에 저장
@@ -20,8 +20,8 @@ const Common = {
   },
 
   // 로컬에 저장된 리프레시 토큰 정보 가져옴
-  getRefreshToken: (token) => {
-    localStorage.getItem("refreshToken");
+  getRefreshToken: () => {
+    return localStorage.getItem("refreshToken");
   },
 
   // 헤더

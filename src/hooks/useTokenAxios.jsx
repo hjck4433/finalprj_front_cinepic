@@ -36,7 +36,7 @@ const useTokenAxios = (axiosEvt) => {
         }
       }
     }
-    return handleTokenAxios;
   };
+  return handleTokenAxios;
 };
 export default useTokenAxios;
