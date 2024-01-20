@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AdminMenuComp = styled.div`
   flex-grow: 3;
   outline: 1px solid red;
-  min-width: 400px;
+  min-width: 300px;
   background-color: var(--DARKRED);
   .btnBox {
     width: 200px;

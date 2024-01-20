@@ -105,6 +105,41 @@ const MemberApi = {
       Common.tokenHeader()
     );
   },
+
+  // admin - 월별 회원정보 조회
+  getMonthlyData: async () => {
+    return await axios.get(
+      Common.MV_DOMAIN + "/member/admin/monthly",
+      Common.tokenHeader()
+    );
+  },
+
+  // admin - 회원 조회
+  memberPage: async (page) => {
+    return await axios.get(
+      Common.MV_DOMAIN + `/member/admin/list/page?page=${page - 1}&size=10`,
+      Common.tokenHeader()
+    );
+  },
+  // admin - 페이지네이션
+  getTotalPage: async () => {
+    const page = 0;
+    const size = 10;
+    return await axios.get(
+      Common.MV_DOMAIN + `/member/admin/list/count?page=${page}&size=${size}`,
+      Common.tokenHeader()
+    );
+  },
+
+  // admin - 로그인 타입별
+
+  // admin - 회원 삭제
+  deleteMem: async (memId) => {
+    return await axios.delete(
+      Common.MV_DOMAIN + `/member/admin/delete/${memId}`,
+      Common.tokenHeader()
+    );
+  },
   // 관리자 로그인
   adminLogin: async (adminId, adminPassword) => {
     const data = {
