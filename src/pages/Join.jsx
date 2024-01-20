@@ -384,7 +384,6 @@ const Join = ({ email, profile, kakaoId }) => {
               ) : (
                 <FontAwesomeIcon icon={faUser} />
               )}
-              {/* // <img src={imgSrc} alt="프로필이미지" /> */}
             </div>
             <label>
               <input type="file" onChange={(e) => handleFileInputChange(e)} />

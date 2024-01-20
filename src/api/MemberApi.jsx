@@ -79,7 +79,7 @@ const MemberApi = {
       image: image,
       isKakao: isKakao,
     };
-    return await axios.poast(
+    return await axios.post(
       Common.CP_DOMAIN + "/member/update",
       data,
       Common.tokenHeader()

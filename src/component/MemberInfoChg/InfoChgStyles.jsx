@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 const InfoChgComp = styled.section`
   padding: 80px 0;
+  background-color: var(--IVORY);
   .container {
     h2 {
       font-weight: 600;
@@ -29,6 +30,14 @@ const InfoChgComp = styled.section`
           width: 100%;
           height: 100%;
         }
+        svg {
+          position: absolute;
+          top: 20%;
+          left: 10%;
+          width: 80%;
+          height: 80%;
+          color: var(--DARKGREY);
+        }
         @media only screen and (max-width: 768px) {
           width: 30%;
           padding-bottom: 30%;
@@ -44,10 +53,11 @@ const InfoChgComp = styled.section`
         font-size: 0.8em;
         font-weight: 600;
         cursor: pointer;
-        background-color: var(--LIGHTVIO);
+        color: #fff;
+        background-color: var(--RED);
         transition: 0.3s ease-out;
         &:hover {
-          background-color: var(--VIOLET);
+          background-color: var(--DARKRED);
           color: white;
         }
       }

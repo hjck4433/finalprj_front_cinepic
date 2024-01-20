@@ -9,6 +9,8 @@ import { Input, InputButton, Address } from "../component/Join/JoinInput";
 import Button from "../util/Button";
 import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const MemberInfoChg = () => {
   const navigate = useNavigate();
@@ -263,7 +265,7 @@ const MemberInfoChg = () => {
     );
     if (res.data) {
       console.log("회원정보 수정 성공!");
-      handleModal("성공", "정보가 수정되었습니다.", false);
+      handleModal("성공", "정보가 수정되었습니다.", false, 2);
     }
   };
 
@@ -293,7 +295,11 @@ const MemberInfoChg = () => {
           {/* 프로필 이미지 */}
           <div className="profile">
             <div className="imgBox">
-              <img src={imgSrc} alt="프로필이미지" />
+              {imgSrc ? (
+                <img src={imgSrc} alt="프로필이미지" />
+              ) : (
+                <FontAwesomeIcon icon={faUser} />
+              )}
             </div>
             <label>
               <input type="file" onChange={(e) => handleFileInputChange(e)} />
@@ -415,7 +421,7 @@ const MemberInfoChg = () => {
           }
         }}
         closeEvt={() => {
-          if (modalConfirm !== 1) {
+          if (modalConfirm === 2) {
             navigate(-1);
           }
         }}
