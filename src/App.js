@@ -55,7 +55,7 @@ function App() {
                 element={<PostRevise />}
               />
               <Route path="/chatlist" element={<ChatList />} />
-              <Route path="/chatlist/:roodId" element={<Chat />} />
+              <Route path="/chatlist/:roomId" element={<Chat />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/theater" element={<Theater />} />
               <Route path="/utiltest" element={<UtilTest />} />

@@ -98,7 +98,7 @@ const MemberApi = {
   },
 
   // 회원 탈퇴
-  widthdrawMember: async () => {
+  withdrawMember: async () => {
     console.log("회원 탈퇴 진입");
     return await axios.get(
       Common.CP_DOMAIN + "/member/withdraw",

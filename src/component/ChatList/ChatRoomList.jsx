@@ -4,6 +4,8 @@ import ChatRoom from "./ChatRoom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NewChatModal from "./NewChatModal";
+import ChatApi from "../../api/ChatApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const ChatRoomListComp = styled.section`
   width: 100%;
@@ -80,7 +82,7 @@ const ChatRoomListComp = styled.section`
 
 const ChatRoomList = () => {
   const navigate = useNavigate();
-  // const [ChatList, setChatList] = useState([]);
+  const [chatList, setChatList] = useState([]);
 
   // 새 채팅 생성 관련 모달
   const [openModal, setModalOpen] = useState(false);
@@ -103,40 +105,41 @@ const ChatRoomList = () => {
   };
 
   // 새 채팅방 생성
-  const createChatRoom = () => {
-    closeModal();
+  const createChatRoom = async () => {
+    const res = await ChatApi.createNewChat(inputVal);
+    if (res.data !== null) {
+      // console.log("roomId : ", res.data);
+      navigate(`/chatlist/${res.data}`);
+    }
   };
+  const newChatRoom = useTokenAxios(createChatRoom);
 
   // 채팅 리스트 호출
-  const ChatList = [
-    {
-      roodId: "123kadjkf",
-      roomName: "안녕하세요",
-      regDate: "2024-01-02 14:46:22.471950",
-    },
-    {
-      roodId: "123dasi23ass",
-      roomName: "햄스터에요",
-      regDate: "2024-01-03 14:46:22.471950",
-    },
-  ];
+  const fetchChatList = async () => {
+    // console.log("kikilist 부르는중");
+    const res = await ChatApi.getChatList();
+    if (res.data !== null) {
+      // console.log("채팅방 목록 : " + res.data);
+      setChatList(res.data);
+    }
+  };
+  const getChatList = useTokenAxios(fetchChatList);
 
   // 채팅방 진입
   const enterKiki = (roomId) => {
-    // console.log("kiki 진입 중 : " + roomId);
     navigate(`/chatlist/${roomId}`);
   };
 
   // 1초 간격으로 채팅방 현황 체크
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     api호출
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
-  // useEffect(() => {}, [chatList]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      getChatList();
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+  useEffect(() => {}, [chatList]);
 
   return (
     <>
@@ -154,19 +157,19 @@ const ChatRoomList = () => {
             />
           </div>
           <div className="chatListBox">
-            {ChatList &&
-              ChatList !== null &&
-              ChatList.map((room) => (
+            {chatList &&
+              chatList !== null &&
+              chatList.map((room) => (
                 <ChatRoom
                   key={room.roomId}
                   data={room}
                   onClick={() => enterKiki(room.roomId)}
                 />
               ))}
-            {ChatList.length === 0 && (
+            {chatList.length === 0 && (
               <div className="txtBox">
-                <p>진행중인 키키가 없습니다</p>
-                <p>키키를 오픈하고 새로운 영화친구를 기다려보세요!</p>
+                <p>진행중인 톡이 없습니다</p>
+                <p>씨네톡을 오픈하고 새로운 영화친구를 기다려보세요!</p>
               </div>
             )}
           </div>
@@ -179,7 +182,7 @@ const ChatRoomList = () => {
           errMsg={errMsg}
           onChangeInput={onChangeInput}
           confirm={() => {
-            createChatRoom();
+            newChatRoom();
           }}
         />
       </ChatRoomListComp>
