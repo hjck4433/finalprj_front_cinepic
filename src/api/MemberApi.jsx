@@ -146,7 +146,7 @@ const MemberApi = {
       adminId: adminId,
       adminPassword: adminPassword,
     };
-    return await axios.post(Common.CP_DOMAIN + "/auth/adminLogin", data);
+    return await axios.post(Common.CP_DOMAIN + "/auth/adminlogin", data);
   },
 };
 export default MemberApi;
