@@ -35,6 +35,9 @@ const MembershipJoinComp = styled.section`
   }
   .imgWrap {
     padding: 5%;
+    transform: rotate(-20deg) scale(1.9);
+    opacity: 0.5;
+    margin-top: 85px;
   }
   @media (max-width: 768px) {
     .container {
@@ -50,9 +53,11 @@ const MembershipJoinComp = styled.section`
       order: -1;
       justify-content: center;
       align-items: center;
+      transform: rotate(-20deg) scale(1);
+      margin: 40px;
     }
   }
-  @media (max-width: 480px) {
+  /* @media (max-width: 480px) {
     .container {
       .adWrap {
         .ad {
@@ -67,7 +72,7 @@ const MembershipJoinComp = styled.section`
         }
       }
     }
-  }
+  } */
 `;
 
 const MembershipJoin = () => {
