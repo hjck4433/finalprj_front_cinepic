@@ -5,71 +5,64 @@ import Logo from "../../images/cinepic_logo.png";
 
 const MembershipJoinComp = styled.section`
   width: 100%;
-  background-color: var(--RED);
-  margin-bottom: 80px;
+  /* background-image: url(${Logo}); */
+  background-color: var(--DARKRED);
+  background-position: center;
+  margin-bottom: 80px; // 북마크와의 간격
+  overflow: hidden;
+  /* border: 1px solid blue; */
   .container {
     position: relative;
     display: flex;
-    justify-content: center;
-  }
-  .adWrap {
-    padding: 10%;
-    width: 70%;
-    /* outline: 1px solid red; */
-    display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-
-    p {
-      font-size: 1.9rem;
-      font-weight: 600;
-      padding-bottom: 50px;
-      white-space: nowrap;
-      color: var(--IVORY);
-      /* outline: 1px solid black; */
-    }
-    Button {
-      font-size: 1.2em;
-    }
-  }
-  .imgWrap {
-    padding: 5%;
-    transform: rotate(-20deg) scale(1.9);
-    opacity: 0.5;
-    margin-top: 85px;
-  }
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
+    /* border: 1px solid green; */
+    padding: 7% 0;
     .adWrap {
-      width: 100%;
-      padding: 10%;
-      padding-top: 10px;
+      /* outline: 1px solid white; */
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      p {
+        font-size: 1.9rem;
+        font-weight: 600;
+        padding-bottom: 30px;
+        white-space: nowrap;
+        color: var(--IVORY);
+        /* outline: 1px solid black; */
+      }
+      Button {
+        font-size: 1.2em;
+      }
     }
     .imgWrap {
-      display: flex;
-      order: -1;
-      justify-content: center;
-      align-items: center;
-      transform: rotate(-20deg) scale(1);
-      margin: 40px;
+      /* border: 1px solid black; */
+      transform: rotate(-20deg) scale(2.7);
+      opacity: 40%;
+      padding: 0 35%;
     }
-  }
-  @media (max-width: 480px) {
-    .container {
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
       .adWrap {
-        .ad {
-          p {
-            font-size: 1.5em;
-          }
-        }
+        width: 100%;
+        padding: 10%;
+        padding-top: 10px;
       }
       .imgWrap {
+        display: flex;
+        order: -1;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-20deg) scale(1);
+        margin: 40px;
         .img {
           width: 50%;
         }
+      }
+      p {
+        font-size: 1.5em;
       }
     }
   }
@@ -95,6 +88,7 @@ const MembershipJoin = () => {
               active={true}
               clickEvt={toPayment}
               front={"var(--IVORY)"}
+              back={"var(--ORANGE)"}
               color={"var(--RED)"}
               width={"130px"}
             />
