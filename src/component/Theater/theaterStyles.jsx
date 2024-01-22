@@ -57,6 +57,9 @@ const TheaterComp = styled.section`
       padding: 40px;
       margin: 0 auto;
       width: 80%;
+      border-radius: 5px;
+      box-shadow: 1px 1px 1px #b2b0b0;
+
       // 상영관 이름
       h3 {
         margin-bottom: 40px;
@@ -68,6 +71,7 @@ const TheaterComp = styled.section`
         h3 {
           color: var(--RED);
           margin-bottom: 5%;
+          text-shadow: 1px 1px 1px #d1bcbc;
           @media screen and (max-width: 840px) {
             padding-bottom: 5px;
           }
@@ -75,6 +79,8 @@ const TheaterComp = styled.section`
         // 박스 안에 내용
         .content1 {
           border: 1px solid var(--BLACK);
+          box-shadow: 1px 1px 1px #b2b0b0;
+          border-radius: 5px;
           padding: 30px;
           div {
             display: flex;
@@ -128,10 +134,13 @@ const TheaterComp = styled.section`
         h3 {
           color: var(--RED);
           margin-bottom: 5%;
+          text-shadow: 1px 1px 1px #d1bcbc;
         }
         // 스크린관 정보 내용
         .content2 {
           border: 1px solid var(--BLACK);
+          box-shadow: 1px 1px 1px #b2b0b0;
+          border-radius: 5px;
           display: grid;
           grid-template-columns: 50% 50%;
           grid-template-rows: 20% 20% 20% 20%;
