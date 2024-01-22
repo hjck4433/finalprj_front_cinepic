@@ -57,7 +57,7 @@ const MembershipJoinComp = styled.section`
       margin: 40px;
     }
   }
-  /* @media (max-width: 480px) {
+  @media (max-width: 480px) {
     .container {
       .adWrap {
         .ad {
@@ -72,7 +72,7 @@ const MembershipJoinComp = styled.section`
         }
       }
     }
-  } */
+  }
 `;
 
 const MembershipJoin = () => {
