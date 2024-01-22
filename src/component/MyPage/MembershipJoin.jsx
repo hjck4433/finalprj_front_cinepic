@@ -10,15 +10,14 @@ const MembershipJoinComp = styled.section`
   background-position: center;
   margin-bottom: 80px; // 북마크와의 간격
   overflow: hidden;
-  /* border: 1px solid blue; */
+
   .container {
     position: relative;
     display: flex;
     align-items: center;
-    /* border: 1px solid green; */
     padding: 7% 0;
+
     .adWrap {
-      /* outline: 1px solid white; */
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -29,7 +28,6 @@ const MembershipJoinComp = styled.section`
         padding-bottom: 30px;
         white-space: nowrap;
         color: var(--IVORY);
-        /* outline: 1px solid black; */
       }
       Button {
         font-size: 1.2em;
@@ -38,11 +36,12 @@ const MembershipJoinComp = styled.section`
     .imgWrap {
       /* border: 1px solid black; */
       transform: rotate(-20deg) scale(2.7);
-      opacity: 40%;
+      opacity: 50%; // 로고 투명도 조절
       padding: 0 35%;
     }
     @media (max-width: 768px) {
       .container {
+        position: absolute;
         flex-direction: column;
       }
       .adWrap {
@@ -55,14 +54,17 @@ const MembershipJoinComp = styled.section`
         order: -1;
         justify-content: center;
         align-items: center;
-        transform: rotate(-20deg) scale(1);
-        margin: 40px;
-        .img {
-          width: 50%;
+        transform: rotate(-20deg) scale(0.9);
+        p {
+          font-size: 1.9rem;
+          font-weight: 600;
+          padding-bottom: 30px;
+          white-space: nowrap;
+          color: var(--IVORY);
         }
-      }
-      p {
-        font-size: 1.5em;
+        Button {
+          font-size: 1.2em;
+        }
       }
     }
   }
