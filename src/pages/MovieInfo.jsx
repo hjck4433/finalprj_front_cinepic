@@ -1,4 +1,5 @@
 import MovieDetail from "../component/MovieInfo/MovieDetail";
+import TabMenu from "../component/MovieInfo/TabMenu";
 
 const data = {
   "movieId" : 10,
@@ -20,6 +21,7 @@ const MovieInfo = () => {
   return (
     <>
       <MovieDetail data = {data}/>
+      <TabMenu />
     </>
   );
 };

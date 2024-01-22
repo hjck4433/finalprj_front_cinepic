@@ -3,9 +3,9 @@ import Bookmark from "../MovieSearch/Bookmark";
 
 const MovieDetailComp = styled.section`
 	/* width: 100vw; */
+  padding: 5% 0;
 	background-color: var(--BLACK);
 	.container {
-		padding: 5% 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;
