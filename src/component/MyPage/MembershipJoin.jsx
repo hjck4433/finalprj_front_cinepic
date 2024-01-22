@@ -7,6 +7,7 @@ const MembershipJoinComp = styled.section`
   width: 100%;
   /* background-image: url(${Logo}); */
   background-color: var(--DARKRED);
+  background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 80px; // 북마크와의 간격
   overflow: hidden;
@@ -15,56 +16,70 @@ const MembershipJoinComp = styled.section`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 7% 0;
+    height: 300px;
 
     .adWrap {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-
-      p {
-        font-size: 1.9rem;
-        font-weight: 600;
-        padding-bottom: 30px;
-        white-space: nowrap;
-        color: var(--IVORY);
+      /* border: 1px solid cyan; */
+      .ad {
+        p {
+          text-align: center;
+          font-size: 1.9em;
+          font-weight: 600;
+          /* white-space: nowrap; */
+          color: var(--IVORY);
+        }
+        margin-bottom: 30px;
       }
-      Button {
-        font-size: 1.2em;
+      .buttonBox {
+        button {
+          display: block;
+          margin: 0 auto;
+          font-size: 1.2em;
+        }
       }
     }
     .imgWrap {
       /* border: 1px solid black; */
-      transform: rotate(-20deg) scale(2.7);
-      opacity: 50%; // 로고 투명도 조절
-      padding: 0 35%;
+      transform: rotate(-20deg) scale(2.4);
+      position: absolute;
+      right: 10%;
+      opacity: 0.2; // 로고 투명도 조절
+      /* padding: 0 35%; */
     }
     @media (max-width: 768px) {
       .container {
-        position: absolute;
-        flex-direction: column;
+        height: 600px;
+        /* flex-direction: column; */
       }
       .adWrap {
+        padding-top: 60px;
         width: 100%;
-        padding: 10%;
-        padding-top: 10px;
+        align-items: baseline;
+        .ad {
+          /* outline: 1px solid cyan; */
+          p {
+            font-size: 1.6em;
+            font-weight: 600;
+            /* white-space: nowrap; */
+            color: var(--IVORY);
+          }
+        }
+        .buttonBox {
+          button {
+            font-size: 1.2em;
+          }
+        }
       }
       .imgWrap {
+        width: 100%;
+        /* outline: 1px solid black; */
+        top: 20px;
+        left: 0;
         display: flex;
         order: -1;
         justify-content: center;
         align-items: center;
-        transform: rotate(-20deg) scale(0.9);
-        p {
-          font-size: 1.9rem;
-          font-weight: 600;
-          padding-bottom: 30px;
-          white-space: nowrap;
-          color: var(--IVORY);
-        }
-        Button {
-          font-size: 1.2em;
-        }
+        transform: rotate(-20deg) scale(0.5);
       }
     }
   }

@@ -6,16 +6,21 @@ const AdminFaqComp = styled.div`
   padding-top: 8%;
 
   .container {
-    min-width: 1200px;
-    background-color: var(--DARKGREY);
-    padding: 40px 30px;
     margin: 0;
     margin-left: 50px;
-    /* border: 1px solid green; */
+    h2 {
+      display: inline-block;
+      margin-bottom: 50px;
+      padding: 0 8px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--GREY);
+    }
 
     .tableBox {
+      background-color: var(--DARKGREY);
       width: 100%;
-      padding-bottom: 10px;
+      padding: 40px 30px;
+      /* padding-bottom: 10px; */
       overflow-x: auto;
       table {
         width: 100%;
@@ -58,8 +63,8 @@ const AdminFaq = () => {
   return (
     <>
       <AdminFaqComp>
-        <h2>FAQ 관리</h2>
         <div className="container">
+          <h2>FAQ 관리</h2>
           <div className="tableBox">
             <table>
               <thead className="">
