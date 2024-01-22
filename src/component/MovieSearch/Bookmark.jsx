@@ -29,7 +29,7 @@ const BookmarkComp = styled.div`
 
       .heart {
         font-size: 1.3rem;
-        color: var(--LIGHTVIO);
+        color: var(--RED);
         opacity: 0.2;
         position: relative;
         z-index: 101;
