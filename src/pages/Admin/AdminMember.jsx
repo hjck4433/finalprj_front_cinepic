@@ -134,6 +134,7 @@ const AdminMember = () => {
         <div className="container">
           <h2>회원 정보 관리</h2>
           <MonthlyChart />
+
           <div className="tableBox">
             <table>
               <thead>

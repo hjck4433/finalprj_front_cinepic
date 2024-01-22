@@ -3,6 +3,7 @@ import Button from "../util/Button";
 import Modal from "../util/Modal";
 import AgreementModal from "../util/Agreement/AgreementModal";
 import PaginationUtil from "../util/Pagination/Pagination";
+import LoginTypeChart from "../component/Chart/LoginTypeChart";
 const UtilTest = () => {
   //Modal
   // 여기서부터
@@ -84,6 +85,7 @@ const UtilTest = () => {
       />
       <AgreementModal open={openAgreement} close={closeAgree} type={"use"} />
       {/* <Chart /> */}
+      <LoginTypeChart />
       <PaginationUtil
         totalPage={totalPage}
         limit={5}
