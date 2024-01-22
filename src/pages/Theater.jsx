@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import TheaterComp from "../component/Theater/theaterStyles";
-import { Map, Marker } from "react-kakao-maps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useKakaoLoader } from "react-kakao-maps-sdk";
+import { Map } from "react-kakao-maps-sdk";
 
 const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
@@ -13,10 +14,17 @@ const Theater = () => {
   const [theaterData, setTheaterData] = useState("");
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [markers, setMarkers] = useState([]);
+  const [state, setState] = useState({
+    // 지도 초기 위치
+    center: { lat: 37.5139545, long: 127.1049251 },
+    // 지도 위치 변경시 panto를 이용할 지에 대해서 정의
+    isPanto: false,
+  });
+
   // 더미데이터 생성 해보기
   const [list, setList] = useState([
     {
-      id: "001224",
+      id: "1224",
       province: "서울시",
       city: "송파구",
       theaterName: "롯데시네마 월드타워",
@@ -40,13 +48,28 @@ const Theater = () => {
   useEffect(() => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
-      center: new window.kakao.maps.LatLng(37.5665, 126.978),
+      center: new window.kakao.maps.LatLng(37.5139545, 127.1049251),
       level: 5,
+      isPanto: false,
     };
 
     const kakaoMap = new window.kakao.maps.Map(container, options);
     setMap(kakaoMap);
   }, [location]);
+
+  // 초기 정보 위치 값 마커로 보여줌
+  const iwPosition = new window.kakao.maps.LatLng(37.5139545, 127.1049251);
+  const infowindow = new window.kakao.maps.InfoWindow({
+    position: iwPosition,
+  });
+  infowindow.open();
+  // Marker 생성 및 지도에 추가
+  const marker = new window.kakao.maps.Marker({
+    position: iwPosition,
+  });
+
+  // 지도에 마커 추가
+  marker.setMap(map);
 
   // 검색 상자
   const handleSearchInputChange = (event) => {
@@ -54,7 +77,7 @@ const Theater = () => {
     setSearchQuery(event.target.value);
   };
 
-  // 검색 확인 버튼 누를 시 내용 조회
+  // 검색 확인 버튼 누를 시 내용 조회(더미데이터 때 사용)
   const handleSearchButtonClick = async () => {
     const query = searchQuery.trim();
 
@@ -85,7 +108,6 @@ const Theater = () => {
         setSelectedPlace(searchData);
       }
     }
-
     // 검색 완료 후 검색어 초기화
     setSearchQuery("");
   };
@@ -121,6 +143,17 @@ const Theater = () => {
   return (
     <>
       <TheaterComp>
+        <Map center={state.center} isPanto={state.isPanto}>
+          <button
+            onClick={() =>
+              setState({
+                center: { lat: state.lat, long: state.long },
+                isPanto: true,
+              })
+            }>
+            {/* 지도 중심좌표 부드럽게 이동시키기 */}
+          </button>
+        </Map>
         <div className="container">
           <h2>인디스페이스 - 영화예술 상영관 검색</h2>
           <div className="mapContainer" ref={mapRef}></div>
