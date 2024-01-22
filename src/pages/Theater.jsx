@@ -27,7 +27,7 @@ const Theater = () => {
     const kakaoMap = new window.kakao.maps.Map(container, options);
     setMap(kakaoMap);
 
-    // 서버에서 초기값을 불러오는 비동기 함수
+    // 서버에서 초기값을 불러오는 비동기 함수(theaterId 아이디 값으로 초기데이터 가져오기)
     const fetchInitialData = async () => {
       try {
         const resp = await TheaterApi.theaterIdDetail();
@@ -39,7 +39,7 @@ const Theater = () => {
         console.error("초기 값 정보가 아님:", error);
       }
     };
-    fetchInitialData();
+    fetchInitialData(); // 초기데이터 렌더링
   }, []);
 
   // 검색 상자
@@ -72,7 +72,7 @@ const Theater = () => {
       placeMarker.setMap(map); // 지도에 마커 표시
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
         setSelectedPlace(place);
-
+        // 장소가 이동 될 때 마커를 누르면 맵 센터로 이동
         map.setCenter(
           new window.kakao.maps.LatLng(place.latitude, place.longitude)
         );
@@ -80,7 +80,7 @@ const Theater = () => {
       return placeMarker;
     });
     setMarkers(newMarkers);
-
+    // 영화관 검색된 지역의 DB의 첫번째 값이 화면에 띄어지게 함
     if (theaterData.length > 0) {
       const firstPlace = theaterData[0];
       map.setCenter(

@@ -13,7 +13,7 @@ const TheaterApi = {
   // theaterId로 영화관 내용 상세 조회
   theaterIdDetail: async () => {
     return await axios.get(
-      Common.CP_DOMAIN + `/theater/theaterListById/${1224}`
+      Common.CP_DOMAIN + `/theater/theaterListById/${1224}` // 초기 데이터 값(롯데시네마 롯데타워점) "ID: 1224"
     );
   },
 };
