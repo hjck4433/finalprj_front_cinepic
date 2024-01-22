@@ -64,9 +64,6 @@ const TheaterComp = styled.section`
       // 기본정보 박스 영역
       .basicInfo1 {
         margin-bottom: 40px;
-        @media screen and (max-width: 840px) {
-          margin-right: 15px;
-        }
         // 기본정보 제목
         h3 {
           color: var(--RED);
@@ -78,22 +75,30 @@ const TheaterComp = styled.section`
         // 박스 안에 내용
         .content1 {
           border: 1px solid var(--BLACK);
-          padding: 25px;
-          line-height: 40px;
+          padding: 30px;
           div {
             display: flex;
             flex-direction: row;
-            @media screen and (max-width: 700px) {
+            @media screen and (max-width: 611px) {
               font-size: 0.8em;
             }
-            span {
+            @media screen and (max-width: 440px) {
+              font-size: 0.6em;
+            }
+            .title {
               display: inline-block;
-              width: 120px;
+              width: 100px;
               margin-right: 10px;
               position: relative;
               font-weight: 600;
-              @media screen and (max-width: 610px) {
+              @media screen and (max-width: 611px) {
                 margin-right: 0;
+              }
+              @media screen and (max-width: 440px) {
+                margin-right: -10px;
+              }
+              @media screen and (max-width: 366px) {
+                margin-right: -5px;
               }
               &::after {
                 display: block;
@@ -104,22 +109,21 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
-                @media screen and (max-width: 700px) {
+                @media screen and (max-width: 611px) {
                   right: 20px;
                 }
-                @media screen and (max-width: 610px) {
-                  right: 45px;
-                }
               }
+            }
+            span {
+              display: inline-block;
+              width: 85%;
+              line-height: 2.6em;
             }
           }
         }
       }
       // 스크린관 정보 박스 영역
       .basicInfo2 {
-        @media screen and (max-width: 840px) {
-          width: 97%;
-        }
         // 스크린관 정보 제목
         h3 {
           color: var(--RED);
@@ -129,34 +133,22 @@ const TheaterComp = styled.section`
         .content2 {
           border: 1px solid var(--BLACK);
           display: grid;
-          grid-template-columns: 31% 31% 31%;
-          grid-template-rows: repeat(3fr);
+          grid-template-columns: 50% 50%;
+          grid-template-rows: 20% 20% 20% 20%;
           gap: 6%;
           padding: 30px;
-          line-height: 37px;
-          @media screen and (max-width: 840px) {
-            grid-template-columns: 55% 45%;
-            grid-template-rows: 25% 25% 25%;
-            gap: 1px;
-          }
-          @media screen and (max-width: 700px) {
-            padding: 20px;
-            grid-template-columns: 50% 50%;
-            grid-template-rows: 23% 23% 23%;
-            gap: 4px;
-          }
           div {
-            @media screen and (max-width: 700px) {
-              font-size: 0.8em;
-            }
-            span {
+            .title {
               width: 120px;
               display: inline-block;
-              margin-right: 10px;
               position: relative;
               font-weight: 600;
-              @media screen and (max-width: 610px) {
-                margin-right: -15px;
+
+              @media screen and (max-width: 768px) {
+                margin-right: -10px;
+              }
+              @media screen and (max-width: 494px) {
+                font-size: 0.8em;
               }
               &::after {
                 display: block;
@@ -167,12 +159,24 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
-                @media screen and (max-width: 700px) {
-                  right: 20px;
+                @media screen and (max-width: 768px) {
+                  left: 95px;
                 }
-                @media screen and (max-width: 610px) {
-                  right: 40px;
+                @media screen and (max-width: 494px) {
+                  left: 70px;
                 }
+              }
+            }
+            span {
+              display: inline-block;
+              width: 50px;
+              margin-left: 20px;
+              line-height: 2.5em;
+              @media screen and (max-width: 768px) {
+                margin-left: 5px;
+              }
+              @media screen and (max-width: 494px) {
+                font-size: 0.8em;
               }
             }
           }

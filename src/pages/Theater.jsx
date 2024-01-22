@@ -125,20 +125,20 @@ const Theater = () => {
                 <h3>| 기본정보</h3>
                 <div className="content1">
                   <div>
-                    <span>상영관 </span>
-                    {selectedPlace.theaterName}
+                    <span className="title">상영관 </span>
+                    <span>{selectedPlace.theaterName}</span>
                   </div>
                   <div>
-                    <span>주소 </span>
-                    {selectedPlace.theaterAddr}
+                    <span className="title">주소 </span>
+                    <span>{selectedPlace.theaterAddr}</span>
                   </div>
                   <div>
-                    <span>전화번호 </span>
-                    {selectedPlace.theaterPhone}
+                    <span className="title">전화번호 </span>
+                    <span>{selectedPlace.theaterPhone}</span>
                   </div>
                   <div>
-                    <span>총 좌석 수 </span>
-                    {selectedPlace.seats}석
+                    <span className="title">총 좌석 수 </span>
+                    <span>{selectedPlace.seats}석</span>
                   </div>
                 </div>
               </div>
@@ -146,32 +146,32 @@ const Theater = () => {
                 <h3>| 스크린관 정보</h3>
                 <div className="content2">
                   <div>
-                    <span>총 스크린 수 </span>
-                    {selectedPlace.screens}개
+                    <span className="title">총 스크린 수 </span>
+                    <span>{selectedPlace.screens}개</span>
                   </div>
                   <div>
-                    <span>특별관 운영 여부 </span>
-                    {selectedPlace.isSpecialScreen}
+                    <span className="title">특별관 운영 여부 </span>
+                    <span>{selectedPlace.isSpecialScreen}</span>
                   </div>
                   <div>
-                    <span>필름 상영관 수 </span>
-                    {selectedPlace.screenFilm}개
+                    <span className="title">필름 상영관 수 </span>
+                    <span>{selectedPlace.screenFilm}개</span>
                   </div>
                   <div>
-                    <span> 2D 상영관 수 </span>
-                    {selectedPlace.screen2D}개
+                    <span className="title"> 2D 상영관 수 </span>
+                    <span>{selectedPlace.screen2D}개</span>
                   </div>
                   <div>
-                    <span>3D 상영관 수 </span>
-                    {selectedPlace.screen3D}개
+                    <span className="title">3D 상영관 수 </span>
+                    <span>{selectedPlace.screen3D}개</span>
                   </div>
                   <div>
-                    <span>4D 상영관 수 </span>
-                    {selectedPlace.screen4D}개
+                    <span className="title">4D 상영관 수 </span>
+                    <span>{selectedPlace.screen4D}개</span>
                   </div>
                   <div>
-                    <span> IMAX 상영관 수 </span>
-                    {selectedPlace.screenImax}개
+                    <span className="title"> IMAX 상영관 수 </span>
+                    <span>{selectedPlace.screenImax}개</span>
                   </div>
                 </div>
               </div>
