@@ -5,7 +5,7 @@ import Logo from "../../images/cinepic_logo.png";
 
 const MembershipJoinComp = styled.section`
   width: 100%;
-  /* background-image: url(${Logo}); */
+
   background-color: var(--DARKRED);
   background-repeat: no-repeat;
   background-position: center;
@@ -19,13 +19,11 @@ const MembershipJoinComp = styled.section`
     height: 300px;
 
     .adWrap {
-      /* border: 1px solid cyan; */
       .ad {
         p {
           text-align: center;
           font-size: 1.9em;
           font-weight: 600;
-          /* white-space: nowrap; */
           color: var(--IVORY);
         }
         margin-bottom: 30px;
@@ -39,28 +37,23 @@ const MembershipJoinComp = styled.section`
       }
     }
     .imgWrap {
-      /* border: 1px solid black; */
       transform: rotate(-20deg) scale(2.4);
       position: absolute;
       right: 10%;
       opacity: 0.2; // 로고 투명도 조절
-      /* padding: 0 35%; */
     }
     @media (max-width: 768px) {
       .container {
         height: 600px;
-        /* flex-direction: column; */
       }
       .adWrap {
         padding-top: 60px;
         width: 100%;
         align-items: baseline;
         .ad {
-          /* outline: 1px solid cyan; */
           p {
             font-size: 1.6em;
             font-weight: 600;
-            /* white-space: nowrap; */
             color: var(--IVORY);
           }
         }
@@ -72,7 +65,6 @@ const MembershipJoinComp = styled.section`
       }
       .imgWrap {
         width: 100%;
-        /* outline: 1px solid black; */
         top: 20px;
         left: 0;
         display: flex;
@@ -107,7 +99,7 @@ const MembershipJoin = () => {
               front={"var(--IVORY)"}
               back={"var(--ORANGE)"}
               color={"var(--RED)"}
-              width={"130px"}
+              width={"100px"}
             />
           </div>
         </div>
