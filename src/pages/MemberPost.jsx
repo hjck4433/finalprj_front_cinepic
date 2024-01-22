@@ -1,7 +1,31 @@
+import MempostSort from "../component/MemberPost/MempostSort";
+import { useState, useEffect } from "react";
+
 const MemberPost = () => {
+  const [selType, setSelType] = useState("written");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onChange = (num) => {
+    switch (num) {
+      case 0:
+        setSelType("written");
+        break;
+      case 1:
+        setSelType("comment");
+        break;
+      default:
+        return;
+    }
+  };
+
+  useEffect(() => {
+    console.log("선택값 : " + selType);
+    setIsLoading(true);
+  }, [selType]);
   return (
     <>
-      <div className="container">내가 쓴 게시글 관리 페이지</div>
+      <MempostSort selType={selType} setSelType={onChange} />
     </>
   );
 };
