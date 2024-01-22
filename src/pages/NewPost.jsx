@@ -123,7 +123,7 @@ const NewPost = () => {
                 active={true}
                 front="var(--RED)"
                 back="var(--DARKRED)"
-                // onClick={savePost}
+                // clickEvt={}
               />
               <Button
                 children="목록보기"

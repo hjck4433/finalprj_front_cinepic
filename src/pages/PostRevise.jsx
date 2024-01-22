@@ -114,7 +114,7 @@ const PostRevise = () => {
                 type="text"
                 // value={inputContents}
                 placeholder="글의 내용을 입력해주세요."
-                // onChange={}
+                // clickEvt={}
               ></textarea>
             </div>
             <div className="buttonBox">
@@ -123,7 +123,7 @@ const PostRevise = () => {
                 active={true}
                 front="var(--RED)"
                 back="var(--DARKRED)"
-                // onClick={savePost}
+                // clickEvt={}
               />
               <Button
                 children="취소하기"
