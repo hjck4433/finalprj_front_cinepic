@@ -4,13 +4,13 @@ const TabPostComp = styled.div`
   
 `;
 
-const TabPost = () => {
+const TabPost = ({post}) => {
 
 
   return (
     <>
       <TabPostComp>
-        
+        <p>dddd</p>
       </TabPostComp>
     </>
   );
