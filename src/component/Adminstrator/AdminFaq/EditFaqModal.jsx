@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 import Button from "../../../util/Button";
-import useTokenAxios from "../../../hooks/useTokenAxios";
 import FaqApi from "../../../api/FaqApi";
+import useTokenAxios from "../../../hooks/useTokenAxios";
 
 const EditFaqModalComp = styled.div`
-  .madal {
+  .modal {
     display: none;
     position: fixed;
     top: 0;
@@ -15,7 +15,7 @@ const EditFaqModalComp = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  .openMadal {
+  .openModal {
     display: flex;
     align-items: center;
     animation: modal-bg-show 0.8s;
@@ -26,14 +26,14 @@ const EditFaqModalComp = styled.div`
     max-width: 600px;
     margin: 0 auto;
     padding: 60px 0;
-    border-radius: 0.3em;
-    background-color: var(--GREY);
+    border-radius: 0.3rem;
+    background-color: var(--DARKRED);
     animation: modal-show 0.3s;
     overflow: hidden;
     .contentBox {
       padding: 16px;
       text-align: center;
-      color: #333333;
+      color: #cccccc;
       white-space: pre-line;
       line-height: 1.4;
       margin-bottom: 10px;
@@ -41,6 +41,7 @@ const EditFaqModalComp = styled.div`
         font-size: 1.4em;
         font-weight: 600;
         margin-bottom: 40px;
+        color: #fff;
       }
       input {
         width: 80%;
@@ -67,7 +68,7 @@ const EditFaqModalComp = styled.div`
       justify-content: center;
       button {
         padding: 6px 12px;
-        color: #cccccc;
+        color: #333333;
         border-radius: 5px;
         font-size: 13px;
         &:last-child {
@@ -133,7 +134,7 @@ const EditFaqModal = (props) => {
 
   return (
     <EditFaqModalComp>
-      <div className={open ? "openModal madal" : "madal"}>
+      <div className={open ? "openModal modal" : "modal"}>
         {open && (
           <section>
             <div className="contentBox">
@@ -145,6 +146,11 @@ const EditFaqModal = (props) => {
               <input
                 defaultValue={titleVal}
                 onChange={onChangeTitle}
+                placeholder={"질문을 입력해 주세요"}
+              />
+              <textarea
+                defaultValue={contentVal}
+                onChange={onChangeContent}
                 placeholder={"답변을 작성해 주세요"}
               />
             </div>
@@ -155,7 +161,8 @@ const EditFaqModal = (props) => {
                 }}
                 active={true}
                 width="20%"
-                back={"var(--RED)"}
+                front={"var(--GREY)"}
+                back={"var(--IVORY)"}
               >
                 등록하기
               </Button>
@@ -163,7 +170,8 @@ const EditFaqModal = (props) => {
                 clickEvt={close}
                 active={true}
                 width="20%"
-                back={"var(--RED)"}
+                front={"var(--GREY)"}
+                back={"var(--IVORY)"}
               >
                 취소하기
               </Button>
