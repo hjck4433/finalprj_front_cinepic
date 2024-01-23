@@ -18,6 +18,7 @@ const ChartComp = styled.div`
   .chart {
     padding: 30px;
     height: 400px;
+    width: 750px;
     margin-right: 20px;
     border-radius: 10px;
     border: 1px solid var(--GREY);
