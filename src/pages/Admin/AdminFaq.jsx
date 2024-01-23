@@ -23,6 +23,7 @@ const AdminFaqComp = styled.div`
 
     .tableBox {
       background-color: var(--DARKGREY);
+      border-radius: 5px;
       width: 100%;
       padding: 40px 30px;
       /* padding-bottom: 10px; */
@@ -145,7 +146,7 @@ const AdminFaq = () => {
   // const AdminFaq = () => {
   //   const [faqData, setFaqData] = useState([]);
 
-  //더미데이터 넣기
+  // 더미데이터 넣기
   useEffect(() => {
     const testData = [
       { faqId: 1, title: "질문1", content: "답변1" },
@@ -155,7 +156,6 @@ const AdminFaq = () => {
     ];
 
     setFaqData(testData);
-    console.log("ididi: " + editId);
   }, []);
 
   return (
