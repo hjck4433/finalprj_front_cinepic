@@ -21,7 +21,7 @@ const MovieInfo = () => {
   return (
     <>
       <MovieDetail data = {data}/>
-      <TabMenu />
+      <TabMenu data = {data} />
     </>
   );
 };

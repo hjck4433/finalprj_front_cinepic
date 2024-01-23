@@ -1,12 +1,18 @@
+import styled from "styled-components";
 
-
+const TabPostComp = styled.div`
+  
+`;
 
 const TabPost = () => {
 
 
-    return (
-        <>
-        </>
-    );
+  return (
+    <>
+      <TabPostComp>
+        
+      </TabPostComp>
+    </>
+  );
 };
 export default TabPost;
