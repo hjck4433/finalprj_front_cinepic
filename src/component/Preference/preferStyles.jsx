@@ -225,8 +225,9 @@ const PreferComp = styled.section`
     }
     .buttonBox {
       text-align: center;
+      margin-top: 40px;
       button {
-        margin: 40px;
+        margin: 0 30px;
         @media screen and (max-width: 560px) {
           margin: 15px;
           width: 25%;
