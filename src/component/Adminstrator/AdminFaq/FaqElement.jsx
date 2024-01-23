@@ -42,7 +42,16 @@ const FaqTr = ({
               fontSize=".8em"
               width="80px"
               height="30px"
+              front={"var(--GREY)"}
+              color={"var(--BLACK)"}
               active={true}
+              clickEvt={() => {
+                editModal();
+                setTitle(data.faqQuestion);
+                setContent(data.faqAnswer);
+                setId(data.faqId);
+              }}
+              faqId={data.faqId}
             />
           </span>
         </td>
@@ -55,6 +64,10 @@ const FaqTr = ({
               width="80px"
               height="30px"
               active={true}
+              clickEvt={() => {
+                setId(data.faqId);
+                deleteModal();
+              }}
             />
           </span>
         </td>
