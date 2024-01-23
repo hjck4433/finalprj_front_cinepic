@@ -2,7 +2,7 @@ import styled from "styled-components";
 import StillCutImg from "./StillCutImg";
 
 const StillCutComp = styled.div`
-  padding: 70px 0;
+  padding: 70px 10px;
   .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
