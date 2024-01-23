@@ -16,11 +16,11 @@ import useTokenAxios from "../../hooks/useTokenAxios";
 
 const ChartComp = styled.div`
   .chart {
-    margin: 20px;
-    padding: 20px;
-
+    padding: 30px;
+    height: 400px;
+    margin-right: 20px;
     border-radius: 10px;
-    /* border: 1px solid blue; */
+    border: 1px solid var(--GREY);
     background-color: white;
     .chartTitle {
       margin-bottom: 30px;

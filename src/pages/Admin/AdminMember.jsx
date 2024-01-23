@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "../../util/Modal";
 import useTokenAxios from "../../hooks/useTokenAxios";
 import PaginationUtil from "../../util/Pagination/Pagination";
+import LoginTypeChart from "../../component/Chart/LoginTypeChart";
 
 const AdminMemberComp = styled.div`
   padding-top: 10%;
@@ -17,8 +18,9 @@ const AdminMemberComp = styled.div`
     h2 {
       margin-bottom: 30px;
     }
-    .chart {
-      margin-bottom: 50px;
+    .chartBox {
+      display: flex;
+      margin-bottom: 30px;
     }
     .tableBox {
       width: 100%;
@@ -133,8 +135,10 @@ const AdminMember = () => {
       <AdminMemberComp>
         <div className="container">
           <h2>회원 정보 관리</h2>
-          <MonthlyChart />
-
+          <div className="chartBox">
+            <MonthlyChart />
+            <LoginTypeChart />
+          </div>
           <div className="tableBox">
             <table>
               <thead>
