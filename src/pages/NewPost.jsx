@@ -1,15 +1,161 @@
 import { RadioBox } from "../component/NewPost/RadioBox";
 import Button from "../util/Button";
 import { NewPostComp } from "../component/NewPost/NewPostStyle";
-import PostImage from "../images/PostImage.png";
+import postImage from "../images/PostImage.png";
+import { storage } from "../api/firebase";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import MemberApi from "../api/MemberApi";
+import BoardApi from "../api/BoardApi";
+import useTokenAxios from "../hooks/useTokenAxios";
+import Modal from "../util/Modal";
 
 const NewPost = () => {
+  const [currentDate, setCurrentDate] = useState("");
+  const [memberInfo, setMemberInfo] = useState(null);
+
+  const fetchMemberDetail = async () => {
+    const res = await MemberApi.getMemberDetail();
+    if (res.data !== null) setMemberInfo(res.data);
+  };
+  const getMemberDetail = useTokenAxios(fetchMemberDetail);
+
+  // 카테고리(주제선택) 및 모임형식(온/오프라인)
+  const [selCategory, setSelCategory] = useState("");
+  const [selGather, setSelGather] = useState("");
+  const [isCategory, setIsCategory] = useState("");
+  const [isGather, setIsGather] = useState("");
+
+  const CategoryChange = (e) => {
+    const currVal = e.target.value;
+    setSelCategory(currVal);
+    if (currVal !== "") {
+      setIsCategory(true);
+    } else {
+      setIsCategory(false);
+    }
+  };
+  const GatherTypeChange = (e) => {
+    const currVal = e.target.value;
+    setSelGather(currVal);
+    if (currVal !== "") {
+      setIsGather(true);
+    } else {
+      setIsGather(false);
+    }
+  };
+
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputContents, setInputContents] = useState("");
+  const [isTitle, setIsTitle] = useState("");
+  const [isContents, setIsContents] = useState("");
+
+  const InputTitleChange = (e) => {
+    const currVal = e.target.value;
+    setInputTitle(currVal);
+    if (currVal.length > 0) setIsTitle(true);
+    else setIsTitle(false);
+  };
+  const InputContentsChange = (e) => {
+    const currVal = e.target.value;
+    setInputContents(currVal);
+    if (currVal.length > 0) setIsContents(true);
+    else setIsContents(false);
+  };
+
+  // 작성 날짜
+  useEffect(() => {
+    const getCurrentDate = () => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = (today.getMonth() + 1).toString().padStart(2, "0");
+      const day = today.getDate().toString().padStart(2, "0");
+      return `${year}.${month}.${day}`;
+    };
+
+    setCurrentDate(getCurrentDate());
+    getMemberDetail(); // 멤버 정보 가져옴
+  }, []);
+
   // 게시글 리스트로 이동
   const navigate = useNavigate();
   const toBoardList = () => {
     navigate(-1);
   };
+
+  // 이미지 업로드
+  const [imgSrc, setImgSrc] = useState(postImage);
+  const [file, setFile] = useState("");
+  const [isImage, setIsImage] = useState(false);
+
+  // 입력받은 이미지 파일 주소
+  const handleFileInputChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+
+    // 선택된 파일을 파이어베이스로
+    if (selectedFile) {
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setImgSrc(objectUrl);
+      setFile(selectedFile);
+      setIsImage(true);
+    }
+  };
+
+  // 모달창
+  const [openModal, setModalOpen] = useState(false);
+  const closeModal = (num) => {
+    setModalOpen(false);
+    switch (selCategory) {
+      case "씨네크루":
+        navigate("/board/gather");
+        break;
+      case "크루후기":
+        navigate("/board/recap");
+        break;
+      default:
+        console.log("카테고리 오류");
+    }
+  };
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+
+  const handleModal = (header, msg, type) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+  };
+
+  const onSubmit = () => {
+    if (imgSrc !== postImage) {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      fileRef.put(file).then(() => {
+        fileRef.getDownloadURL().then((url) => {
+          newPost(url);
+        });
+      });
+    } else {
+      newPost();
+    }
+  };
+  const postSave = useTokenAxios(onSubmit);
+
+  const newPost = async (url) => {
+    const res = await BoardApi.saveNewPost(
+      selCategory,
+      selGather,
+      inputTitle,
+      url,
+      inputContents
+    );
+    if (res.data) {
+      console.log("저장 성공!");
+      handleModal("성공", "등록이 완료 되었습니다.", false);
+    }
+  };
+
   return (
     <>
       <NewPostComp>
@@ -30,7 +176,7 @@ const NewPost = () => {
                       id="씨네크루"
                       value="씨네크루"
                       name="category"
-                      // onChange={}
+                      onChange={CategoryChange}
                     />
                     씨네크루
                   </label>
@@ -40,7 +186,7 @@ const NewPost = () => {
                       id="크루후기"
                       value="크루후기"
                       name="category"
-                      // onChange={}
+                      onChange={CategoryChange}
                     />
                     크루후기
                   </label>
@@ -57,7 +203,7 @@ const NewPost = () => {
                       id="온라인"
                       value="온라인"
                       name="meetingSpot"
-                      // onChange={}
+                      onChange={GatherTypeChange}
                     />
                     온라인
                   </label>
@@ -67,7 +213,7 @@ const NewPost = () => {
                       id="오프라인"
                       value="오프라인"
                       name="meetingSpot"
-                      // onChange={}
+                      onChange={GatherTypeChange}
                     />
                     오프라인
                   </label>
@@ -76,33 +222,31 @@ const NewPost = () => {
             </div>
             <div className="author">
               <h3>작성자</h3>
-              <p>gogohamster</p>
-              {/* <p>{memberInfo && memberInfo.alias}</p>  */}
+              <p>{memberInfo && memberInfo.alias}</p>
             </div>
             <div className="regDate">
               <h3>작성일</h3>
-              <p>2024.01.15</p>
-              {/* <p>{currentDate}</p> */}
+              <p>{currentDate}</p>
             </div>
             <div className="postTitle">
               <h3>제 목</h3>
               <textarea
                 type="text"
-                // value={InputTitle}
+                value={inputTitle}
                 placeholder="글의 제목을 입력해주세요."
-                // onChange={}
+                onChange={InputTitleChange}
               ></textarea>
             </div>
             <div className="postImage">
               <h3>이미지</h3>
               <div className="uploadImage">
                 <div className="imgBox">
-                  <img src={PostImage} alt="게시글 첨부 이미지" />
+                  <img src={postImage} alt="게시글 첨부 이미지" />
                 </div>
                 <label>
                   <input
                     type="file"
-                    // onChange={}
+                    onChange={(e) => handleFileInputChange(e)}
                   />
                   파일 선택
                 </label>
@@ -112,30 +256,39 @@ const NewPost = () => {
               <h3>내 용</h3>
               <textarea
                 type="text"
-                // value={inputContents}
+                value={inputContents}
                 placeholder="글의 내용을 입력해주세요."
-                // onChange={}
+                onChange={InputContentsChange}
               ></textarea>
             </div>
             <div className="buttonBox">
               <Button
                 children="등록하기"
-                active={true}
+                active={
+                  isCategory && isGather && isTitle && isContents && isImage
+                }
                 front="var(--RED)"
                 back="var(--DARKRED)"
-                // clickEvt={}
+                clickEvt={postSave}
               />
               <Button
                 children="목록보기"
                 active={true}
                 front="var(--DARKGREY)"
                 back="var(--BLACK)"
-                onClick={toBoardList}
+                clickEvt={toBoardList}
               />
             </div>
           </div>
         </div>
       </NewPostComp>
+      <Modal
+        open={openModal}
+        close={closeModal}
+        header={modalHeader}
+        children={modalMsg}
+        type={modalType}
+      />
     </>
   );
 };
