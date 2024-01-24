@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
 import Button from "../../../util/Button";
-import { useState } from "react";
 
 const TrComp = styled.tr`
   vertical-align: middle;
   td {
     padding: 10px;
-    /* outline: 1px solid red; */
+    vertical-align: middle;
     &.center {
       text-align: center;
     }
@@ -43,8 +42,7 @@ const FaqTr = ({
               fontSize=".8em"
               width="80px"
               height="30px"
-              front={"var(--GREY)"}
-              color={"var(--BLACK)"}
+              front="var(--DARKGREY)"
               active={true}
               clickEvt={() => {
                 editModal();
