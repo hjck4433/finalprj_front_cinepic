@@ -30,7 +30,16 @@ padding: 5% 0 0;
     }
 
   }
-  
+  @media only screen and (max-width:480px){
+    .container {
+      ul {
+        li {
+          letter-spacing: -1px;
+          font-size: 1em;
+        }
+      }
+    }
+  }
 `;
 
 const TabMenu = ({data}) => {
