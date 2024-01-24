@@ -5,8 +5,10 @@ import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../context/UserStore";
 import ScrollToTop from "../component/Layout/ScrollToTop";
 import Modal from "../util/Modal";
+import MemberApi from "../api/MemberApi";
 import { useNavigate } from "react-router-dom";
 import Ad from "../component/Layout/Ad";
+import useTokenAxios from "../hooks/useTokenAxios";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -34,19 +36,19 @@ const Layout = () => {
   };
 
   // 멤버십 정보 호출
-  // const fetchIsKikiMember = async () => {
-  //   const res = await MemberApi.getMembership();
-  //   if (res.data) {
-  //     setIsKikiMember(res.data);
-  //     console.log("키키 멤버 : " + res.data);
-  //   }
-  // };
+  const fetchIsMember = async () => {
+    const res = await MemberApi.getMembership();
+    if (res.data) {
+      setIsMembership(res.data);
+      console.log("시네픽 멤버 : " + res.data);
+    }
+  };
 
-  // const getIsKikiMember = useTokenAxios(fetchIsKikiMember);
+  const getIsMembership = useTokenAxios(fetchIsMember);
 
   useEffect(() => {
     // console.log("로그인 여부" + loginStatus);
-    // console.log("kiki" + isKikiMember);
+    // console.log("cinepic" + isMembership);
     if (loginStatus === "ADMIN") {
       setLoginStatus("");
       window.localStorage.clear();
@@ -59,10 +61,9 @@ const Layout = () => {
         "보안을 위해 다시 로그인해주세요",
         true
       );
+    } else if (loginStatus) {
+      getIsMembership();
     }
-    // else if (loginStatus) {
-    //   getIsKikiMember();
-    // }
   }, [loginStatus]);
 
   return (
@@ -71,9 +72,8 @@ const Layout = () => {
       <Header />
       <main>
         <Outlet />
-        <Ad />
         {/* 로그인 여부를 props로 전달 */}
-        {/* {!isKikiMember && <Advertise isLogin={loginStatus} />} */}
+        {!isMembership && <Ad isLogin={loginStatus} />}
       </main>
       <Footer />
       <Modal

@@ -49,6 +49,27 @@ const MemberApi = {
     };
     return await axios.post(Common.CP_DOMAIN + "/auth/login", data);
   },
+
+  // 멤버십 여부 업데이트
+  saveMembership: async (isMembership) => {
+    const data = {
+      isMembership: isMembership,
+    };
+    console.log("saveMembership start");
+    return await axios.post(
+      Common.CP_DOMAIN + "/member/membership",
+      data,
+      Common.tokenHeader()
+    );
+  },
+  // 멤버십 여부 가져오기
+  getMembership: async () => {
+    return await axios.get(
+      Common.CP_DOMAIN + "/member/ismembership",
+      Common.tokenHeader()
+    );
+  },
+
   // 회원 상세 조회
   getMemberDetail: async () => {
     return await axios.get(

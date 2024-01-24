@@ -49,6 +49,7 @@ const PaymentComp = styled.div`
         top: 58%;
         transform: translate(-50%, -50%);
         margin-top: 30px;
+
         @media only screen and (max-width: 768px) {
           margin-top: 50px;
           button {
@@ -100,24 +101,42 @@ const Payment = () => {
   };
   const updateMembership = useTokenAxios(membershipUpdate);
 
-  const onClickPayment = () => {
+  // 회원 정보 불러오기
+  const memberInfo = async () => {
+    const res = await MemberApi.getMemberDetail();
+    console.log("회원 상세정보: " + res.data);
+    if (res.data !== null) {
+    }
+  };
+
+  const onClickPayment = async () => {
     const { IMP } = window;
     IMP.init("imp78148083");
 
-    const data = {
-      pg: "kcp.AO09C", // NHN KCP 결제 방식 사용
-      pay_method: "card",
-      merchant_uid: `mid_${new Date().getTime()}`,
-      amount: "2900",
-      name: "결제 테스트",
-      buyer_name: "홍길동",
-      // buyer_tel: "01012345678",
-      buyer_email: "14279625@gmail.com",
-      buyer_addr: "구천면로 000-00",
-      // buyer_postcode: "01234",
-    };
+    try {
+      const response = await MemberApi.getMemberDetail();
 
-    IMP.request_pay(data, callback);
+      if (response.data) {
+        const { name, email, addr } = response.data;
+
+        const data = {
+          pg: "kcp.AO09C", // NHN KCP 결제 방식 사용
+          pay_method: "card",
+          merchant_uid: `mid_${new Date().getTime()}`,
+          amount: "2900",
+          name: "결제",
+          buyer_name: name,
+          buyer_email: email,
+          buyer_addr: addr,
+        };
+
+        IMP.request_pay(data, callback);
+      } else {
+        console.error("회원 상세정보 불러오기 오류: ", response);
+      }
+    } catch (error) {
+      console.error("사용자 정보 불러오기 오류:", error);
+    }
   };
 
   const callback = (response) => {
@@ -162,7 +181,6 @@ const Payment = () => {
                 children="결제하기"
                 active={true}
                 front={"white"}
-                back={"white"}
                 clickEvt={onClickPayment}
                 color={"var(--BLACK)"}
               />
