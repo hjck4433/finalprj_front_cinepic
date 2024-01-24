@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminMenuComp = styled.div`
   flex-grow: 3;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   min-width: 300px;
   background-color: var(--DARKRED);
   .btnBox {
@@ -14,6 +14,8 @@ const AdminMenuComp = styled.div`
     left: 150px;
     button {
       margin-bottom: 40px;
+      text-align: right;
+      padding-right: 60px;
       &:last-child {
         margin-bottom: 0;
       }

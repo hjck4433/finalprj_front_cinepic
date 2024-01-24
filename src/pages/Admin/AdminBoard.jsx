@@ -5,10 +5,12 @@ import Tr from "../../component/Adminstrator/AdminBoard/TableElement";
 
 const AdminBoardComp = styled.div`
   padding-top: 60px;
+
   .container {
     min-width: 1200px;
     padding: 40px 30px;
     margin-left: 50px;
+
     h2 {
       margin-bottom: 50px;
       font-size: 1.7em;
@@ -27,8 +29,10 @@ const AdminBoardComp = styled.div`
       padding-bottom: 10px;
       overflow-x: auto;
       text-align: center;
-      outline: 1px solid var(--GREY);
-      border-radius: 10px;
+      display: inline-block;
+      padding: 0 5px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--GREY);
 
       table {
         width: 100%;

@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
-import Modal from "../../util/Modal";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header/Header";
 import adImg from "../../images/ad_banner.jpg";
 import logo from "../../images/cinepic_logo.png";
+import Modal from "../../util/Modal";
 
 const AdComp = styled.section`
   width: 100%;
@@ -48,12 +47,36 @@ const AdComp = styled.section`
   }
 `;
 
-const Ad = () => {
+const Ad = ({ isLogin }) => {
   const navigate = useNavigate();
   const toPayment = () => {
-    navigate("/Payment");
+    if (isLogin) {
+      navigate("/Payment");
+    } else {
+      handleModal(
+        "로그인",
+        "로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?",
+        true
+      );
+    }
   };
 
+  // 팝업
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+  // 팝업으로 이동조건 하나일 경우
+  const closeModal = (num) => {
+    setModalOpen(false);
+  };
+
+  const handleModal = (header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+  };
   return (
     <>
       <AdComp onClick={toPayment}>
@@ -68,6 +91,17 @@ const Ad = () => {
           </div>
         </div>
       </AdComp>
+      <Modal
+        open={openModal}
+        close={closeModal}
+        header={modalHeader}
+        children={modalMsg}
+        type={modalType}
+        confirm={() => {
+          navigate("/login");
+          closeModal();
+        }}
+      />
     </>
   );
 };
