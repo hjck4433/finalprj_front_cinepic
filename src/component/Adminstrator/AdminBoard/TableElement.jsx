@@ -40,8 +40,8 @@ const TrComp = styled.tr`
         &:disabled {
           opacity: 1;
         }
-        outline: none;
-        border: none;
+        border: 1px solid var(--GREY);
+        border-radius: 2px;
         padding: 6px;
         font-weight: 600;
         option {

@@ -4,11 +4,8 @@ import { PieChart, Pie, Sector } from "recharts";
 
 const PieChartBox = styled.div`
   padding: 30px;
-  height: 400px;
-  margin-right: 20px;
   border-radius: 10px;
   border: 1px solid var(--GREY);
-  background-color: white;
   .chartTitle {
     margin-bottom: 30px;
     font-weight: 600;
@@ -86,14 +83,16 @@ const TypeChart = (props) => {
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         textAnchor={textAnchor}
-        fill="#333"
+        fill="var(--BLACK)"
+        fontSize={13}
       >{`${value} 명`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         dy={18}
         textAnchor={textAnchor}
-        fill="#999"
+        fill="var(--DARKGREY)"
+        fontSize={11}
       >
         {`(Rate ${(percent * 100).toFixed(2)}%)`}
       </text>
@@ -112,7 +111,7 @@ const LoginTypeChart = () => {
     <PieChartBox>
       <h4 className="chartTitle">회원가입 방법 구분</h4>
       <ResponsiveContainer width="100%" height="100%">
-        <PieChartComp width={300} height={300}>
+        <PieChartComp width={250} height={250}>
           <Pie
             activeIndex={activeIndex}
             activeShape={TypeChart}

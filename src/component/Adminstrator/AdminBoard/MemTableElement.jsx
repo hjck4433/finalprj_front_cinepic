@@ -4,7 +4,6 @@ import Button from "../../../util/Button";
 const MemTrComp = styled.tr`
   vertical-align: middle;
   td {
-    /* border: 1px solid red; */
     padding: 10px;
     vertical-align: middle;
     &.center {
@@ -37,9 +36,6 @@ const MemTrComp = styled.tr`
 `;
 
 const MemTr = ({ data, index, setId, deleteModal }) => {
-  const toDate = new Date(data.regDate);
-  const regDate = toDate.toISOString().split("T")[0];
-
   return (
     <MemTrComp>
       {/* 숫자 자동증가 */}
@@ -57,7 +53,7 @@ const MemTr = ({ data, index, setId, deleteModal }) => {
       <td className="center">{data.phone}</td>
       <td className="center">{data && data.isKakao ? "O" : "X"}</td>
       <td className="center">{data && data.isMembership ? "O" : "X"}</td>
-      <td className="center">{regDate}</td>
+      <td className="center">{data.joinDate}</td>
       <td className="center">{data.isWithdraw ? "O" : "X"}</td>
       <td className="center">{data.addr}</td>
 

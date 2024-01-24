@@ -4,44 +4,48 @@ import { useState, useEffect } from "react";
 import Tr from "../../component/Adminstrator/AdminBoard/TableElement";
 
 const AdminBoardComp = styled.div`
-  padding-top: 8%;
+  padding-top: 60px;
   .container {
     min-width: 1200px;
     padding: 40px 30px;
-    margin: 0;
     margin-left: 50px;
     h2 {
-      margin-bottom: 30px;
+      margin-bottom: 50px;
+      font-size: 1.7em;
+      font-weight: 600;
+      // 밑줄
+      display: inline-block;
+      padding: 0 5px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--GREY);
     }
     .chartBox {
       margin-bottom: 30px;
     }
     .tableBox {
       width: 100%;
-      padding: 50px 30px;
+      padding-bottom: 10px;
       overflow-x: auto;
-      background-color: var(--GREY);
       text-align: center;
-      display: flex;
-      justify-content: center;
+      outline: 1px solid var(--GREY);
       border-radius: 10px;
-      /* vertical-align: middle; */
-      /* margin: 0 auto; */
+
       table {
         width: 100%;
         max-width: 100%;
         white-space: nowrap;
         overflow-x: scroll;
         padding: 10px;
+
         thead {
           tr {
-            border-radius: 10px;
+            border-radius: 5px;
 
             th {
-              color: #333;
+              color: var(--BLACK);
               font-weight: 600;
-              font-size: 1.1em;
-              background-color: white;
+              font-size: 1em;
+              background-color: var(--GREY);
               padding: 20px;
               &:first-child {
                 border-radius: 10px 0 0 10px;
