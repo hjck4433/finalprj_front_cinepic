@@ -1,3 +1,4 @@
+import CommentContainer from "../component/MovieInfo/CommentContainer";
 import MovieDetail from "../component/MovieInfo/MovieDetail";
 import TabMenu from "../component/MovieInfo/TabMenu";
 
@@ -22,6 +23,7 @@ const MovieInfo = () => {
     <>
       <MovieDetail data = {data}/>
       <TabMenu data = {data} />
+      <CommentContainer />
     </>
   );
 };

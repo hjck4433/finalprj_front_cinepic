@@ -6,11 +6,11 @@ import TabStillCut from "./TabStillCut";
 import TabPostSlide from "./TabPostSlide";
 
 const TabMenuComp = styled.section`
+padding: 5% 0 0;
 
-padding: 5% 0;
   .container {
     padding: 0;
-    /* outline: 1px solid red; */
+    border-bottom: 1px solid var(--ORANGE);
     ul {
       display: flex;
       /* padding: 0 10px; */
