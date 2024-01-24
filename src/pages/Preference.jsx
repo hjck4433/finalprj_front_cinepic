@@ -36,6 +36,7 @@ const Preference = () => {
   // 감독 검색
   const [directorList, setDirectorList] = useState([]);
   const [inputDirector, setInputDirector] = useState("");
+  const [isDirector, setIsDirector] = useState("");
   const maxDirectors = 3;
 
   // 감독 추가
@@ -44,6 +45,9 @@ const Preference = () => {
       setDirectorList(directorList.concat(inputDirector));
       setInputDirector("");
       console.log(directorList);
+      setIsDirector(true);
+    } else {
+      setIsDirector(false);
     }
   };
 
@@ -59,6 +63,7 @@ const Preference = () => {
   // 배우 검색
   const [actorList, setActorList] = useState([]);
   const [inputActor, setInputActor] = useState("");
+  const [isActor, setIsActor] = useState("");
   const maxActors = 3;
 
   // 배우 추가
@@ -67,6 +72,9 @@ const Preference = () => {
       setActorList(actorList.concat(inputActor));
       setInputActor("");
       console.log(actorList);
+      setIsActor(true);
+    } else {
+      setIsActor(false);
     }
   };
 
@@ -77,8 +85,18 @@ const Preference = () => {
     setActorList(updatedActorList);
   };
 
+  // 성별 고르기
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [isGender, setIsGender] = useState("");
+
+  const handleGenderCheck = (gender) => {
+    setSelectedGender(gender);
+    setIsGender(true);
+  };
+
   // 장르 상태 및 최대 선택 가능한 개수 설정
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [isGenres, setIsGenres] = useState("");
   const maxGenres = 3; // 최대 선택 할 수 있는 개수
 
   // 체크박스 변경 시 호출되는 함수
@@ -95,17 +113,12 @@ const Preference = () => {
       // 선택되지 않은 경우 추가(단 , 최대 개수를 초과하지 않아야 함)
       if (selectedGenres.length < maxGenres) {
         setSelectedGenres([...selectedGenres, genre]);
+        setIsGenres(true);
+      } else {
+        setIsGenres(false);
       }
     }
   };
-
-  //Button 활성화
-  // const [isActive, setActive] = useState(false);
-
-  // 버튼 활성화
-  // const activate = () => {
-  //   isActive ? setActive(false) : setActive(true);
-  // };
 
   return (
     <>
@@ -192,11 +205,18 @@ const Preference = () => {
                       name="성별"
                       value="female"
                       checked
+                      onChange={() => handleGenderCheck()}
                     />
                     <label htmlFor="radio-1">여성</label>
                   </div>
                   <div className="form_radio_btn">
-                    <input id="radio-2" type="radio" name="성별" value="male" />
+                    <input
+                      id="radio-2"
+                      type="radio"
+                      name="성별"
+                      value="male"
+                      onChange={() => handleGenderCheck()}
+                    />
                     <label htmlFor="radio-2">남성</label>
                   </div>
                 </div>
@@ -243,7 +263,9 @@ const Preference = () => {
                   width="200px"
                   height="50px"
                   fontSize="20px"
-                  active={true}
+                  active={
+                    isDirector && isActor && isGender && isGenres === true
+                  }
                   clickEvt={modal}
                 />
                 {type !== "new" && (
@@ -264,7 +286,7 @@ const Preference = () => {
                 header={modalHeader}
                 children={modalMsg}
                 type={modalType}
-                confirm={() => {}}
+                // confirm={() => {}}
                 closeEvt={() => {
                   if (modalConfirm === 0) {
                     navigate("/");
