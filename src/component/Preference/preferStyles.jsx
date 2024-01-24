@@ -48,7 +48,6 @@ const PreferComp = styled.section`
           justify-content: space-between;
           width: 300px;
           border-bottom: 1px solid var(--BLACK);
-          cursor: pointer;
           text-align: center;
           @media screen and (max-width: 480px) {
             width: 70%;
@@ -66,6 +65,11 @@ const PreferComp = styled.section`
               font-size: 0.9em;
             }
           }
+          button {
+            cursor: pointer;
+            border: none;
+            background-color: var(--WHITE);
+          }
         }
         // 선택된 내용 나오는 것
         .selBox {
@@ -77,21 +81,25 @@ const PreferComp = styled.section`
           }
           // 검색 된 이름 나옴
           .sel {
-            background-color: rgba(204, 204, 204, 0.5);
-            border-radius: 50px;
-            padding: 13px;
-            margin-right: 20px;
-            @media screen and (max-width: 480px) {
-              margin-bottom: 10px;
-              padding-left: 20px;
+            .name {
+              span {
+                background-color: rgba(204, 204, 204, 0.5);
+                font-weight: bold;
+                border-radius: 50px;
+                padding: 14px;
+                margin-right: 15px;
+                button {
+                  padding-left: 15px;
+                  border: none;
+                  cursor: pointer;
+                  background-color: var(--WHITE);
+                }
+              }
             }
-            span:nth-child(1) {
-              margin-right: 10px;
-              font-weight: bold;
-            }
-            span:nth-child(2) {
-              cursor: pointer;
-            }
+          }
+          @media screen and (max-width: 480px) {
+            margin-bottom: 10px;
+            padding-left: 20px;
           }
         }
       }
