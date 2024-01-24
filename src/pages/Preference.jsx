@@ -85,12 +85,14 @@ const Preference = () => {
     setActorList(updatedActorList);
   };
 
-  // 성별 고르기
+  // 성별
   const [selectedGender, setSelectedGender] = useState(null);
   const [isGender, setIsGender] = useState("");
 
+  // 성별 고르기
   const handleGenderCheck = (gender) => {
     setSelectedGender(gender);
+    console.log(gender);
     setIsGender(true);
   };
 
@@ -113,6 +115,7 @@ const Preference = () => {
       // 선택되지 않은 경우 추가(단 , 최대 개수를 초과하지 않아야 함)
       if (selectedGenres.length < maxGenres) {
         setSelectedGenres([...selectedGenres, genre]);
+        console.log(genre);
         setIsGenres(true);
       } else {
         setIsGenres(false);
@@ -204,8 +207,8 @@ const Preference = () => {
                       type="radio"
                       name="성별"
                       value="female"
-                      checked
-                      onChange={() => handleGenderCheck()}
+                      checked={selectedGender === "female"}
+                      onChange={() => handleGenderCheck("female")}
                     />
                     <label htmlFor="radio-1">여성</label>
                   </div>
@@ -215,7 +218,8 @@ const Preference = () => {
                       type="radio"
                       name="성별"
                       value="male"
-                      onChange={() => handleGenderCheck()}
+                      checked={selectedGender === "male"}
+                      onChange={() => handleGenderCheck("male")}
                     />
                     <label htmlFor="radio-2">남성</label>
                   </div>
@@ -286,7 +290,6 @@ const Preference = () => {
                 header={modalHeader}
                 children={modalMsg}
                 type={modalType}
-                // confirm={() => {}}
                 closeEvt={() => {
                   if (modalConfirm === 0) {
                     navigate("/");
