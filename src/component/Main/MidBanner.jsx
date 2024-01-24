@@ -2,6 +2,7 @@ import styled from "styled-components";
 import crew from "../../images/crew.jpg";
 import talk from "../../images/talk.jpg";
 import space from "../../images/space.jpg";
+import { useNavigate } from "react-router-dom";
 
 const MidBannerComp = styled.section`
   background-color: var(--IVORY);
@@ -86,6 +87,16 @@ const MidBannerComp = styled.section`
 `;
 
 const MidBanner = () => {
+  const navigate = useNavigate();
+  const toCineCrew = () => {
+    navigate("/board/:category");
+  };
+  const toCineTalk = () => {
+    navigate("/chatlist");
+  };
+  const toIndiSpace = () => {
+    navigate("/theater");
+  };
   return (
     <>
       <MidBannerComp>
@@ -96,13 +107,13 @@ const MidBanner = () => {
             </h3>
           </div>
           <div className="funcBtnBox">
-            <div className="funcBtn1">
+            <div className="funcBtn1" onClick={toCineCrew}>
               <div className="funcText">CINE:CREW</div>
             </div>
-            <div className="funcBtn2">
+            <div className="funcBtn2" onClick={toCineTalk}>
               <div className="funcText">CINE:TALK</div>
             </div>
-            <div className="funcBtn3">
+            <div className="funcBtn3" onClick={toIndiSpace}>
               <div className="funcText">INDI:SPACE</div>
             </div>
           </div>

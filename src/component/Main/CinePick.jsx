@@ -35,21 +35,29 @@ const CinePickComp = styled.section`
         button {
           display: block;
           margin: 0 auto;
+          margin-top: 40px;
         }
+        @media only screen and (max-width: 400px) {
+          button {
+            width: 150px;
+          }
+        }
+
         .movieCard {
           position: relative;
-          /* border: 1px solid gray; */
           border-radius: 5px;
           margin-bottom: 15px;
+
           .label {
             width: 30%;
             position: absolute;
+            top: -5px;
+            z-index: 1;
           }
         }
       }
       .rightSideBox {
         width: 70%;
-        /* border: 1px solid gray; */
         .textBox {
           padding: 5px 40px;
 
@@ -57,6 +65,7 @@ const CinePickComp = styled.section`
             font-size: 1.5em;
             font-weight: 600;
             padding: 10px 0;
+            margin-top: 30px;
           }
           p {
             color: var(--DARKGREY);
@@ -68,23 +77,35 @@ const CinePickComp = styled.section`
             margin-bottom: 20px;
           }
         }
+        @media only screen and (max-width: 900px) {
+          .textBox {
+            padding: 5px;
+            p {
+              font-size: 0.9em;
+            }
+            .story {
+              font-size: 1.1em;
+            }
+          }
+        }
         .otherMovieBox {
           display: flex;
           justify-content: space-between;
           align-items: center;
           width: 100%;
           padding: 0 40px 100px 40px;
-          /* border: 1px solid orange; */
 
           .movieCard {
             width: 28%;
             position: relative;
-            /* border: 1px solid gray; */
             border-radius: 5px;
             margin-bottom: 15px;
+
             .label {
               width: 30%;
               position: absolute;
+              top: -2px;
+              z-index: 1;
             }
           }
           @media only screen and (max-width: 735px) {
@@ -150,7 +171,6 @@ const CinePick = () => {
                     연인 클레멘타인의 기억을 지우기로 결심한다. 기억이 사라져
                     갈수록 조엘은 사랑이 시작되던 순간, 행복한 기억들, 가슴 속에
                     각인된 추억들을 지우기 싫어지기만 하는데... 당신을 지우면 이
-                    아픔도 사라질까요? 사랑은 그렇게 다시 기억된다.우면 이
                     아픔도 사라질까요? 사랑은 그렇게 다시 기억된다.
                   </p>
                 </div>
