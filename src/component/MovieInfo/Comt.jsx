@@ -47,9 +47,6 @@ const ComtComp = styled.div`
       margin: 20px;
     }
   }
-  @media only screen and (max-width:1200px){
-
-  }
   @media only screen and (max-width:768px){
     font-size: 1.1em;
     .user_box {
@@ -85,7 +82,6 @@ const ComtComp = styled.div`
       }
     }
   }
-  
   @media only screen and (max-width:480px){
 
   }

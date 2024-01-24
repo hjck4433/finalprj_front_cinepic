@@ -35,6 +35,7 @@ const CommentWriteComp = styled.div`
 					margin-right: 20px;
 				}
         select { 
+					cursor: pointer;
 					font-size: 1.1em;
           border-style: none;	
 					&:focus {
@@ -50,6 +51,7 @@ const CommentWriteComp = styled.div`
     }
     textarea {
 			width: calc(100% - (180px + (20px + 20px)));
+			height: 80px;
       margin: 20px;
 			border: none;
 			resize: none;
@@ -63,9 +65,6 @@ const CommentWriteComp = styled.div`
 			margin: 20px;
 		}
 		
-  }
-	@media only screen and (max-width:1200px){
-
   }
   @media only screen and (max-width:768px){
 		font-size: 1.1em;
@@ -96,16 +95,17 @@ const CommentWriteComp = styled.div`
 			textarea {
 				width: 100%;
 				margin: 0;
-				padding: 20px 0;
+				margin: 20px 0;
 				margin-bottom: 3%;
 			}
-		}
-    
+			button {
+				margin: 10px;
+			}
+		} 
   }
   @media only screen and (max-width:480px){
 
   }
-
 `;
 const ComtImg = styled.div`
   width: 100%;
