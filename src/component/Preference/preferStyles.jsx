@@ -11,7 +11,7 @@ const PreferComp = styled.section`
     // 제목
     h2 {
       margin-left: 10%;
-      padding-bottom: 30px;
+      padding-bottom: 50px;
     }
     // 선호 배우,감독
     .searchSel {
@@ -36,6 +36,7 @@ const PreferComp = styled.section`
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 50px;
         @media screen and (max-width: 480px) {
           height: 240px;
           text-align: center;
@@ -106,7 +107,6 @@ const PreferComp = styled.section`
     }
     // 성별 영역
     .genderSel {
-      padding-top: 50px;
       // 성별 제목
       h3 {
         color: var(--RED);
