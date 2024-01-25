@@ -5,6 +5,7 @@ import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Button from "../util/Button";
 import Modal from "../util/Modal";
 import { useNavigate, useParams } from "react-router-dom";
+import PreferApi from "../api/PreferApi";
 
 const Preference = () => {
   const navigate = useNavigate();
@@ -117,7 +118,9 @@ const Preference = () => {
     }
   };
 
+  // 등록 할 때 수정 시
   useEffect(() => {
+    console.log("감독 : " + directorList);
     if (directorList.length === 0) {
       setIsDirector(false);
     }
@@ -131,6 +134,7 @@ const Preference = () => {
     }
   }, [directorList, actorList, selectedGenres]);
 
+  // 수정 일때
   useEffect(() => {
     if (type !== "new") {
       setIsDirector(true);
