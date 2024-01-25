@@ -1,17 +1,19 @@
 import styled from "styled-components";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserStore";
 import Button from "../util/Button";
 import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
 import paymentImg from "../images/paymentImg.png";
-
+import Modal from "../util/Modal";
 const PaymentComp = styled.div`
   .container {
+    display: flex;
+    justify-content: center;
     .paymentBox {
-      width: 100%;
-      padding-bottom: 100%;
+      width: 70%;
+      padding-bottom: 70%;
       background-image: url(${paymentImg});
       background-size: cover;
       position: relative;
@@ -71,8 +73,32 @@ const Payment = () => {
   const navigate = useNavigate();
 
   const context = useContext(UserContext);
+
   // 로그인 / 멤버쉽 여부
-  const { setIsMember } = context;
+  const { setIsMembership } = context;
+
+  // 모달 관련
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+  const [modalConfirm, setModalConfirm] = useState(null);
+
+  // 모달 닫기
+  const closeModal = (num) => {
+    setModalOpen(false);
+  };
+  const handleModal = (header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+    setModalConfirm(num);
+  };
+
+  const modal = () => {
+    handleModal("결제", "결제가 완료되었습니다.", false, 0);
+  };
 
   useEffect(() => {
     const jquery = document.createElement("script");
@@ -93,21 +119,16 @@ const Payment = () => {
     const res = await MemberApi.saveMembership(true);
     console.log(res.data);
     if (res.data) {
-      navigate("/payment/result");
       console.log("멤버십 저장 성공");
+      setIsMembership(true);
+      // 모달을 여기서 불러줌
+      modal();
     } else {
       console.log("멤버십 저장 실패!");
+      navigate("/payment");
     }
   };
   const updateMembership = useTokenAxios(membershipUpdate);
-
-  // 회원 정보 불러오기
-  const memberInfo = async () => {
-    const res = await MemberApi.getMemberDetail();
-    console.log("회원 상세정보: " + res.data);
-    if (res.data !== null) {
-    }
-  };
 
   const onClickPayment = async () => {
     const { IMP } = window;
@@ -140,21 +161,11 @@ const Payment = () => {
   };
 
   const callback = (response) => {
-    const {
-      success,
-      error_msg,
-      imp_uid,
-      merchant_uid,
-      pay_method,
-      paid_amount,
-      status,
-    } = response;
+    const { success, error_msg } = response;
 
     if (success) {
       updateMembership();
       console.log("결제 성공");
-      // 토큰
-      setIsMember(true);
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
@@ -188,6 +199,18 @@ const Payment = () => {
           </div>
         </div>
       </PaymentComp>
+      <Modal
+        open={openModal}
+        close={closeModal}
+        header={modalHeader}
+        children={modalMsg}
+        type={modalType}
+        closeEvt={() => {
+          if (modalConfirm === 0) {
+            navigate("/");
+          }
+        }}
+      />
     </>
   );
 };
