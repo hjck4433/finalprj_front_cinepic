@@ -76,7 +76,7 @@ const PreferComp = styled.section`
         .selBox {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 35px;
+          margin-bottom: 55px;
           @media screen and (max-width: 480px) {
             display: block;
           }

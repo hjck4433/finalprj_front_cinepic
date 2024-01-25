@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PreferComp from "../component/Preference/preferStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -46,8 +46,6 @@ const Preference = () => {
       setInputDirector("");
       console.log(directorList);
       setIsDirector(true);
-    } else {
-      setIsDirector(false);
     }
   };
 
@@ -73,8 +71,6 @@ const Preference = () => {
       setInputActor("");
       console.log(actorList);
       setIsActor(true);
-    } else {
-      setIsActor(false);
     }
   };
 
@@ -117,11 +113,32 @@ const Preference = () => {
         setSelectedGenres([...selectedGenres, genre]);
         console.log(genre);
         setIsGenres(true);
-      } else {
-        setIsGenres(false);
       }
     }
   };
+
+  useEffect(() => {
+    if (directorList.length === 0) {
+      setIsDirector(false);
+    }
+
+    if (actorList.length === 0) {
+      setIsActor(false);
+    }
+
+    if (selectedGenres.length === 0) {
+      setIsGenres(false);
+    }
+  }, [directorList, actorList, selectedGenres]);
+
+  useEffect(() => {
+    if (type !== "new") {
+      setIsDirector(true);
+      setIsActor(true);
+      setIsGender(true);
+      setIsGenres(true);
+    }
+  }, []);
 
   return (
     <>
@@ -261,14 +278,14 @@ const Preference = () => {
               </div>
               <div className="buttonBox">
                 <Button
-                  children="등록하기"
+                  children={type === "new" ? "등록하기" : "수정하기"}
                   front={"var(--RED)"}
                   back={"var(--DARKRED)"}
                   width="200px"
                   height="50px"
                   fontSize="20px"
                   active={
-                    isDirector && isActor && isGender && isGenres === true
+                    isActor && isDirector && isGender && isGenres === true
                   }
                   clickEvt={modal}
                 />
