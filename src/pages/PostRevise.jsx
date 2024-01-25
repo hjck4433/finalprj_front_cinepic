@@ -1,8 +1,17 @@
 import { RadioBox } from "../component/NewPost/RadioBox";
 import Button from "../util/Button";
 import { NewPostComp } from "../component/NewPost/NewPostStyle";
-import PostImage from "../images/PostImage.png";
-import { useNavigate } from "react-router-dom";
+import postImage from "../images/PostImage.png";
+import { PostComp } from "../component/Post/PostStyle";
+import CommentList from "../component/Post/Comment/CommentList";
+import { useNavigate, useParams } from "react-router-dom";
+import BoardApi from "../api/BoardApi";
+import MemberApi from "../api/MemberApi";
+import React, { useEffect, useState } from "react";
+import useTokenAxios from "../hooks/useTokenAxios";
+import { storage } from "../api/firebase";
+import Modal from "../util/Modal";
+import profileImg from "../images/profileImg.png";
 
 const PostRevise = () => {
   // 게시글 상세로 이동
@@ -10,6 +19,128 @@ const PostRevise = () => {
   const toPostDetail = () => {
     navigate(-1);
   };
+
+  const [boardData, setBoardData] = useState("");
+  const { postId } = useParams();
+  const [memberInfo, setMemberInfo] = useState(null);
+  const [regDate, setRegDate] = useState("");
+
+  const fetchMemberDetail = async () => {
+    const res = await MemberApi.getMemberDetail();
+    if (res.data !== null) setMemberInfo(res.data);
+  };
+  const getMemberDetail = useTokenAxios(fetchMemberDetail);
+
+  const fetchBoardData = async () => {
+    console.log("API 요청 전");
+    const res = await BoardApi.boardDetail(postId);
+    console.log("API 요청 후 : ", res);
+    if (res.data !== null) {
+      setBoardData(res.data);
+      setSelCategory(res.data.categoryName);
+      setSelGather(res.data.gatherType);
+      setInputTitle(res.data.title);
+      setInputContents(res.data.boardContent);
+      setImgSrc(res.data.image);
+
+      const toDate = new Date(res.data.regDate);
+      setRegDate(toDate.toISOString().split("T")[0]);
+    }
+  };
+  const getBoardData = useTokenAxios(fetchBoardData);
+
+  useEffect(() => {
+    getMemberDetail(); // 멤버 정보 가져옴
+    getBoardData(); // 게시글 정보 가져옴
+  }, []);
+
+  // 카테고리(주제선택) 및 모임형식(온/오프라인)
+  const [selCategory, setSelCategory] = useState("");
+  const [selGather, setSelGather] = useState("");
+
+  const CategoryChange = (e) => {
+    setSelCategory(e.target.value);
+  };
+  const GatherChange = (e) => {
+    setSelGather(e.target.value);
+  };
+
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputContents, setInputContents] = useState("");
+  const InputTitleChange = (e) => {
+    setInputTitle(e.target.value);
+  };
+  const InputContentsChange = (e) => {
+    setInputContents(e.target.value);
+  };
+
+  // 이미지 업로드
+  const [imgSrc, setImgSrc] = useState(postImage);
+  const [file, setFile] = useState("");
+
+  // 입력받은 이미지 파일 주소
+  const handleFileInputChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+
+    // 선택된 파일을 파이어베이스로
+    if (selectedFile) {
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setImgSrc(objectUrl);
+      setFile(selectedFile);
+    }
+  };
+
+  // 모달
+  const [openModal, setModalOpen] = useState(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    navigate(-1);
+  };
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+
+  const handleModal = (header, msg, type) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+  };
+
+  // 게시글 수정
+  const updatePost = async (url) => {
+    const res = await BoardApi.updateBoard(
+      boardData.id,
+      selCategory,
+      selGather,
+      inputTitle,
+      url,
+      inputContents
+    );
+    if (res.data) {
+      console.log("저장 성공!");
+      handleModal("성공", "수정이 완료되었습니다.", false);
+    }
+  };
+
+  const onSubmit = () => {
+    if (imgSrc !== postImage && imgSrc !== boardData.image) {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      fileRef.put(file).then(() => {
+        console.log("저장성공!");
+        fileRef.getDownloadURL().then((url) => {
+          console.log("저장경로 확인 : " + url);
+          console.log("url" + url);
+          updatePost(url);
+        });
+      });
+    } else {
+      updatePost();
+    }
+  };
+  const postUpdate = useTokenAxios(onSubmit);
+
   return (
     <>
       <NewPostComp>
@@ -97,7 +228,7 @@ const PostRevise = () => {
               <h3>이미지</h3>
               <div className="uploadImage">
                 <div className="imgBox">
-                  <img src={PostImage} alt="게시글 첨부 이미지" />
+                  <img src={postImage} alt="게시글 첨부 이미지" />
                 </div>
                 <label>
                   <input

@@ -24,7 +24,7 @@ export const PostComp = styled.section`
           overflow: hidden;
           background-color: var(--GREY);
           img {
-            object-fit: cover;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;

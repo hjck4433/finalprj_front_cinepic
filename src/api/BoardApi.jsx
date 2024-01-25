@@ -12,7 +12,7 @@ const BoardApi = {
       boardContent: boardContent,
     };
     return await axios.post(
-      Common.MV_DOMAIN + "/board/post/new",
+      Common.CP_DOMAIN + `/board/new`,
       data,
       Common.tokenHeader()
     );
@@ -35,7 +35,7 @@ const BoardApi = {
       boardContent: boardContent,
     };
     return await axios.post(
-      Common.MV_DOMAIN + "/board/post/update",
+      Common.CP_DOMAIN + `/board/update`,
       data,
       Common.tokenHeader()
     );
@@ -43,21 +43,21 @@ const BoardApi = {
   // 게시글 삭제
   deleteBoard: async (id) => {
     return await axios.delete(
-      Common.MV_DOMAIN + `/board/post/delete/${id}`,
+      Common.CP_DOMAIN + `/board/delete/${id}`,
       Common.tokenHeader()
     );
   },
   // 게시글 리스트 조회
   boardList: async () => {
     return await axios.get(
-      Common.MV_DOMAIN + `/board/list`,
+      Common.CP_DOMAIN + `/board/list`,
       Common.tokenHeader()
     );
   },
   // 게시글 상세 조회
   boardDetail: async (postId) => {
     return await axios.get(
-      Common.MV_DOMAIN + `/board/post/${postId}`,
+      Common.CP_DOMAIN + `/board/post/${postId}`,
       Common.tokenHeader()
     );
   },

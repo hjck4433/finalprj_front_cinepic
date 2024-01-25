@@ -241,7 +241,7 @@ const NewPost = () => {
               <h3>이미지</h3>
               <div className="uploadImage">
                 <div className="imgBox">
-                  <img src={postImage} alt="게시글 첨부 이미지" />
+                  <img src={imgSrc} alt="게시글 첨부 이미지" />
                 </div>
                 <label>
                   <input
