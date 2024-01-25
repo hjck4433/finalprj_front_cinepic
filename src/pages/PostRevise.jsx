@@ -2,8 +2,6 @@ import { RadioBox } from "../component/NewPost/RadioBox";
 import Button from "../util/Button";
 import { NewPostComp } from "../component/NewPost/NewPostStyle";
 import postImage from "../images/PostImage.png";
-import { PostComp } from "../component/Post/PostStyle";
-import CommentList from "../component/Post/Comment/CommentList";
 import { useNavigate, useParams } from "react-router-dom";
 import BoardApi from "../api/BoardApi";
 import MemberApi from "../api/MemberApi";
@@ -11,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import useTokenAxios from "../hooks/useTokenAxios";
 import { storage } from "../api/firebase";
 import Modal from "../util/Modal";
-import profileImg from "../images/profileImg.png";
 
 const PostRevise = () => {
   // 게시글 상세로 이동
@@ -61,7 +58,7 @@ const PostRevise = () => {
   const CategoryChange = (e) => {
     setSelCategory(e.target.value);
   };
-  const GatherChange = (e) => {
+  const GatherTypeChange = (e) => {
     setSelGather(e.target.value);
   };
 
@@ -161,7 +158,8 @@ const PostRevise = () => {
                       id="씨네크루"
                       value="씨네크루"
                       name="category"
-                      // onChange={}
+                      onChange={CategoryChange}
+                      checked={selCategory === "씨네크루" ? "checked" : ""}
                     />
                     씨네크루
                   </label>
@@ -171,7 +169,8 @@ const PostRevise = () => {
                       id="크루후기"
                       value="크루후기"
                       name="category"
-                      // onChange={}
+                      onChange={CategoryChange}
+                      checked={selCategory === "크루후기" ? "checked" : ""}
                     />
                     크루후기
                   </label>
@@ -188,7 +187,8 @@ const PostRevise = () => {
                       id="온라인"
                       value="온라인"
                       name="meetingSpot"
-                      // onChange={}
+                      onChange={GatherTypeChange}
+                      checked={selGather === "온라인" ? "checked" : ""}
                     />
                     온라인
                   </label>
@@ -198,7 +198,8 @@ const PostRevise = () => {
                       id="오프라인"
                       value="오프라인"
                       name="meetingSpot"
-                      // onChange={}
+                      onChange={GatherTypeChange}
+                      checked={selGather === "오프라인" ? "checked" : ""}
                     />
                     오프라인
                   </label>
@@ -207,21 +208,19 @@ const PostRevise = () => {
             </div>
             <div className="author">
               <h3>작성자</h3>
-              <p>gogohamster</p>
-              {/* <p>{memberInfo && memberInfo.alias}</p>  */}
+              <p>{memberInfo && memberInfo.alias}</p>
             </div>
             <div className="regDate">
               <h3>작성일</h3>
-              <p>2024.01.15</p>
-              {/* <p>{currentDate}</p> */}
+              <p>{regDate}</p>
             </div>
             <div className="postTitle">
               <h3>제 목</h3>
               <textarea
                 type="text"
-                // value={InputTitle}
+                value={inputTitle}
                 placeholder="글의 제목을 입력해주세요."
-                // onChange={}
+                onChange={InputTitleChange}
               ></textarea>
             </div>
             <div className="postImage">
@@ -233,7 +232,7 @@ const PostRevise = () => {
                 <label>
                   <input
                     type="file"
-                    // onChange={}
+                    onChange={(e) => handleFileInputChange(e)}
                   />
                   파일 선택
                 </label>
@@ -243,9 +242,9 @@ const PostRevise = () => {
               <h3>내 용</h3>
               <textarea
                 type="text"
-                // value={inputContents}
+                value={inputContents}
                 placeholder="글의 내용을 입력해주세요."
-                // clickEvt={}
+                onChange={InputContentsChange}
               ></textarea>
             </div>
             <div className="buttonBox">
@@ -254,7 +253,7 @@ const PostRevise = () => {
                 active={true}
                 front="var(--RED)"
                 back="var(--DARKRED)"
-                // clickEvt={}
+                clickEvt={postUpdate}
               />
               <Button
                 children="취소하기"
@@ -267,6 +266,13 @@ const PostRevise = () => {
           </div>
         </div>
       </NewPostComp>
+      <Modal
+        open={openModal}
+        close={closeModal}
+        header={modalHeader}
+        children={modalMsg}
+        type={modalType}
+      />
     </>
   );
 };
