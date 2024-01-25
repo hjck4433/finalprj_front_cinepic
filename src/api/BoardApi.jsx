@@ -61,5 +61,25 @@ const BoardApi = {
       Common.tokenHeader()
     );
   },
+
+  // Admin
+  // 게시글 리스트 조회(페이지네이션)
+  getAdminBoardList: async (page) => {
+    console.log("관리자 게시글 불러오는 중 - 페이지 : " + page);
+    return await axios.get(
+      Common.CP_DOMAIN + `/board/admin/boardlist?page=${page - 1}&size=10`,
+      Common.tokenHeader()
+    );
+  },
+
+  // 총 페이지 조회
+  getAdminPages: async () => {
+    const page = 0;
+    const size = 10;
+    return await axios.get(
+      Common.CP_DOMAIN + `/board/admin/totalpage?page=${page}&size=${size}`,
+      Common.tokenHeader()
+    );
+  },
 };
 export default BoardApi;
