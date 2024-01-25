@@ -109,6 +109,7 @@ const MyInfoComp = styled.section`
           width: 100%;
           justify-content: center;
           text-align: center;
+          margin-right: 30px;
           .buttonBox {
             padding-right: 0;
             justify-content: center;

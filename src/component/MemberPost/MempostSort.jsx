@@ -14,7 +14,6 @@ const MempostSortComp = styled.section`
     transition: 0.1s ease-in;
     font-size: 22px;
     font-weight: 600;
-    /* border: 1px solid red; */
 
     &:hover {
       cursor: pointer;
