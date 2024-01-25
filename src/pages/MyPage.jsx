@@ -39,7 +39,7 @@ const MyPage = () => {
   return (
     <>
       <MyInfo memberInfo={memberInfo && memberInfo} />
-      {memberInfo && !memberInfo.isMembershp && <MembershipJoin />}
+      {memberInfo && !memberInfo.isMembership && <MembershipJoin />}
       <BookMarkList />
     </>
   );
