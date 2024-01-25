@@ -1,10 +1,8 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import Button from "../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "../../context/UserStore";
 
 const MyInfoComp = styled.section`
   width: 100%;
@@ -149,10 +147,6 @@ const MyInfo = ({ memberInfo, profile }) => {
     navigate("/preference/revise");
   };
 
-  // 프로필
-  const context = useContext(UserContext);
-  const { setLoginStatus, loginStatus } = context;
-
   return (
     <>
       <MyInfoComp>
@@ -175,7 +169,7 @@ const MyInfo = ({ memberInfo, profile }) => {
               </div>
               <div className="userBox">
                 <p className="title">닉네임</p>
-                <p>{memberInfo && memberInfo.alisa}</p>
+                <p>{memberInfo && memberInfo.alias}</p>
               </div>
               <div className="userBox">
                 <p className="title">이메일</p>
