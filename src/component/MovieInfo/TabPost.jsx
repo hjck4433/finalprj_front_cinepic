@@ -1,11 +1,16 @@
 import styled from "styled-components";
+import Button from "../../util/Button";
 
 const TabPostComp = styled.div`
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 4px 5px 10px rgb(0, 0, 0, 0.2);
-
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
 
   .img_box {
     width: 100%;
@@ -28,7 +33,6 @@ const TabPostComp = styled.div`
       color: var(--GREY);
     }
   }
-  
 `;
 const PostImg = styled.div`
   width: 100%;
@@ -36,13 +40,11 @@ const PostImg = styled.div`
   background-image: url(${(props) => props.$postImage});
   background-size: 100%;
   background-position: center;
-	background-repeat: no-repeat;
+  background-repeat: no-repeat;
   position: absolute;
 `;
 
-const TabPost = ({post}) => {
-
-
+const TabPost = ({ post, revise }) => {
   return (
     <>
       <TabPostComp>
@@ -55,6 +57,23 @@ const TabPost = ({post}) => {
           <p>{post.postContent}</p>
           <p>{post.postRegDate}</p>
         </div>
+        <Button
+          children="수정"
+          front="#fff"
+          back="var(--ORANGE)"
+          width="100px"
+          height=""
+          fontSize="1em"
+          active={true}
+          clickEvt={() => {
+            revise(
+              post.postImage,
+              post.postTitle,
+              post.postContent,
+              post.postId
+            );
+          }}
+        />
       </TabPostComp>
     </>
   );
