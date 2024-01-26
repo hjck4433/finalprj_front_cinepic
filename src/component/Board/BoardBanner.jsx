@@ -2,10 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import crewBanner from "../../images/CrewBanner.jpg";
 import Button from "../../util/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import ToggleBtn from "./ToggleBtn";
 
 const CineBannerComp = styled.section`
   width: 100%;
-  height: 550px;
   background-image: url(${crewBanner});
   background-size: cover;
   background-position: center;
@@ -16,6 +18,9 @@ const CineBannerComp = styled.section`
     padding: 40px 30px;
     position: relative;
     .banner {
+      width: 100%;
+      height: 550px;
+
       ul {
         font-size: 1.3em;
         display: flex;
@@ -69,6 +74,16 @@ const CineBannerComp = styled.section`
       }
     }
     .filter {
+      width: 100%;
+      background-color: #fff;
+      .search_bar {
+      }
+      .flex_bar {
+        .type_filter {
+        }
+        .recent_filter {
+        }
+      }
     }
   }
   @media only screen and (max-width: 768px) {
@@ -99,6 +114,41 @@ const CineBannerComp = styled.section`
     }
   }
   @media only screen and (max-width: 480px) {
+  }
+`;
+const SearchComp = styled.section`
+  .container {
+    .filter {
+      .search_area {
+        margin: 100px 0 80px;
+        .search_bar {
+          width: 40%;
+          display: flex;
+          gap: 10px;
+          padding: 10px;
+          margin: 0 auto;
+          border-bottom: 1px solid var(--BLACK);
+          input {
+            display: inline-block;
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 1.1em;
+          }
+
+          .search_icon {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .flex_box {
+        .type_filter {
+        }
+        .recent_filter {
+        }
+      }
+    }
   }
 `;
 
@@ -151,9 +201,33 @@ const BoardBanner = () => {
               />
             </div>
           </div>
-          <div className="filter"></div>
         </div>
       </CineBannerComp>
+      <SearchComp>
+        <div className="container">
+          <div className="filter">
+            <div className="search_area">
+              <div className="search_bar">
+                <input
+                  type="text"
+                  placeholder="검색어를 입력해주세요."
+                  onChange={() => {}}
+                />
+                <div className="search_icon">
+                  <FontAwesomeIcon icon={faSearch} onClick={() => {}} />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex_box">
+              <div className="type_filter">
+                <ToggleBtn />
+              </div>
+              <div className="recent_filter"></div>
+            </div>
+          </div>
+        </div>
+      </SearchComp>
     </>
   );
 };
