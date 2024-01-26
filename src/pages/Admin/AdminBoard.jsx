@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import BarChart from "../../component/Chart/BarChart";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Tr from "../../component/Adminstrator/AdminBoard/TableElement";
+import MemoizedTr from "../../component/Adminstrator/AdminBoard/TableElement";
+import PaginationUtil from "../../util/Pagination/Pagination";
+import Modal from "../../util/Modal";
+import BoardApi from "../Board";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const AdminBoardComp = styled.div`
   padding-top: 60px;
@@ -71,50 +76,154 @@ const AdminBoardComp = styled.div`
   }
 `;
 const AdminBoard = () => {
-  const [categoryActive, setCategoryActive] = useState(true);
-  const [gatherActive, setGatherActive] = useState(true);
-  const dataList = [
-    {
-      alias: "시니",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-      title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
-      count: 120,
-      regDate: "2024.2.3",
-      category: "씨네크루",
-      gatherType: "온라인",
+  const [dataList, setDataLIst] = useState([]);
+
+  //페이지 네이션 관련
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(5);
+
+  // 게시글 api 정의
+  const fetchDataList = async (page) => {
+    const res = await BoardApi.getAdminBoardList(page);
+    if (res.data !== null) {
+      setDataLIst(res.data);
+    }
+  };
+  const getDataList = useTokenAxios(() => fetchDataList(page));
+  const getFirstList = useTokenAxios(() => fetchDataList(1));
+
+  // 페이지 api 정의
+  const fetchTotalPage = async () => {
+    setPage(1);
+    const res = await BoardApi.getAdminPages();
+    if (res.data !== null) {
+      setTotalPage(res.data);
+      getFirstList();
+    }
+  };
+  const getTotalPage = useTokenAxios(fetchTotalPage);
+
+  useEffect(() => {
+    //클릭된 페이지의 게시글 가져오기
+    getDataList();
+  }, [page]);
+  useEffect(() => {
+    // 총페이지 수 가져오는 APi
+    getTotalPage();
+  }, []);
+
+  // 모달
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+  const [confirm, setConfirm] = useState(null);
+
+  // 모달 닫기
+  const closeModal = () => {
+    setModalOpen(false);
+    setRevise("back");
+  };
+
+  const handleModal = useCallback((header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+    setConfirm(num);
+  }, []);
+
+  const [revise, setRevise] = useState(false);
+  const [editCategory, setEditCategory] = useState("");
+  const [editType, setEditType] = useState("");
+  const [editId, setEditId] = useState("");
+
+  // 확인 버튼 클릭
+  const clickOk = useCallback(
+    (categorySel, typeSel, id) => {
+      handleModal("확인", "수정하시겠습니까", true, 0);
+      setEditCategory(categorySel);
+      if (categorySel === "무비추천") {
+        setEditType("");
+      } else {
+        setEditType(typeSel);
+      }
+      setEditId(id);
     },
-    {
-      alias: "시니",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-      title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
-      count: 120,
-      regDate: "2024.2.3",
-      category: "씨네크루",
-      gatherType: "온라인",
+    [handleModal, setEditCategory, setEditType, setEditId]
+  );
+
+  // 삭제 버튼 클릭
+  const clickDel = useCallback(
+    (id) => {
+      handleModal("삭제", "삭제하시겠습니까?", true, 1);
+      setEditId(id);
     },
-    {
-      alias: "시니",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-      title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
-      count: 120,
-      regDate: "2024.2.3",
-      category: "씨네크루",
-      gatherType: "온라인",
-    },
-    {
-      alias: "시니",
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-      title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
-      count: 120,
-      regDate: "2024.2.3",
-      category: "씨네크루",
-      gatherType: "온라인",
-    },
-  ];
+    [handleModal, setEditId]
+  );
+
+  // 게시글 이동
+  const moveBoard = async () => {
+    const res = await BoardApi.updateBoard(editId, editCategory, editType);
+    if (res.data) {
+      getTotalPage();
+    }
+  };
+  const changeCategory = useTokenAxios(moveBoard);
+
+  // 게시글 삭제
+  const deleteBoard = async () => {
+    const res = await BoardApi.deleteBoard(editId);
+    if (res.data) {
+      getTotalPage();
+    }
+  };
+  const delBoard = useTokenAxios(deleteBoard);
+
+  // const [categoryActive, setCategoryActive] = useState(true);
+  // const [gatherActive, setGatherActive] = useState(true);
+  // const dataList = [
+  //   {
+  //     alias: "시니",
+  //     image:
+  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
+  //     title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
+  //     count: 120,
+  //     regDate: "2024.2.3",
+  //     category: "씨네크루",
+  //     gatherType: "온라인",
+  //   },
+  //   {
+  //     alias: "시니",
+  //     image:
+  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
+  //     title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
+  //     count: 120,
+  //     regDate: "2024.2.3",
+  //     category: "씨네크루",
+  //     gatherType: "온라인",
+  //   },
+  //   {
+  //     alias: "시니",
+  //     image:
+  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
+  //     title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
+  //     count: 120,
+  //     regDate: "2024.2.3",
+  //     category: "씨네크루",
+  //     gatherType: "온라인",
+  //   },
+  //   {
+  //     alias: "시니",
+  //     image:
+  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
+  //     title: "청룡의 해 드래곤 길들이기 함께봐요! 용띠 환영 :)",
+  //     count: 120,
+  //     regDate: "2024.2.3",
+  //     category: "씨네크루",
+  //     gatherType: "온라인",
+  //   },
+  // ];
   return (
     <>
       <AdminBoardComp>
@@ -142,12 +251,45 @@ const AdminBoard = () => {
                 {/* map으로 반복할 요소 */}
                 {dataList &&
                   dataList.map((data, index) => (
-                    <Tr key={data.title} data={data} index={index} />
+                    // <Tr key={data.title} data={data} index={index} />
+                    <MemoizedTr
+                      key={data.id}
+                      data={data}
+                      index={index}
+                      revise={revise}
+                      setRevise={setRevise}
+                      clickOk={clickOk}
+                      clickDel={clickDel}
+                      editId={editId}
+                    />
                   ))}
               </tbody>
             </table>
           </div>
+          <PaginationUtil
+            totalPage={totalPage}
+            limit={10}
+            page={page}
+            setPage={setPage}
+          />
         </div>
+        <Modal
+          open={openModal}
+          close={closeModal}
+          header={modalHeader}
+          children={modalMsg}
+          type={modalType}
+          confirm={() => {
+            if (confirm === 0) {
+              changeCategory();
+              setModalOpen(false);
+              setRevise(true);
+            } else if (confirm === 1) {
+              closeModal();
+              delBoard();
+            }
+          }}
+        />
       </AdminBoardComp>
     </>
   );
