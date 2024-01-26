@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PieChart, Pie, Sector } from "recharts";
+import MemberApi from "../../api/MemberApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const PieChartBox = styled.div`
   padding: 30px;
@@ -29,10 +31,10 @@ const PieChartComp = styled(PieChart)`
     margin-bottom: 10px; /* 필요에 따라 여백 조절 */
   }
 `;
-const data = [
-  { name: "일반 회원", value: 400 },
-  { name: "카카오 회원", value: 300 },
-];
+// const data = [//map - string과
+//   { name: "일반 회원", value: 400 },
+//   { name: "카카오 회원", value: 300 },
+// ];
 
 const TypeChart = (props) => {
   const RADIAN = Math.PI / 180;
@@ -101,6 +103,25 @@ const TypeChart = (props) => {
 };
 
 const LoginTypeChart = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const typeRes = await MemberApi.getMemberTypeData();
+
+      if (typeRes.data !== null) {
+        setData(typeRes.data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const getData = useTokenAxios(fetchData); // 리프레시 토큰까지 만료되면 재로그인 할 수 있도록 담아줌(커스텀 훅)
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_, index) => {

@@ -152,7 +152,13 @@ const MemberApi = {
     );
   },
 
-  // admin - 로그인 타입별
+  // admin - 회원가입 타입별
+  getMemberTypeData: async () => {
+    return await axios.get(
+      Common.CP_DOMAIN + `/member/admin/counts`,
+      Common.tokenHeader()
+    );
+  },
 
   // admin - 회원 삭제
   deleteMem: async (memId) => {

@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import { useEffect, useState } from "react";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 import {
   LineChart,
@@ -7,9 +9,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend, //범례
   ResponsiveContainer,
-} from "recharts"; // 차트 관련 import 할 부분 추가
+} from "recharts";
+import MemberApi from "../../api/MemberApi";
 
 const ChartComp = styled.div`
   .chart {
@@ -36,57 +38,38 @@ const ChartComp = styled.div`
   }
 `;
 export default function Chart() {
-  const data = [
-    // dummy data를 활용해 차트 정상 작동 되는지 확인
-    {
-      name: "1월",
-      monthlyUser: 50,
-    },
-    {
-      name: "2월",
-      monthlyUser: 20,
-    },
-    {
-      name: "3월",
-      monthlyUser: 40,
-    },
-    {
-      name: "4월",
-      monthlyUser: 30,
-    },
-    {
-      name: "5월",
-      monthlyUser: 15,
-    },
-    {
-      name: "6월",
-      monthlyUser: 55,
-    },
-    {
-      name: "7월",
-      monthlyUser: 60,
-    },
-    {
-      name: "8월",
-      monthlyUser: 0,
-    },
-    {
-      name: "9월",
-      monthlyUser: 70,
-    },
-    {
-      name: "10월",
-      monthlyUser: 30,
-    },
-    {
-      name: "11월",
-      monthlyUser: 10,
-    },
-    {
-      name: "12월",
-      monthlyUser: 100,
-    },
-  ];
+  const [monthlyUserData, setMonthlyUserData] = useState([]);
+
+  const fetchMonthlyUserData = async () => {
+    const res = await MemberApi.getMonthlyData();
+    if (res.data !== null) {
+      const monthOrder = [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월",
+      ];
+      const sortedMonthlyUserData = res.data.sort((a, b) => {
+        const monthA = monthOrder.indexOf(a.month);
+        const monthB = monthOrder.indexOf(b.month);
+        return monthA - monthB;
+      });
+      setMonthlyUserData(sortedMonthlyUserData);
+    }
+  };
+
+  const getMonthlyUserData = useTokenAxios(fetchMonthlyUserData);
+  useEffect(() => {
+    getMonthlyUserData();
+  }, []);
 
   return (
     <ChartComp>
@@ -97,7 +80,7 @@ export default function Chart() {
             width="100%"
             aspect={4 / 1.5} // aspect 는 width / height 의 비율을 지정
           >
-            <LineChart data={data}>
+            <LineChart data={monthlyUserData}>
               {/* X축 설정 */}
               <XAxis
                 dataKey="name"
