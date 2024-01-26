@@ -6,6 +6,7 @@ import Button from "../util/Button";
 import Modal from "../util/Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import PreferApi from "../api/PreferApi";
+import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
 
 const Preference = () => {
@@ -29,10 +30,6 @@ const Preference = () => {
     setModalMsg(msg);
     setModalType(type);
     setModalConfirm(num);
-  };
-
-  const modal = () => {
-    handleModal("안내", "취향선택이 등록되었습니다.", false, 0);
   };
 
   // 감독 검색
@@ -160,6 +157,11 @@ const Preference = () => {
     }
   }, []);
 
+  // 취소 버튼 누르면 메인으로 이동
+  const clickCancel = () => {
+    navigate("/");
+  };
+
   // 취향 선택 등록하기
   const savePrefer = async () => {
     const res = await PreferApi.savePrefer(
@@ -179,47 +181,50 @@ const Preference = () => {
   // 취향 등록 토큰
   const preferSave = useTokenAxios(savePrefer);
 
-  // // 취향 회원 때 등록한 내용 가져오기
-  // const [preferData, setPreferData] = useState({ id: "" });
+  const [preferId, setPreferId] = useState(null);
 
-  // 회원 정보 불러오기
-  useEffect(() => {
-    const fetchMemberData = async () => {
-      try {
-        const memberData = await PreferApi.getPreferInfo(preferSave.id);
-        if (memberData) {
-          setDirectorList(memberData.directorList.split(","));
-          setInputDirector("");
-          setActorList(memberData.actorList.split(","));
-          setInputActor("");
-          setSelectedGender(memberData.selectedGender);
-          setIsGender("");
-          setSelectedGenres(memberData.selectedGenre.split(","));
-          setIsGenres("");
-        }
-      } catch (error) {
-        console.log("회원 정보를 불러오는데 실패했습니다.", error);
+  // 회원 취향 정보 불러오기
+  const fetchPreferData = async () => {
+    try {
+      console.log("api 요청 전");
+      const res = await PreferApi.getPreferInfo();
+      console.log("api 요청 후 : ", res);
+      if (res.data !== null && res.data !== undefined) {
+        setDirectorList(res.data.directorName.split(","));
+
+        setActorList(res.data.actorName.split(","));
+
+        setSelectedGender(res.data.gender);
+
+        setSelectedGenres(res.data.genre.split(","));
+
+        setPreferId(res.data.id);
       }
-    };
-
-    if (type === "revise" && preferSave.id) {
-      fetchMemberData();
+    } catch (error) {
+      console.error("취향 정보를 불러오는데 실패했습니다.", error);
     }
-  }, [type, preferSave.id]);
+  };
+
+  const getPreferData = useTokenAxios(fetchPreferData);
+
+  useEffect(() => {
+    if (type === "revise") {
+      getPreferData(); // 취향 정보 가져옴
+    }
+  }, []);
 
   // 취향 선택 수정하기
   const modifyPrefer = async () => {
     const res = await PreferApi.modifyPrefer(
-      preferSave.id,
+      preferId,
       directorList.join(","),
       actorList.join(","),
       selectedGender,
       selectedGenres.join(",")
     );
     if (res.data) {
-      preferSave(res.data);
       console.log("수정 성공");
-      handleModal("성공", "수정이 완료되었습니다.", false, 0);
+      handleModal("성공", "수정이 완료되었습니다.", false, 1);
     }
   };
 
@@ -386,6 +391,7 @@ const Preference = () => {
                     height="50px"
                     fontSize="20px"
                     active={true}
+                    clickEvt={clickCancel}
                   />
                 )}
               </div>
@@ -398,6 +404,8 @@ const Preference = () => {
                 closeEvt={() => {
                   if (modalConfirm === 0) {
                     navigate("/");
+                  } else if (modalConfirm === 1) {
+                    navigate(-1);
                   }
                 }}
               />
