@@ -6,6 +6,7 @@ import Button from "../util/Button";
 import Modal from "../util/Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import PreferApi from "../api/PreferApi";
+import useTokenAxios from "../hooks/useTokenAxios";
 
 const Preference = () => {
   const navigate = useNavigate();
@@ -43,10 +44,16 @@ const Preference = () => {
   // 감독 추가
   const addDirector = () => {
     if (directorList.length < maxDirectors) {
-      setDirectorList(directorList.concat(inputDirector));
-      setInputDirector("");
-      console.log(directorList);
-      setIsDirector(true);
+      // 중복 검사
+      if (!directorList.includes(inputDirector)) {
+        setDirectorList(directorList.concat(inputDirector));
+        setInputDirector("");
+        console.log(directorList);
+        setIsDirector(true);
+      } else {
+        // 중복된 경우에 대한 처리
+        console.log("이미 추가된 감독입니다.");
+      }
     }
   };
 
@@ -68,10 +75,16 @@ const Preference = () => {
   // 배우 추가
   const addActor = () => {
     if (actorList.length < maxActors) {
-      setActorList(actorList.concat(inputActor));
-      setInputActor("");
-      console.log(actorList);
-      setIsActor(true);
+      // 중복 검사
+      if (!actorList.includes(inputActor)) {
+        setActorList(actorList.concat(inputActor));
+        setInputActor("");
+        console.log(actorList);
+        setIsActor(true);
+      } else {
+        // 중복된 경우에 대한 처리
+        console.log("이미 추가된 배우입니다.");
+      }
     }
   };
 
@@ -121,6 +134,9 @@ const Preference = () => {
   // 등록 할 때 수정 시
   useEffect(() => {
     console.log("감독 : " + directorList);
+    console.log("배우 : " + actorList);
+    console.log("성별 : " + selectedGender);
+    console.log("장르 : " + selectedGenres);
     if (directorList.length === 0) {
       setIsDirector(false);
     }
@@ -143,6 +159,72 @@ const Preference = () => {
       setIsGenres(true);
     }
   }, []);
+
+  // 취향 선택 등록하기
+  const savePrefer = async () => {
+    const res = await PreferApi.savePrefer(
+      directorList.join(","),
+      actorList.join(","),
+      selectedGender,
+      selectedGenres.join(",")
+    );
+    if (res.data === true) {
+      console.log("저장 성공");
+      handleModal("성공", "등록이 완료되었습니다.", false, 0);
+    } else {
+      console.log("저장 실패");
+    }
+  };
+
+  // 취향 등록 토큰
+  const preferSave = useTokenAxios(savePrefer);
+
+  // // 취향 회원 때 등록한 내용 가져오기
+  // const [preferData, setPreferData] = useState({ id: "" });
+
+  // 회원 정보 불러오기
+  useEffect(() => {
+    const fetchMemberData = async () => {
+      try {
+        const memberData = await PreferApi.getPreferInfo(preferSave.id);
+        if (memberData) {
+          setDirectorList(memberData.directorList.split(","));
+          setInputDirector("");
+          setActorList(memberData.actorList.split(","));
+          setInputActor("");
+          setSelectedGender(memberData.selectedGender);
+          setIsGender("");
+          setSelectedGenres(memberData.selectedGenre.split(","));
+          setIsGenres("");
+        }
+      } catch (error) {
+        console.log("회원 정보를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    if (type === "revise" && preferSave.id) {
+      fetchMemberData();
+    }
+  }, [type, preferSave.id]);
+
+  // 취향 선택 수정하기
+  const modifyPrefer = async () => {
+    const res = await PreferApi.modifyPrefer(
+      preferSave.id,
+      directorList.join(","),
+      actorList.join(","),
+      selectedGender,
+      selectedGenres.join(",")
+    );
+    if (res.data) {
+      preferSave(res.data);
+      console.log("수정 성공");
+      handleModal("성공", "수정이 완료되었습니다.", false, 0);
+    }
+  };
+
+  // 취향 수정 토큰
+  const preferModify = useTokenAxios(modifyPrefer);
 
   return (
     <>
@@ -291,7 +373,9 @@ const Preference = () => {
                   active={
                     isActor && isDirector && isGender && isGenres === true
                   }
-                  clickEvt={modal}
+                  clickEvt={() => {
+                    type === "new" ? preferSave() : preferModify();
+                  }} // 저장하는 api 함수 호출
                 />
                 {type !== "new" && (
                   <Button
