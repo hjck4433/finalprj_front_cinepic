@@ -3,6 +3,11 @@ import { styled } from "styled-components";
 const TheaterComp = styled.section`
   // 지도 전체 감싸는 영역
   .container {
+    // 제목
+    h2 {
+      text-align: center;
+      margin: 50px;
+    }
     // 지도 영역
     .mapContainer {
       width: 80%;
