@@ -30,6 +30,31 @@ const FaqApi = {
       Common.tokenHeader()
     );
   },
+
+  // faq 삭제
+
+  deleteFaq: async (faqId) => {
+    console.log("FAQ 삭제 :" + faqId);
+    return await axios.delete(
+      Common.MV_DOMAIN + `/faq/delete/${faqId}`,
+      Common.tokenHeader()
+    );
+  },
+
+  // 관리자 faq 테스트
+  getFaqList: async () => {
+    console.log("faq 리스트 가지러감");
+    return await axios.get(
+      Common.MV_DOMAIN + "/faq/list",
+      Common.tokenHeader()
+    );
+  },
+
+  // 메인 페이지 faq 리스트
+  getMainFaq: async () => {
+    console.log("FAQ 메인페이지 출력");
+    return await axios.get(Comment.MV_DOMAIN + "/auth/faqlist");
+  },
 };
 
 export default FaqApi;
