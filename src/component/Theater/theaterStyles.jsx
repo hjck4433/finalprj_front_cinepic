@@ -5,10 +5,14 @@ const TheaterComp = styled.section`
   .container {
     // 제목
     h2 {
-      text-align: center;
+      padding-left: 5%;
       margin: 50px;
-      @media screen and (max-width: 380px) {
-        font-size: 1.5em;
+      @media screen and (max-width: 650px) {
+        padding-left: 2%;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 1.9em;
+        margin-left: 7%;
       }
     }
     // 지도 영역

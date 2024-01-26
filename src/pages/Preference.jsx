@@ -6,7 +6,6 @@ import Button from "../util/Button";
 import Modal from "../util/Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import PreferApi from "../api/PreferApi";
-import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
 
 const Preference = () => {

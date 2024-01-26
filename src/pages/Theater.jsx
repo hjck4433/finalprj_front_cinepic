@@ -96,7 +96,7 @@ const Theater = () => {
         {/* 영화관 배너 포스터 */}
         <TheaterBannerComp />
         <div className="container">
-          <h2>📽영화관 지도 검색📽</h2>
+          <h2>| 영화관 지도 검색</h2>
           <div className="mapContainer" ref={mapRef}></div>
           <div className="searchContainer">
             <div className="inputWapper">
