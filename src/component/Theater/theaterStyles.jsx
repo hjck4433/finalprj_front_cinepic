@@ -7,6 +7,9 @@ const TheaterComp = styled.section`
     h2 {
       text-align: center;
       margin: 50px;
+      @media screen and (max-width: 380px) {
+        font-size: 1.5em;
+      }
     }
     // 지도 영역
     .mapContainer {
