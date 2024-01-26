@@ -1,7 +1,11 @@
+import BoardBanner from "../component/Board/BoardBanner";
+import CardList from "../component/Board/CardList";
+
 const Board = () => {
   return (
     <>
-      <div className="container">게시판 목록 페이지</div>
+      <BoardBanner />
+      <CardList />
     </>
   );
 };
