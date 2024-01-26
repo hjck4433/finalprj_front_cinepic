@@ -3,6 +3,7 @@ import TheaterComp from "../component/Theater/theaterStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import TheaterApi from "../api/TheaterApi";
+import TheaterBannerComp from "../component/Theater/theaterBanner";
 
 const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
@@ -92,8 +93,9 @@ const Theater = () => {
   return (
     <>
       <TheaterComp>
+        {/* 영화관 배너 포스터 */}
+        <TheaterBannerComp />
         <div className="container">
-          <h2>인디스페이스 - 영화예술 상영관 검색</h2>
           <div className="mapContainer" ref={mapRef}></div>
           <div className="searchContainer">
             <div className="inputWapper">

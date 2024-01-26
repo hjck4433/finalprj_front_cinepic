@@ -3,18 +3,11 @@ import { styled } from "styled-components";
 const TheaterComp = styled.section`
   // 지도 전체 감싸는 영역
   .container {
-    padding: 80px 0;
-    // 제목
-    h2 {
-      padding-left: 10%;
-      margin-bottom: 50px;
-    }
     // 지도 영역
     .mapContainer {
       width: 80%;
       height: 500px;
-      margin: 0 auto;
-      margin-bottom: 50px;
+      margin: 70px auto;
     }
     // 검색바 감싸는 영역
     .searchContainer {
@@ -55,7 +48,7 @@ const TheaterComp = styled.section`
     .infoContainer {
       border: 1px solid var(--BLACK);
       padding: 40px;
-      margin: 0 auto;
+      margin: 50px auto;
       width: 80%;
       border-radius: 5px;
 
