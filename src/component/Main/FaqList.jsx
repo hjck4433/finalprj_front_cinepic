@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import FaqApi from "../../api/FaqApi";
+import { useEffect, useState } from "react";
 
 const FaqListComp = styled.section`
   background-color: white;
@@ -108,11 +109,11 @@ const Faq = ({ faqPlus }) => {
     <>
       <li>
         <div className="faqBox">
-          <div className="title">{faqPlus.title}</div>
+          <div className="title">{faqPlus.faqQuestion}</div>
         </div>
 
         <div className={`toggle ${active}`}>
-          <p>{faqPlus.contents}</p>
+          <p>{faqPlus.faqAnswer}</p>
         </div>
         <FontAwesomeIcon onClick={onClick} icon={icon} />
       </li>
@@ -121,28 +122,49 @@ const Faq = ({ faqPlus }) => {
 };
 
 const FaqList = () => {
-  const faqData = [
-    {
-      title: "씨네픽은 무엇인가요?",
-      contents: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      title: "씨네픽은 무엇인가요?",
-      contents: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      title: "씨네픽은 무엇인가요?",
-      contents: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      title: "씨네픽은 무엇인가요?",
-      contents: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      title: "씨네픽은 무엇인가요?",
-      contents: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-  ];
+  const [faqData, setFaqData] = useState([]);
+
+  // faq 리스트 불러오기
+  const fetchFaqList = async () => {
+    try {
+      const res = await FaqApi.getMainFaq();
+      if (res.data !== null) {
+        setFaqData(res.data);
+        console.log("Faq리스트 가져옴");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchFaqList();
+  }, []);
+
+  // FAQ List 더미데이터
+  // const FaqList = () => {
+  //   const faqData = [
+  //     {
+  //       title: "씨네픽은 무엇인가요?",
+  //       contents: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       title: "씨네픽은 무엇인가요?",
+  //       contents: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       title: "씨네픽은 무엇인가요?",
+  //       contents: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       title: "씨네픽은 무엇인가요?",
+  //       contents: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       title: "씨네픽은 무엇인가요?",
+  //       contents: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //   ];
   return (
     <>
       <FaqListComp>
@@ -151,9 +173,10 @@ const FaqList = () => {
             <h3>FAQ</h3>
           </div>
           <ul className="faqMap">
-            {faqData.map((faq) => (
-              <Faq key={faq.faqQuestion} faqPlus={faq} isNotice={false} />
-            ))}
+            {faqData &&
+              faqData.map((faq) => (
+                <Faq key={faq.faqQuestion} faqPlus={faq} isNotice={false} />
+              ))}
           </ul>
         </div>
       </FaqListComp>

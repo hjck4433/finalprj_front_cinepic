@@ -69,6 +69,8 @@ const AdminFaqComp = styled.div`
 `;
 
 const AdminFaq = () => {
+  const [faqData, setFaqData] = useState([]);
+
   const [titleVal, setTitleVal] = useState("");
   const [contentVal, setContentVal] = useState("");
 
@@ -95,16 +97,16 @@ const AdminFaq = () => {
     setContentVal(e.target.value);
   };
 
-  // 리스트 불러오기
-  // const fetchFaqList = async () => {
-  //   const res = await FaqApi.getFaqList();
-  //   if (res.data !== null) {
-  //     setFaqData(res.data);
-  //     console.log("Faq리스트 가져옴");
-  //   }
-  // };
+  //리스트 불러오기
+  const fetchFaqList = async () => {
+    const res = await FaqApi.getFaqList();
+    if (res.data !== null) {
+      setFaqData(res.data);
+      console.log("Faq리스트 가져옴");
+    }
+  };
 
-  // const bringData = useTokenAxios(fetchFaqList);
+  const bringData = useTokenAxios(fetchFaqList);
 
   useEffect(() => {
     console.log("titleVal : " + titleVal);
@@ -112,9 +114,9 @@ const AdminFaq = () => {
     console.log("editId : " + editId);
   }, [titleVal, contentVal, editId]);
 
-  // useEffect(() => {
-  //   bringData();
-  // }, []);
+  useEffect(() => {
+    bringData();
+  }, []);
 
   // 삭제 모달
 
@@ -139,26 +141,24 @@ const AdminFaq = () => {
     if (res.data) {
       console.log("faq 삭제 성공");
       closeModal();
-      // bringData();
+      bringData();
     }
   };
   const delFaq = useTokenAxios(deleteFaq);
 
-  //   const [faqData, setFaqData] = useState([]);
+  //더미데이터 넣기
+  // const faqData = [
+  //   {
+  //     faqId: 1,
+  //     faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?",
+  //     faqAnswer: "테스트입니다~",
+  //   },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  // ];
 
-  // 더미데이터 넣기
-  const faqData = [
-    {
-      faqId: 1,
-      faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?",
-      faqAnswer: "테스트입니다~",
-    },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-  ];
   // useEffect(() => {
-
   //   setFaqData(testData);
   // }, []);
 
@@ -225,7 +225,7 @@ const AdminFaq = () => {
           onChangeTitle={changeTitleInput}
           onChangeContent={changeContentInput}
           editId={editId}
-          // bringData={bringData}
+          bringData={bringData}
         />
         <Modal
           open={openModal}

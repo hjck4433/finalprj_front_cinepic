@@ -53,7 +53,7 @@ const FaqApi = {
   // 메인 페이지 faq 리스트
   getMainFaq: async () => {
     console.log("FAQ 메인페이지 출력");
-    return await axios.get(Comment.MV_DOMAIN + "/auth/faqlist");
+    return await axios.get(Common.MV_DOMAIN + "/auth/faqlist");
   },
 };
 
