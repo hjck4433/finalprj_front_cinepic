@@ -4,7 +4,7 @@ import crewBanner from "../../images/CrewBanner.jpg";
 import Button from "../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import ToggleBtn from "./ToggleBtn";
+import ToggleButton from "./ToggleBtn";
 
 const CineBannerComp = styled.section`
   width: 100%;
@@ -78,11 +78,8 @@ const CineBannerComp = styled.section`
       background-color: #fff;
       .search_bar {
       }
-      .flex_bar {
-        .type_filter {
-        }
-        .recent_filter {
-        }
+
+      .type_filter {
       }
     }
   }
@@ -141,11 +138,38 @@ const SearchComp = styled.section`
           }
         }
       }
-
-      .flex_box {
-        .type_filter {
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .container {
+      .filter {
+        .search_area {
+          .search_bar {
+            width: 70%;
+            input {
+              font-size: 1.3em;
+            }
+            .search_icon {
+              svg {
+                font-size: large;
+              }
+            }
+          }
         }
-        .recent_filter {
+        .type_filter {
+          text-align: center;
+          margin-bottom: 50px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .container {
+      .filter {
+        .search_area {
+          .search_bar {
+            width: 90%;
+          }
         }
       }
     }
@@ -219,11 +243,8 @@ const BoardBanner = () => {
               </div>
             </div>
 
-            <div className="flex_box">
-              <div className="type_filter">
-                <ToggleBtn />
-              </div>
-              <div className="recent_filter"></div>
+            <div className="type_filter">
+              <ToggleButton />
             </div>
           </div>
         </div>

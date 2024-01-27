@@ -1,56 +1,89 @@
-import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import React, { useState, useEffect } from "react";
 
-const ToggleBtnComp = styled.div`
-  position: relative;
-  margin-top: 8rem;
-  left: 47%;
+const ToggleBtn = styled.button`
+  width: 25%;
+  border-radius: 30px;
+  padding: 5px;
+  border: 1px solid #909090;
+  overflow: hidden;
   cursor: pointer;
-
-  > .toggle-container {
-    width: 50px;
-    height: 24px;
-    border-radius: 30px;
-    background-color: rgb(233, 233, 234);
+  background-color: white;
+  position: relative;
+  transition: all 0.5s ease;
+  .btnBox {
+    display: flex;
+    justify-content: space-around;
+    outline: 1px solid yellow;
+    width: 100%;
   }
-  //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
-  > .toggle--checked {
-    background-color: rgb(0, 200, 102);
-    transition: 0.5s;
-  }
-
-  > .toggle-circle {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: rgb(255, 254, 255);
-    transition: 0.5s;
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
-  }
-  > .toggle--checked {
-    left: 27px;
-    transition: 0.5s;
+  @media only screen and (max-width: 768px) {
+    width: 40%;
   }
 `;
 
-const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState(false);
+const BtnText = styled.div`
+  width: 50%;
+  z-index: 5;
+  color: ${(props) => (props.$toggle === true ? "var(--VIOLET)" : "white")};
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.5s ease;
+  @media only screen and (max-width: 480px) {
+    font-size: 0.8em;
+  }
+`;
 
-  const toggleHandler = () => {
-    setIsOn(!isOn);
-  };
-  return (
-    <>
-      <ToggleBtnComp onClick={toggleHandler}>
-        <div
-          className={`toggle-container ${isOn ? "toggle--checked" : null}`}
-        />
-        <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`} />
-      </ToggleBtnComp>
-    </>
-  );
-};
-export default ToggleBtn;
+const Circle = styled.div`
+  background-color: var(--VIOLET);
+  width: 49%;
+  height: 90%;
+  border-radius: 30px;
+  position: absolute;
+  left: 2%;
+  top: 6%;
+  transition: all 0.8s ease;
+  ${(props) =>
+    props.$toggle === false &&
+    css`
+      transform: translate(98%, 0);
+    `}
+`;
+
+const ToggleButton = React.memo(
+  ({ onChange, gatherType }) => {
+    const [toggle, setToggle] = useState(true);
+
+    // console.log("토글버튼");
+
+    const clickedToggle = () => {
+      setToggle(toggle ? false : true);
+      gatherType === "온라인" ? onChange("오프라인") : onChange("온라인");
+    };
+
+    useEffect(() => {
+      if (gatherType === "온라인") {
+        setToggle(true);
+      } else if (gatherType === "오프라인") {
+        setToggle(false);
+      }
+    }, [gatherType]);
+
+    return (
+      <>
+        <ToggleBtn onClick={clickedToggle}>
+          <div className="btnBox">
+            <BtnText $toggle={!toggle}>온라인</BtnText>
+            <BtnText $toggle={toggle}>오프라인</BtnText>
+          </div>
+          <Circle $toggle={toggle} />
+        </ToggleBtn>
+      </>
+    );
+  },
+  (prevProps, nextProps) =>
+    prevProps.gatherType === nextProps.gatherType &&
+    prevProps.toggle === nextProps.toggle
+);
+
+export default ToggleButton;

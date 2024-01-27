@@ -1,11 +1,21 @@
 import styled from "styled-components";
+import Card from "./Card";
 
-const CardListComp = styled.section``;
+const CardListComp = styled.section`
+  .container {
+  }
+`;
 
-const CardList = () => {
+const CardList = ({ data }) => {
   return (
     <>
-      <CardListComp></CardListComp>
+      <CardListComp>
+        <div className="container">
+          <Card data={data} />
+          <Card data={data} />
+          <Card data={data} />
+        </div>
+      </CardListComp>
     </>
   );
 };
