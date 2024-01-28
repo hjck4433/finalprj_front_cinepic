@@ -83,7 +83,7 @@ export default function Chart() {
             <LineChart data={monthlyUserData}>
               {/* X축 설정 */}
               <XAxis
-                dataKey="name"
+                dataKey="month"
                 stroke="var(--GREY)"
                 tickCount={12}
                 tick={{
