@@ -244,6 +244,12 @@ const Preference = () => {
                   placeholder="감독 이름을 입력하세요."
                   value={inputDirector}
                   onChange={(e) => setInputDirector(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault(); // 기본 Enter 행동 방지
+                      addDirector();
+                    }
+                  }}
                 />
                 <button onClick={addDirector}>
                   <FontAwesomeIcon icon={faSearch} />
@@ -279,6 +285,12 @@ const Preference = () => {
                     placeholder="배우 이름을 입력하세요."
                     value={inputActor}
                     onChange={(e) => setInputActor(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault(); // 기본 Enter 행동 방지
+                        addActor();
+                      }
+                    }}
                   />
                   <button onClick={addActor}>
                     <FontAwesomeIcon icon={faSearch} />
