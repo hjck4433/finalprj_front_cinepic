@@ -33,7 +33,7 @@ const Post = () => {
     setModalType(type);
   };
 
-  const onClickBoard = (num) => {
+  const clickBtn = (num) => {
     switch (num) {
       case 1:
         navigate(`/board/post/revise/${postId}`);
@@ -125,7 +125,7 @@ const Post = () => {
                       front="var(--GREY)"
                       back="var(--DARKRED)"
                       active={true}
-                      clickEvt={() => onClickBoard(1)}
+                      clickEvt={() => clickBtn(1)}
                       width="100%"
                       height="30px"
                     />
@@ -159,7 +159,7 @@ const Post = () => {
               children="목록보기"
               active={true}
               front="var(--RED)"
-              clickEvt={() => onClickBoard(2)}
+              clickEvt={() => clickBtn(2)}
             />
           </div>
         </div>

@@ -43,12 +43,13 @@ export const PostComp = styled.section`
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 15px;
+          margin-bottom: 10px;
           .selectedCategory {
             width: 40%;
             height: 30px;
             display: flex;
             text-align: center;
+            margin-bottom: 10px;
 
             .selectedTheme {
               width: 100px;
@@ -82,11 +83,15 @@ export const PostComp = styled.section`
         h3 {
           color: var(--BLACK);
           margin-bottom: 20px;
+          font-size: 1.8em;
         }
         .nickAndReviseBtn {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          .nickname {
+            font-size: 1.4em;
+          }
         }
         .reviseBtnBox {
           display: flex;
@@ -224,71 +229,82 @@ export const PostComp = styled.section`
           color: var(--BLACK);
           font-size: 0.7rem;
         }
-      }
-      .postTopInfo {
-        .categotyAndRegDate {
-          .selectedCategory {
-            .selectedTheme,
-            .selectedPlace {
-              display: flex;
-              justify-content: center;
-              align-items: center;
+        .postTopInfo {
+          h3 {
+            margin-bottom: 5px;
+          }
+          .categotyAndRegDate {
+            margin-bottom: 5px;
+            .selectedCategory {
+              margin-bottom: 0px;
             }
           }
         }
-      }
-      .postMain {
-        padding: 3%;
-        margin-top: 30px;
-        .contents {
-          width: 95%;
-        }
-        .contentsText {
-          width: 100%;
-          margin: 30px 0;
-          p {
-            font-size: 1rem;
+        .postTopInfo {
+          .categotyAndRegDate {
+            .selectedCategory {
+              .selectedTheme,
+              .selectedPlace {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
           }
         }
-      }
-      // 댓글 리스트 부분
-      .commentArea {
-        h3 {
+        .postMain {
+          padding: 3%;
           margin-top: 30px;
-        }
-        .commentList {
-          .commentBox {
-            .iconArea {
-              width: 15%;
+          .contents {
+            width: 95%;
+          }
+          .contentsText {
+            width: 100%;
+            margin: 30px 0;
+            p {
+              font-size: 1rem;
             }
-            .textBox {
-              width: 55%;
-              padding: 2%;
-              .comment {
-                .nickname {
+          }
+        }
+        // 댓글 리스트 부분
+        .commentArea {
+          h3 {
+            margin-top: 30px;
+          }
+          .commentList {
+            .commentBox {
+              .iconArea {
+                width: 15%;
+              }
+              .textBox {
+                width: 55%;
+                padding: 2%;
+                .comment {
+                  .nickname {
+                    margin-bottom: 10px;
+                  }
+                  .commentText {
+                    color: black;
+                  }
+                }
+              }
+              .buttonBox {
+                width: 40%;
+                .writtenDate {
                   margin-bottom: 10px;
                 }
-                .commentText {
-                  color: black;
-                }
-              }
-            }
-            .buttonBox {
-              width: 40%;
-              .writtenDate {
-                margin-bottom: 10px;
               }
             }
           }
+          // 댓글 입력창
+          .textInputBox {
+            margin-bottom: 20px;
+          }
         }
-        // 댓글 입력창
-        .textInputBox {
+        //목록보기 버튼
+        .goToListBtn {
           margin-bottom: 20px;
         }
-      }
-      //목록보기 버튼
-      .goToListBtn {
-        margin-bottom: 20px;
       }
     }
   }
