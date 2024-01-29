@@ -5,6 +5,7 @@ import Button from "../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import ToggleButton from "./ToggleBtn";
+import { useNavigate } from "react-router-dom";
 
 const CineBannerComp = styled.section`
   width: 100%;
@@ -176,8 +177,42 @@ const SearchComp = styled.section`
   }
 `;
 
-const BoardBanner = () => {
-  const [currentTab, setTab] = useState(0);
+const BoardBanner = ({ id, keyword, setKeyword, setIsLoading }) => {
+  const navigate = useNavigate();
+
+  // 보드 파라미터에 따라 배너 내용 변화
+  const { category, description } = (() => {
+    switch (id) {
+      case "gather":
+        return {
+          category: "씨네크루",
+          description: "씨네크루, 새로운 친구와의 만남의 장소",
+        };
+      case "recap":
+        return {
+          category: "크루후기",
+          description: "새로운 사람들과의 경험을 공유해보세요.",
+        };
+      default:
+        return {
+          category: "",
+          description: "",
+        };
+    }
+  })();
+
+  const onClickMenu = (num) => {
+    switch (num) {
+      case 1:
+        navigate("/board/gather");
+        break;
+      case 2:
+        navigate("/board/recap");
+        break;
+      default:
+        return;
+    }
+  };
 
   return (
     <>
@@ -186,34 +221,22 @@ const BoardBanner = () => {
           <div className="banner">
             <ul>
               <li
-                onClick={() => {
-                  setTab(0);
-                }}
-                className={currentTab === 0 ? "focused_menu" : ""}
+                className={category === "씨네크루" ? "focused_menu" : ""}
+                onclick={() => onClickMenu(1)}
               >
                 씨네크루
               </li>
               <li
-                onClick={() => {
-                  setTab(1);
-                }}
-                className={currentTab === 1 ? "focused_menu" : ""}
+                className={category === "크루후기" ? "focused_menu" : ""}
+                onClick={() => onClickMenu(2)}
               >
                 크루후기
               </li>
             </ul>
             <div className="title">
-              <div
-                className={currentTab === 0 ? "focused_title" : "none_title"}
-              >
-                <h2>씨네크루</h2>
-                <p>씨네크루, 새로운 친구와의 만남의 장소</p>
-              </div>
-              <div
-                className={currentTab === 1 ? "focused_title" : "none_title"}
-              >
-                <h2>크루후기</h2>
-                <p>새로운 친구와의 경험을 공유하세요</p>
+              <div className="focused_title">
+                <h2>{category}</h2>
+                <p>{description}</p>
               </div>
               <Button
                 clickEvt={() => {}}
@@ -235,10 +258,16 @@ const BoardBanner = () => {
                 <input
                   type="text"
                   placeholder="검색어를 입력해주세요."
-                  onChange={() => {}}
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
                 />
                 <div className="search_icon">
-                  <FontAwesomeIcon icon={faSearch} onClick={() => {}} />
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    onClick={() => {
+                      setIsLoading(true);
+                    }}
+                  />
                 </div>
               </div>
             </div>

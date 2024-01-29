@@ -2,20 +2,22 @@ import styled, { css } from "styled-components";
 import React, { useState, useEffect } from "react";
 
 const ToggleBtn = styled.button`
-  width: 25%;
-  border-radius: 30px;
-  padding: 5px;
-  border: 1px solid #909090;
+  width: 24%;
+  border-radius: 5px;
+  padding: 10px 5px;
   overflow: hidden;
-  cursor: pointer;
   background-color: white;
+  border: none;
+  box-shadow: 8px 6px 10px -3px rgba(0, 0, 0, 0.1),
+    0 10px 10px rgba(0, 0, 0, 0.1);
+
   position: relative;
   transition: all 0.5s ease;
+  cursor: pointer;
   .btnBox {
+    width: 100%;
     display: flex;
     justify-content: space-around;
-    outline: 1px solid yellow;
-    width: 100%;
   }
   @media only screen and (max-width: 768px) {
     width: 40%;
@@ -25,9 +27,9 @@ const ToggleBtn = styled.button`
 const BtnText = styled.div`
   width: 50%;
   z-index: 5;
-  color: ${(props) => (props.$toggle === true ? "var(--VIOLET)" : "white")};
+  color: ${(props) => (props.$toggle === !true ? "#fff" : "var(--BLACK)")};
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   transition: all 0.5s ease;
   @media only screen and (max-width: 480px) {
     font-size: 0.8em;
@@ -35,10 +37,10 @@ const BtnText = styled.div`
 `;
 
 const Circle = styled.div`
-  background-color: var(--VIOLET);
+  background-color: var(--BLACK);
   width: 49%;
   height: 90%;
-  border-radius: 30px;
+  border-radius: 5px;
   position: absolute;
   left: 2%;
   top: 6%;

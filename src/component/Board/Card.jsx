@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const CardComp = styled.section`
@@ -102,15 +103,24 @@ const ImgComp = styled.div`
 `;
 
 const Card = ({ data }) => {
+  const navigate = useNavigate();
+  const toDate = new Date(data.boardRegDate);
+  const regDate = toDate.toISOString().split("T")[0];
+
   return (
     <>
       <CardComp>
-        <div className="card_container">
+        <div
+          className="card_container"
+          onClick={() => {
+            navigate(`/board/post/:${data.boardId}`);
+          }}
+        >
           <div className="img_box">
             <ImgComp $imgsrc={data.boardImage} />
           </div>
           <div className="text_box">
-            <p className="date">{data.boardRegDate}</p>
+            <p className="date">{regDate}</p>
             <p className="title">{data.boardTitle}</p>
             <div className="text_area">
               {data.boardContent.split("\n").map((line, index) => (
