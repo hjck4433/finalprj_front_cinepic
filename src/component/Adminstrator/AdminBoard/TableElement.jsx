@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "../../../util/Button";
-import Modal from "../../../util/Modal";
 import basicProfile from "../../../images/profileImg.png";
 
 const TrComp = styled.tr`
@@ -52,32 +51,35 @@ const TrComp = styled.tr`
 `;
 
 const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
+  const [confirmRevise, setConfirmRevise] = useState(false);
   const [categorySel, setCategorySel] = useState("sel");
   const [categoryActive, setCategoryActive] = useState(true);
   const [typeSel, setTypeSel] = useState("sel");
   const [gatherActive, setGatherActive] = useState(true);
 
-  const [confirmRevise, setConfirmRevise] = useState(false);
+  // 날짜 가져오는 형식
+  const toDate = new Date(data.regDate);
+  const regDate = toDate.toISOString().split("T")[0];
 
-  //Modal
-  const [openModal, setModalOpen] = useState(false);
-  const [modalMsg, setModalMsg] = useState("");
-  const [modalHeader, setModalHeader] = useState("");
-  const [modalType, setModalType] = useState(null);
-  const [modalConfirm, setModalConfirm] = useState(null);
+  // 첫 렌더링(마운트) 상태 여부를 useRef를 사용하여 관리
+  const isInitialRender = useRef(true);
 
-  // 모달 닫기
-  const closeModal = (num) => {
-    setModalOpen(false);
-  };
-  const handleModal = (header, msg, type, num) => {
-    setModalOpen(true);
-    setModalHeader(header);
-    setModalMsg(msg);
-    setModalType(type);
-    setModalConfirm(num);
-  };
+  // 카테고리 정보, 온/오프라인 상태 관리
+  useEffect(() => {
+    if (revise === true || revise === "back") {
+      // console.log("TR" + data.id + "revise 영향");
+      setConfirmRevise(false);
+      setRevise(false);
+      setCategoryActive(true);
+      setGatherActive(true);
+      if (revise === "back") {
+        setCategorySel(data.categoryName);
+        setTypeSel(data.gatherType);
+      }
+    }
+  }, [revise]);
 
+  // 수정버튼 클릭
   const clickRevise = () => {
     setCategoryActive(false);
     if (categorySel !== "씨네크루" && categorySel !== "sel")
@@ -85,8 +87,20 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
     setConfirmRevise(true);
   };
 
-  const ClickOk = () => {
-    handleModal("확인", "수정하시겠습니까?", true, 0);
+  // 대분류 변경
+  const onChangeCategory = (e) => {
+    const selectedCategory = e.target.value; // 선택된 대분류 값 가져오기
+    setCategorySel(selectedCategory); // 대분류 상태 없데이트
+
+    // 대분류가 "씨네크루"가 아닌 경우 -> 소분류 초기화, 기본값인 "오프라인"으로 설정
+    if (selectedCategory !== "cineCrew") {
+      setTypeSel("오프라인");
+    }
+  };
+
+  // 소분류 변경
+  const onChangeType = (e) => {
+    setTypeSel(e.target.value);
   };
 
   return (
@@ -103,13 +117,14 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
       </td>
       <td>{data.title}</td>
       <td className="center">{data.count}</td>
-      <td className="center">{data.regDate}</td>
+      <td className="center">{regDate}</td>
       {/* 셀렉트 들어갈 예정 */}
       <td className="selectBox">
         <select
           name="category"
           disabled={categoryActive}
           dafaultValue={categorySel}
+          onChange={onChangeCategory}
         >
           <option value="sel" hidden>
             선택
@@ -120,7 +135,12 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
       </td>
       {/* 셀렉트 들어갈 예정 */}
       <td className="selectBox">
-        <select name="gather" disabled={gatherActive} defaultValue={typeSel}>
+        <select
+          name="gather"
+          disabled={gatherActive}
+          value={typeSel}
+          onChange={onChangeType}
+        >
           <option value="sel" hidden>
             선택
           </option>
@@ -137,7 +157,9 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
             width="80px"
             height="30px"
             active={true}
-            clickEvt={ClickOk}
+            clickEvt={() => {
+              clickOk(categorySel, typeSel, data.id);
+            }}
           />
         ) : (
           <Button
@@ -160,25 +182,25 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
           width="80px"
           height="30px"
           active={true}
-          clickEvt={() => {}}
+          clickEvt={() => clickDel(data.id)}
         />
       </td>
-      <Modal
-        open={openModal}
-        close={closeModal}
-        header={modalHeader}
-        children={modalMsg}
-        type={modalType}
-        confirm={() => {
-          if (modalConfirm === 0) {
-            setCategoryActive(true);
-            setGatherActive(true);
-            closeModal();
-            setConfirmRevise(false);
-          }
-        }}
-      />
     </TrComp>
   );
 };
+
+const MemoizedTr = React.memo(Tr, (prevProps, nextProps) => {
+  const isTargetTr = prevProps.data.id === nextProps.editId;
+
+  return (
+    (isTargetTr && prevProps.revise === nextProps.revise) ||
+    (!isTargetTr &&
+      prevProps.confirmRevise === nextProps.confirmRevise &&
+      prevProps.categorySel === nextProps.categorySel &&
+      prevProps.typeSel === nextProps.typeSel &&
+      prevProps.categoryActive === nextProps.categoryActive &&
+      prevProps.gatherActive === nextProps.gatherActive &&
+      prevProps.data.id === nextProps.data.id)
+  );
+});
 export default Tr;

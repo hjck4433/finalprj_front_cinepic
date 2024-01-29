@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import BarChart from "../../component/Chart/BarChart";
 import { useState, useEffect, useCallback } from "react";
-import Tr from "../../component/Adminstrator/AdminBoard/TableElement";
 import MemoizedTr from "../../component/Adminstrator/AdminBoard/TableElement";
 import PaginationUtil from "../../util/Pagination/Pagination";
 import Modal from "../../util/Modal";
@@ -76,7 +75,7 @@ const AdminBoardComp = styled.div`
   }
 `;
 const AdminBoard = () => {
-  const [dataList, setDataLIst] = useState([]);
+  const [dataList, setDataList] = useState([]);
 
   //페이지 네이션 관련
   const [page, setPage] = useState(1);
@@ -86,7 +85,7 @@ const AdminBoard = () => {
   const fetchDataList = async (page) => {
     const res = await BoardApi.getAdminBoardList(page);
     if (res.data !== null) {
-      setDataLIst(res.data);
+      setDataList(res.data);
     }
   };
   const getDataList = useTokenAxios(() => fetchDataList(page));
