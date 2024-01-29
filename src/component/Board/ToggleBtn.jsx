@@ -42,13 +42,13 @@ const Circle = styled.div`
   height: 90%;
   border-radius: 5px;
   position: absolute;
-  left: 2%;
+  left: 1%;
   top: 6%;
   transition: all 0.8s ease;
   ${(props) =>
     props.$toggle === false &&
     css`
-      transform: translate(98%, 0);
+      transform: translate(100%, 0);
     `}
 `;
 

@@ -222,7 +222,7 @@ const BoardBanner = ({ id, keyword, setKeyword, setIsLoading }) => {
             <ul>
               <li
                 className={category === "씨네크루" ? "focused_menu" : ""}
-                onclick={() => onClickMenu(1)}
+                onClick={() => onClickMenu(1)}
               >
                 씨네크루
               </li>
@@ -239,7 +239,9 @@ const BoardBanner = ({ id, keyword, setKeyword, setIsLoading }) => {
                 <p>{description}</p>
               </div>
               <Button
-                clickEvt={() => {}}
+                clickEvt={() => {
+                  navigate(`/board/post/new`);
+                }}
                 active={true}
                 children="글 작성하기"
                 width="110px"
@@ -270,10 +272,6 @@ const BoardBanner = ({ id, keyword, setKeyword, setIsLoading }) => {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className="type_filter">
-              <ToggleButton />
             </div>
           </div>
         </div>

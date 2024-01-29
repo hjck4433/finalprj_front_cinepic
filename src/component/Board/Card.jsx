@@ -10,6 +10,7 @@ const CardComp = styled.section`
     padding: 30px 0;
     /* margin-bottom: 100px; */
     border-bottom: 1px solid var(--GREY);
+    cursor: pointer;
     .img_box {
       width: 22%;
       border-radius: 5px;
@@ -35,7 +36,6 @@ const CardComp = styled.section`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        cursor: pointer;
       }
       .text_area {
         margin-bottom: 20px;
@@ -113,7 +113,7 @@ const Card = ({ data }) => {
         <div
           className="card_container"
           onClick={() => {
-            navigate(`/board/post/:${data.boardId}`);
+            navigate(`/board/post/${data.boardId}`);
           }}
         >
           <div className="img_box">

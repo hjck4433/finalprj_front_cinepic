@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
+import ToggleButton from "./ToggleBtn";
 
 const CardListComp = styled.section`
   .container {
@@ -37,7 +38,6 @@ const CardListComp = styled.section`
 `;
 
 const CardList = ({
-  data,
   category,
   keyword,
   type,
@@ -50,7 +50,7 @@ const CardList = ({
   const [totalPage, setTotalPage] = useState(5);
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState("recent");
-  const [boardData, setBoardData] = useState([]);
+  // const [boardData, setBoardData] = useState([]);
   const [gatherType, setGatherType] = useState("온라인");
 
   const handleSetGatherType = useCallback(
@@ -61,10 +61,44 @@ const CardList = ({
     [setGatherType]
   );
 
+  const boardData = [
+    {
+      boardId: 1,
+      memberId: 12345,
+      categoryId: 10,
+      gatherType: "온라인",
+      boardRegDate: "2024-01-24T12:34:56Z",
+      boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
+      boardContent:
+        "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
+      boardImage:
+        "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
+      count: 50,
+    },
+    {
+      boardId: 2,
+      memberId: 12345,
+      categoryId: 10,
+      gatherType: "온라인",
+      boardRegDate: "2024-01-24T12:34:56Z",
+      boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
+      boardContent:
+        "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
+      boardImage:
+        "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
+      count: 50,
+    },
+  ];
   return (
     <>
       <CardListComp>
         <div className="container">
+          <div className="type_filter">
+            <ToggleButton
+              onChange={handleSetGatherType}
+              gatherType={gatherType}
+            />
+          </div>
           <ul className="sortArea">
             <li
               className={sortBy === "recent" ? "active" : ""}
@@ -85,9 +119,10 @@ const CardList = ({
               과거순
             </li>
           </ul>
-          <Card data={data} />
-          <Card data={data} />
-          <Card data={data} />
+          <div className="boardMap">
+            {boardData &&
+              boardData.map((data) => <Card key={data.title} data={data} />)}
+          </div>
         </div>
       </CardListComp>
     </>
