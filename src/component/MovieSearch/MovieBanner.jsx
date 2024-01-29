@@ -28,7 +28,7 @@ const MovieBannerComp = styled.section`
       .title {
         position: absolute;
         top: 45%;
-        left: 35px;
+        left: 25px;
       }
     }
   }
