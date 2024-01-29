@@ -13,6 +13,7 @@ const AdminFaqComp = styled.div`
   .container {
     margin: 0;
     margin-left: 50px;
+    /* border: 1px solid red; */
     h2 {
       font-size: 1.7em;
       font-weight: 600;
@@ -24,7 +25,7 @@ const AdminFaqComp = styled.div`
     }
 
     .tableBox {
-      /* background-color: var(--BLACK); */
+      border: 1px solid var(--GREY);
       border-radius: 10px;
       width: 100%;
       padding: 40px 30px;
@@ -64,7 +65,7 @@ const AdminFaqComp = styled.div`
   .addbutton {
     display: flex;
     justify-content: end;
-    border-top: 1px solid grey;
+    border-top: 2px solid var(--GREY);
     padding-top: 30px;
     margin-top: 20px;
   }
@@ -205,8 +206,9 @@ const AdminFaq = () => {
                 fontSize=".8em"
                 width="80px"
                 height="30px"
-                front={"var(--GREY)"}
-                color={"var(--BLACK)"}
+                front={"var(--DARKRED)"}
+                back={"var(--RED)"}
+                color={"var(--IVORY)"}
                 active={true}
                 clickEvt={() => {
                   setFaqModalOpen(true);
