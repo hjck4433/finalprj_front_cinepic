@@ -14,10 +14,11 @@ const AdminFaqComp = styled.div`
     margin: 0;
     margin-left: 50px;
     h2 {
+      font-size: 1.7em;
       font-weight: 600;
       display: inline-block;
       margin-bottom: 50px;
-      padding: 0 8px;
+      padding: 0 5px;
       padding-bottom: 14px;
       border-bottom: 3px solid var(--GREY);
     }
@@ -27,7 +28,7 @@ const AdminFaqComp = styled.div`
       border-radius: 10px;
       width: 100%;
       padding: 40px 30px;
-      padding-bottom: 30px;
+      padding-bottom: 14px;
       overflow-x: auto;
 
       table {
@@ -204,8 +205,8 @@ const AdminFaq = () => {
                 fontSize=".8em"
                 width="80px"
                 height="30px"
-                front={"var(--IVORY)"}
-                color={"var(--RED)"}
+                front={"var(--GREY)"}
+                color={"var(--BLACK)"}
                 active={true}
                 clickEvt={() => {
                   setFaqModalOpen(true);
