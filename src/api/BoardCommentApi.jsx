@@ -16,6 +16,29 @@ const BoardCommentApi = {
     );
   },
 
+  // 댓글 수정
+  commentModify: async (commentId, content) => {
+    console.log("댓글 수정 : " + commentId);
+    const data = {
+      id: commentId,
+      commentContent: content,
+    };
+    return await axios.post(
+      Common.CP_DOMAIN + "/comment/modify",
+      data,
+      Common.tokenHeader()
+    );
+  },
+
+  // 댓글 삭제
+  commentDelete: async (id) => {
+    console.log("댓글 삭제 : " + id);
+    return await axios.delete(
+      Common.CP_DOMAIN + `/comment/delete/${id}`,
+      Common.tokenHeader()
+    );
+  },
+
   // 댓글 전체 조회
   commentList: async (id) => {
     console.log("댓글 포스트 id : " + id);
