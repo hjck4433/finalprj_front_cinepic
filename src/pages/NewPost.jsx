@@ -132,7 +132,10 @@ const NewPost = () => {
       const storageRef = storage.ref();
       const fileRef = storageRef.child(file.name);
       fileRef.put(file).then(() => {
+        console.log("저장성공!");
         fileRef.getDownloadURL().then((url) => {
+          console.log("저장경로 확인 : " + url);
+          console.log("url" + url);
           newPost(url);
         });
       });

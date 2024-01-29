@@ -36,7 +36,7 @@ const Post = () => {
   const onClickBoard = (num) => {
     switch (num) {
       case 1:
-        navigate(`/board/revise/${postId}`);
+        navigate(`/board/post/revise/${postId}`);
         break;
       case 2:
         navigate(-1);
@@ -57,13 +57,13 @@ const Post = () => {
   };
   const getBoardData = useTokenAxios(fetchBoardData);
 
-  const fetchPostCounter = async () => {
-    const res = await BoardApi.boardCounter(postId);
+  const fetchPostDetail = async () => {
+    const res = await BoardApi.boardDetail(postId);
     if (res.data) {
       getBoardData();
     }
   };
-  const getPostCounter = useTokenAxios(fetchPostCounter);
+  const getPostDetail = useTokenAxios(fetchPostDetail);
 
   const fetchUserDetail = async () => {
     const res = await MemberApi.getMemberDetail();
@@ -82,10 +82,9 @@ const Post = () => {
   const delPost = useTokenAxios(deletePost);
 
   useEffect(() => {
-    getPostCounter();
+    getPostDetail();
     getUserDetail();
   }, []);
-
   return (
     <>
       <PostComp>
@@ -152,6 +151,7 @@ const Post = () => {
               <div className="contentsText">{boardData.boardContent}</div>
             </div>
           </div>
+          {/* 아래는 댓글 부분 */}
           <CommentList id={postId} userAlias={userAlias} />
           <div className="goToListBtn">
             <Button
