@@ -133,55 +133,10 @@ const AdminMember = () => {
     if (res.data) {
       // console.log("회원 삭제 성공");
       closeModal();
-      getTotalPage(); // 멤버 삭제하고 나면 멤버리스트 다시 불러줘!(리스트 부를 때 토큰 필요)
+      getTotalPage(); // 멤버 삭제하고 나면 멤버리스트 다시 불러(리스트 부를 때 토큰 필요)
     }
   };
   const memDelete = useTokenAxios(deleteMem);
-
-  // const [page, setPage] = useState(0);
-  // const [memData, setMemData] = useState([]);
-  // const [editId, setEditId] = useState("");
-  // const memData = [
-  //   {
-  //     profile:
-  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-  //     alias: "햄스터는 햄햄",
-  //     name: "햄토리",
-  //     email: "hamham1234@gmail.com",
-  //     phone: "010-8888-8888",
-  //     iskakao: "연동완료",
-  //     membership: "미가입",
-  //     joinDate: "2023.12.12",
-  //     withdraw: "회원",
-  //     addr: "서울시 강남구 역삼동",
-  //   },
-  //   {
-  //     profile:
-  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-  //     alias: "햄스터는 햄햄",
-  //     name: "햄토리",
-  //     email: "hamham1234@gmail.com",
-  //     phone: "010-8888-8888",
-  //     iskakao: "연동완료",
-  //     membership: "미가입",
-  //     joinDate: "2023.12.12",
-  //     withdraw: "회원",
-  //     addr: "서울시 강남구 역삼동",
-  //   },
-  //   {
-  //     profile:
-  //       "https://firebasestorage.googleapis.com/v0/b/movieverse-e1c4f.appspot.com/o/hamster.jpg?alt=media&token=3d2fe721-d4f2-4cde-8862-604ad7081656",
-  //     alias: "햄스터는 햄햄",
-  //     name: "햄토리",
-  //     email: "hamham1234@gmail.com",
-  //     phone: "010-8888-8888",
-  //     iskakao: "연동완료",
-  //     membership: "미가입",
-  //     joinDate: "2023.12.12",
-  //     withdraw: "회원",
-  //     addr: "서울시 강남구 역삼동",
-  //   },
-  // ];
 
   return (
     <>
@@ -218,6 +173,9 @@ const AdminMember = () => {
                       data={data}
                       index={index}
                       setId={setEditId}
+                      deleteModal={() => {
+                        handleModal("삭제", "삭제하시겠습니까?", true);
+                      }}
                     />
                   ))}
               </tbody>
