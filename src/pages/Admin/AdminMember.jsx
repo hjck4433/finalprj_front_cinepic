@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import MonthlyChart from "../../component/Chart/MonthlyChart";
-import MemTr from "../../component/Adminstrator/AdminBoard/MemTableElement";
+import MemTr from "../../component/Adminstrator/AdminBoard/MemTr";
 import MemberApi from "../../api/MemberApi";
 import { useEffect, useState } from "react";
 import Modal from "../../util/Modal";

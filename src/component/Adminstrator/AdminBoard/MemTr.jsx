@@ -84,7 +84,7 @@ const MemTr = ({ data, index, setId, deleteModal }) => {
           width="80px"
           height="30px"
           active={true}
-          back="var(--BLUE)"
+          back="var(--DARKRED)"
           clickEvt={() => {
             setId(data.id);
             deleteModal();

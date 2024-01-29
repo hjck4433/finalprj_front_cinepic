@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 import Button from "../../../util/Button";
-import basicProfile from "../../../images/profileImg.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const TrComp = styled.tr`
   vertical-align: middle;
@@ -54,9 +55,9 @@ const TrComp = styled.tr`
 
 const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   const [confirmRevise, setConfirmRevise] = useState(false);
-  const [categorySel, setCategorySel] = useState("sel");
+  const [categorySel, setCategorySel] = useState(data.categoryName);
   const [categoryActive, setCategoryActive] = useState(true);
-  const [typeSel, setTypeSel] = useState("sel");
+  const [typeSel, setTypeSel] = useState(data.gatherType);
   const [gatherActive, setGatherActive] = useState(true);
 
   // 날짜 가져오는 형식
@@ -69,7 +70,7 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   useEffect(() => {
     if (!isInitialRender.current) {
       if (categorySel === "씨네크루") {
-        setTypeSel("sel");
+        setTypeSel("선택");
         setGatherActive(true);
       }
     } else {
@@ -94,7 +95,7 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   // 수정버튼
   const clickRevise = () => {
     setCategoryActive(false);
-    if (categorySel !== "씨네크루" && categorySel !== "sel")
+    if (categorySel !== "씨네크루" && categorySel !== "선택")
       setGatherActive(false);
     setConfirmRevise(true);
   };
@@ -103,11 +104,11 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   const onChangeCategory = (e) => {
     setCategorySel(e.target.value);
     if (e.target.value !== "씨네크루") {
-      setGatherActive(true);
-      if (data.gatherType === "") {
-        setTypeSel("오프라인");
-      } else
-        setTypeSel((prevType) => (prevType === "sel" ? "오프라인" : prevType));
+      setGatherActive(false);
+      // if (data.gatherType === "") {
+      //   setTypeSel("오프라인");
+      // } else
+      //   setTypeSel((prevType) => (prevType === "선택" ? "오프라인" : prevType));
     }
   };
 
@@ -123,7 +124,11 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
       <td className="profile">
         <span className="wrapper">
           <span className="imgBox">
-            <img src={data.image} alt="profile" />
+            {data.memberImage && data.memberImage ? (
+              <img src={data.memberImage} alt="프로필이미지" />
+            ) : (
+              <FontAwesomeIcon icon={faUser} />
+            )}
           </span>
           <span>{data.alias}</span>
         </span>
@@ -131,22 +136,22 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
       <td>{data.title}</td>
       <td className="center">{data.count}</td>
       <td className="center">{regDate}</td>
-      {/* 셀렉트 들어갈 예정 */}
+      {/* 대분류 */}
       <td className="selectBox">
         <select
           name="category"
           disabled={categoryActive}
-          dafaultValue={categorySel}
+          value={categorySel}
           onChange={onChangeCategory}
         >
-          <option value="sel" hidden>
+          <option value="선택" hidden>
             선택
           </option>
           <option value="cineCrew">씨네크루</option>
           <option value="crewReview">크루후기</option>
         </select>
       </td>
-      {/* 셀렉트 들어갈 예정 */}
+      {/* 소분류 */}
       <td className="selectBox">
         <select
           name="gather"
@@ -154,7 +159,7 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
           value={typeSel}
           onChange={onChangeType}
         >
-          <option value="sel" hidden>
+          <option value="선택" hidden>
             선택
           </option>
           <option value="오프라인">오프라인</option>
@@ -216,4 +221,4 @@ const MemoizedTr = React.memo(Tr, (prevProps, nextProps) => {
       prevProps.data.id === nextProps.data.id)
   );
 });
-export default Tr;
+export default MemoizedTr;
