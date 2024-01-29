@@ -121,50 +121,50 @@ const Faq = ({ faqPlus }) => {
   );
 };
 
-// const FaqList = () => {
-//   const [faqData, setFaqData] = useState([]);
-
-//   // faq 리스트 불러오기
-//   const fetchFaqList = async () => {
-//     try {
-//       const res = await FaqApi.getMainFaq();
-//       if (res.data !== null) {
-//         setFaqData(res.data);
-//         console.log("Faq리스트 가져옴");
-//       }
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchFaqList();
-//   }, []);
-
-// FAQ List 더미데이터
 const FaqList = () => {
-  const faqData = [
-    {
-      faqQuestion: "씨네픽은 무엇인가요?",
-      faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      faqQuestion: "씨네픽은 무엇인가요?",
-      faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      faqQuestion: "씨네픽은 무엇인가요?",
-      faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      faqQuestion: "씨네픽은 무엇인가요?",
-      faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-    {
-      faqQuestion: "씨네픽은 무엇인가요?",
-      faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-    },
-  ];
+  const [faqData, setFaqData] = useState([]);
+
+  // faq 리스트 불러오기
+  const fetchFaqList = async () => {
+    try {
+      const res = await FaqApi.getMainFaq();
+      if (res.data !== null) {
+        setFaqData(res.data);
+        console.log("Faq리스트 가져옴");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchFaqList();
+  }, []);
+
+  // FAQ List 더미데이터
+  // const FaqList = () => {
+  //   const faqData = [
+  //     {
+  //       faqQuestion: "씨네픽은 무엇인가요?",
+  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       faqQuestion: "씨네픽은 무엇인가요?",
+  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       faqQuestion: "씨네픽은 무엇인가요?",
+  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       faqQuestion: "씨네픽은 무엇인가요?",
+  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //     {
+  //       faqQuestion: "씨네픽은 무엇인가요?",
+  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
+  //     },
+  //   ];
   return (
     <>
       <FaqListComp>

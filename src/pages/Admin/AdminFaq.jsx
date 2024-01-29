@@ -72,7 +72,7 @@ const AdminFaqComp = styled.div`
 `;
 
 const AdminFaq = () => {
-  const [setFaqData] = useState([]);
+  const [faqData, setFaqData] = useState([]);
 
   const [titleVal, setTitleVal] = useState("");
   const [contentVal, setContentVal] = useState("");
@@ -150,16 +150,16 @@ const AdminFaq = () => {
   const delFaq = useTokenAxios(deleteFaq);
 
   //더미데이터 넣기
-  const faqData = [
-    {
-      faqId: 1,
-      faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?",
-      faqAnswer: "테스트입니다~",
-    },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-    { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
-  ];
+  // const faqData = [
+  //   {
+  //     faqId: 1,
+  //     faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?",
+  //     faqAnswer: "테스트입니다~",
+  //   },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  //   { faqId: 1, faqQuestion: "씨네픽은 어떤 서비스를 제공하나요?" },
+  // ];
 
   // useEffect(() => {
   //   setFaqData(testData);
