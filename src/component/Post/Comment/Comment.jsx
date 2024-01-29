@@ -1,46 +1,63 @@
 import Button from "../../../util/Button";
-import pikachu from "../../../images/pikachu.jpg";
-const Comment = () => {
+import profileImg from "../../../images/profileImg.png";
+
+const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
+  const dateTime = boardComment.commentRegDate;
+  const toDate = new Date(dateTime);
+  const regDate = toDate.toISOString().split("T")[0];
   return (
     <>
       <div className="commentBox">
         <div className="iconArea">
           <div className="imgBox">
-            <img src={pikachu} alt="memberIcon" />
+            <img
+              src={boardComment.memberImage || profileImg}
+              alt="memberIcon"
+            />
           </div>
         </div>
         <div className="textBox">
           <div className="comment">
-            <p className="nickname">낭만고양이</p>
-            <p className="commentText">슬픈 도시를 비춰 춤추는 작은!</p>
+            <p className="nickname">{boardComment.memberAlias}</p>
+            <p className="commentText">{boardComment.commentText}</p>
           </div>
         </div>
         <div className="buttonBox">
-          <div className="writtenDate">2024.01.17</div>
-          <div className="editBtnBox">
-            <Button
-              className="editBtn"
-              children="수정"
-              active={true}
-              width="44%"
-              height="30px"
-              fontSize="1em"
-              front="var(--RED)"
-              back="var(--DARKRED)"
-              // clickEvt={}
-            />
-            <Button
-              className="deleteBtn"
-              children="삭제"
-              active={true}
-              width="44%"
-              height="30px"
-              fontSize="1em"
-              front="var(--GREY)"
-              back="var(--DARKGREY)"
-              // clickEvt={}
-            />
-          </div>
+          <div className="writtenDate">{regDate}</div>
+          {userAlias === boardComment.memberAlias && (
+            <div className="editBtnBox">
+              <Button
+                className="editBtn"
+                children="수정"
+                active={true}
+                width="44%"
+                height="30px"
+                fontSize="1em"
+                front="var(--RED)"
+                back="var(--DARKRED)"
+                // clickEvt={editModalOpen}
+              />
+              <Button
+                className="deleteBtn"
+                children="삭제"
+                active={true}
+                width="44%"
+                height="30px"
+                fontSize="1em"
+                front="var(--GREY)"
+                back="var(--DARKGREY)"
+                // clickEvt={}
+              />
+            </div>
+          )}
+          {/* <Modal
+            open={openModal}
+            close={closeModal}
+            header={modalHeader}
+            children={modalMsg}
+            type={modalType}
+            confirm={() => delComment()}
+          /> */}
         </div>
       </div>
     </>

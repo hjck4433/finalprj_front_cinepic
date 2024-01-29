@@ -151,7 +151,7 @@ const Post = () => {
               <div className="contentsText">{boardData.boardContent}</div>
             </div>
           </div>
-          {/* 아래는 댓글 부분 */}
+          {/* 댓글 부분 추가 */}
           <CommentList id={postId} userAlias={userAlias} />
           <div className="goToListBtn">
             <Button
