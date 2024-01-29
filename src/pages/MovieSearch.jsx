@@ -1,7 +1,11 @@
+import MovieBannerComp from "../component/MovieSearch/MovieBanner";
+import { useState } from "react";
+
 const MovieSearch = () => {
   return (
     <>
-      <div className="container">영화 검색 페이지</div>
+      <MovieBannerComp />
+      <div className="container"></div>
     </>
   );
 };
