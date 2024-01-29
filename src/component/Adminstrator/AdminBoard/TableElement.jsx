@@ -105,10 +105,10 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
     setCategorySel(e.target.value);
     if (e.target.value !== "씨네크루") {
       setGatherActive(false);
-      // if (data.gatherType === "") {
-      //   setTypeSel("오프라인");
-      // } else
-      //   setTypeSel((prevType) => (prevType === "선택" ? "오프라인" : prevType));
+      if (data.gatherType === "") {
+        setTypeSel("오프라인");
+      } else
+        setTypeSel((prevType) => (prevType === "선택" ? "오프라인" : prevType));
     }
   };
 
@@ -147,8 +147,8 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
           <option value="선택" hidden>
             선택
           </option>
-          <option value="cineCrew">씨네크루</option>
-          <option value="crewReview">크루후기</option>
+          <option value="씨네크루">씨네크루</option>
+          <option value="크루후기">크루후기</option>
         </select>
       </td>
       {/* 소분류 */}
