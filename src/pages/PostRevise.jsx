@@ -14,7 +14,7 @@ const PostRevise = () => {
   // 게시글 상세로 이동
   const navigate = useNavigate();
   const toPostDetail = () => {
-    navigate(-1);
+    navigate(`/board/post/${postId}`);
   };
 
   const [boardData, setBoardData] = useState("");
@@ -227,7 +227,7 @@ const PostRevise = () => {
               <h3>이미지</h3>
               <div className="uploadImage">
                 <div className="imgBox">
-                  <img src={postImage} alt="게시글 첨부 이미지" />
+                  <img src={imgSrc} alt="게시글 첨부 이미지" />
                 </div>
                 <label>
                   <input
@@ -260,7 +260,7 @@ const PostRevise = () => {
                 active={true}
                 front="var(--DARKGREY)"
                 back="var(--BLACK)"
-                onClick={toPostDetail}
+                clickEvt={toPostDetail}
               />
             </div>
           </div>
