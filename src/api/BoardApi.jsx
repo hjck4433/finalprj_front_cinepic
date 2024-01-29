@@ -74,6 +74,7 @@ const BoardApi = {
 
   // 총 페이지 조회
   getAdminPages: async () => {
+    console.log("총 페이지 가져오는 중");
     const page = 0;
     const size = 10;
     return await axios.get(

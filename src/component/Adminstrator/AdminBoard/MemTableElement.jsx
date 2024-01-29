@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import Button from "../../../util/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const MemTrComp = styled.tr`
   vertical-align: middle;
@@ -14,10 +16,11 @@ const MemTrComp = styled.tr`
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
         .imgBox {
           width: 30px;
           padding-bottom: 30px;
+          margin-right: 5px;
           position: relative;
           border-radius: 100%;
           overflow: hidden;
@@ -25,8 +28,18 @@ const MemTrComp = styled.tr`
           img {
             position: absolute;
             width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
           }
-          margin-right: 10px;
+          svg {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            color: var(--DARKGREY);
+          }
         }
         span {
         }
@@ -46,7 +59,11 @@ const MemTr = ({ data, index, setId, deleteModal }) => {
       <td className="profile">
         <span className="wrapper">
           <span className="imgBox">
-            <img src={data.image} alt="profile" />
+            {data.image && data.image ? (
+              <img src={data.image} alt="profile" />
+            ) : (
+              <FontAwesomeIcon icon={faUser} />
+            )}
           </span>
           <span>{data.alias}</span>
         </span>

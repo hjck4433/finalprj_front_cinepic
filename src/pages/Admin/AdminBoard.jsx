@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import MemoizedTr from "../../component/Adminstrator/AdminBoard/TableElement";
 import PaginationUtil from "../../util/Pagination/Pagination";
 import Modal from "../../util/Modal";
-import BoardApi from "../Board";
+import BoardApi from "../../api/BoardApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
 
 const AdminBoardComp = styled.div`
@@ -77,9 +77,9 @@ const AdminBoardComp = styled.div`
 const AdminBoard = () => {
   const [dataList, setDataList] = useState([]);
 
-  //페이지 네이션 관련
-  const [page, setPage] = useState(1);
+  //페이지네이션 관련
   const [totalPage, setTotalPage] = useState(5);
+  const [page, setPage] = useState(1);
 
   // 게시글 api 정의
   const fetchDataList = async (page) => {
@@ -93,6 +93,7 @@ const AdminBoard = () => {
 
   // 페이지 api 정의
   const fetchTotalPage = async () => {
+    // console.log("fetchTotalPage : ");
     setPage(1);
     const res = await BoardApi.getAdminPages();
     if (res.data !== null) {
@@ -108,6 +109,7 @@ const AdminBoard = () => {
   }, [page]);
   useEffect(() => {
     // 총페이지 수 가져오는 APi
+    // console.log("first rendering");
     getTotalPage();
   }, []);
 

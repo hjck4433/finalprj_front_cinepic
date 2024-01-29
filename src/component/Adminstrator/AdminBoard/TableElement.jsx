@@ -27,6 +27,8 @@ const TrComp = styled.tr`
           img {
             position: absolute;
             width: 100%;
+            left: 0;
+            top: 0;
           }
           margin-right: 10px;
         }
@@ -64,10 +66,20 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   // 첫 렌더링(마운트) 상태 여부를 useRef를 사용하여 관리
   const isInitialRender = useRef(true);
 
+  useEffect(() => {
+    if (!isInitialRender.current) {
+      if (categorySel === "씨네크루") {
+        setTypeSel("sel");
+        setGatherActive(true);
+      }
+    } else {
+      isInitialRender.current = false;
+    }
+  }, [categorySel, typeSel]);
+
   // 카테고리 정보, 온/오프라인 상태 관리
   useEffect(() => {
     if (revise === true || revise === "back") {
-      // console.log("TR" + data.id + "revise 영향");
       setConfirmRevise(false);
       setRevise(false);
       setCategoryActive(true);
@@ -79,7 +91,7 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
     }
   }, [revise]);
 
-  // 수정버튼 클릭
+  // 수정버튼
   const clickRevise = () => {
     setCategoryActive(false);
     if (categorySel !== "씨네크루" && categorySel !== "sel")
@@ -89,12 +101,13 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
 
   // 대분류 변경
   const onChangeCategory = (e) => {
-    const selectedCategory = e.target.value; // 선택된 대분류 값 가져오기
-    setCategorySel(selectedCategory); // 대분류 상태 없데이트
-
-    // 대분류가 "씨네크루"가 아닌 경우 -> 소분류 초기화, 기본값인 "오프라인"으로 설정
-    if (selectedCategory !== "cineCrew") {
-      setTypeSel("오프라인");
+    setCategorySel(e.target.value);
+    if (e.target.value !== "씨네크루") {
+      setGatherActive(true);
+      if (data.gatherType === "") {
+        setTypeSel("오프라인");
+      } else
+        setTypeSel((prevType) => (prevType === "sel" ? "오프라인" : prevType));
     }
   };
 
