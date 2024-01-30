@@ -39,6 +39,7 @@ const Preference = () => {
 
   // 감독 추가
   const addDirector = () => {
+    console.log("addDirector 함수가 호출되었습니다.");
     if (directorList.length < maxDirectors) {
       // 중복 검사
       if (!directorList.includes(inputDirector)) {
@@ -70,6 +71,7 @@ const Preference = () => {
 
   // 배우 추가
   const addActor = () => {
+    console.log("addActor 함수가 호출되었습니다.");
     if (actorList.length < maxActors) {
       // 중복 검사
       if (!actorList.includes(inputActor)) {
@@ -244,7 +246,8 @@ const Preference = () => {
                   placeholder="감독 이름을 입력하세요."
                   value={inputDirector}
                   onChange={(e) => setInputDirector(e.target.value)}
-                  onKeyDown={(e) => {
+                  onKeyPress={(e) => {
+                    console.log("onKeyDown 발생");
                     if (e.key === "Enter") {
                       e.preventDefault(); // 기본 Enter 행동 방지
                       addDirector();
@@ -285,7 +288,7 @@ const Preference = () => {
                     placeholder="배우 이름을 입력하세요."
                     value={inputActor}
                     onChange={(e) => setInputActor(e.target.value)}
-                    onKeyDown={(e) => {
+                    onKeyPress={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault(); // 기본 Enter 행동 방지
                         addActor();
