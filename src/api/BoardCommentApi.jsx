@@ -3,11 +3,11 @@ import Common from "../util/Common";
 
 const BoardCommentApi = {
   // 댓글 저장하기
-  saveNewComment: async (boardId, content) => {
-    console.log("작성 댓글 : " + content);
+  saveNewComment: async (boardId, text) => {
+    console.log("작성 댓글 : " + text);
     const data = {
       boardId: boardId,
-      commentText: content,
+      commentText: text,
     };
     return await axios.post(
       Common.CP_DOMAIN + "/comment/new",
@@ -17,11 +17,11 @@ const BoardCommentApi = {
   },
 
   // 댓글 수정
-  commentModify: async (commentId, content) => {
-    console.log("댓글 수정 : " + commentId);
+  commentModify: async (boardCommentId, text) => {
+    console.log("댓글 수정 : " + boardCommentId);
     const data = {
-      id: commentId,
-      commentContent: content,
+      id: boardCommentId,
+      commentText: text,
     };
     return await axios.post(
       Common.CP_DOMAIN + "/comment/modify",
