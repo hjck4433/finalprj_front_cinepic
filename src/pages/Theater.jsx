@@ -143,7 +143,8 @@ const Theater = () => {
                   </div>
                   <div>
                     <span className="title">총 좌석 수 </span>
-                    <span>{selectedPlace.seats}석</span>
+                    <span>{selectedPlace.seats.toLocaleString()}석</span>
+                    {/* toLocaleString() -> 천 단위에서 콤마 생기게 함 */}
                   </div>
                 </div>
               </div>
@@ -156,7 +157,10 @@ const Theater = () => {
                   </div>
                   <div>
                     <span className="title">특별관 운영 여부 </span>
-                    <span>{selectedPlace.isSpecialScreen}</span>
+                    <span>
+                      {selectedPlace.isSpecialScreen == 1 ? "있음" : "없음"}
+                      {/* 1이면 있음, 0 이면 없음 표시 */}
+                    </span>
                   </div>
                   <div>
                     <span className="title">필름 상영관 수 </span>
