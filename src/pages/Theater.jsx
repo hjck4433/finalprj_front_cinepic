@@ -22,7 +22,7 @@ const Theater = () => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
       center: new window.kakao.maps.LatLng(location.lat, location.long),
-      level: 5,
+      level: 4,
     };
 
     const kakaoMap = new window.kakao.maps.Map(container, options);
