@@ -74,6 +74,7 @@ const Theater = () => {
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
         setSelectedPlace(place);
         // 장소가 이동 될 때 마커를 누르면 맵 센터로 이동
+        map.setLevel(3);
         map.setCenter(
           new window.kakao.maps.LatLng(place.latitude, place.longitude)
         );
