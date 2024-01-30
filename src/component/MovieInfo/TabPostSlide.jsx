@@ -12,22 +12,26 @@ import TabPostModal from "./TabPostModal";
 const PostSlide = styled.div`
   width: 100%;
   .container {
-    padding-top: 50px;
+    padding: 30px 0 40px !important;
     text-align: right;
-    button {
+    & > button {
       border: 1px solid var(--ORANGE);
       margin-right: 10px;
       color: var(--ORANGE);
       font-weight: 300;
       transition: 0.3s ease-in;
+      /* margin: 2% 10px 2% 0; */
       &:hover {
         color: #fff;
       }
     }
     .movie_post_slider {
       width: 100%;
-      padding: 5%;
+      padding: 30px 20px;
 
+      .swiper-slide {
+        min-width: 280px;
+      }
       .swiper-button {
         width: 15px;
         height: 100%;
@@ -38,7 +42,7 @@ const PostSlide = styled.div`
         cursor: pointer;
         z-index: 10;
         transition: all 0.3s;
-        top: 0;
+        top: 21px;
 
         &:hover {
           opacity: 1;
@@ -266,8 +270,8 @@ const TabPostSlide = () => {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
-              300: {
-                slidesPerView: 2,
+              500: {
+                slidesPerView: 1.5,
                 spaceBetween: 20,
               },
             }}
