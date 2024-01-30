@@ -52,7 +52,9 @@ const PreferComp = styled.section`
           text-align: center;
           @media screen and (max-width: 480px) {
             width: 70%;
-            margin-bottom: 10px;
+          }
+          @media screen and (max-width: 340px) {
+            width: 80%;
           }
           // 검색창
           input {
@@ -77,9 +79,6 @@ const PreferComp = styled.section`
           display: flex;
           justify-content: space-between;
           margin-bottom: 55px;
-          @media screen and (max-width: 480px) {
-            display: block;
-          }
           // 검색 된 이름 나옴
           .sel {
             .name {
@@ -95,12 +94,14 @@ const PreferComp = styled.section`
                   cursor: pointer;
                   background-color: var(--WHITE);
                 }
+                @media screen and (max-width: 480px) {
+                  display: flex;
+                  align-items: center;
+                  padding: 10px;
+                  margin: 10px;
+                }
               }
             }
-          }
-          @media screen and (max-width: 480px) {
-            margin-bottom: 10px;
-            padding-left: 20px;
           }
         }
       }
@@ -236,9 +237,9 @@ const PreferComp = styled.section`
       margin-top: 40px;
       button {
         margin: 0 30px;
-        @media screen and (max-width: 560px) {
+        @media screen and (max-width: 650px) {
           margin: 15px;
-          width: 25%;
+          width: 35%;
           height: 40px;
           font-size: 15px;
         }
