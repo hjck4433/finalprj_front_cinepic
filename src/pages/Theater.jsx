@@ -87,6 +87,7 @@ const Theater = () => {
       map.setCenter(
         new window.kakao.maps.LatLng(firstPlace.latitude, firstPlace.longitude)
       );
+      setSelectedPlace(firstPlace); // 검색하고 이동 시 처음 마커의 내용 나오게 함
     }
   }, [theaterData, map]);
 
