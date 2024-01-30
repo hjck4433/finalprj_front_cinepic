@@ -24,18 +24,18 @@ const StillCutComp = styled.div`
   }
 `;
 
-const TabStillCut = ({data}) => {
-  const stills = data.movieStill ? data.movieStill.split("|") : [];
+const TabStillCut = ({ movieDetail }) => {
+  const stills = movieDetail.movieStills
+    ? movieDetail.movieStills.split("|")
+    : [];
 
   return (
     <StillCutComp>
       <div className="container">
         {stills.length > 0 ? (
-          
           stills.map((still, index) => (
-            <StillCutImg className="movieStill" key={index} still={still}/>
+            <StillCutImg className="movieStill" key={index} still={still} />
           ))
-         
         ) : (
           <p className="noStillMsg">스틸 컷 정보가 없습니다.</p>
         )}

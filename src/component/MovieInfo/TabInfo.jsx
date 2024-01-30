@@ -7,7 +7,6 @@ const TabInfoComp = styled.div`
     font-size: 1.1em;
   }
   @media only screen and (max-width: 768px) {
-  
     p {
       line-height: 2.5em;
       font-size: 1.3em;
@@ -15,13 +14,11 @@ const TabInfoComp = styled.div`
   }
 `;
 
-const TabInfo = ({data}) => {
-
-
+const TabInfo = ({ movieDetail }) => {
   return (
     <>
       <TabInfoComp>
-        <p>{data.movieContent}</p>
+        <p>{movieDetail.moviePlot}</p>
       </TabInfoComp>
     </>
   );
