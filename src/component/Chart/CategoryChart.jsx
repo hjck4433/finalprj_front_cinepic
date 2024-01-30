@@ -1,4 +1,6 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import BoardApi from "../../api/BoardApi";
 import {
   ComposedChart,
   Bar,
@@ -25,30 +27,45 @@ const BarChartBox = styled.div`
   }
 `;
 
-const data = [
-  {
-    name: "씨네크루",
-    pv: 30,
-    color: "var(--DARKRED)",
-  },
-  {
-    name: "크루후기",
-    pv: 15,
-    color: "var(--RED)",
-  },
-  {
-    name: "온라인",
-    pv: 100,
-    color: "var(--ORANGE)",
-  },
-  {
-    name: "오프라인",
-    pv: 50,
-    color: "var(--DARKGREY)",
-  },
-];
+// const data = [
+//   {
+//     name: "씨네크루",
+//     pv: 30,
+//     color: "var(--DARKRED)",
+//   },
+//   {
+//     name: "크루후기",
+//     pv: 15,
+//     color: "var(--RED)",
+//   },
+//   {
+//     name: "온라인",
+//     pv: 100,
+//     color: "var(--ORANGE)",
+//   },
+//   {
+//     name: "오프라인",
+//     pv: 50,
+//     color: "var(--DARKGREY)",
+//   },
+// ];
 
-const Example = () => {
+const CategoryChart = () => {
+  const [boardData, setBoardData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await BoardApi.getAllCategories(); // API 호출
+        setBoardData(response.data); // 데이터 설정
+      } catch (error) {
+        console.error("데이터를 가져오는 중 오류 발생:", error);
+      }
+    }
+
+    fetchData(); // 데이터 가져오기
+  }, []); // 컴포넌트가 마운트될 때 한 번만 호출
+
   return (
     <BarChartBox>
       <h4 className="chartTitle">유형별 누적게시물 현황</h4>
@@ -57,7 +74,7 @@ const Example = () => {
           layout="vertical"
           width={500}
           height={400}
-          data={data}
+          data={boardData}
           margin={{
             top: 30,
             right: 30,
@@ -69,7 +86,7 @@ const Example = () => {
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" scale="band" />
           <Bar dataKey="pv" barSize={20} radius={[0, 10, 10, 0]}>
-            {data.map((entry, index) => (
+            {boardData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Bar>
@@ -79,4 +96,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default CategoryChart;
