@@ -11,17 +11,14 @@ const CommentContainerComp = styled.section`
   }
 `;
 
-const CommentContainer = () => {
-
-
-
+const CommentContainer = ({ userAlias }) => {
   return (
     <>
       <CommentContainerComp>
         <div className="container">
           <h4>관람평</h4>
-          <CommentWrite />
-          <Comments />
+          <CommentWrite userAlias={userAlias} />
+          <Comments userAlias={userAlias} />
         </div>
       </CommentContainerComp>
     </>

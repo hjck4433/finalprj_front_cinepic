@@ -8,7 +8,7 @@ const ComtComp = styled.div`
     width: 120px;
     text-align: center;
     padding: 10px;
-    .img_box { 
+    .img_box {
       width: 70%;
       padding-bottom: 70%;
       margin-bottom: 10%;
@@ -47,43 +47,42 @@ const ComtComp = styled.div`
       margin: 20px;
     }
   }
-  @media only screen and (max-width:768px){
+  @media only screen and (max-width: 768px) {
     font-size: 1.1em;
     .user_box {
-			width: 80px;
-			padding: 0;
+      width: 80px;
+      padding: 0;
       font-size: 1.1em;
-		}
+    }
     .input_box {
       width: calc(100% - 80px);
-			display: block;
-			padding: 2%;
-			text-align: right;
+      display: block;
+      padding: 2%;
+      text-align: right;
       .select_box {
         text-align: right;
         padding: 1% 2% 4% 2%;
         span:nth-child(1) {
           margin: 0;
-          margin-right: 35px
+          margin-right: 35px;
         }
       }
       .bar {
-				width: 100%;
-				height: 1px;
-				margin: 0 auto;
-			}
+        width: 100%;
+        height: 1px;
+        margin: 0 auto;
+      }
       .comment {
         width: 100%;
-				margin: 0;
-				padding: 20px 0;
-				margin-bottom: 3%;
+        margin: 0;
+        padding: 20px 0;
+        margin-bottom: 3%;
         text-align: left;
         font-size: 1.1em;
       }
     }
   }
-  @media only screen and (max-width:480px){
-
+  @media only screen and (max-width: 480px) {
   }
 `;
 const ComtImg = styled.div`
@@ -96,8 +95,7 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const Comt = ({comt}) => {
-
+const Comt = ({ comt, userAlias }) => {
   return (
     <>
       <ComtComp>

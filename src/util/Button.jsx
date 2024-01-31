@@ -48,8 +48,11 @@ const Button = (props) => {
         height={height}
         fontSize={fontSize}
         className={active ? "" : "false"}
-        onClick={() => {
-          if (active) clickEvt();
+        onClick={(e) => {
+          if (active) {
+            e.stopPropagation();
+            clickEvt();
+          }
         }}
       >
         {children}

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "../../util/Button";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const PostModalComp = styled.div`
   .modal {
@@ -27,11 +29,22 @@ const PostModalComp = styled.div`
     background-color: #fff;
     animation: modal-show 0.3s;
     overflow: hidden;
+    position: relative;
 
     h3 {
       font-size: 26px;
       font-weight: 900;
       margin-bottom: 20px;
+    }
+    .close_btn {
+      font-size: 36px;
+      cursor: pointer;
+
+      position: absolute;
+      top: 22px;
+      right: 26px;
+      svg {
+      }
     }
 
     .input_box {
@@ -64,6 +77,18 @@ const PostModalComp = styled.div`
           .input_file {
             display: none;
           }
+        }
+      }
+      p {
+        /* background-color: pink; */
+        margin-bottom: 10px;
+        text-align: left;
+        span {
+          padding: 0 3px;
+          padding-bottom: 6px;
+          color: var(--ORANGE);
+          /* border-right: 4px solid var(--GREY); */
+          display: inline-block;
         }
       }
 
@@ -105,8 +130,7 @@ const PostModalComp = styled.div`
         font-size: 1em;
         font-weight: 300;
         border-radius: 5px;
-
-        &:last-child {
+        &:nth-child(2) {
           border: 1px solid var(--RED);
           margin-left: 10px;
           color: var(--RED);
@@ -171,11 +195,16 @@ const TabPostModal = (props) => {
     type,
     postImage,
     moviePostId,
+    postAlias,
     postTitle,
     onChangePostTitle,
     postContent,
     onChangePostContent,
   } = props;
+
+  useEffect(() => {
+    console.log("수정할 포스트 아이디 : " + moviePostId);
+  }, [moviePostId]);
 
   // 이미지 업로드
   const [imgSrc, setImgSrc] = useState(postImage !== "" ? "" : postImage);
@@ -207,6 +236,10 @@ const TabPostModal = (props) => {
     console.log("modal rendered!");
   }, []);
 
+  useEffect(() => {
+    console.log("type : " + type);
+  }, [type]);
+
   return (
     <>
       <PostModalComp>
@@ -214,6 +247,18 @@ const TabPostModal = (props) => {
           <section>
             <div className="contentBox">
               <h3>씨네포스트</h3>
+              <div
+                className="close_btn"
+                onClick={() => {
+                  close();
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="m-menu"
+                  onClick={close}
+                />
+              </div>
               <div className="input_box">
                 <div className="file_box">
                   {imgSrc !== "" ? (
@@ -223,48 +268,63 @@ const TabPostModal = (props) => {
                   )}
                 </div>
                 <div className="box">
-                  <label htmlFor="file">
-                    <input
-                      type="file"
-                      className="input_file"
-                      id="file"
-                      onChange={(e) => handleFileInputChange(e)}
-                    />
-                    파일 선택
-                  </label>
+                  {type !== "view" && (
+                    <label htmlFor="file">
+                      <input
+                        type="file"
+                        className="input_file"
+                        id="file"
+                        onChange={(e) => handleFileInputChange(e)}
+                      />
+                      파일 선택
+                    </label>
+                  )}
                 </div>
-
+                <p>
+                  <span>{postAlias}</span>
+                </p>
                 <input
                   type="text"
                   defaultValue={postTitle}
                   className="input_text"
                   placeholder="제목"
+                  onChange={onChangePostTitle}
+                  disabled={type === "view" ? true : false}
                 />
                 <textarea
                   defaultValue={postContent}
                   placeholder="내용을 입력해 주세요"
+                  onChange={onChangePostContent}
+                  disabled={type === "view" ? true : false}
                 ></textarea>
               </div>
 
               <div className="btnBox">
-                <Button
-                  clickEvt={() => {}}
-                  active={true}
-                  children="작성"
-                  width="80px"
-                  front={"var(--RED)"}
-                  back={"var(--DARKRED)"}
-                />
-                <Button
-                  clickEvt={() => {
-                    close();
-                  }}
-                  active={true}
-                  children="취소"
-                  width="80px"
-                  front={"#fff"}
-                  back={"#fff"}
-                />
+                {type !== "view" && (
+                  <Button
+                    clickEvt={() => {
+                      // type === "edit" ? 수정기능 함수 : 등록기능 함수
+                    }}
+                    active={true}
+                    children={type === "edit" ? "수정" : "등록"}
+                    width="80px"
+                    front="var(--RED)"
+                    back={"var(--DARKRED)"}
+                  />
+                )}
+                {type === "edit" && (
+                  <Button
+                    className="delButton"
+                    clickEvt={() => {
+                      close();
+                    }}
+                    active={true}
+                    children="삭제"
+                    width="80px"
+                    front={"#fff"}
+                    back={"#fff"}
+                  />
+                )}
               </div>
             </div>
           </section>

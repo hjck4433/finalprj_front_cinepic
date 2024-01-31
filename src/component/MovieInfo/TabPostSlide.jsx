@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Navigation } from "swiper";
@@ -8,21 +8,26 @@ import "swiper/css/navigation";
 import TabPost from "./TabPost";
 import Button from "../../util/Button";
 import TabPostModal from "./TabPostModal";
+import Modal from "../../util/Modal";
+import { UserContext } from "../../context/UserStore";
 
 const PostSlide = styled.div`
   width: 100%;
   .container {
     padding: 30px 0 40px !important;
-    text-align: right;
-    & > button {
-      border: 1px solid var(--ORANGE);
-      margin-right: 10px;
-      color: var(--ORANGE);
-      font-weight: 300;
-      transition: 0.3s ease-in;
-      /* margin: 2% 10px 2% 0; */
-      &:hover {
-        color: #fff;
+    /* text-align: right; */
+    .newButton {
+      text-align: right;
+      button {
+        border: 1px solid var(--ORANGE);
+        margin-right: 10px;
+        color: var(--ORANGE);
+        font-weight: 300;
+        transition: 0.3s ease-in;
+        /* margin: 2% 10px 2% 0; */
+        &:hover {
+          color: #fff;
+        }
       }
     }
     .movie_post_slider {
@@ -101,30 +106,55 @@ const PostSlide = styled.div`
   }
 `;
 
-const TabPostSlide = () => {
+const TabPostSlide = ({ userAlias }) => {
+  const context = useContext(UserContext);
+  const { loginStatus } = context;
+
   // const [postData, setPostData] = useState([]);
   const navigate = useNavigate();
   const swiperRef = useRef(null);
 
-  const [openPostModal, setOpenPostModal] = useState(false);
-  const [postType, setPostType] = useState("");
-
   const [postImage, setPostImage] = useState("");
   const [editId, setEditId] = useState("");
   const [postTitle, setPostTitle] = useState("");
+  const [postAlias, setPostAlias] = useState("");
   const [onChangePostTitle, setOnChangePostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
   const [onChangePostContent, setOnChangePostContent] = useState("");
 
-  // 모달 닫기
+  // 기본 접근 제한 모달
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+
+  const closeModal = (num) => {
+    setModalOpen(false);
+  };
+
+  const handleModal = (header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+  };
+
+  // POST MODAL
+  const [openPostModal, setOpenPostModal] = useState(false);
+  const [postType, setPostType] = useState("");
+
   const closePostModal = () => {
     setOpenPostModal(false);
   };
 
-  // 모달 수정 버전으로 열기
-  const openEdit = () => {
+  //post모달 새글 작성 버전으로 열기
+  const openNew = () => {
     setOpenPostModal(true);
-    setPostType("edit");
+    setPostType("new");
+    setPostImage("");
+    setPostTitle("");
+    setPostContent("");
+    setPostAlias(userAlias);
   };
 
   // 제목 값 저장
@@ -154,10 +184,10 @@ const TabPostSlide = () => {
       postImage:
         "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
       movieId: 123,
-      alias: "nana",
+      alias: "씨네픽",
       postTitle: "Awesome Movie Review",
       postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
+        "I recently watched this amazing movie and here's my detailed review...ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
       postRegDate: "2024-01-23T12:34:56Z",
     },
     {
@@ -165,7 +195,7 @@ const TabPostSlide = () => {
       postImage:
         "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
       movieId: 123,
-      alias: "nana",
+      alias: "씨네픽",
       postTitle: "Awesome Movie Review",
       postContent:
         "I recently watched this amazing movie and here's my detailed review...",
@@ -216,14 +246,15 @@ const TabPostSlide = () => {
       postRegDate: "2024-01-23T12:34:56Z",
     },
   ];
-
-  const revise = (image, title, content, id) => {
+  // 수정 버전으로 넣기
+  const revise = (type, image, title, content, id, alias) => {
     setOpenPostModal(true);
-    setPostType("edit");
+    setPostType(type);
     setPostImage(image);
     setPostTitle(title);
     setPostContent(content);
     setEditId(id);
+    setPostAlias(alias);
   };
 
   // useEffect(() => {
@@ -234,22 +265,26 @@ const TabPostSlide = () => {
     <>
       <PostSlide>
         <div className="container">
-          <Button
-            children="글 작성하기"
-            front="#fff"
-            back="var(--ORANGE)"
-            width="100px"
-            height=""
-            fontSize="1em"
-            active={true}
-            clickEvt={() => {
-              setOpenPostModal(true);
-              setPostType("new");
-              setPostImage("");
-              setPostTitle("");
-              setPostContent("");
-            }}
-          />
+          <div className="newButton">
+            <Button
+              children="글 작성하기"
+              front="#fff"
+              back="var(--ORANGE)"
+              width="100px"
+              height=""
+              fontSize="1em"
+              active={true}
+              clickEvt={() => {
+                loginStatus
+                  ? openNew()
+                  : handleModal(
+                      "로그인",
+                      "로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?",
+                      true
+                    );
+              }}
+            />
+          </div>
           <Swiper
             className="movie_post_slider"
             loop={false}
@@ -280,7 +315,12 @@ const TabPostSlide = () => {
             {postData &&
               postData.map((post) => (
                 <SwiperSlide className="slide" key={post.postId}>
-                  <TabPost post={post} revise={revise} />
+                  <TabPost
+                    // onClick={}
+                    post={post}
+                    revise={revise}
+                    userAlias={userAlias}
+                  />
                 </SwiperSlide>
               ))}
             <div className="swiper-button-prev swiper-button"></div>
@@ -289,12 +329,23 @@ const TabPostSlide = () => {
         </div>
       </PostSlide>
 
+      <Modal
+        open={openModal}
+        close={closeModal}
+        header={modalHeader}
+        children={modalMsg}
+        type={modalType}
+        confirm={() => {
+          navigate("/login");
+        }}
+      />
       <TabPostModal
         open={openPostModal}
         close={closePostModal}
         type={postType}
         postImage={postImage}
         moviePostId={editId}
+        postAlias={postAlias}
         postTitle={postTitle}
         onChangePostTitle={changeTitleInput}
         postContent={postContent}

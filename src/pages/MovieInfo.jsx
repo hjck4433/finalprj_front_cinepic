@@ -2,31 +2,17 @@ import { useParams } from "react-router-dom";
 import CommentContainer from "../component/MovieInfo/CommentContainer";
 import MovieDetail from "../component/MovieInfo/MovieDetail";
 import TabMenu from "../component/MovieInfo/TabMenu";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MovieDetailApi from "../api/MovieDetailApi";
+import { UserContext } from "../context/UserStore";
+import MemberApi from "../api/MemberApi";
+import useTokenAxios from "../hooks/useTokenAxios";
 
-// const data = {
-//   movieId: 10,
-//   movieActor:
-//     "안도 사쿠라, 나가야마 에이타, 쿠로카와 소야, 히이라기 히나타, 타카하타 미츠키",
-//   movieDirector: "고레에다 히로카즈",
-//   movieGenre: "드라마,미스터리,스릴러",
-//   movieNation: "일본",
-//   movieContent:
-//     "“우리 동네에는 괴물이 산다”싱글맘 사오리(안도 사쿠라)는 아들 미나토(쿠로카와 소야)의 행동에서 이상 기운을 감지한다.용기를 내 찾아간 학교에서 상담을 진행한 날 이후 선생님과 학생들의 분위기가 심상치 않게 흐르기 시작하고.“괴물은 누구인가?”한편 사오리는 친구들로부터 따돌림을 당하고 있는 미나토의 친구 요리(히이라기 히나타)의 존재를 알게 되고 자신이 아는 아들의 모습과 사람들이 아는 아들의 모습이 다르다는 사실을 어렴풋이 깨닫는데…태풍이 몰아치던 어느 날, 아무도 몰랐던 진실이 드러난다.",
-//   moviePoster:
-//     "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-//   movieRating: "12세관람가",
-//   movieRelease: "20231129",
-//   movieRuntime: "127",
-//   movieScore: "9.00",
-//   movieStill:
-//     "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_185%2F1698877175642F39ay_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_66%2F16988771908320RXli_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_188%2F16988772044086s93i_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_90%2F1698877216681BaSVN_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_44%2F1698877229921oFSr7_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_32%2F1698877244373T2wxz_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_61%2F1698877258312YazW0_JPEG%2Fmovie_image.jpg|https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231102_285%2F1698877271874D5NnN_JPEG%2Fmovie_image.jpg",
-//   movieTitle: "괴물",
-//   movieTitleEng: "Monster",
-// };
 const MovieInfo = () => {
   const { id } = useParams();
+  const context = useContext(UserContext);
+  const { loginStatus } = context;
+
   const [movieData, setMovieData] = useState({});
 
   const movieInfoData = async () => {
@@ -40,15 +26,32 @@ const MovieInfo = () => {
     }
   };
 
+  const [userAlias, setUserAlias] = useState("");
+
+  // 회원정보 함수 res에 data값이 있으면, Alias값 저장 (props는 해놨음) -- 만들고 얘기하기 (토큰 적용)
+  const userInfo = async () => {
+    const res = await MemberApi.getMemberDetail();
+    console.log("회원 정보 : " + res.data);
+    if (res.data !== null) {
+      setUserAlias(res.data.alias);
+      console.log("회원 닉네임 : " + res.data.alias);
+    }
+  };
+  const getUserInfo = useTokenAxios(userInfo);
+
   useEffect(() => {
     movieInfoData();
-  }, [id]);
+
+    if (loginStatus) {
+      getUserInfo();
+    }
+  }, []);
 
   return (
     <>
       <MovieDetail movieDetail={movieData} movieId={id} />
-      <TabMenu movieDetail={movieData} />
-      <CommentContainer movieId={id} />
+      <TabMenu movieDetail={movieData} userAlias={userAlias} />
+      <CommentContainer movieId={id} userAlias={userAlias} />
     </>
   );
 };

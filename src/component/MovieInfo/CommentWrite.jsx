@@ -116,7 +116,7 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const CommentWrite = () => {
+const CommentWrite = ({ userAlias }) => {
   const comtWriteData = {
     postId: 1,
     movieId: 123,
