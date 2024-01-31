@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Button from "../../util/Button";
 import label from "../../images/pick.png";
 import poster from "../../images/poster.jpeg";
+import { useState, useEffect } from "react";
+import MovieDetailApi from "../../api/MovieDetailApi";
 
 const CinePickComp = styled.section`
   .container {
@@ -139,15 +141,72 @@ const CinePickComp = styled.section`
 const ImgComp = styled.div`
   width: 100%;
   padding-bottom: 147%;
-  background-image: url(${poster});
+  /* background-image: url(${poster}); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: drop-shadow(3px 3px 3px #cccccc);
   border-radius: 5px;
 `;
+
+const genresByDay = {
+  월요일: "액션",
+  화요일: "코미디",
+  수요일: "스릴러",
+  목요일: "로맨스",
+  금요일: "판타지",
+  토요일: "SF",
+  일요일: "드라마",
+};
+
+const getGenreByDay = () => {
+  const today = new Date().getDate(); // 현재 요일 가져오기
+
+  switch (today) {
+    case 0:
+      return genresByDay["월요일"];
+    case 1:
+      return genresByDay["화요일"];
+    case 2:
+      return genresByDay["수요일"];
+    case 3:
+      return genresByDay["목요일"];
+    case 4:
+      return genresByDay["금요일"];
+    case 5:
+      return genresByDay["토요일"];
+    case 6:
+      return genresByDay["일요일"];
+    default:
+      return 0;
+  }
+};
 const CinePick = () => {
-  // const movieData = [{}];
+  const [genre, setGenre] = useState(""); // 장르 상태
+
+  useEffect(() => {
+    const todayGenre = getGenreByDay(); // 요일에 해당하는 장르 가져오기
+    setGenre(todayGenre);
+  }, []);
+
+  // const [movieData, setMovieData] = useState(null);
+  // useEffect(()=>{
+  //   const fetchMovieData = async () =>{
+  //     try {
+  //       const response = await MovieDetailApi.getMovieDetail();
+  //       setMovieData(response.data);
+  //     }catch (error) {
+  //       console.error("영화 데이터를 가져오는데에 실패했습니다 : ", error);
+  //     }
+  //   };
+  // },[]);
+  const movieData = {
+    genre: "로맨스",
+    poster: { poster },
+    story:
+      "조엘은 아픈 기억만을 지워준다는 라쿠나사를 찾아가 헤어진 연인 클레멘타인의 기억을 지우기로 결심한다. 기억이 사라져 갈수록 조엘은 사랑이 시작되던 순간, 행복한 기억들, 가슴 속에 각인된 추억들을 지우기 싫어지기만 하는데... 당신을 지우면 이 아픔도 사라질까요? 사랑은 그렇게 다시 기억된다.",
+  };
+
   return (
     <>
       <CinePickComp>
@@ -160,10 +219,8 @@ const CinePick = () => {
               <div className="onePickBox">
                 <div className="movieCard">
                   <img src={label} alt="label" className="label" />
-                  <ImgComp />
-                  {/* 북마크 자리 */}
+                  <ImgComp style={{ backgroundImage: `url(${poster})` }} />
                 </div>
-
                 <Button
                   children="상세보기"
                   // width="300px"
@@ -175,32 +232,19 @@ const CinePick = () => {
               <div className="rightSideBox">
                 <div className="textBox">
                   <div className="genre">
-                    <p>#로맨스</p>
+                    <p>#{movieData.genre}</p>
                   </div>
-                  <p className="story">
-                    조엘은 아픈 기억만을 지워준다는 라쿠나사를 찾아가 헤어진
-                    연인 클레멘타인의 기억을 지우기로 결심한다. 기억이 사라져
-                    갈수록 조엘은 사랑이 시작되던 순간, 행복한 기억들, 가슴 속에
-                    각인된 추억들을 지우기 싫어지기만 하는데... 당신을 지우면 이
-                    아픔도 사라질까요? 사랑은 그렇게 다시 기억된다.
-                  </p>
+                  <p className="story">{movieData.story}</p>
                 </div>
                 <div className="otherMovieBox">
-                  <div className="movieCard">
-                    <img src={label} alt="label" className="label" />
-                    <ImgComp />
-                    {/* 북마크 자리 */}
-                  </div>
-                  <div className="movieCard">
-                    <img src={label} alt="label" className="label" />
-                    <ImgComp />
-                    {/* 북마크 자리 */}
-                  </div>
-                  <div className="movieCard">
-                    <img src={label} alt="label" className="label" />
-                    <ImgComp />
-                    {/* 북마크 자리 */}
-                  </div>
+                  {[...Array(3)].map((_, index) => (
+                    <div className="movieCard" key={index}>
+                      <img src={label} alt="label" className="label" />
+                      <ImgComp
+                        style={{ backgroundImage: `url(${movieData.poster})` }}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
