@@ -119,14 +119,27 @@ const Theater = () => {
 
       const placeMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(place.latitude, place.longitude),
-        markerPosition,
         image: markerImage, // 마커 이미지 설정
       });
       placeMarker.setMap(map); // 지도에 마커 표시
 
       const infowindow = new window.kakao.maps.InfoWindow({
-        content: `<div style="font-size:14px; padding:10px; text-align: center; line-height: 1.2">${place.theaterName}<br><a href=${place.theaterUrl} target="_blank">${place.theaterUrl}</a></div>`, // 장소에 대한 정보 표시
+        content: `<div style="width:200px; font-size:14px; padding: 10px; text-align: center;">${place.theaterName}</div>`, // 장소에 대한 정보 표시
         position: markerPosition,
+      });
+
+      let isOpen = false;
+
+      // 마커에 마우스오버 이벤트를 등록
+      window.kakao.maps.event.addListener(placeMarker, "mouseover", () => {
+        isOpen = true;
+        infowindow.open(map, placeMarker);
+      });
+
+      // 마커에 마우스아웃 이벤트를 등록
+      window.kakao.maps.event.addListener(placeMarker, "mouseout", () => {
+        isOpen = false;
+        infowindow.close();
       });
 
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
