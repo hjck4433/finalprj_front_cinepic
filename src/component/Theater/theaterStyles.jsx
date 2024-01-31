@@ -4,9 +4,10 @@ const TheaterComp = styled.section`
   // 지도 전체 감싸는 영역
   .container {
     // 제목
-    h2 {
-      padding-left: 5%;
-      margin: 50px;
+    h3 {
+      padding-left: 10%;
+      /* margin: 50px; */
+      padding-top: 8.5%;
       @media screen and (max-width: 650px) {
         padding-left: 2%;
       }
@@ -19,7 +20,7 @@ const TheaterComp = styled.section`
     .mapContainer {
       width: 80%;
       height: 500px;
-      margin: 70px auto;
+      margin: 80px auto;
     }
     // 검색바 감싸는 영역
     .searchContainer {
