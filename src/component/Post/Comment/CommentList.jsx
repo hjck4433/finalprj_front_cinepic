@@ -5,7 +5,7 @@ import BoardCommentApi from "../../../api/BoardCommentApi";
 import useTokenAxios from "../../../hooks/useTokenAxios";
 
 const BoardCommentList = ({ id, userAlias }) => {
-  const [commentData, setCommmentData] = useState("");
+  const [commentData, setCommentData] = useState([]);
   const [inputComment, setInputComment] = useState("");
 
   const inputCommentChange = (e) => {
@@ -14,19 +14,31 @@ const BoardCommentList = ({ id, userAlias }) => {
 
   // 댓글 저장
   const submitComment = async () => {
-    const response = await BoardCommentApi.saveNewComment(id, inputComment);
-    console.log("댓글 저장 결과 : ", response.data);
-    if (response.data) {
-      setInputComment("");
+    try {
+      const response = await BoardCommentApi.saveNewComment(id, inputComment);
+      console.log("댓글 저장 결과 : ", response.data);
+      if (response.data) {
+        console.log("댓글이 성공적으로 저장되었습니다.");
+        setInputComment("");
+        getCommentList(); // 댓글 저장 후 목록 다시 불러오기
+      } else {
+        console.log("댓글 저장에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("댓글 저장 중 오류 발생:", error);
     }
   };
   const saveComment = useTokenAxios(submitComment);
 
   // 댓글 리스트 불러오기
   const fetchCommentList = async () => {
-    const res = await BoardCommentApi.commentList(id);
-    if (res.data !== null) {
-      setCommmentData(res.data);
+    try {
+      const res = await BoardCommentApi.commentList(id);
+      if (res.data !== null) {
+        setCommentData(res.data);
+      }
+    } catch (error) {
+      console.error("댓글 목록 불러오기 중 오류 발생:", error);
     }
   };
   const getCommentList = useTokenAxios(fetchCommentList);

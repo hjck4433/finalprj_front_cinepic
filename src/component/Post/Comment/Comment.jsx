@@ -65,12 +65,7 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
   const closeModal = (num) => {
     setModalOpen(false);
   };
-  const handleModal = (header, msg, type) => {
-    setModalOpen(true);
-    setModalHeader(header);
-    setModalMsg(msg);
-    setModalType(type);
-  };
+
   return (
     <>
       <div className="commentBox" key={boardComment.boardCommentId}>
@@ -113,7 +108,10 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
                 front="var(--GREY)"
                 back="var(--DARKGREY)"
                 clickEvt={() => {
-                  handleModal("삭제", "삭제하시겠습니까 ?", true);
+                  setModalOpen(true);
+                  setModalHeader("삭제");
+                  setModalMsg("삭제하시겠습니까?");
+                  setModalType(true);
                 }}
               />
             </div>
