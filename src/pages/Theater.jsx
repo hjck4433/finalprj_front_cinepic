@@ -18,6 +18,25 @@ const Theater = () => {
   const [selectedPlace, setSelectedPlace] = useState(null); // 선택된 장소 데이터 불러오기
   const [markers, setMarkers] = useState([]); // 마커 배열
 
+  // 모달 관련
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+  const [modalConfirm, setModalConfirm] = useState(null);
+
+  // 모달 닫기
+  const closeModal = (num) => {
+    setModalOpen(false);
+  };
+  const handleModal = (header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+    setModalConfirm(num);
+  };
+
   // 지도 불러오기
   useEffect(() => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
@@ -65,7 +84,7 @@ const Theater = () => {
       // 검색 결과가 없는 경우 모달 열기
       handleModal(
         "검색 결과 없음",
-        "검색 결과가 없습니다. 다른 지역이나 검색어를 시도해보세요.",
+        "검색 결과가 없습니다. \n 다른 지역이나 검색어를 시도해보세요.",
         false,
         0
       );
@@ -132,25 +151,6 @@ const Theater = () => {
       setSelectedPlace(firstPlace); // 검색하고 이동 시 처음 마커의 내용 나오게 함
     }
   }, [theaterData, map]);
-
-  // 모달 관련
-  const [openModal, setModalOpen] = useState(false);
-  const [modalMsg, setModalMsg] = useState("");
-  const [modalHeader, setModalHeader] = useState("");
-  const [modalType, setModalType] = useState(null);
-  const [modalConfirm, setModalConfirm] = useState(null);
-
-  // 모달 닫기
-  const closeModal = (num) => {
-    setModalOpen(false);
-  };
-  const handleModal = (header, msg, type, num) => {
-    setModalOpen(true);
-    setModalHeader(header);
-    setModalMsg(msg);
-    setModalType(type);
-    setModalConfirm(num);
-  };
 
   return (
     <>
