@@ -37,7 +37,7 @@ const PieChartComp = styled(PieChart)`
 // ];
 
 const TypeChart = (props) => {
-  const RADIAN = Math.PI / 180;
+  const RADIAN = Math.PI / 180; // 각도를 라디안 단위로 변환하는 상수
   const {
     cx,
     cy,
@@ -51,21 +51,26 @@ const TypeChart = (props) => {
     percent,
     value,
   } = props;
+  // 중간 각도를 기반으로 삼각함수 값을 계산
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
+  // 시작점, 중간점, 끝점 좌표 계산
   const sx = cx + (outerRadius + 10) * cos;
   const sy = cy + (outerRadius + 10) * sin;
   const mx = cx + (outerRadius + 30) * cos;
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
+  // 텍스트의 위치를 결정하기 위한 textAnchor 값 설정
   const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
+      {/* 파이 차트의 섹터에 대한 이름 표시 -일반 회원 / 카카오 회원*/}
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={"var(--BLACK)"}>
         {payload.name}
       </text>
+      {/* 섹터 그리기 */}
       <Sector
         cx={cx}
         cy={cy}
@@ -75,12 +80,16 @@ const TypeChart = (props) => {
         endAngle={endAngle}
         fill={"var(--RED)"}
       />
+      {/* 선 그리기 */}
       <path
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
         stroke={fill}
         fill="none"
       />
+      {/* 점 */}
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+      {/* 값 표시 텍스트 */}
+      {/* 인원수 */}
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -88,11 +97,12 @@ const TypeChart = (props) => {
         fill="var(--BLACK)"
         fontSize={13}
       >{`${value} 명`}</text>
+      {/* 퍼센트 */}
       <text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        x={ex + (cos >= 0 ? 1 : -1.5) * 12}
         y={ey}
         dy={18}
-        textAnchor={textAnchor}
+        textAnchor="middle"
         fill="var(--DARKGREY)"
         fontSize={11}
       >
@@ -109,6 +119,7 @@ const LoginTypeChart = () => {
     getData();
   }, []);
 
+  // 회원 데이터 가져오기
   const fetchData = async () => {
     try {
       const typeRes = await MemberApi.getMemberTypeData();
@@ -120,10 +131,12 @@ const LoginTypeChart = () => {
       console.error("Error fetching data:", error);
     }
   };
+  // 데이터를 가져오는 커스텀 훅 사용
   const getData = useTokenAxios(fetchData); // 리프레시 토큰까지 만료되면 재로그인 할 수 있도록 담아줌(커스텀 훅)
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // 파이 차트에 마우스를 올렸을 때의 이벤트 핸들러
   const onPieEnter = (_, index) => {
     setActiveIndex(index);
   };
