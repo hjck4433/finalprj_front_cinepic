@@ -66,9 +66,23 @@ const Theater = () => {
     if (!theaterData) return;
     markers.forEach((marker) => marker.setMap(null));
 
+    // 마커 색 설정 및 마커 위치표시
     const newMarkers = theaterData.map((place) => {
+      // 마커 이미지의 url을 설정해 마커 색상 바꿈
+      const markerImage = new window.kakao.maps.MarkerImage(
+        // 마커 이미지 url
+        "https://firebasestorage.googleapis.com/v0/b/kh-miniproject.appspot.com/o/%E1%84%88%E1%85%A1%E1%86%AF%E1%84%80%E1%85%A1%E1%86%AB%E1%84%86%E1%85%A1%E1%84%8F%E1%85%A5-removebg-preview.png?alt=media&token=216166b6-2769-445a-bac7-a1c0e248b1ad",
+        new window.kakao.maps.Size(40, 50), // 마커 이미지의 크기 지정
+        {
+          offset: new window.kakao.maps.Point(15, 30), //마커 이미지의 중심 좌표 지정
+          alt: "마커 이미지",
+          clickable: true,
+        }
+      );
+
       const placeMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(place.latitude, place.longitude),
+        image: markerImage, // 마커 이미지 설정
       });
       placeMarker.setMap(map); // 지도에 마커 표시
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
