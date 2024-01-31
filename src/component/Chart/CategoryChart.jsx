@@ -49,6 +49,12 @@ const BarChartBox = styled.div`
 //     color: "var(--DARKGREY)",
 //   },
 // ];
+const categoryColors = {
+  씨네크루: "var(--DARKRED)",
+  크루후기: "var(--RED)",
+  온라인: "var(--ORANGE)",
+  오프라인: "var(--DARKGREY)",
+};
 
 const CategoryChart = () => {
   const [boardData, setBoardData] = useState([]);
@@ -57,7 +63,11 @@ const CategoryChart = () => {
     async function fetchData() {
       try {
         const response = await BoardApi.getAllCategories(); // API 호출
-        setBoardData(response.data); // 데이터 설정
+        const formattedData = response.data.map((item) => ({
+          category: item.name,
+          pv: item.count,
+        }));
+        setBoardData(formattedData); // 데이터 설정
       } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);
       }
@@ -84,11 +94,12 @@ const CategoryChart = () => {
         >
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis type="number" />
-          <YAxis dataKey="name" type="category" scale="band" />
+          <YAxis dataKey="category" type="category" scale="band" />
           <Bar dataKey="pv" barSize={20} radius={[0, 10, 10, 0]}>
-            {boardData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
+            {boardData.length > 0 &&
+              boardData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={categoryColors[entry.name]} />
+              ))}
           </Bar>
         </ComposedChart>
       </ResponsiveContainer>

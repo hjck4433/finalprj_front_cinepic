@@ -96,7 +96,7 @@ const MovieBanner = () => {
                 type="text"
                 placeholder="검색어를 입력해주세요."
                 onChange={() => {}}
-                onKeyDown={(e) => {
+                onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault(); // 기본 Enter 행동 방지
                   }

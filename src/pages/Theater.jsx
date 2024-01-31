@@ -22,7 +22,7 @@ const Theater = () => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
       center: new window.kakao.maps.LatLng(location.lat, location.long),
-      level: 5,
+      level: 4,
     };
 
     const kakaoMap = new window.kakao.maps.Map(container, options);
@@ -74,6 +74,7 @@ const Theater = () => {
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
         setSelectedPlace(place);
         // 장소가 이동 될 때 마커를 누르면 맵 센터로 이동
+        map.setLevel(3);
         map.setCenter(
           new window.kakao.maps.LatLng(place.latitude, place.longitude)
         );
@@ -142,7 +143,8 @@ const Theater = () => {
                   </div>
                   <div>
                     <span className="title">총 좌석 수 </span>
-                    <span>{selectedPlace.seats}석</span>
+                    <span>{selectedPlace.seats.toLocaleString()}석</span>
+                    {/* toLocaleString() -> 천 단위에서 콤마 생기게 함 */}
                   </div>
                 </div>
               </div>
@@ -155,7 +157,10 @@ const Theater = () => {
                   </div>
                   <div>
                     <span className="title">특별관 운영 여부 </span>
-                    <span>{selectedPlace.isSpecialScreen}</span>
+                    <span>
+                      {selectedPlace.isSpecialScreen == 1 ? "있음" : "없음"}
+                      {/* 1이면 있음, 0 이면 없음 표시 */}
+                    </span>
                   </div>
                   <div>
                     <span className="title">필름 상영관 수 </span>

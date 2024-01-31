@@ -31,6 +31,29 @@ const TabPostComp = styled.div`
     }
     p:nth-child(4) {
       color: var(--GREY);
+      /* margin-bottom: 20px; */
+    }
+    button {
+      border: 1px solid var(--GREY);
+      color: var(--GREY);
+      transition: all 0.3s;
+
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+
+      &:hover {
+        border: 1px solid var(--ORANGE);
+        color: var(--ORANGE);
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .text_box {
+      font-size: 1.3em;
+      button {
+        font-size: 1em;
+      }
     }
   }
 `;
@@ -45,6 +68,9 @@ const PostImg = styled.div`
 `;
 
 const TabPost = ({ post, revise }) => {
+  const toDate = new Date(post.postRegDate);
+  const regDate = toDate.toISOString().split("T")[0];
+
   return (
     <>
       <TabPostComp>
@@ -55,25 +81,25 @@ const TabPost = ({ post, revise }) => {
           <p>{post.alias}</p>
           <p>{post.postTitle}</p>
           <p>{post.postContent}</p>
-          <p>{post.postRegDate}</p>
+          <p>{regDate}</p>
+          <Button
+            children="수정"
+            front="#fff"
+            back="#fff"
+            width="60px"
+            height="36px"
+            fontSize="0.9em"
+            active={true}
+            clickEvt={() => {
+              revise(
+                post.postImage,
+                post.postTitle,
+                post.postContent,
+                post.postId
+              );
+            }}
+          />
         </div>
-        <Button
-          children="수정"
-          front="#fff"
-          back="var(--ORANGE)"
-          width="100px"
-          height=""
-          fontSize="1em"
-          active={true}
-          clickEvt={() => {
-            revise(
-              post.postImage,
-              post.postTitle,
-              post.postContent,
-              post.postId
-            );
-          }}
-        />
       </TabPostComp>
     </>
   );

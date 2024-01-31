@@ -48,8 +48,8 @@ const Nav = ({ active, togle }) => {
             씨네크루
           </div>
           <ul className="sub-menu">
-            <li onClick={() => onClickMenu(2)}>무비모임</li>
-            <li onClick={() => onClickMenu(3)}>모임후기</li>
+            <li onClick={() => onClickMenu(2)}>씨네크루</li>
+            <li onClick={() => onClickMenu(3)}>크루후기</li>
           </ul>
         </li>
         <li>

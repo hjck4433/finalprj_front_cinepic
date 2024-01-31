@@ -85,7 +85,7 @@ const BoardApi = {
 
   // 모든 카테고리 조회
   getAllCategories: async () => {
-    console.log("모든 카테로기 가져오는 중");
+    console.log("모든 카테고리 가져오는 중");
     return await axios.get(
       Common.CP_DOMAIN + `/board/admin/boardtype`,
       Common.tokenHeader()

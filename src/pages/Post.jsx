@@ -1,6 +1,6 @@
 import { PostComp } from "../component/Post/PostStyle";
 import Button from "../util/Button";
-import CommentList from "../component/Post/Comment/CommentList";
+import BoardCommentList from "../component/Post/Comment/CommentList";
 import { useNavigate, useParams } from "react-router-dom";
 import BoardApi from "../api/BoardApi";
 import MemberApi from "../api/MemberApi";
@@ -152,7 +152,7 @@ const Post = () => {
             </div>
           </div>
           {/* 댓글 부분 추가 */}
-          <CommentList id={postId} userAlias={userAlias} />
+          <BoardCommentList id={postId} userAlias={userAlias} />
           <div className="goToListBtn">
             <Button
               className="listBtn"

@@ -1,10 +1,10 @@
 import Button from "../../../util/Button";
 import Comment from "./Comment";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import BoardCommentApi from "../../../api/BoardCommentApi";
 import useTokenAxios from "../../../hooks/useTokenAxios";
 
-const CommentList = ({ id, userAlias }) => {
+const BoardCommentList = ({ id, userAlias }) => {
   const [commentData, setCommmentData] = useState("");
   const [inputComment, setInputComment] = useState("");
 
@@ -29,7 +29,7 @@ const CommentList = ({ id, userAlias }) => {
       setCommmentData(res.data);
     }
   };
-  const getCommentList = useTokenAxios(() => fetchCommentList());
+  const getCommentList = useTokenAxios(fetchCommentList);
 
   useEffect(() => {
     getCommentList();
@@ -37,16 +37,15 @@ const CommentList = ({ id, userAlias }) => {
 
   return (
     <>
-      {/* 댓글 영역 */}
       <div className="commentArea">
         <h3>댓글</h3>
         <div className="commentList">
           {commentData &&
-            commentData.map((comment) => (
+            commentData.map((boardComment) => (
               <Comment
-                key={comment.commentId}
+                key={boardComment.boardCommentId}
                 userAlias={userAlias}
-                comment={comment}
+                boardComment={boardComment}
               />
             ))}
         </div>
@@ -72,4 +71,4 @@ const CommentList = ({ id, userAlias }) => {
   );
 };
 
-export default CommentList;
+export default BoardCommentList;

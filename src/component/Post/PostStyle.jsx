@@ -127,6 +127,7 @@ export const PostComp = styled.section`
     }
     // 댓글 리스트 부분
     .commentArea {
+      margin-bottom: 50px;
       h3 {
         color: var(--VIOLET);
         font-weight: 600;
@@ -198,7 +199,7 @@ export const PostComp = styled.section`
         textarea {
           background-color: var(--IVORY);
           width: 100%;
-          height: 150px;
+          height: 120px;
           padding: 8px;
           font-size: 0.9rem;
           margin-bottom: 10px;
