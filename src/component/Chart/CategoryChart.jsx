@@ -27,28 +27,6 @@ const BarChartBox = styled.div`
   }
 `;
 
-// const data = [
-//   {
-//     name: "씨네크루",
-//     pv: 30,
-//     color: "var(--DARKRED)",
-//   },
-//   {
-//     name: "크루후기",
-//     pv: 15,
-//     color: "var(--RED)",
-//   },
-//   {
-//     name: "온라인",
-//     pv: 100,
-//     color: "var(--ORANGE)",
-//   },
-//   {
-//     name: "오프라인",
-//     pv: 50,
-//     color: "var(--DARKGREY)",
-//   },
-// ];
 const categoryColors = {
   씨네크루: "var(--DARKRED)",
   크루후기: "var(--RED)",
@@ -64,10 +42,23 @@ const CategoryChart = () => {
       try {
         const response = await BoardApi.getAllCategories(); // API 호출
         const data = response.data;
-        const formattedData = Object.keys(data).map((key) => ({
-          category: key,
-          pv: data[key],
-        }));
+
+        const formattedData = Object.keys(data)
+          .map((key) => ({
+            category: key,
+            pv: data[key],
+          }))
+          .sort((a, b) => {
+            const categoryOrder = {
+              씨네크루: 0,
+              크루후기: 1,
+              온라인: 2,
+              오프라인: 3,
+            };
+            //오름차순 정렬
+            return categoryOrder[a.category] - categoryOrder[b.category];
+          });
+
         setBoardData(formattedData); // 데이터 설정
       } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);
@@ -99,7 +90,10 @@ const CategoryChart = () => {
           <Bar dataKey="pv" barSize={20} radius={[0, 10, 10, 0]}>
             {boardData.length > 0 &&
               boardData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={categoryColors[entry.name]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={categoryColors[entry.category]}
+                />
               ))}
           </Bar>
         </ComposedChart>
