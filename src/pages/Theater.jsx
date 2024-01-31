@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import TheaterApi from "../api/TheaterApi";
 import TheaterBannerComp from "../component/Theater/theaterBanner";
+import Modal from "../util/Modal";
 
 const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
@@ -53,11 +54,22 @@ const Theater = () => {
   const handleSearchButtonClick = async () => {
     console.log("검색 키워드: ", searchQuery);
     const resp = await TheaterApi.theaterAddrSearch(searchQuery);
-    if (resp.data !== null) {
+    if (resp.data !== null && resp.data.length > 0) {
+      // 검색 결과가 있을 경우
       setTheaterData(resp.data);
       console.log("지도정보 : " + resp.data);
       setSearchQuery(""); // 엔터 시 글 초기화
       setLocation({ lat: resp.data[0].latitude, long: resp.data[0].longitude });
+    } else {
+      console.log("검색결과 없음");
+      // 검색 결과가 없는 경우 모달 열기
+      handleModal(
+        "검색 결과 없음",
+        "검색 결과가 없습니다. 다른 지역이나 검색어를 시도해보세요.",
+        false,
+        0
+      );
+      setSearchQuery(""); // 엔터 시 글 초기화
     }
   };
 
@@ -121,6 +133,25 @@ const Theater = () => {
     }
   }, [theaterData, map]);
 
+  // 모달 관련
+  const [openModal, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  const [modalType, setModalType] = useState(null);
+  const [modalConfirm, setModalConfirm] = useState(null);
+
+  // 모달 닫기
+  const closeModal = (num) => {
+    setModalOpen(false);
+  };
+  const handleModal = (header, msg, type, num) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+    setModalConfirm(num);
+  };
+
   return (
     <>
       <TheaterComp>
@@ -151,6 +182,18 @@ const Theater = () => {
               </div>
             </div>
           </div>
+          <Modal
+            open={openModal}
+            close={closeModal}
+            header={modalHeader}
+            children={modalMsg}
+            type={modalType}
+            closeEvt={() => {
+              if (modalConfirm === 0) {
+              }
+            }}
+          />
+
           {selectedPlace && selectedPlace !== null && (
             <div className="infoContainer" key={selectedPlace.id}>
               {/* CGV 청주(서문) */}
