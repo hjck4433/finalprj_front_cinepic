@@ -63,9 +63,10 @@ const CategoryChart = () => {
     async function fetchData() {
       try {
         const response = await BoardApi.getAllCategories(); // API 호출
-        const formattedData = response.data.map((item) => ({
-          category: item.name,
-          pv: item.count,
+        const data = response.data;
+        const formattedData = Object.keys(data).map((key) => ({
+          category: key,
+          pv: data[key],
         }));
         setBoardData(formattedData); // 데이터 설정
       } catch (error) {
