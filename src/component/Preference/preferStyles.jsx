@@ -7,11 +7,11 @@ const PreferComp = styled.section`
   }
   // 전체 영역
   .container {
-    padding-top: 50px;
+    padding-top: 8.5%;
     // 제목
     h2 {
       margin-left: 10%;
-      padding-bottom: 50px;
+      padding-bottom: 7%;
     }
     // 선호 배우,감독
     .searchSel {
