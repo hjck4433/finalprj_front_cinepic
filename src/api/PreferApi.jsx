@@ -40,6 +40,18 @@ const PreferApi = {
       Common.tokenHeader()
     );
   },
+  saveRecsMovie: async () => {
+    return await axios.get(
+      Common.CP_DOMAIN + "/prefer/savemovie",
+      Common.tokenHeader()
+    );
+  },
+  getIsPrefer: async () => {
+    return await axios.get(
+      Common.CP_DOMAIN + "/prefer/isprefer",
+      Common.tokenHeader()
+    );
+  },
 };
 
 export default PreferApi;

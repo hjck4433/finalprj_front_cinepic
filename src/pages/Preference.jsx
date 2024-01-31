@@ -173,7 +173,8 @@ const Preference = () => {
     );
     if (res.data === true) {
       console.log("저장 성공");
-      handleModal("성공", "등록이 완료되었습니다.", false, 0);
+      // handleModal("성공", "등록이 완료되었습니다.", false, 0);
+      preferMovieSave();
     } else {
       console.log("저장 실패");
     }
@@ -225,7 +226,18 @@ const Preference = () => {
     );
     if (res.data) {
       console.log("수정 성공");
-      handleModal("성공", "수정이 완료되었습니다.", false, 1);
+      // handleModal("성공", "수정이 완료되었습니다.", false, 1);
+      preferMovieSave();
+    }
+  };
+
+  const preferMovieSave = async () => {
+    const res = await PreferApi.saveRecsMovie();
+    if (res.data) {
+      console.log("영화추천 저장 성공");
+      type === "new"
+        ? handleModal("성공", "등록이 완료되었습니다.", false, 0)
+        : handleModal("성공", "수정이 완료되었습니다.", false, 1);
     }
   };
 
@@ -269,7 +281,8 @@ const Preference = () => {
                             <button
                               onClick={() => {
                                 deleteDirector(index);
-                              }}>
+                              }}
+                            >
                               <FontAwesomeIcon icon={faTimes} />
                             </button>
                           </span>
@@ -310,7 +323,8 @@ const Preference = () => {
                               <button
                                 onClick={() => {
                                   deleteActor(index);
-                                }}>
+                                }}
+                              >
                                 <FontAwesomeIcon icon={faTimes} />
                               </button>
                             </span>

@@ -9,6 +9,7 @@ import MemberApi from "../api/MemberApi";
 import { useNavigate } from "react-router-dom";
 import Ad from "../component/Layout/Ad";
 import useTokenAxios from "../hooks/useTokenAxios";
+import PreferApi from "../api/PreferApi";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -46,6 +47,14 @@ const Layout = () => {
 
   const getIsMembership = useTokenAxios(fetchIsMember);
 
+  const fetchIsPrefer = async () => {
+    const res = await PreferApi.getIsPrefer();
+    if (!res.data) {
+      navigate("/preference/new");
+    }
+  };
+  const getIsPrefer = useTokenAxios(fetchIsPrefer);
+
   useEffect(() => {
     // console.log("로그인 여부" + loginStatus);
     // console.log("cinepic" + isMembership);
@@ -63,6 +72,7 @@ const Layout = () => {
       );
     } else if (loginStatus) {
       getIsMembership();
+      getIsPrefer();
     }
   }, [loginStatus]);
 
