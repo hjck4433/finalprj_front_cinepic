@@ -4,9 +4,9 @@ const TheaterComp = styled.section`
   // 지도 전체 감싸는 영역
   .container {
     // 제목
-    h3 {
+    h2 {
       padding-left: 10%;
-      /* margin: 50px; */
+      font-size: 1.6em;
       padding-top: 8.5%;
       @media screen and (max-width: 650px) {
         padding-left: 2%;
