@@ -114,7 +114,7 @@ export const PostComp = styled.section`
         .contentsText {
           width: 100%;
           margin: 40px 0;
-          color: #333;
+          color: var(--BLACK);
           line-height: 1.5;
           font-size: 1.2rem;
           font-weight: 300;
@@ -127,6 +127,7 @@ export const PostComp = styled.section`
     }
     // 댓글 리스트 부분
     .commentArea {
+      outline: 1px solid blue;
       margin-bottom: 50px;
       h3 {
         color: var(--VIOLET);
@@ -134,6 +135,7 @@ export const PostComp = styled.section`
         margin-bottom: 10px;
       }
       .commentList {
+        outline: 1px solid red;
         .commentBox {
           border-top: 1px solid var(--GREY);
           border-bottom: 1px solid var(--GREY);
@@ -170,7 +172,6 @@ export const PostComp = styled.section`
               margin-bottom: 15px;
             }
             .commentText {
-              color: black;
               font-size: 1.2em;
             }
           }
@@ -189,7 +190,7 @@ export const PostComp = styled.section`
           }
         }
       }
-      //댓글 입력창
+      // 댓글 입력창
       .textInputBox {
         width: 100%;
         margin-top: 30px;
@@ -217,8 +218,11 @@ export const PostComp = styled.section`
     .goToListBtn {
       display: flex;
       justify-content: center;
+      margin-bottom: 100px;
     }
   }
+
+  // 미디어쿼리
   @media only screen and (max-width: 768px) {
     .container {
       .postTop {
@@ -267,45 +271,79 @@ export const PostComp = styled.section`
             }
           }
         }
-        // 댓글 리스트 부분
-        .commentArea {
-          h3 {
-            margin-top: 30px;
-          }
-          .commentList {
-            .commentBox {
-              .iconArea {
-                width: 15%;
-              }
-              .textBox {
-                width: 55%;
-                padding: 2%;
-                .comment {
-                  .nickname {
-                    margin-bottom: 10px;
-                  }
-                  .commentText {
-                    color: black;
-                  }
-                }
-              }
-              .buttonBox {
-                width: 40%;
-                .writtenDate {
-                  margin-bottom: 10px;
+      }
+      // 댓글 리스트 부분
+      .commentArea {
+        margin-bottom: 50px;
+        h3 {
+          color: var(--VIOLET);
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+        .commentList {
+          .commentBox {
+            border-top: 1px solid var(--GREY);
+            border-bottom: 1px solid var(--GREY);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 5px;
+            .iconArea {
+              width: 10%;
+              .imgBox {
+                width: 100%;
+                padding-bottom: 100%;
+                position: relative;
+                border-radius: 50%;
+                overflow: hidden;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
                 }
               }
             }
-          }
-          // 댓글 입력창
-          .textInputBox {
-            margin-bottom: 20px;
+            .textBox {
+              width: 60%;
+              padding: 2%;
+              line-height: 1.4;
+
+              .nickname {
+                font-weight: 600;
+                font-size: 1.4em;
+                margin-bottom: 15px;
+              }
+              .commentText {
+                color: black;
+                font-size: 1.2em;
+              }
+            }
+            .buttonBox {
+              width: 20%;
+              padding: 0%;
+              .writtenDate {
+                color: var(--GREY);
+                margin-bottom: 20px;
+                text-align: right;
+              }
+              .editBtnBox {
+                display: flex;
+                justify-content: space-between;
+              }
+            }
           }
         }
-        //목록보기 버튼
-        .goToListBtn {
+        // 댓글 입력창
+        .textInputBox {
           margin-bottom: 20px;
         }
+      }
+      //목록보기 버튼
+      .goToListBtn {
+        margin-bottom: 50px;
       }
     }
   }

@@ -7,37 +7,44 @@ import Modal from "../../../util/Modal";
 import EditModal from "./EditCommentModal";
 
 const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
-  const dateTime = boardComment.commentRegDate;
-  const toDate = new Date(dateTime);
+  const dateTimeString = boardComment.commentRegDate;
+  const toDate = new Date(dateTimeString);
   const regDate = toDate.toISOString().split("T")[0];
 
-  //   댓글 수정
+  // 댓글 수정
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editModalContent, setEditModalContent] = useState(
-    boardComment.boardCommentText
+    boardComment.commentText
   );
 
+  // 수정모달 열기
   const editModalOpen = () => {
     setOpenEditModal(true);
-    setEditModalContent(boardComment.boardCommentText);
+    setEditModalContent(boardComment.commentText);
   };
 
+  // 수정모달 닫기
   const closeEditModal = () => {
     setOpenEditModal(false);
-    setEditModalContent(boardComment.boardCommentText);
+    setEditModalContent(boardComment.commentText);
   };
 
+  // 수정 Api
   const commentModify = async () => {
-    console.log("댓글 수정 전");
-    const res = await BoardCommentApi.commentModify(
-      boardComment.boardCommentId,
-      editModalContent
-    );
-    console.log("commentId : " + boardComment.boardCommentId);
-    if (res.data !== null) {
-      console.log("댓글 수정 성공");
-      fetchCommentList(); // 수정 후 댓글 목록 다시 불러오기
-      closeEditModal(); // 모달 닫기
+    try {
+      console.log("댓글 수정 전");
+      const res = await BoardCommentApi.commentModify(
+        boardComment.commentId,
+        editModalContent
+      );
+      console.log("commentId : " + boardComment.commentId);
+      if (res.data !== null) {
+        console.log("댓글 수정 성공");
+        closeEditModal(); // 수정 모달 닫기
+        fetchCommentList(); // 수정 후 댓글 목록 다시 불러오기
+      }
+    } catch (error) {
+      console.error("댓글 수정 중 오류 발생:", error);
     }
   };
   const modiComment = useTokenAxios(commentModify);
@@ -48,27 +55,33 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
   const [modalHeader, setModalHeader] = useState("");
   const [modalType, setModalType] = useState(null);
 
+  // 삭제 Api
   const deleteComment = async () => {
     const deleteRes = await BoardCommentApi.commentDelete(
-      boardComment.boardCommentId
+      boardComment.commentId
     );
     if (deleteRes.data) {
       console.log("Comment 삭제 성공");
-      closeModal();
-      fetchCommentList();
+      closeModal(); // 모달 닫기
+      fetchCommentList(); // 삭제 후 댓글 목록 다시 불러오기
     }
   };
-
   const delComment = useTokenAxios(deleteComment);
 
   // 모달 닫기
-  const closeModal = (num) => {
+  const closeModal = () => {
     setModalOpen(false);
+  };
+  const handleModal = (header, msg, type) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
   };
 
   return (
     <>
-      <div className="commentBox" key={boardComment.boardCommentId}>
+      <div className="commentBox" key={boardComment.commentId}>
         <div className="iconArea">
           <div className="imgBox">
             <img
@@ -101,17 +114,14 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
               <Button
                 className="deleteBtn"
                 children="삭제"
-                active={true}
                 width="44%"
                 height="30px"
                 fontSize="1em"
                 front="var(--GREY)"
                 back="var(--DARKGREY)"
+                active={true}
                 clickEvt={() => {
-                  setModalOpen(true);
-                  setModalHeader("삭제");
-                  setModalMsg("삭제하시겠습니까?");
-                  setModalType(true);
+                  handleModal("삭제", "삭제하시겠습니까 ?", true);
                 }}
               />
             </div>
@@ -122,12 +132,14 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
             header={modalHeader}
             children={modalMsg}
             type={modalType}
-            confirm={() => delComment()}
+            confirm={() => {
+              delComment();
+            }}
           />
           <EditModal
             open={openEditModal}
             close={closeEditModal}
-            header={"수정"}
+            header={"댓글 수정"}
             contentVal={editModalContent}
             onChangeContent={setEditModalContent}
             type={true}

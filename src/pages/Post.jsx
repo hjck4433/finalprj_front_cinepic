@@ -148,7 +148,9 @@ const Post = () => {
           <div className="postMain">
             <div className="contents">
               <img src={boardData.image} alt="contentsImg" />
-              <div className="contentsText">{boardData.boardContent}</div>
+              <div className="contentsText">
+                <p>{boardData.boardContent}</p>
+              </div>
             </div>
           </div>
           {/* 댓글 부분 추가 */}

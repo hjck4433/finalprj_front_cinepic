@@ -29,8 +29,9 @@ const ModalStyle = styled.div`
     header {
       position: relative;
       padding: 16px 64px 16px 16px;
-      background-color: var(--VIOLET);
+      background-color: var(--RED);
       font-weight: 600;
+      color: var(--IVORY);
       button {
         position: absolute;
         top: 15px;
@@ -39,15 +40,14 @@ const ModalStyle = styled.div`
         font-size: 21px;
         font-weight: 700;
         text-align: center;
-        color: #999;
         background-color: transparent;
       }
     }
     div {
       padding: 16px;
-      border-bottom: 2px solid #dee2e6;
+      border-bottom: 1px solid var(--GREY);
       text-align: center;
-      color: #333;
+      color: var(--BLACK);
       white-space: pre-line;
       line-height: 1.4;
       input {
@@ -62,8 +62,8 @@ const ModalStyle = styled.div`
       text-align: right;
       button {
         padding: 6px 12px;
-        color: #fff;
-        background-color: var(--VIOLET);
+        color: var(--IVORY);
+        background-color: var(--RED);
         border-radius: 5px;
         font-size: 13px;
       }
@@ -122,7 +122,7 @@ const EditModal = (props) => {
               {type && (
                 <Button
                   onClick={() => {
-                    confirm();
+                    confirm(contentVal);
                   }}
                 >
                   확인
