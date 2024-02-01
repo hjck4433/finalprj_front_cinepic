@@ -116,18 +116,20 @@ const Theater = () => {
         place.latitude,
         place.longitude
       );
-
+      // 마커 핀 꽂힘
       const placeMarker = new window.kakao.maps.Marker({
         position: new window.kakao.maps.LatLng(place.latitude, place.longitude),
         image: markerImage, // 마커 이미지 설정
       });
       placeMarker.setMap(map); // 지도에 마커 표시
 
+      // 인포윈도우 표시
       const infowindow = new window.kakao.maps.InfoWindow({
         content: `<div style="width:200px; font-size:14px; padding: 10px; text-align: center;">${place.theaterName}</div>`, // 장소에 대한 정보 표시
         position: markerPosition,
       });
 
+      // 마우스 호버 때와 아닐 때 초기 값
       let isOpen = false;
 
       // 마커에 마우스오버 이벤트를 등록
