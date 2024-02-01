@@ -23,15 +23,15 @@ export const RadioBox = styled.div`
       font-weight: 600;
       color: white;
       display: flex;
-      justify-content: center;
       align-items: center;
       word-break: keep-all;
       margin-right: 20px;
       accent-color: var(--BLACK);
 
-      // 체크박스를 라벨 안으로 이동
+      // 체크박스 위치 조정
       input[type="radio"] {
         margin: 0 8px 0 0;
+        cursor: pointer;
       }
     }
   }
@@ -41,7 +41,6 @@ export const RadioBox = styled.div`
     .online {
       background-color: var(--ORANGE);
     }
-
     .offline {
       background-color: var(--GREY);
       color: var(--BLACK);
@@ -60,9 +59,11 @@ export const RadioBox = styled.div`
       align-items: center;
       accent-color: var(--BLACK);
 
-      // 체크박스를 라벨 안으로 이동
+      // 체크박스 위치 조정
       input[type="radio"] {
         margin: 0 8px 0 0;
+        cursor: pointer;
+        padding: 10px;
       }
     }
   }

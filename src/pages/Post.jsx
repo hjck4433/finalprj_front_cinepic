@@ -135,7 +135,11 @@ const Post = () => {
                       back="var(--DARKGREY)"
                       active={true}
                       clickEvt={() => {
-                        handleModal("삭제", "삭제하시겠습니까?", true);
+                        handleModal(
+                          "게시글 삭제",
+                          "정말 이 글을 삭제하시겠습니까?",
+                          true
+                        );
                       }}
                       width="100%"
                       height="30px"

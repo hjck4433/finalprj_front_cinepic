@@ -121,7 +121,11 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
                 back="var(--DARKGREY)"
                 active={true}
                 clickEvt={() => {
-                  handleModal("삭제", "삭제하시겠습니까 ?", true);
+                  handleModal(
+                    "댓글 삭제",
+                    "정말 이 댓글을 삭제하시겠습니까 ?",
+                    true
+                  );
                 }}
               />
             </div>

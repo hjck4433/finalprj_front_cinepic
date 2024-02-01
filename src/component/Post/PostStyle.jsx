@@ -12,6 +12,8 @@ export const PostComp = styled.section`
       display: flex;
       align-items: center;
       padding-bottom: 30px;
+      margin-top: 10px;
+      margin-bottom: 50px;
       position: relative;
 
       .profileIcon {
@@ -104,7 +106,7 @@ export const PostComp = styled.section`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 5%;
+      padding: 2%;
       .contents {
         width: 90%;
         img {
@@ -119,6 +121,7 @@ export const PostComp = styled.section`
           font-size: 1.2rem;
           font-weight: 300;
           white-space: pre-wrap;
+          margin-bottom: 150px;
           @media only screen and (max-width: 768px) {
             font-size: 1rem;
           }
@@ -129,13 +132,12 @@ export const PostComp = styled.section`
     .commentArea {
       margin-bottom: 50px;
       h3 {
-        color: var(--VIOLET);
         font-weight: 600;
-        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--GREY);
       }
       .commentList {
         .commentBox {
-          border-top: 1px solid var(--GREY);
           border-bottom: 1px solid var(--GREY);
           display: flex;
           justify-content: space-between;
@@ -225,6 +227,8 @@ export const PostComp = styled.section`
     .container {
       .postTop {
         padding-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 25px;
         .profileIcon {
           width: 25%;
         }
@@ -276,11 +280,9 @@ export const PostComp = styled.section`
         h3 {
           color: var(--VIOLET);
           font-weight: 600;
-          margin-bottom: 10px;
         }
         .commentList {
           .commentBox {
-            border-top: 1px solid var(--GREY);
             border-bottom: 1px solid var(--GREY);
             display: flex;
             justify-content: space-between;

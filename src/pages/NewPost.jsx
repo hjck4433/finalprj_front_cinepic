@@ -74,7 +74,7 @@ const NewPost = () => {
     };
 
     setCurrentDate(getCurrentDate());
-    getMemberDetail(); // 멤버 정보 가져옴
+    getMemberDetail();
   }, []);
 
   // 게시글 리스트로 이동
@@ -155,7 +155,11 @@ const NewPost = () => {
     );
     if (res.data) {
       console.log("저장 성공!");
-      handleModal("성공", "등록이 완료 되었습니다.", false);
+      handleModal(
+        "새 글 등록 성공",
+        selCategory + "(" + selGather + ")에 게시글 등록이 완료 되었습니다.",
+        false
+      );
     }
   };
 
