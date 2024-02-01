@@ -76,7 +76,11 @@ const Post = () => {
   const deletePost = async () => {
     const res = await BoardApi.deleteBoard(postId);
     if (res.data) {
-      navigate(-1);
+      if (boardData.categoryName === "씨네크루") {
+        navigate(`/board/gather`);
+      } else {
+        navigate(`/board/recap`);
+      }
     }
   };
   const delPost = useTokenAxios(deletePost);
