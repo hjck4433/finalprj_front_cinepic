@@ -47,5 +47,25 @@ const BoardCommentApi = {
       Common.tokenHeader()
     );
   },
+
+  // 댓글 페이지 수
+  totalBoardCommentPage: async (boardId) => {
+    console.log("댓글 총 페이지수 : " + boardId);
+    const page = 0;
+    const size = 5;
+    return await axios.get(
+      Common.CP_DOMAIN + `/comment/page/${boardId}?page=${page}&size=${size}`,
+      Common.tokenHeader()
+    );
+  },
+
+  // 댓글 페이지네이션
+  boardCommentPageList: async (boardId, page) => {
+    return await axios.get(
+      Common.CP_DOMAIN +
+        `/comment/page/list/${boardId}?page=${page - 1}&size=5`,
+      Common.tokenHeader()
+    );
+  },
 };
 export default BoardCommentApi;
