@@ -44,8 +44,8 @@ const Preference = () => {
     if (inputDirector.trim() === "") {
       console.log("감독 이름이 비어있습니다.");
       handleModal(
-        "이름 없음",
-        "감독 이름이 비었습니다. \n 이름을 입력해 주세요.",
+        "입력값 없음",
+        "입력값이 없습니다. \n 이름을 입력해 주세요.",
         false
       );
       return;
@@ -93,8 +93,8 @@ const Preference = () => {
     if (inputActor.trim() === "") {
       console.log("배우 이름이 비어있습니다.");
       handleModal(
-        "이름 없음",
-        "배우 이름이 비었습니다. \n 이름을 입력해 주세요.",
+        "입력값 없음",
+        "입력값이 없습니다. \n 이름을 입력해 주세요.",
         false
       );
       return;
