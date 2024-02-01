@@ -58,6 +58,7 @@ const BoardCommentList = ({ id, userAlias }) => {
                 key={boardComment.boardCommentId}
                 userAlias={userAlias}
                 boardComment={boardComment}
+                fetchCommentList={fetchCommentList}
               />
             ))}
         </div>

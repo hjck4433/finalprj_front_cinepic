@@ -127,7 +127,6 @@ export const PostComp = styled.section`
     }
     // 댓글 리스트 부분
     .commentArea {
-      outline: 1px solid blue;
       margin-bottom: 50px;
       h3 {
         color: var(--VIOLET);
@@ -135,7 +134,6 @@ export const PostComp = styled.section`
         margin-bottom: 10px;
       }
       .commentList {
-        outline: 1px solid red;
         .commentBox {
           border-top: 1px solid var(--GREY);
           border-bottom: 1px solid var(--GREY);
