@@ -1,11 +1,18 @@
-import MovieBannerComp from "../component/MovieSearch/MovieBanner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import MovieBanner from "../component/MovieSearch/MovieBanner";
+import MovieList from "../component/MovieSearch/MovieList";
 
 const MovieSearch = () => {
+  const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    console.log("검색 키워드 : " + keyword);
+  }, [keyword]);
+
   return (
     <>
-      <MovieBannerComp />
-      <div className="container"></div>
+      <MovieBanner setKeyword={setKeyword} />
+      <MovieList />
     </>
   );
 };

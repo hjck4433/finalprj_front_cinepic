@@ -21,7 +21,7 @@ const BookmarkComp = styled.div`
     .BookmarkAround {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.3);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -30,7 +30,7 @@ const BookmarkComp = styled.div`
       .heart {
         font-size: 1.3rem;
         color: var(--RED);
-        opacity: 0.2;
+        opacity: 0.6;
         position: relative;
         z-index: 101;
         &.marked {

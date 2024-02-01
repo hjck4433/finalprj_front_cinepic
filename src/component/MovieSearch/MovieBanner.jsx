@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import movieSearchBanner from "../../images/movieSearch.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -75,7 +76,16 @@ const SearchComp = styled.section`
   }
 `;
 
-const MovieBanner = () => {
+const MovieBanner = ({ setKeyword }) => {
+  const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    console.log("검색어 변화 : " + searchInput);
+  }, [searchInput]);
+  useEffect(() => {
+    console.log("렌더링!");
+  }, []);
+
   return (
     <>
       <MovieBannerComp>
@@ -95,15 +105,24 @@ const MovieBanner = () => {
               <input
                 type="text"
                 placeholder="검색어를 입력해주세요."
-                onChange={() => {}}
+                value={searchInput}
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                }}
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault(); // 기본 Enter 행동 방지
+                    setKeyword(searchInput);
                   }
                 }}
               />
               <div className="search_icon">
-                <FontAwesomeIcon icon={faSearch} onClick={() => {}} />
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  onClick={() => {
+                    setKeyword(searchInput);
+                  }}
+                />
               </div>
             </div>
           </div>
