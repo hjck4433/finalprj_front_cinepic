@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faPen, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState } from "react";
 
 const ComtComp = styled.div`
   padding-bottom: 5%;
@@ -40,14 +41,16 @@ const ComtComp = styled.div`
       top: 16px;
       right: 18px;
       .modify,
-      .close {
+      .delete,
+      .check {
         transition: all 0.5s;
       }
-      .modify:hover {
+      .modify:hover,
+      .check:hover {
         cursor: pointer;
         color: var(--ORANGE);
       }
-      .close:hover {
+      .delete:hover {
         cursor: pointer;
         color: var(--BLACK);
       }
@@ -55,12 +58,32 @@ const ComtComp = styled.div`
     .select_box {
       padding: 16px;
       min-width: 180px;
-      span:nth-child(1) {
-        margin: 0 40% 0 12%;
+      line-height: 36px;
+
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      label {
+        select {
+          font-size: 0.9em;
+          border-style: none;
+        }
+        select[disabled] {
+          /* 화살표를 없애는 스타일 */
+          -webkit-appearance: none; /* Safari 및 Chrome 등 Webkit 기반 브라우저에서 사용 */
+          -moz-appearance: none; /* Firefox에서 사용 */
+          appearance: none; /* 일반적인 경우에 적용 */
+          color: var(--BLACK);
+          font-size: 1.1em;
+        }
       }
-      span:nth-child(2) {
+      .num {
         font-size: 1.5em;
         font-weight: 900;
+        select[disabled] {
+          font-size: 1.1em;
+          font-weight: 700;
+        }
       }
     }
     .bar {
@@ -70,8 +93,25 @@ const ComtComp = styled.div`
     }
     .comment {
       width: 100%;
-      margin: 40px 20px;
+      /* margin: 40px 20px; */
       line-height: 26px;
+      height: auto;
+      margin: 20px;
+      border: none;
+
+      resize: none;
+      font-size: 1em;
+      font-family: "Noto Sans KR", sans-serif;
+      &:focus {
+        outline: none;
+      }
+    }
+    .P_comment {
+      width: 100%;
+      display: inline;
+      line-height: 26px;
+      font-size: 1em;
+      margin: 40px 20px;
     }
   }
   @media only screen and (max-width: 768px) {
@@ -92,16 +132,17 @@ const ComtComp = styled.div`
         .modify {
           font-size: 16px;
         }
-        .close {
+        .delete {
           font-size: 18px;
         }
       }
       .select_box {
-        text-align: left;
-        padding: 5px 5px 15px;
-        span:nth-child(1) {
-          margin: 0;
-          margin-right: 35px;
+        justify-content: flex-start;
+        label {
+          select:nth-child(1) {
+          }
+        }
+        .num {
         }
       }
       .bar {
@@ -132,7 +173,24 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const Comt = ({ comt, userAlias }) => {
+const Comt = (props) => {
+  const {
+    open,
+    close,
+    type,
+    postImage,
+    moviePostId,
+    postAlias,
+    postTitle,
+    onChangePostTitle,
+    postContent,
+    onChangePostContent,
+    handleModal,
+    comt,
+    userAlias,
+  } = props;
+  const [isRevice, setIsRevice] = useState(false);
+
   return (
     <>
       <ComtComp>
@@ -146,24 +204,91 @@ const Comt = ({ comt, userAlias }) => {
         <div className="input_box">
           {userAlias && userAlias === comt.alias && (
             <div className="icon_box">
-              <FontAwesomeIcon
-                icon={faPen}
-                className="modify"
-                onClick={() => {}}
-              />
+              {isRevice ? (
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="check"
+                  onClick={() => {
+                    setIsRevice(false);
+                  }}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faPen}
+                  className="modify"
+                  onClick={() => {
+                    setIsRevice(true);
+                  }}
+                />
+              )}
+
               <FontAwesomeIcon
                 icon={faXmark}
-                className="close"
-                onClick={() => {}}
+                className="delete"
+                onClick={() => {
+                  handleModal("삭제", "삭제하시겠습니까?", true);
+                }}
               />
             </div>
           )}
           <div className="select_box">
-            <span>{comt.ratingField}</span>
-            <span>{comt.ratingNum}</span>
+            {/* <span>{comt.ratingField}</span>
+            <span>{comt.ratingNum}</span> */}
+
+            <label htmlFor="field">
+              <select
+                name="rating_field"
+                id="field"
+                size={1}
+                value={comt.ratingField}
+                disabled={isRevice ? false : true}
+              >
+                <option value="연출" defaultValue>
+                  연출
+                </option>
+                <option value="배우">배우</option>
+                <option value="OST">OST</option>
+                <option value="영상미">영상미</option>
+                <option value="스토리">스토리</option>
+              </select>
+            </label>
+
+            <label htmlFor="num" className="num">
+              <select
+                name="rating_num"
+                id="num"
+                size={1}
+                value={comt.ratingNum}
+                disabled={isRevice ? false : true}
+              >
+                <option value="1" defaultValue>
+                  1
+                </option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </label>
           </div>
+
           <div className="bar"></div>
-          <p className="comment">{comt.ratingText}</p>
+
+          {isRevice ? (
+            <textarea
+              className="comment"
+              placeholder="관람평을 입력해주세요"
+              value={comt.ratingText}
+              disabled={false}
+            ></textarea>
+          ) : (
+            <p className="P_comment">{comt.ratingText}</p>
+          )}
         </div>
       </ComtComp>
     </>

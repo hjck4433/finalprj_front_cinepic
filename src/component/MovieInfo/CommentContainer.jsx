@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
 import Modal from "../../util/Modal";
+import PaginationUtil from "../../util/Pagination/Pagination";
 
 const CommentContainerComp = styled.section`
   .container {
@@ -38,6 +39,10 @@ const CommentContainer = ({ userAlias }) => {
     setModalType(type);
     setModalConfirm(num);
   };
+
+  // 페이지네이션 관련
+  const [totalPage, setTotalPage] = useState(5);
+  const [page, setPage] = useState(1);
 
   const commentData = [
     {
@@ -107,9 +112,21 @@ const CommentContainer = ({ userAlias }) => {
           <CommentWrite userAlias={userAlias} handleModal={handleModal} />
           <div className="comment_box">
             {commentData.map((comment) => (
-              <Comt comt={comment} userAlias={userAlias} key={comment.postId} />
+              <Comt
+                comt={comment}
+                userAlias={userAlias}
+                key={comment.postId}
+                handleModal={handleModal}
+              />
             ))}
           </div>
+
+          <PaginationUtil
+            totalPage={totalPage}
+            limit={5}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       </CommentContainerComp>
       <Modal
