@@ -50,6 +50,13 @@ const Preference = () => {
       } else {
         // 중복된 경우에 대한 처리
         console.log("이미 추가된 감독입니다.");
+        // 검색 결과가 중복일 경우 모달 열기
+        handleModal(
+          "이름 중복",
+          "같은 이름이 이미 있습니다 \n 다른 이름을 검색어를 시도해보세요.",
+          false
+        );
+        setInputDirector("");
       }
     }
   };
@@ -82,6 +89,13 @@ const Preference = () => {
       } else {
         // 중복된 경우에 대한 처리
         console.log("이미 추가된 배우입니다.");
+        // 검색 결과가 중복일 경우 모달 열기
+        handleModal(
+          "이름 중복",
+          "같은 이름이 이미 있습니다 \n 다른 이름을 검색어를 시도해보세요.",
+          false
+        );
+        setInputActor("");
       }
     }
   };
@@ -281,8 +295,7 @@ const Preference = () => {
                             <button
                               onClick={() => {
                                 deleteDirector(index);
-                              }}
-                            >
+                              }}>
                               <FontAwesomeIcon icon={faTimes} />
                             </button>
                           </span>
@@ -323,8 +336,7 @@ const Preference = () => {
                               <button
                                 onClick={() => {
                                   deleteActor(index);
-                                }}
-                              >
+                                }}>
                                 <FontAwesomeIcon icon={faTimes} />
                               </button>
                             </span>
