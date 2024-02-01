@@ -5,7 +5,7 @@ const TabPostComp = styled.div`
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 4px 5px 10px rgb(0, 0, 0, 0.2);
+  box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s;
   &:hover {

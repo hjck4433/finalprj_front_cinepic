@@ -127,6 +127,7 @@ const TabPostSlide = ({ userAlias }) => {
   const [modalMsg, setModalMsg] = useState("");
   const [modalHeader, setModalHeader] = useState("");
   const [modalType, setModalType] = useState(null);
+  const [modalConfirm, setModalConfirm] = useState(null);
 
   const closeModal = (num) => {
     setModalOpen(false);
@@ -137,6 +138,7 @@ const TabPostSlide = ({ userAlias }) => {
     setModalHeader(header);
     setModalMsg(msg);
     setModalType(type);
+    setModalConfirm(num);
   };
 
   // POST MODAL
@@ -261,6 +263,9 @@ const TabPostSlide = ({ userAlias }) => {
   //   console.log("postImage : " + postImage);
   // }, [postImage]);
 
+  //삭제함수
+  // 삭제 성공 후 모달 두개 클로즈 (내용 모달 + 확인 모달)
+
   return (
     <>
       <PostSlide>
@@ -280,7 +285,8 @@ const TabPostSlide = ({ userAlias }) => {
                   : handleModal(
                       "로그인",
                       "로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?",
-                      true
+                      true,
+                      0
                     );
               }}
             />
@@ -336,7 +342,13 @@ const TabPostSlide = ({ userAlias }) => {
         children={modalMsg}
         type={modalType}
         confirm={() => {
-          navigate("/login");
+          if (modalConfirm === 0) {
+            navigate("/login");
+          } else {
+            closePostModal();
+            closeModal();
+            // 삭제함수 부르기
+          }
         }}
       />
       <TabPostModal
@@ -350,6 +362,7 @@ const TabPostSlide = ({ userAlias }) => {
         onChangePostTitle={changeTitleInput}
         postContent={postContent}
         onChangePostContent={changeContentInput}
+        handleModal={handleModal}
       />
     </>
   );

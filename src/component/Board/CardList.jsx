@@ -30,6 +30,7 @@ const CardListComp = styled.section`
             position: absolute;
             top: 1px;
             left: -11px;
+            cursor: default;
           }
         }
       }

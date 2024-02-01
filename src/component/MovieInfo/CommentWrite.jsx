@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Button from "../../util/Button";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserStore";
 
 const CommentWriteComp = styled.div`
   margin-bottom: 5%;
@@ -51,7 +53,6 @@ const CommentWriteComp = styled.div`
     }
     textarea {
       width: calc(100% - (180px + (20px + 20px)));
-      height: 80px;
       margin: 20px;
       border: none;
       resize: none;
@@ -116,7 +117,10 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const CommentWrite = ({ userAlias }) => {
+const CommentWrite = ({ userAlias, handleModal }) => {
+  const context = useContext(UserContext);
+  const { loginStatus } = context;
+
   const comtWriteData = {
     postId: 1,
     movieId: 123,
@@ -131,7 +135,18 @@ const CommentWrite = ({ userAlias }) => {
 
   return (
     <>
-      <CommentWriteComp>
+      <CommentWriteComp
+        onClick={() => {
+          console.log("click!");
+          !loginStatus &&
+            handleModal(
+              "로그인",
+              "로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?",
+              true,
+              0
+            );
+        }}
+      >
         <div className="user_box">
           <div className="img_box">
             <ComtImg $comtImg={comtWriteData.image}></ComtImg>

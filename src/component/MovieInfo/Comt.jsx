@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
 
 const ComtComp = styled.div`
   padding-bottom: 5%;
@@ -7,7 +9,7 @@ const ComtComp = styled.div`
   .user_box {
     width: 120px;
     text-align: center;
-    padding: 10px;
+    padding: 22px 10px;
     .img_box {
       width: 70%;
       padding-bottom: 70%;
@@ -26,6 +28,30 @@ const ComtComp = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.1em;
+
+    position: relative;
+    .icon_box {
+      display: flex;
+      gap: 16px;
+      color: var(--GREY);
+      opacity: 0.8;
+
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      .modify,
+      .close {
+        transition: all 0.5s;
+      }
+      .modify:hover {
+        cursor: pointer;
+        color: var(--ORANGE);
+      }
+      .close:hover {
+        cursor: pointer;
+        color: var(--BLACK);
+      }
+    }
     .select_box {
       padding: 16px;
       min-width: 180px;
@@ -44,7 +70,8 @@ const ComtComp = styled.div`
     }
     .comment {
       width: 100%;
-      margin: 20px;
+      margin: 40px 20px;
+      line-height: 26px;
     }
   }
   @media only screen and (max-width: 768px) {
@@ -59,9 +86,19 @@ const ComtComp = styled.div`
       display: block;
       padding: 2%;
       text-align: right;
+      .icon_box {
+        top: 20px;
+        right: 18px;
+        .modify {
+          font-size: 16px;
+        }
+        .close {
+          font-size: 18px;
+        }
+      }
       .select_box {
-        text-align: right;
-        padding: 1% 2% 4% 2%;
+        text-align: left;
+        padding: 5px 5px 15px;
         span:nth-child(1) {
           margin: 0;
           margin-right: 35px;
@@ -107,6 +144,20 @@ const Comt = ({ comt, userAlias }) => {
         </div>
 
         <div className="input_box">
+          {userAlias && userAlias === comt.alias && (
+            <div className="icon_box">
+              <FontAwesomeIcon
+                icon={faPen}
+                className="modify"
+                onClick={() => {}}
+              />
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="close"
+                onClick={() => {}}
+              />
+            </div>
+          )}
           <div className="select_box">
             <span>{comt.ratingField}</span>
             <span>{comt.ratingNum}</span>

@@ -12,7 +12,7 @@ const PostModalComp = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 999999;
+    z-index: 996;
     background-color: rgba(0, 0, 0, 0.6);
   }
   .openModal {
@@ -200,6 +200,7 @@ const TabPostModal = (props) => {
     onChangePostTitle,
     postContent,
     onChangePostContent,
+    handleModal,
   } = props;
 
   useEffect(() => {
@@ -316,7 +317,7 @@ const TabPostModal = (props) => {
                   <Button
                     className="delButton"
                     clickEvt={() => {
-                      close();
+                      handleModal("삭제", "삭제하시겠습니까?", true, 1);
                     }}
                     active={true}
                     children="삭제"
