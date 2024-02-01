@@ -45,6 +45,7 @@ const NewPost = () => {
     }
   };
 
+  // 제목과 내용, 필수사항
   const [inputTitle, setInputTitle] = useState("");
   const [inputContents, setInputContents] = useState("");
   const [isTitle, setIsTitle] = useState("");

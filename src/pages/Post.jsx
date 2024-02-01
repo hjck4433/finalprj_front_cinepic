@@ -26,25 +26,22 @@ const Post = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const handleModal = (header, msg, type) => {
-    setModalOpen(true);
-    setModalHeader(header);
-    setModalMsg(msg);
-    setModalType(type);
-  };
 
   const clickBtn = (num) => {
     switch (num) {
       case 1:
+        // 게시글 수정
         navigate(`/board/post/revise/${postId}`);
         break;
       case 2:
+        // 목록보기
         navigate(-1);
         break;
       default:
     }
   };
 
+  // 게시글 상세 Api
   const fetchBoardData = async () => {
     console.log("API 요청 전");
     const res = await BoardApi.boardDetail(postId);
@@ -65,14 +62,25 @@ const Post = () => {
   };
   const getPostDetail = useTokenAxios(fetchPostDetail);
 
+  // 멤버정보 Api
   const fetchUserDetail = async () => {
     const res = await MemberApi.getMemberDetail();
     if (res.data !== null) {
+      // 글쓴이의 닉네임
       setUserAlias(res.data.alias);
     }
   };
   const getUserDetail = useTokenAxios(fetchUserDetail);
 
+  // 게시글 삭제
+  const handleModal = (header, msg, type) => {
+    setModalOpen(true);
+    setModalHeader(header);
+    setModalMsg(msg);
+    setModalType(type);
+  };
+
+  // 게시글 삭제 Api 및 삭제 후 페이지 이동
   const deletePost = async () => {
     const res = await BoardApi.deleteBoard(postId);
     if (res.data) {
@@ -85,6 +93,7 @@ const Post = () => {
   };
   const delPost = useTokenAxios(deletePost);
 
+  // 게시글 내용과 멤버정보 가져오기
   useEffect(() => {
     getPostDetail();
     getUserDetail();
@@ -96,6 +105,7 @@ const Post = () => {
           <div className="postTop">
             <div className="profileIcon">
               <div className="profileImage">
+                {/* profileImg는 기본 이미지 */}
                 <img
                   src={
                     boardData && boardData.memberImage
@@ -161,8 +171,9 @@ const Post = () => {
               </div>
             </div>
           </div>
-          {/* 댓글 부분 추가 */}
+          {/* 댓글 컴포넌트 */}
           <BoardCommentList id={postId} userAlias={userAlias} />
+          {/* 목록보기 버튼 */}
           <div className="goToListBtn">
             <Button
               className="listBtn"
