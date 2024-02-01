@@ -19,18 +19,26 @@ const ImgComp = styled.div`
 
 const CinePick = () => {
   const navigate = useNavigate();
-  const [genre, setGenre] = useState(""); // 장르 상태
-  const [movieData, setMovieData] = useState([]);
+  const [genre, setGenre] = useState(""); // 선택 장르 상태
+  const [movieData, setMovieData] = useState([]); // 영화 데이터 상태
 
-  // 로그인 상태
+  // 유저 컨텍스트에서 로그인 상태 가져오기
   const context = useContext(UserContext);
   const { loginStatus } = context;
 
   useEffect(() => {
-    const todayGenre = getGenreByDay(); // 요일에 해당하는 장르 가져오기
-    setGenre(todayGenre);
-  }, []);
+    if (loginStatus) {
+      // 로그인 상태일때 실행할 작업
+    } else {
+      // 비로그인 상태일 때 실행할 작업
+      if (genre !== "") {
+        // 장르가 빈문자열이 아닐경우
+        getGenreRecs(genre); // 선택 장르에 대한 추천 영화 가져오기
+      }
+    }
+  }, [loginStatus, genre]);
 
+  // 선택 장르의 추천 영화 가져오기
   const getGenreRecs = async (genre) => {
     const res = await PreferApi.getRecsMovies(genre);
     if (res.data !== null) {
@@ -38,14 +46,11 @@ const CinePick = () => {
     }
   };
 
+  // 요일 - 장르별 영화 추천
   useEffect(() => {
-    if (loginStatus) {
-    } else {
-      if (genre !== "") {
-        getGenreRecs(genre);
-      }
-    }
-  }, [loginStatus, genre]);
+    const todayGenre = getGenreByDay(); // 요일에 해당하는 장르 가져오기
+    setGenre(todayGenre);
+  }, []);
 
   const getGenreByDay = () => {
     const today = new Date().getDay(); // 현재 요일 가져오기(getDay)
@@ -70,11 +75,13 @@ const CinePick = () => {
     }
   };
 
+  // 영화 데이터 매핑, 영화 카드 정보 생성
   const recsList = movieData.map((item) => {
     const key = Object.keys(item)[0]; //첫번째 키를 가져옴
     return item[key];
   });
 
+  //영화의 상세 페이지로 이동
   const toMovie = (movieId) => {
     navigate(`/moviesearch/${movieId}`);
   };
@@ -93,7 +100,7 @@ const CinePick = () => {
                   className="movieCard"
                   onClick={() => {
                     movieData &&
-                      movieData.length > 0 &&
+                      movieData.length > 0 && //movieData가 비어있지 않고, 데이터가 존재할 때에만 실행
                       toMovie(movieData[0].recs1.movieId);
                   }}
                 >
