@@ -40,6 +40,16 @@ const Preference = () => {
   // 감독 추가
   const addDirector = () => {
     console.log("addDirector 함수가 호출되었습니다.");
+    // inputDirector이 비어있는지 확인
+    if (inputDirector.trim() === "") {
+      console.log("감독 이름이 비어있습니다.");
+      handleModal(
+        "이름 없음",
+        "감독 이름이 비었습니다. \n 이름을 입력해 주세요.",
+        false
+      );
+      return;
+    }
     if (directorList.length < maxDirectors) {
       // 중복 검사
       if (!directorList.includes(inputDirector)) {
@@ -79,6 +89,17 @@ const Preference = () => {
   // 배우 추가
   const addActor = () => {
     console.log("addActor 함수가 호출되었습니다.");
+    // inputActor이 비어있는지 확인
+    if (inputActor.trim() === "") {
+      console.log("배우 이름이 비어있습니다.");
+      handleModal(
+        "이름 없음",
+        "배우 이름이 비었습니다. \n 이름을 입력해 주세요.",
+        false
+      );
+      return;
+    }
+
     if (actorList.length < maxActors) {
       // 중복 검사
       if (!actorList.includes(inputActor)) {
