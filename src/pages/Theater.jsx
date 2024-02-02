@@ -5,6 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import TheaterApi from "../api/TheaterApi";
 import TheaterBannerComp from "../component/Theater/theaterBanner";
 import Modal from "../util/Modal";
+import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
@@ -184,7 +185,12 @@ const Theater = () => {
         {/* 영화관 배너 포스터 */}
         <TheaterBannerComp />
         <div className="container">
-          <h2>| 영화관 지도 검색</h2>
+          <h2>
+            <div className="titleName">
+              <FontAwesomeIcon icon={faMapLocationDot} />
+            </div>
+            영화관 지도 검색
+          </h2>
           <div className="mapContainer" ref={mapRef}></div>
           <div className="searchContainer">
             <div className="inputWapper">
@@ -225,7 +231,7 @@ const Theater = () => {
               {/* CGV 청주(서문) */}
               <h3>{selectedPlace.theaterName}</h3>
               <div className="basicInfo1">
-                <h3>| 기본정보</h3>
+                <h3>기본정보</h3>
                 <div className="content1">
                   <div>
                     <span className="title">상영관 </span>
@@ -233,7 +239,7 @@ const Theater = () => {
                   </div>
                   <div>
                     <span className="title">주소 </span>
-                    <span>{selectedPlace.theaterAddr}</span>
+                    <span className="address">{selectedPlace.theaterAddr}</span>
                   </div>
                   <div>
                     <span className="title">전화번호 </span>
@@ -247,38 +253,42 @@ const Theater = () => {
                 </div>
               </div>
               <div className="basicInfo2">
-                <h3>| 스크린관 정보</h3>
+                <h3>스크린관 정보</h3>
                 <div className="content2">
                   <div>
                     <span className="title">총 스크린 수 </span>
-                    <span>{selectedPlace.screens}개</span>
+                    <span className="element">{selectedPlace.screens}개</span>
                   </div>
                   <div>
                     <span className="title">특별관 운영 여부 </span>
-                    <span>
+                    <span className="element">
                       {selectedPlace.isSpecialScreen == 1 ? "있음" : "없음"}
                       {/* 1이면 있음, 0 이면 없음 표시 */}
                     </span>
                   </div>
                   <div>
                     <span className="title">필름 상영관 수 </span>
-                    <span>{selectedPlace.screenFilm}개</span>
+                    <span className="element">
+                      {selectedPlace.screenFilm}개
+                    </span>
                   </div>
                   <div>
                     <span className="title"> 2D 상영관 수 </span>
-                    <span>{selectedPlace.screen2D}개</span>
+                    <span className="element">{selectedPlace.screen2D}개</span>
                   </div>
                   <div>
                     <span className="title">3D 상영관 수 </span>
-                    <span>{selectedPlace.screen3D}개</span>
+                    <span className="element"> {selectedPlace.screen3D}개</span>
                   </div>
                   <div>
                     <span className="title">4D 상영관 수 </span>
-                    <span>{selectedPlace.screen4D}개</span>
+                    <span className="element">{selectedPlace.screen4D}개</span>
                   </div>
                   <div>
                     <span className="title"> IMAX 상영관 수 </span>
-                    <span>{selectedPlace.screenImax}개</span>
+                    <span className="element">
+                      {selectedPlace.screenImax}개
+                    </span>
                   </div>
                 </div>
               </div>
