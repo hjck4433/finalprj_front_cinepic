@@ -178,7 +178,7 @@ const NewPost = () => {
               <h3>주제 선택</h3>
               <RadioBox>
                 <div className="themeSelectBtn">
-                  <label className="cineCrew" htmlFor="crewBtn1">
+                  <label className="cineCrew" htmlFor="씨네크루">
                     <input
                       type="radio"
                       id="씨네크루"
@@ -188,7 +188,7 @@ const NewPost = () => {
                     />
                     씨네크루
                   </label>
-                  <label className="postCrew" htmlFor="crewBtn2">
+                  <label className="postCrew" htmlFor="크루후기">
                     <input
                       type="radio"
                       id="크루후기"
@@ -205,7 +205,7 @@ const NewPost = () => {
               <h3>모임 유형</h3>
               <RadioBox>
                 <div className="typeSelectBtn">
-                  <label className="online" htmlFor="typeBtn1">
+                  <label className="online" htmlFor="온라인">
                     <input
                       type="radio"
                       id="온라인"
@@ -215,7 +215,7 @@ const NewPost = () => {
                     />
                     온라인
                   </label>
-                  <label className="offline" htmlFor="typeBtn2">
+                  <label className="offline" htmlFor="오프라인">
                     <input
                       type="radio"
                       id="오프라인"

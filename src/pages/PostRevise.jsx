@@ -54,26 +54,14 @@ const PostRevise = () => {
   // 카테고리(주제선택) 및 모임형식(온/오프라인)
   const [selCategory, setSelCategory] = useState("");
   const [selGather, setSelGather] = useState("");
-  const [isCategory, setIsCategory] = useState("");
-  const [isGather, setIsGather] = useState("");
 
   const CategoryChange = (e) => {
     const currVal = e.target.value;
     setSelCategory(currVal);
-    if (currVal !== "") {
-      setIsCategory(true);
-    } else {
-      setIsCategory(false);
-    }
   };
   const GatherTypeChange = (e) => {
     const currVal = e.target.value;
     setSelGather(currVal);
-    if (currVal !== "") {
-      setIsGather(true);
-    } else {
-      setIsGather(false);
-    }
   };
 
   const [inputTitle, setInputTitle] = useState("");
@@ -175,7 +163,7 @@ const PostRevise = () => {
               <h3>주제 선택</h3>
               <RadioBox>
                 <div className="themeSelectBtn">
-                  <label className="cineCrew" htmlFor="crewBtn1">
+                  <label className="cineCrew" htmlFor="씨네크루">
                     <input
                       type="radio"
                       id="씨네크루"
@@ -186,7 +174,7 @@ const PostRevise = () => {
                     />
                     씨네크루
                   </label>
-                  <label className="postCrew" htmlFor="crewBtn2">
+                  <label className="postCrew" htmlFor="크루후기">
                     <input
                       type="radio"
                       id="크루후기"
@@ -204,7 +192,7 @@ const PostRevise = () => {
               <h3>모임 유형</h3>
               <RadioBox>
                 <div className="typeSelectBtn">
-                  <label className="online" htmlFor="typeBtn1">
+                  <label className="online" htmlFor="온라인">
                     <input
                       type="radio"
                       id="온라인"
@@ -215,7 +203,7 @@ const PostRevise = () => {
                     />
                     온라인
                   </label>
-                  <label className="offline" htmlFor="typeBtn2">
+                  <label className="offline" htmlFor="오프라인">
                     <input
                       type="radio"
                       id="오프라인"
@@ -273,7 +261,7 @@ const PostRevise = () => {
             <div className="buttonBox">
               <Button
                 children="수정하기"
-                active={isCategory && isGather && isTitle && isContents}
+                active={isTitle || isContents} // 둘중 하나만 바뀌어도 수정
                 front="var(--RED)"
                 back="var(--DARKRED)"
                 clickEvt={postUpdate}
