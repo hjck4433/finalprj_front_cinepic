@@ -142,7 +142,7 @@ const CinePickComp = styled.section`
           width: 60%;
           button {
             /* width: 150px; */
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 1.3em;
           }
         }
@@ -153,7 +153,7 @@ const CinePickComp = styled.section`
             .genre {
               font-size: 1.7em;
               /* border: 1px solid red; */
-              padding: 20px 0;
+              padding: 30px 0 20px 0;
             }
             .story {
               font-size: 1.5em;
@@ -181,18 +181,11 @@ const CinePickComp = styled.section`
         align-items: center;
         .onePickBox {
           width: 60%;
-          button {
-            width: 150px;
-            margin-top: 20px;
-          }
         }
         .rightSideBox {
           .textBox {
             padding: 0 0 0 0px;
-            .genre {
-              /* border: 1px solid blue; */
-              padding: 10px 0;
-            }
+
             .story {
               font-size: 1.4em;
               line-height: 1.6;
@@ -213,17 +206,16 @@ const CinePickComp = styled.section`
         .onePickBox {
           width: 70%;
           button {
-            width: 130px;
-            margin-top: 20px;
+            width: 150px;
             font-size: 1.1em;
           }
         }
         .rightSideBox {
-          /* text-align: center; */
           .textBox {
             .genre {
               /* border: 1px solid orange; */
-              font-size: 1.4em;
+              font-size: 1.5em;
+              /* padding: 20px 0; */
             }
             .story {
               font-size: 1.2em;
