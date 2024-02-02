@@ -89,7 +89,7 @@ const MidBannerComp = styled.section`
 const MidBanner = () => {
   const navigate = useNavigate();
   const toCineCrew = () => {
-    navigate("/board/:category");
+    navigate("/board/gather");
   };
   const toCineTalk = () => {
     navigate("/chatlist");

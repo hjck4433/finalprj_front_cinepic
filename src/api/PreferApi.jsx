@@ -46,6 +46,7 @@ const PreferApi = {
       Common.tokenHeader()
     );
   },
+  // 취향정보 여부
   getIsPrefer: async () => {
     return await axios.get(
       Common.CP_DOMAIN + "/prefer/isprefer",
@@ -58,8 +59,6 @@ const PreferApi = {
     console.log(genre);
     return await axios.get(Common.CP_DOMAIN + `/auth/recs/${genre}`);
   },
-
-  // 회원 영화 추천
 };
 
 export default PreferApi;

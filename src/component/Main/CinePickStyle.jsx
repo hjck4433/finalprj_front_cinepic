@@ -88,14 +88,14 @@ const CinePickComp = styled.section`
               font-size: 0.9em;
             }
             .story {
-              font-size: 1.1em;
+              font-size: 1.2em;
             }
           }
         }
         @media only screen and (max-width: 500px) {
           .textBox {
             padding: 5px 5px;
-
+            width: 400px;
             p {
               font-size: 0.9em;
             }

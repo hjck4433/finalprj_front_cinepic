@@ -127,6 +127,15 @@ const MemberApi = {
     );
   },
 
+  // 회원 맞춤 영화 추천
+  getPreferMovies: async (prefer) => {
+    console.log(prefer);
+    return await axios.get(
+      Common.CP_DOMAIN + `/member/recs`,
+      Common.tokenHeader()
+    );
+  },
+
   // admin - 월별 회원정보 조회
   getMonthlyData: async () => {
     return await axios.get(

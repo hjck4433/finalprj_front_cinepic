@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
 import PreferApi from "../../api/PreferApi";
+import MemberApi from "../../api/MemberApi";
 
 const ImgComp = styled.div`
   width: 100%;
@@ -24,11 +25,14 @@ const CinePick = () => {
 
   // 유저 컨텍스트에서 로그인 상태 가져오기
   const context = useContext(UserContext);
-  const { loginStatus } = context;
+  const { loginStatus, isPrefer } = context;
 
   useEffect(() => {
     if (loginStatus) {
       // 로그인 상태일때 실행할 작업
+      if (isPrefer) {
+        getPreferMovies();
+      }
     } else {
       // 비로그인 상태일 때 실행할 작업
       if (genre !== "") {
@@ -36,11 +40,19 @@ const CinePick = () => {
         getGenreRecs(genre); // 선택 장르에 대한 추천 영화 가져오기
       }
     }
-  }, [loginStatus, genre]);
+  }, [loginStatus, genre, isPrefer]);
 
   // 선택 장르의 추천 영화 가져오기
   const getGenreRecs = async (genre) => {
     const res = await PreferApi.getRecsMovies(genre);
+    if (res.data !== null) {
+      setMovieData(res.data);
+    }
+  };
+
+  // 회원 연결
+  const getPreferMovies = async (prefer) => {
+    const res = await MemberApi.getPreferMovies(prefer);
     if (res.data !== null) {
       setMovieData(res.data);
     }
@@ -131,7 +143,12 @@ const CinePick = () => {
               <div className="rightSideBox">
                 <div className="textBox">
                   <div className="genre">
-                    <p>#{genre}</p>
+                    <p>
+                      #
+                      {!loginStatus
+                        ? genre
+                        : movieData.length > 0 && movieData[0].recs1.movieTitle}
+                    </p>
                   </div>
                   <p className="story">
                     {movieData &&
