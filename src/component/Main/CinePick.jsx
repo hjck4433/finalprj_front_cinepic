@@ -29,7 +29,7 @@ const CinePick = () => {
 
   useEffect(() => {
     if (loginStatus) {
-      // 로그인 상태일때 실행할 작업
+      // 로그인 상태일때: 회원 맞춤 영화 추천
       if (isPrefer) {
         getPreferMovies();
       }
@@ -42,19 +42,23 @@ const CinePick = () => {
     }
   }, [loginStatus, genre, isPrefer]);
 
-  // 선택 장르의 추천 영화 가져오기
-  const getGenreRecs = async (genre) => {
-    const res = await PreferApi.getRecsMovies(genre);
-    if (res.data !== null) {
-      setMovieData(res.data);
-    }
-  };
-
   // 회원 연결
   const getPreferMovies = async (prefer) => {
     const res = await MemberApi.getPreferMovies(prefer);
     if (res.data !== null) {
       setMovieData(res.data);
+    }
+  };
+
+  // 장르별 추천 영화 가져오기
+  const getGenreRecs = async (genre) => {
+    try {
+      const res = await PreferApi.getRecsMovies(genre);
+      if (res.data !== null) {
+        setMovieData(res.data);
+      }
+    } catch (error) {
+      console.error("장르별 추천영화 가져오는 중 오류 발생:", error);
     }
   };
 

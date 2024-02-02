@@ -11,18 +11,11 @@ const CinePickComp = styled.section`
         span {
           font-weight: 600;
         }
-        @media only screen and (max-width: 768px) {
-          padding-left: 8%;
-          font-size: 1.9em;
-        }
-        @media only screen and (max-width: 520px) {
-          font-size: 1.5em;
-        }
       }
     }
     .pickMovieBox {
       width: 100%;
-      padding: 35px 35px 100px 35px;
+      padding: 35px 35px 100px;
       /* border: 1px solid blue; */
       display: flex;
       .onePickBox {
@@ -32,11 +25,6 @@ const CinePickComp = styled.section`
           display: block;
           margin: 0 auto;
           margin-top: 40px;
-        }
-        @media only screen and (max-width: 400px) {
-          button {
-            width: 150px;
-          }
         }
 
         .movieCard {
@@ -70,7 +58,6 @@ const CinePickComp = styled.section`
             font-size: 1.5em;
             font-weight: 600;
             padding: 10px 0;
-            margin-top: 10px;
           }
           p {
             color: var(--DARKGREY);
@@ -82,28 +69,7 @@ const CinePickComp = styled.section`
             margin-bottom: 20px;
           }
         }
-        @media only screen and (max-width: 900px) {
-          .textBox {
-            p {
-              font-size: 0.9em;
-            }
-            .story {
-              font-size: 1.2em;
-            }
-          }
-        }
-        @media only screen and (max-width: 500px) {
-          .textBox {
-            padding: 5px 5px;
-            width: 400px;
-            p {
-              font-size: 0.9em;
-            }
-            .story {
-              font-size: 1.1em;
-            }
-          }
-        }
+
         .otherMovieBox {
           display: flex;
           justify-content: space-between;
@@ -132,19 +98,90 @@ const CinePickComp = styled.section`
               z-index: 1;
             }
           }
-          @media only screen and (max-width: 735px) {
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 991px) {
+    .container {
+      .pickMovieBox {
+        .rightSideBox {
+          .textBox {
+            .genre {
+              font-size: 1.3em;
+              padding: 0;
+            }
+            .story {
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .container {
+      .cineTitle {
+        h3 {
+          padding-left: 8%;
+          font-size: 1.9em;
+        }
+      }
+      .pickMovieBox {
+        .onePickBox {
+          button {
+            width: 150px;
+            margin-top: 30px;
+          }
+        }
+        .rightSideBox {
+          .textBox {
+            padding: 0 40px;
+            .genre {
+              font-size: 1.4em;
+              border: 1px solid red;
+            }
+            .story {
+              font-size: 1.1em;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .container {
+      .pickMovieBox {
+        padding: 25px 25px 100px;
+        .onePickBox {
+          button {
+            width: 130px;
+            margin-top: 20px;
+          }
+        }
+        .rightSideBox {
+          .textBox {
+            padding: 0 0 0 30px;
+            .genre {
+              border: 1px solid blue;
+            }
+            .story {
+              font-size: 1.2em;
+            }
+          }
+          .otherMovieBox {
             display: none;
           }
         }
       }
-      @media only screen and (max-width: 735px) {
-        display: flex;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .container {
+      .pickMovieBox {
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        .onePickBox {
-          width: 60%;
-        }
       }
     }
   }
