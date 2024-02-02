@@ -16,7 +16,7 @@ const CommentContainerComp = styled.section`
   }
 `;
 
-const CommentContainer = ({ userAlias }) => {
+const CommentContainer = ({ movieId, userAlias }) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
   const navigate = useNavigate();
@@ -104,12 +104,17 @@ const CommentContainer = ({ userAlias }) => {
       commentRegDate: "2024-01-26T12:34:56Z",
     },
   ];
+
   return (
     <>
       <CommentContainerComp>
         <div className="container">
           <h4>관람평</h4>
-          <CommentWrite userAlias={userAlias} handleModal={handleModal} />
+          <CommentWrite
+            movieId={movieId}
+            userAlias={userAlias}
+            handleModal={handleModal}
+          />
           <div className="comment_box">
             {commentData.map((comment) => (
               <Comt

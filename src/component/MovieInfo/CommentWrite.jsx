@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Button from "../../util/Button";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserStore";
+import MovieDetailApi from "../../api/MovieDetailApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const CommentWriteComp = styled.div`
   margin-bottom: 5%;
@@ -117,9 +119,35 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const CommentWrite = ({ userAlias, handleModal }) => {
+const CommentWrite = ({ movieId, userAlias, handleModal }) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
+
+  const [field, setField] = useState("연출");
+  const [num, setNum] = useState("1");
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    console.log("영화아이디 : " + movieId);
+  }, []);
+
+  // 관람평 저장
+  const handleSubmitComment = async () => {
+    const res = await MovieDetailApi.saveMovieComment(
+      movieId,
+      field,
+      num,
+      text
+    );
+    console.log("관람평 저장 결과 : ", res.data);
+    if (res.data) {
+      setField("연출");
+      setNum("1");
+      setText("");
+      // getTotalPage();
+    }
+  };
+  const saveComment = useTokenAxios(handleSubmitComment);
 
   const comtWriteData = {
     postId: 1,
@@ -157,7 +185,15 @@ const CommentWrite = ({ userAlias, handleModal }) => {
         <div className="input_box">
           <div className="select_box">
             <label htmlFor="field">
-              <select name="rating_field" id="field" size={1}>
+              <select
+                name="rating_field"
+                id="field"
+                size={1}
+                value={field}
+                onChange={(e) => {
+                  setField(e.target.value);
+                }}
+              >
                 <option value="연출" defaultValue>
                   연출
                 </option>
@@ -169,10 +205,16 @@ const CommentWrite = ({ userAlias, handleModal }) => {
             </label>
 
             <label htmlFor="num">
-              <select name="rating_num" id="num" size={1}>
-                <option value="1" defaultValue>
-                  1
-                </option>
+              <select
+                name="rating_num"
+                id="num"
+                size={1}
+                value={num}
+                onChange={(e) => {
+                  setNum(e.target.value);
+                }}
+              >
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -189,6 +231,10 @@ const CommentWrite = ({ userAlias, handleModal }) => {
           <textarea
             className="comment"
             placeholder="관람평을 입력해주세요"
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
           ></textarea>
           <Button
             children="작성"
@@ -197,8 +243,8 @@ const CommentWrite = ({ userAlias, handleModal }) => {
             width="58px"
             height=""
             fontSize="1em"
-            active={true}
-            clickEvt={() => {}}
+            active={text.length > 0}
+            clickEvt={saveComment}
           />
         </div>
       </CommentWriteComp>
