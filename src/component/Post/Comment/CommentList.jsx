@@ -74,23 +74,29 @@ const BoardCommentList = ({ id, userAlias }) => {
     <>
       <div className="commentArea">
         <h3>댓글</h3>
-        <div className="commentList">
-          {commentData &&
-            commentData.map((boardComment) => (
-              <Comment
-                key={boardComment.boardCommentId}
-                userAlias={userAlias}
-                boardComment={boardComment}
-                fetchCommentList={getTotalPage}
-              />
-            ))}
-        </div>
-        <PaginationUtil
-          totalPage={totalPage}
-          limit={3}
-          page={page}
-          setPage={setPage}
-        />
+        {commentData && commentData.length > 0 ? (
+          <>
+            <div className="commentList">
+              {commentData.map((boardComment) => (
+                <Comment
+                  key={boardComment.boardCommentId}
+                  userAlias={userAlias}
+                  boardComment={boardComment}
+                  fetchCommentList={getTotalPage}
+                />
+              ))}
+            </div>
+            <PaginationUtil
+              totalPage={totalPage}
+              limit={3}
+              page={page}
+              setPage={setPage}
+            />
+          </>
+        ) : (
+          <p>등록된 댓글이 없습니다.</p>
+        )}
+
         <div className="textInputBox">
           <textarea
             type="text"

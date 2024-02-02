@@ -55,31 +55,21 @@ const PostRevise = () => {
   const [selCategory, setSelCategory] = useState("");
   const [selGather, setSelGather] = useState("");
 
-  const CategoryChange = (e) => {
-    const currVal = e.target.value;
-    setSelCategory(currVal);
+  const categoryChange = (e) => {
+    setSelCategory(e.target.value);
   };
-  const GatherTypeChange = (e) => {
-    const currVal = e.target.value;
-    setSelGather(currVal);
+  const gatherTypeChange = (e) => {
+    setSelGather(e.target.value);
   };
 
+  // 제목 및 내용
   const [inputTitle, setInputTitle] = useState("");
   const [inputContents, setInputContents] = useState("");
-  const [isTitle, setIsTitle] = useState("");
-  const [isContents, setIsContents] = useState("");
-
   const InputTitleChange = (e) => {
-    const currVal = e.target.value;
-    setInputTitle(currVal);
-    if (currVal.length > 0) setIsTitle(true);
-    else setIsTitle(false);
+    setInputTitle(e.target.value);
   };
   const InputContentsChange = (e) => {
-    const currVal = e.target.value;
-    setInputContents(currVal);
-    if (currVal.length > 0) setIsContents(true);
-    else setIsContents(false);
+    setInputContents(e.target.value);
   };
 
   // 이미지 업로드
@@ -125,6 +115,7 @@ const PostRevise = () => {
       url,
       inputContents
     );
+
     if (res.data) {
       console.log("저장 성공!");
       handleModal("성공", "수정이 완료되었습니다.", false);
@@ -169,7 +160,7 @@ const PostRevise = () => {
                       id="씨네크루"
                       value="씨네크루"
                       name="category"
-                      onChange={CategoryChange}
+                      onChange={categoryChange}
                       checked={selCategory === "씨네크루" ? "checked" : ""}
                     />
                     씨네크루
@@ -180,7 +171,7 @@ const PostRevise = () => {
                       id="크루후기"
                       value="크루후기"
                       name="category"
-                      onChange={CategoryChange}
+                      onChange={categoryChange}
                       checked={selCategory === "크루후기" ? "checked" : ""}
                     />
                     크루후기
@@ -198,7 +189,7 @@ const PostRevise = () => {
                       id="온라인"
                       value="온라인"
                       name="meetingSpot"
-                      onChange={GatherTypeChange}
+                      onChange={gatherTypeChange}
                       checked={selGather === "온라인" ? "checked" : ""}
                     />
                     온라인
@@ -209,7 +200,7 @@ const PostRevise = () => {
                       id="오프라인"
                       value="오프라인"
                       name="meetingSpot"
-                      onChange={GatherTypeChange}
+                      onChange={gatherTypeChange}
                       checked={selGather === "오프라인" ? "checked" : ""}
                     />
                     오프라인
@@ -261,7 +252,7 @@ const PostRevise = () => {
             <div className="buttonBox">
               <Button
                 children="수정하기"
-                active={isTitle || isContents} // 둘중 하나만 바뀌어도 수정
+                active={inputTitle !== "" && inputContents !== ""}
                 front="var(--RED)"
                 back="var(--DARKRED)"
                 clickEvt={postUpdate}
