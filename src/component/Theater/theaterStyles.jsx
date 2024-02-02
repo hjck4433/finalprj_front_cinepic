@@ -8,13 +8,6 @@ const TheaterComp = styled.section`
       padding-left: 10%;
       font-size: 1.6em;
       padding-top: 8.5%;
-      @media screen and (max-width: 650px) {
-        padding-left: 2%;
-      }
-      @media screen and (max-width: 400px) {
-        font-size: 1.9em;
-        margin-left: 7%;
-      }
     }
     // 지도 영역
     .mapContainer {
@@ -46,9 +39,6 @@ const TheaterComp = styled.section`
             border: none;
             outline: none;
             margin-right: 10px;
-            @media screen and (max-width: 840px) {
-              font-size: 0.7em;
-            }
           }
           // 아이콘
           svg {
@@ -76,9 +66,6 @@ const TheaterComp = styled.section`
         h3 {
           color: var(--RED);
           margin-bottom: 5%;
-          @media screen and (max-width: 840px) {
-            padding-bottom: 5px;
-          }
         }
         // 박스 안에 내용
         .content1 {
@@ -88,27 +75,12 @@ const TheaterComp = styled.section`
           div {
             display: flex;
             flex-direction: row;
-            @media screen and (max-width: 611px) {
-              font-size: 0.8em;
-            }
-            @media screen and (max-width: 440px) {
-              font-size: 0.6em;
-            }
             .title {
               display: inline-block;
               width: 100px;
               margin-right: 10px;
               position: relative;
               font-weight: 600;
-              @media screen and (max-width: 611px) {
-                margin-right: 0;
-              }
-              @media screen and (max-width: 440px) {
-                margin-right: -10px;
-              }
-              @media screen and (max-width: 366px) {
-                margin-right: -5px;
-              }
               &::after {
                 display: block;
                 content: "";
@@ -118,9 +90,6 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
-                @media screen and (max-width: 611px) {
-                  right: 20px;
-                }
               }
             }
             span {
@@ -153,13 +122,6 @@ const TheaterComp = styled.section`
               display: inline-block;
               position: relative;
               font-weight: 600;
-
-              @media screen and (max-width: 768px) {
-                margin-right: -10px;
-              }
-              @media screen and (max-width: 494px) {
-                font-size: 0.8em;
-              }
               &::after {
                 display: block;
                 content: "";
@@ -169,12 +131,6 @@ const TheaterComp = styled.section`
                 position: absolute;
                 top: 25%;
                 right: 0;
-                @media screen and (max-width: 768px) {
-                  left: 95px;
-                }
-                @media screen and (max-width: 494px) {
-                  left: 70px;
-                }
               }
             }
             span {
@@ -182,11 +138,106 @@ const TheaterComp = styled.section`
               width: 50px;
               margin-left: 20px;
               line-height: 2.5em;
-              @media screen and (max-width: 768px) {
-                margin-left: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .container {
+      // 정보박스 전체 영역
+      .infoContainer {
+        // 기본정보 박스 영역
+        .basicInfo1 {
+          // 기본정보 제목
+          h3 {
+            font-size: 1.5em;
+          }
+        }
+        // 스크린관 정보 박스 영역
+        .basicInfo2 {
+          // 스크린관 정보 제목
+          h3 {
+            font-size: 1.5em;
+          }
+          // 스크린관 정보 내용
+          .content2 {
+            grid-template-columns: 100%;
+            grid-template-rows: repeat(7, 14%);
+            gap: 3px;
+            padding: 30px 0 45px 12px;
+            div {
+              .title {
+                &::after {
+                  right: 20px;
+                }
+                span {
+                }
               }
-              @media screen and (max-width: 494px) {
-                font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .container {
+      // 제목
+      h2 {
+      }
+      // 지도 영역
+      .mapContainer {
+      }
+      // 검색바 감싸는 영역
+      .searchContainer {
+        .inputWapper {
+          // 검색창&돋보기 아이콘
+          .searchBox {
+            // 검색창
+            input {
+            }
+            // 아이콘
+            svg {
+            }
+          }
+        }
+      }
+      // 정보박스 전체 영역
+      .infoContainer {
+        // 상영관 이름
+        h3 {
+        }
+        // 기본정보 박스 영역
+        .basicInfo1 {
+          // 기본정보 제목
+          h3 {
+          }
+          // 박스 안에 내용
+          .content1 {
+            div {
+              .title {
+                &::after {
+                }
+              }
+              span {
+              }
+            }
+          }
+        }
+        // 스크린관 정보 박스 영역
+        .basicInfo2 {
+          // 스크린관 정보 제목
+          h3 {
+          }
+          // 스크린관 정보 내용
+          .content2 {
+            div {
+              .title {
+                &::after {
+                }
+              }
+              span {
               }
             }
           }
