@@ -1,12 +1,13 @@
 import Button from "../../../util/Button";
 import { useState } from "react";
 import BoardCommentApi from "../../../api/BoardCommentApi";
-import profileImg from "../../../images/profileImg.png";
 import useTokenAxios from "../../../hooks/useTokenAxios";
 import Modal from "../../../util/Modal";
 import EditModal from "./EditCommentModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
+const Comment = ({ boardComment, fetchCommentList, userAlias, memberInfo }) => {
   const dateTimeString = boardComment.commentRegDate;
   const toDate = new Date(dateTimeString);
   const regDate = toDate.toISOString().split("T")[0];
@@ -84,10 +85,11 @@ const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
       <div className="commentBox" key={boardComment.commentId}>
         <div className="iconArea">
           <div className="imgBox">
-            <img
-              src={boardComment.memberImage || profileImg}
-              alt="memberIcon"
-            />
+            {memberInfo && memberInfo.image ? (
+              <img src={memberInfo.image} alt="프로필이미지" />
+            ) : (
+              <FontAwesomeIcon icon={faUser} />
+            )}
           </div>
         </div>
         <div className="textBox">

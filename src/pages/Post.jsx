@@ -7,9 +7,10 @@ import MemberApi from "../api/MemberApi";
 import React, { useEffect, useState } from "react";
 import useTokenAxios from "../hooks/useTokenAxios";
 import Modal from "../util/Modal";
-import profileImg from "../images/profileImg.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const Post = () => {
+const Post = (memberInfo) => {
   const navigate = useNavigate();
   const [boardData, setBoardData] = useState("");
   const [userAlias, setUserAlias] = useState("");
@@ -105,15 +106,11 @@ const Post = () => {
           <div className="postTop">
             <div className="profileIcon">
               <div className="profileImage">
-                {/* profileImg는 기본 이미지 */}
-                <img
-                  src={
-                    boardData && boardData.memberImage
-                      ? boardData.memberImage
-                      : profileImg
-                  }
-                  alt="memberImage"
-                />
+                {memberInfo && memberInfo.image ? (
+                  <img src={memberInfo.image} alt="프로필이미지" />
+                ) : (
+                  <FontAwesomeIcon icon={faUser} />
+                )}
               </div>
             </div>
             <div className="postTopInfo">

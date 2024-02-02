@@ -32,6 +32,14 @@ export const PostComp = styled.section`
             height: 100%;
             position: absolute;
           }
+          svg {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            color: var(--DARKGREY);
+          }
         }
         p {
           color: var(--BLACK);
@@ -147,17 +155,27 @@ export const PostComp = styled.section`
           .iconArea {
             width: 10%;
             .imgBox {
+              background-color: var(--GREY);
               width: 100%;
               padding-bottom: 100%;
               position: relative;
               border-radius: 50%;
               overflow: hidden;
               img {
+                outline: 1px solid red;
+                top: 0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 position: absolute;
-                top: 0;
-                left: 0;
+              }
+              svg {
+                width: 80%;
+                height: 80%;
+                position: absolute;
+                top: 20%;
+                left: 10%;
+                color: var(--DARKGREY);
               }
             }
           }
