@@ -54,21 +54,44 @@ const PostRevise = () => {
   // 카테고리(주제선택) 및 모임형식(온/오프라인)
   const [selCategory, setSelCategory] = useState("");
   const [selGather, setSelGather] = useState("");
+  const [isCategory, setIsCategory] = useState("");
+  const [isGather, setIsGather] = useState("");
 
   const CategoryChange = (e) => {
-    setSelCategory(e.target.value);
+    const currVal = e.target.value;
+    setSelCategory(currVal);
+    if (currVal !== "") {
+      setIsCategory(true);
+    } else {
+      setIsCategory(false);
+    }
   };
   const GatherTypeChange = (e) => {
-    setSelGather(e.target.value);
+    const currVal = e.target.value;
+    setSelGather(currVal);
+    if (currVal !== "") {
+      setIsGather(true);
+    } else {
+      setIsGather(false);
+    }
   };
 
   const [inputTitle, setInputTitle] = useState("");
   const [inputContents, setInputContents] = useState("");
+  const [isTitle, setIsTitle] = useState("");
+  const [isContents, setIsContents] = useState("");
+
   const InputTitleChange = (e) => {
-    setInputTitle(e.target.value);
+    const currVal = e.target.value;
+    setInputTitle(currVal);
+    if (currVal.length > 0) setIsTitle(true);
+    else setIsTitle(false);
   };
   const InputContentsChange = (e) => {
-    setInputContents(e.target.value);
+    const currVal = e.target.value;
+    setInputContents(currVal);
+    if (currVal.length > 0) setIsContents(true);
+    else setIsContents(false);
   };
 
   // 이미지 업로드
@@ -250,7 +273,7 @@ const PostRevise = () => {
             <div className="buttonBox">
               <Button
                 children="수정하기"
-                active={true}
+                active={isCategory && isGather && isTitle && isContents}
                 front="var(--RED)"
                 back="var(--DARKRED)"
                 clickEvt={postUpdate}
