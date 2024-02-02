@@ -6,7 +6,7 @@ const CinePickComp = styled.section`
       h3 {
         font-size: 1.5rem;
         font-weight: 400;
-        padding: 100px 40px 40px 40px;
+        padding: 100px 40px 0px 40px;
 
         span {
           font-weight: 600;
@@ -15,7 +15,7 @@ const CinePickComp = styled.section`
     }
     .pickMovieBox {
       width: 100%;
-      padding: 35px 35px 100px;
+      padding: 40px 40px 100px;
       /* border: 1px solid blue; */
       display: flex;
       .onePickBox {
@@ -52,21 +52,20 @@ const CinePickComp = styled.section`
       .rightSideBox {
         width: 70%;
         .textBox {
-          padding: 5px 40px;
+          padding: 5px 0 0 50px;
 
           .genre {
             font-size: 1.5em;
             font-weight: 600;
-            padding: 10px 0;
           }
           p {
             color: var(--DARKGREY);
             margin-bottom: 10px;
           }
           .story {
-            line-height: 1.4;
+            line-height: 1.6;
             font-size: 1.2em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
           }
         }
 
@@ -75,7 +74,7 @@ const CinePickComp = styled.section`
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: 0 40px 100px 40px;
+          padding: 0 0 30px 40px;
 
           .movieCard {
             width: 28%;
@@ -104,16 +103,23 @@ const CinePickComp = styled.section`
   }
   @media only screen and (max-width: 991px) {
     .container {
+      .cineTitle {
+        h3 {
+          padding: 60px 20px 0px 20px;
+        }
+      }
       .pickMovieBox {
         .rightSideBox {
           .textBox {
             .genre {
               font-size: 1.3em;
-              padding: 0;
             }
             .story {
               font-size: 1em;
             }
+          }
+          .otherMovieBox {
+            padding: 0 0 20px 40px;
           }
         }
       }
@@ -125,49 +131,34 @@ const CinePickComp = styled.section`
         h3 {
           padding-left: 8%;
           font-size: 1.9em;
+          padding-bottom: 15px;
         }
       }
       .pickMovieBox {
+        padding: 25px 25px 60px;
+        flex-direction: column;
+        align-items: center;
         .onePickBox {
+          width: 60%;
           button {
-            width: 150px;
+            /* width: 150px; */
             margin-top: 30px;
+            font-size: 1.3em;
           }
         }
         .rightSideBox {
+          width: 80vw;
           .textBox {
-            padding: 0 40px;
+            padding: 0 0 0 0px;
             .genre {
-              font-size: 1.4em;
-              border: 1px solid red;
+              font-size: 1.7em;
+              /* border: 1px solid red; */
+              padding: 20px 0;
             }
             .story {
-              font-size: 1.1em;
+              font-size: 1.5em;
+              line-height: 1.6;
               margin-bottom: 10px;
-            }
-          }
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: 600px) {
-    .container {
-      .pickMovieBox {
-        padding: 25px 25px 100px;
-        .onePickBox {
-          button {
-            width: 130px;
-            margin-top: 20px;
-          }
-        }
-        .rightSideBox {
-          .textBox {
-            padding: 0 0 0 30px;
-            .genre {
-              border: 1px solid blue;
-            }
-            .story {
-              font-size: 1.2em;
             }
           }
           .otherMovieBox {
@@ -177,11 +168,69 @@ const CinePickComp = styled.section`
       }
     }
   }
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: 600px) {
     .container {
+      .cineTitle {
+        h3 {
+          padding-bottom: 10px;
+        }
+      }
       .pickMovieBox {
+        padding: 25px 25px 50px;
         flex-direction: column;
         align-items: center;
+        .onePickBox {
+          width: 60%;
+          button {
+            width: 150px;
+            margin-top: 20px;
+          }
+        }
+        .rightSideBox {
+          .textBox {
+            padding: 0 0 0 0px;
+            .genre {
+              /* border: 1px solid blue; */
+              padding: 10px 0;
+            }
+            .story {
+              font-size: 1.4em;
+              line-height: 1.6;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .container {
+      .cineTitle {
+        h3 {
+          font-size: 1.6em;
+        }
+      }
+      .pickMovieBox {
+        .onePickBox {
+          width: 70%;
+          button {
+            width: 130px;
+            margin-top: 20px;
+            font-size: 1.1em;
+          }
+        }
+        .rightSideBox {
+          /* text-align: center; */
+          .textBox {
+            .genre {
+              /* border: 1px solid orange; */
+              font-size: 1.4em;
+            }
+            .story {
+              font-size: 1.2em;
+              line-height: 1.6;
+            }
+          }
+        }
       }
     }
   }
