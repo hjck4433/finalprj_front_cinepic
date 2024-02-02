@@ -48,6 +48,17 @@ const Theater = () => {
     const kakaoMap = new window.kakao.maps.Map(container, options);
     setMap(kakaoMap);
 
+    // 맵에 컨트롤 추가
+    const zoomControl = new window.kakao.maps.ZoomControl();
+    kakaoMap.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
+
+    // 지도 & 스카이뷰 추가
+    const mapTypeControl = new window.kakao.maps.MapTypeControl();
+    kakaoMap.addControl(
+      mapTypeControl,
+      window.kakao.maps.ControlPosition.TOPRIGHT
+    );
+
     // 서버에서 초기값을 불러오는 비동기 함수(theaterId 아이디 값으로 초기데이터 가져오기)
     const fetchInitialData = async () => {
       try {
