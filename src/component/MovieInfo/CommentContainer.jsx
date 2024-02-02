@@ -6,20 +6,31 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
 import Modal from "../../util/Modal";
 import PaginationUtil from "../../util/Pagination/Pagination";
+import MovieDetailApi from "../../api/MovieDetailApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const CommentContainerComp = styled.section`
   .container {
+    padding-bottom: 80px;
     h4 {
       font-size: 1.5em;
       margin: 4% 2%;
     }
   }
+  @media only screen and (max-width: 768px) {
+    .container {
+      padding-bottom: 50px;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+  }
 `;
 
-const CommentContainer = ({ movieId, userAlias }) => {
+const CommentContainer = ({ movieId, userImage, userAlias }) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
   const navigate = useNavigate();
+  const [movieCommentData, setMovieCommentData] = useState("");
 
   // 기본 접근 제한 모달
   const [openModal, setModalOpen] = useState(false);
@@ -44,66 +55,109 @@ const CommentContainer = ({ movieId, userAlias }) => {
   const [totalPage, setTotalPage] = useState(5);
   const [page, setPage] = useState(1);
 
-  const commentData = [
-    {
-      postId: 1,
-      movieId: 123,
-      image:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-      alias: "nana",
-      ratingField: "OST",
-      ratingNum: "8",
-      ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
-      commentRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 2,
-      movieId: 123,
-      image:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-      alias: "nana",
-      ratingField: "OST",
-      ratingNum: "8",
-      ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
-      commentRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 3,
-      movieId: 123,
-      image:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-      alias: "씨네픽",
-      ratingField: "OST",
-      ratingNum: "8",
-      ratingText:
-        "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
-      commentRegDate: "2024-01-24T12:34:56Z",
-    },
-    {
-      postId: 4,
-      movieId: 123,
-      image:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-      alias: "nana",
-      ratingField: "OST",
-      ratingNum: "8",
-      ratingText:
-        "ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ",
-      commentRegDate: "2024-01-25T12:34:56Z",
-    },
-    {
-      postId: 5,
-      movieId: 123,
-      image:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-      alias: "씨네픽",
-      ratingField: "OST",
-      ratingNum: "8",
-      ratingText:
-        "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
-      commentRegDate: "2024-01-26T12:34:56Z",
-    },
-  ];
+  // 관람평 리스트 불러오기(페이지네이션)
+  const fetchCommentList = async (page) => {
+    const res = await MovieDetailApi.getPagedMovieComments(movieId, page);
+    if (res.data !== null) {
+      console.log("관람평 페이지네이션 : ", res.data);
+      setMovieCommentData(res.data);
+    }
+  };
+  const getCommentList = useTokenAxios(() => fetchCommentList(page));
+  const getFirstList = useTokenAxios(() => fetchCommentList(1));
+
+  // 관람평 총 페이지 수 불러오기
+  const fetchPage = async () => {
+    setPage(1);
+    const res = await MovieDetailApi.getTotalMovieCommentPages(movieId);
+    if (res.data !== null) {
+      console.log("관람평 총 페이지 수 : ", res.data);
+      setTotalPage(res.data);
+      getFirstList();
+    }
+  };
+  const getTotalPage = useTokenAxios(fetchPage);
+
+  useEffect(() => {
+    getCommentList();
+  }, [page]);
+
+  useEffect(() => {
+    getTotalPage();
+  }, []);
+
+  // 삭제
+  const [editId, setEditId] = useState("");
+
+  const deleteComment = async () => {
+    const res = await MovieDetailApi.deleteMovieComment(editId);
+    if (res.data) {
+      console.log("관람평 삭제 성공");
+      fetchPage();
+    }
+  };
+  const delComment = useTokenAxios(deleteComment);
+
+  // const commentData = [
+  //   {
+  //     postId: 1,
+  //     movieId: 123,
+  //     image:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //     alias: "nana",
+  //     ratingField: "OST",
+  //     ratingNum: "8",
+  //     ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
+  //     commentRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 2,
+  //     movieId: 123,
+  //     image:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //     alias: "nana",
+  //     ratingField: "OST",
+  //     ratingNum: "8",
+  //     ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
+  //     commentRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 3,
+  //     movieId: 123,
+  //     image:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //     alias: "씨네픽",
+  //     ratingField: "OST",
+  //     ratingNum: "8",
+  //     ratingText:
+  //       "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
+  //     commentRegDate: "2024-01-24T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 4,
+  //     movieId: 123,
+  //     image:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //     alias: "nana",
+  //     ratingField: "OST",
+  //     ratingNum: "8",
+  //     ratingText:
+  //       "ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ",
+  //     commentRegDate: "2024-01-25T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 5,
+  //     movieId: 123,
+  //     image:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //     alias: "씨네픽",
+  //     ratingField: "OST",
+  //     ratingNum: "8",
+  //     ratingText:
+  //       "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
+  //     commentRegDate: "2024-01-26T12:34:56Z",
+  //   },
+  // ];
 
   return (
     <>
@@ -112,18 +166,23 @@ const CommentContainer = ({ movieId, userAlias }) => {
           <h4>관람평</h4>
           <CommentWrite
             movieId={movieId}
+            userImage={userImage}
             userAlias={userAlias}
             handleModal={handleModal}
+            fetchPage={fetchPage}
           />
           <div className="comment_box">
-            {commentData.map((comment) => (
-              <Comt
-                comt={comment}
-                userAlias={userAlias}
-                key={comment.postId}
-                handleModal={handleModal}
-              />
-            ))}
+            {movieCommentData &&
+              movieCommentData.map((comment) => (
+                <Comt
+                  comt={comment}
+                  userAlias={userAlias}
+                  key={comment.commentId}
+                  handleModal={handleModal}
+                  fetchPage={fetchPage}
+                  setEditId={setEditId}
+                />
+              ))}
           </div>
 
           <PaginationUtil
@@ -145,7 +204,7 @@ const CommentContainer = ({ movieId, userAlias }) => {
             navigate("/login");
           } else {
             closeModal();
-            // 삭제함수 부르기
+            delComment();
           }
         }}
       />

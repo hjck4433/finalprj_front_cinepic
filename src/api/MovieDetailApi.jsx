@@ -105,10 +105,10 @@ const MovieDetailApi = {
   },
 
   // 수정
-  modifyMovieComment: async (movieId, field, num, text) => {
+  modifyMovieComment: async (commentId, field, num, text) => {
     console.log("관람평 수정 진입");
     const data = {
-      movieId: movieId,
+      commentId: commentId,
       ratingField: field,
       ratingNum: num,
       ratingText: text,

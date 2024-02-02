@@ -4,6 +4,8 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserStore";
 import MovieDetailApi from "../../api/MovieDetailApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const CommentWriteComp = styled.div`
   margin-bottom: 5%;
@@ -21,7 +23,17 @@ const CommentWriteComp = styled.div`
 
       border-radius: 50%;
       overflow: hidden;
+      background-color: var(--GREY);
       position: relative;
+
+      svg {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        color: var(--DARKGREY);
+      }
     }
   }
   .input_box {
@@ -83,7 +95,7 @@ const CommentWriteComp = styled.div`
       text-align: right;
       font-size: 1.1em;
       .select_box {
-        text-align: right;
+        text-align: left;
         padding: 2% 2% 4% 2%;
         label {
           &:nth-child(1) {
@@ -119,7 +131,13 @@ const ComtImg = styled.div`
   position: absolute;
 `;
 
-const CommentWrite = ({ movieId, userAlias, handleModal }) => {
+const CommentWrite = ({
+  fetchPage,
+  movieId,
+  userImage,
+  userAlias,
+  handleModal,
+}) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
 
@@ -144,22 +162,22 @@ const CommentWrite = ({ movieId, userAlias, handleModal }) => {
       setField("연출");
       setNum("1");
       setText("");
-      // getTotalPage();
+      fetchPage();
     }
   };
   const saveComment = useTokenAxios(handleSubmitComment);
 
-  const comtWriteData = {
-    postId: 1,
-    movieId: 123,
-    image:
-      "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-    alias: "Mimi",
-    ratingField: "",
-    ratingNum: "",
-    ratingText: "",
-    commentRegDate: "",
-  };
+  // const comtWriteData = {
+  //   postId: 1,
+  //   movieId: 123,
+  //   image:
+  //     "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
+  //   alias: "Mimi",
+  //   ratingField: "",
+  //   ratingNum: "",
+  //   ratingText: "",
+  //   commentRegDate: "",
+  // };
 
   return (
     <>
@@ -177,9 +195,13 @@ const CommentWrite = ({ movieId, userAlias, handleModal }) => {
       >
         <div className="user_box">
           <div className="img_box">
-            <ComtImg $comtImg={comtWriteData.image}></ComtImg>
+            {userImage ? (
+              <ComtImg $comtImg={userImage}></ComtImg>
+            ) : (
+              <FontAwesomeIcon icon={faUser} />
+            )}
           </div>
-          <p>{comtWriteData.alias}</p>
+          <p>{userAlias}</p>
         </div>
 
         <div className="input_box">

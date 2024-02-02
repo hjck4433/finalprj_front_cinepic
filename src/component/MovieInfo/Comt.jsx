@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faPen, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faXmark,
+  faPen,
+  faCheck,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";
+import MovieDetailApi from "../../api/MovieDetailApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const ComtComp = styled.div`
   padding-bottom: 5%;
@@ -19,7 +26,17 @@ const ComtComp = styled.div`
 
       border-radius: 50%;
       overflow: hidden;
+      background-color: var(--GREY);
       position: relative;
+
+      svg {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        color: var(--DARKGREY);
+      }
     }
   }
   .input_box {
@@ -125,7 +142,7 @@ const ComtComp = styled.div`
       width: calc(100% - 80px);
       display: block;
       padding: 2%;
-      text-align: right;
+      /* text-align: right; */
       .icon_box {
         top: 20px;
         right: 18px;
@@ -137,6 +154,7 @@ const ComtComp = styled.div`
         }
       }
       .select_box {
+        padding: 0px 16px 8px;
         justify-content: flex-start;
         label {
           select:nth-child(1) {
@@ -149,6 +167,7 @@ const ComtComp = styled.div`
         width: 100%;
         height: 1px;
         margin: 0 auto;
+        margin-bottom: 10px;
       }
       .comment {
         width: 100%;
@@ -157,6 +176,9 @@ const ComtComp = styled.div`
         margin-bottom: 3%;
         text-align: left;
         font-size: 1.1em;
+      }
+      .P_comment {
+        margin: 0;
       }
     }
   }
@@ -174,29 +196,39 @@ const ComtImg = styled.div`
 `;
 
 const Comt = (props) => {
-  const {
-    open,
-    close,
-    type,
-    postImage,
-    moviePostId,
-    postAlias,
-    postTitle,
-    onChangePostTitle,
-    postContent,
-    onChangePostContent,
-    handleModal,
-    comt,
-    userAlias,
-  } = props;
+  const { handleModal, comt, userAlias, fetchPage, setEditId } = props;
   const [isRevice, setIsRevice] = useState(false);
+  const [editField, setEditField] = useState(comt.ratingField);
+  const [editNum, setEditNum] = useState(comt.ratingNum);
+  const [editText, setEditText] = useState(comt.ratingText);
+
+  // 수정
+  const commentModify = async () => {
+    console.log("관람평 수정 전");
+    const res = await MovieDetailApi.modifyMovieComment(
+      comt.commentId,
+      editField,
+      editNum,
+      editText
+    );
+    console.log("commentId : " + comt.commentId);
+    if (res.data !== null) {
+      console.log("관람평 수정 성공");
+      fetchPage();
+    }
+  };
+  const modiComment = useTokenAxios(commentModify);
 
   return (
     <>
       <ComtComp>
         <div className="user_box">
           <div className="img_box">
-            <ComtImg $comtImg={comt.image}></ComtImg>
+            {comt.image ? (
+              <ComtImg $comtImg={comt.image}></ComtImg>
+            ) : (
+              <FontAwesomeIcon icon={faUser} />
+            )}
           </div>
           <p>{comt.alias}</p>
         </div>
@@ -210,6 +242,7 @@ const Comt = (props) => {
                   className="check"
                   onClick={() => {
                     setIsRevice(false);
+                    modiComment();
                   }}
                 />
               ) : (
@@ -226,7 +259,8 @@ const Comt = (props) => {
                 icon={faXmark}
                 className="delete"
                 onClick={() => {
-                  handleModal("삭제", "삭제하시겠습니까?", true);
+                  handleModal("삭제", "삭제하시겠습니까?", true, 1);
+                  setEditId(comt.commentId);
                 }}
               />
             </div>
@@ -240,12 +274,13 @@ const Comt = (props) => {
                 name="rating_field"
                 id="field"
                 size={1}
-                value={comt.ratingField}
+                defaultValue={comt.ratingField}
                 disabled={isRevice ? false : true}
+                onChange={(e) => {
+                  setEditField(e.target.value);
+                }}
               >
-                <option value="연출" defaultValue>
-                  연출
-                </option>
+                <option value="연출">연출</option>
                 <option value="배우">배우</option>
                 <option value="OST">OST</option>
                 <option value="영상미">영상미</option>
@@ -258,12 +293,13 @@ const Comt = (props) => {
                 name="rating_num"
                 id="num"
                 size={1}
-                value={comt.ratingNum}
+                defaultValue={comt.ratingNum}
                 disabled={isRevice ? false : true}
+                onChange={(e) => {
+                  setEditNum(e.target.value);
+                }}
               >
-                <option value="1" defaultValue>
-                  1
-                </option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -283,8 +319,11 @@ const Comt = (props) => {
             <textarea
               className="comment"
               placeholder="관람평을 입력해주세요"
-              value={comt.ratingText}
+              defaultValue={comt.ratingText}
               disabled={false}
+              onChange={(e) => {
+                setEditText(e.target.value);
+              }}
             ></textarea>
           ) : (
             <p className="P_comment">{comt.ratingText}</p>

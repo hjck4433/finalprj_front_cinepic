@@ -106,7 +106,7 @@ const PostSlide = styled.div`
   }
 `;
 
-const TabPostSlide = ({ userAlias }) => {
+const TabPostSlide = ({ userImage, userAlias }) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
 

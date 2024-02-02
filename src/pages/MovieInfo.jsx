@@ -26,6 +26,7 @@ const MovieInfo = () => {
     }
   };
 
+  const [userImage, setUserImage] = useState("");
   const [userAlias, setUserAlias] = useState("");
 
   // 회원정보 함수 res에 data값이 있으면, Alias값 저장 (props는 해놨음) -- 만들고 얘기하기 (토큰 적용)
@@ -33,6 +34,7 @@ const MovieInfo = () => {
     const res = await MemberApi.getMemberDetail();
     console.log("회원 정보 : " + res.data);
     if (res.data !== null) {
+      setUserImage(res.data.image);
       setUserAlias(res.data.alias);
       console.log("회원 닉네임 : " + res.data.alias);
     }
@@ -50,8 +52,16 @@ const MovieInfo = () => {
   return (
     <>
       <MovieDetail movieDetail={movieData} movieId={id} />
-      <TabMenu movieDetail={movieData} userAlias={userAlias} />
-      <CommentContainer movieId={id} userAlias={userAlias} />
+      <TabMenu
+        movieDetail={movieData}
+        userImage={userImage}
+        userAlias={userAlias}
+      />
+      <CommentContainer
+        movieId={id}
+        userImage={userImage}
+        userAlias={userAlias}
+      />
     </>
   );
 };
