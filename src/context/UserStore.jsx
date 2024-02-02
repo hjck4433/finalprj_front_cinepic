@@ -11,6 +11,14 @@ const UserStore = (props) => {
     localStorage.setItem("loginStatus", loginStatus);
   }, [loginStatus]);
 
+  // 취향 등록 여부
+  const [isPrefer, setIsPrefer] = useState(
+    localStorage.getItem("isPrefer") || ""
+  );
+  useEffect(() => {
+    localStorage.setItem("isPrefer", isPrefer);
+  }, [isPrefer]);
+
   // 멤버쉽 여부
   const [isMembership, setIsMembership] = useState(
     localStorage.getItem("isMembership") || ""
@@ -24,6 +32,8 @@ const UserStore = (props) => {
       value={{
         loginStatus,
         setLoginStatus,
+        isPrefer,
+        setIsPrefer,
         isMembership,
         setIsMembership,
       }}

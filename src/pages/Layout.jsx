@@ -15,8 +15,13 @@ const Layout = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   // 로그인 / 멤버쉽 여부
-  const { loginStatus, setLoginStatus, isMembership, setIsMembership } =
-    context;
+  const {
+    loginStatus,
+    setLoginStatus,
+    setIsPrefer,
+    isMembership,
+    setIsMembership,
+  } = context;
 
   //Modal
   // 여기서부터
@@ -51,6 +56,8 @@ const Layout = () => {
     const res = await PreferApi.getIsPrefer();
     if (!res.data) {
       navigate("/preference/new");
+    } else {
+      setIsPrefer(res.data);
     }
   };
   const getIsPrefer = useTokenAxios(fetchIsPrefer);

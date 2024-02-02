@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/UserStore";
 import PreferComp from "../component/Preference/preferStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +10,8 @@ import PreferApi from "../api/PreferApi";
 import useTokenAxios from "../hooks/useTokenAxios";
 
 const Preference = () => {
+  const context = useContext(UserContext);
+  const { setIsPrefer } = context;
   const navigate = useNavigate();
   const { type } = useParams();
 
@@ -209,6 +212,7 @@ const Preference = () => {
     if (res.data === true) {
       console.log("저장 성공");
       // handleModal("성공", "등록이 완료되었습니다.", false, 0);
+      setIsPrefer(res.data);
       preferMovieSave();
     } else {
       console.log("저장 실패");
@@ -316,7 +320,8 @@ const Preference = () => {
                             <button
                               onClick={() => {
                                 deleteDirector(index);
-                              }}>
+                              }}
+                            >
                               <FontAwesomeIcon icon={faTimes} />
                             </button>
                           </span>
@@ -357,7 +362,8 @@ const Preference = () => {
                               <button
                                 onClick={() => {
                                   deleteActor(index);
-                                }}>
+                                }}
+                              >
                                 <FontAwesomeIcon icon={faTimes} />
                               </button>
                             </span>
