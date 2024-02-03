@@ -8,6 +8,11 @@ const MovieDetailApi = {
   },
 
   // 씨네포스트 -----------------------------------------------------------
+  // 포스트 상세조회
+  getMoviePost: async (postId) => {
+    return await axios.get(Common.CP_DOMAIN + `/movieDetail/post/${postId}`);
+  },
+
   // 총 페이지 수(조회)
   getTotalMoviePostPages: async (movieId) => {
     console.log("씨네포스트 총 페이지 수 :" + movieId);
@@ -44,10 +49,10 @@ const MovieDetailApi = {
   },
 
   // 수정
-  modifyMoviePost: async (movieId, postImage, postTitle, postContent) => {
+  modifyMoviePost: async (postId, postImage, postTitle, postContent) => {
     console.log("씨네포스트 수정 진입");
     const data = {
-      movieId: movieId,
+      postId: postId,
       postImage: postImage,
       postTitle: postTitle,
       postContent: postContent,

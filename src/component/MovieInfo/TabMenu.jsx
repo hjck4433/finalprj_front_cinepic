@@ -41,7 +41,7 @@ const TabMenuComp = styled.section`
   }
 `;
 
-const TabMenu = ({ movieDetail, userImage, userAlias }) => {
+const TabMenu = ({ movieId, movieDetail, userImage, userAlias }) => {
   const [currentTab, setTab] = useState(0);
 
   return (
@@ -87,6 +87,7 @@ const TabMenu = ({ movieDetail, userImage, userAlias }) => {
           {currentTab === 2 && <TabStillCut movieDetail={movieDetail} />}
           {currentTab === 3 && (
             <TabPostSlide
+              movieId={movieId}
               movieDetail={movieDetail}
               userImage={userImage}
               userAlias={userAlias}

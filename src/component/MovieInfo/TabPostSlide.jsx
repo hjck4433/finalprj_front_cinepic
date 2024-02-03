@@ -10,6 +10,8 @@ import Button from "../../util/Button";
 import TabPostModal from "./TabPostModal";
 import Modal from "../../util/Modal";
 import { UserContext } from "../../context/UserStore";
+import MovieDetailApi from "../../api/MovieDetailApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const PostSlide = styled.div`
   width: 100%;
@@ -106,21 +108,13 @@ const PostSlide = styled.div`
   }
 `;
 
-const TabPostSlide = ({ userImage, userAlias }) => {
+const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
 
-  // const [postData, setPostData] = useState([]);
+  const [postData, setPostData] = useState([]);
   const navigate = useNavigate();
   const swiperRef = useRef(null);
-
-  const [postImage, setPostImage] = useState("");
-  const [editId, setEditId] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [postAlias, setPostAlias] = useState("");
-  const [onChangePostTitle, setOnChangePostTitle] = useState("");
-  const [postContent, setPostContent] = useState("");
-  const [onChangePostContent, setOnChangePostContent] = useState("");
 
   // 기본 접근 제한 모달
   const [openModal, setModalOpen] = useState(false);
@@ -149,6 +143,14 @@ const TabPostSlide = ({ userImage, userAlias }) => {
     setOpenPostModal(false);
   };
 
+  const [postImage, setPostImage] = useState("");
+  const [editId, setEditId] = useState("");
+  const [postTitle, setPostTitle] = useState("");
+  const [postAlias, setPostAlias] = useState("");
+  const [onChangePostTitle, setOnChangePostTitle] = useState("");
+  const [postContent, setPostContent] = useState("");
+  const [onChangePostContent, setOnChangePostContent] = useState("");
+
   //post모달 새글 작성 버전으로 열기
   const openNew = () => {
     setOpenPostModal(true);
@@ -169,85 +171,104 @@ const TabPostSlide = ({ userImage, userAlias }) => {
     setPostContent(e.target.value);
   };
 
-  const postData = [
-    {
-      postId: 1,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "nana",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 2,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "씨네픽",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 3,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "씨네픽",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 4,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "nana",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 5,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "nana",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 6,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "nana",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-    {
-      postId: 7,
-      postImage:
-        "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
-      movieId: 123,
-      alias: "nana",
-      postTitle: "Awesome Movie Review",
-      postContent:
-        "I recently watched this amazing movie and here's my detailed review...",
-      postRegDate: "2024-01-23T12:34:56Z",
-    },
-  ];
+  // 저장
+  const handleSubmitPost = async () => {
+    const res = await MovieDetailApi.saveMoviePost(
+      movieId,
+      postImage,
+      postTitle,
+      postContent
+    );
+    console.log("포스트 업로딩 결과 : ", res.data);
+
+    if (res.data) {
+      setPostImage("");
+      setPostTitle("");
+      setPostContent("");
+      // 조회 함수 자리
+    }
+  };
+  const savePost = useTokenAxios(handleSubmitPost);
+
+  // const postData = [
+  //   {
+  //     postId: 1,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "nana",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 2,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "씨네픽",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 3,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "씨네픽",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 4,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "nana",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 5,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "nana",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 6,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "nana",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  //   {
+  //     postId: 7,
+  //     postImage:
+  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231130_162%2F1701308134241kbHHU_JPEG%2Fmovie_image.jpg",
+  //     movieId: 123,
+  //     alias: "nana",
+  //     postTitle: "Awesome Movie Review",
+  //     postContent:
+  //       "I recently watched this amazing movie and here's my detailed review...",
+  //     postRegDate: "2024-01-23T12:34:56Z",
+  //   },
+  // ];
   // 수정 버전으로 넣기
   const revise = (type, image, title, content, id, alias) => {
     setOpenPostModal(true);
@@ -259,12 +280,33 @@ const TabPostSlide = ({ userImage, userAlias }) => {
     setPostAlias(alias);
   };
 
-  // useEffect(() => {
-  //   console.log("postImage : " + postImage);
-  // }, [postImage]);
+  // 수정
+  const postModify = async () => {
+    console.log("무비포스트 수정 전");
+    const res = await MovieDetailApi.modifyMoviePost(
+      setEditId,
+      postImage,
+      postTitle,
+      postContent
+    );
+    console.log("postId : " + setEditId);
+    if (res.data !== null) {
+      console.log("무비포스트 수정 성공");
+      // 조회 함수 자리
+      closeModal();
+    }
+  };
+  const modiPost = useTokenAxios(postModify);
 
-  //삭제함수
-  // 삭제 성공 후 모달 두개 클로즈 (내용 모달 + 확인 모달)
+  //삭제
+  const deletePost = async () => {
+    const res = await MovieDetailApi.deleteMoviePost(editId);
+    if (res.data) {
+      console.log("무비포스트 삭제 성공");
+      // 조회 함수 추가
+    }
+  };
+  const delPost = useTokenAxios(deletePost);
 
   return (
     <>
@@ -323,6 +365,7 @@ const TabPostSlide = ({ userImage, userAlias }) => {
                 <SwiperSlide className="slide" key={post.postId}>
                   <TabPost
                     // onClick={}
+                    postId={post.postId}
                     post={post}
                     revise={revise}
                     userAlias={userAlias}
@@ -363,6 +406,9 @@ const TabPostSlide = ({ userImage, userAlias }) => {
         postContent={postContent}
         onChangePostContent={changeContentInput}
         handleModal={handleModal}
+        savePost={savePost}
+        modiPost={modiPost}
+        delPost={delPost}
       />
     </>
   );

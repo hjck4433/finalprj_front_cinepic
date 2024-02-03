@@ -201,6 +201,9 @@ const TabPostModal = (props) => {
     postContent,
     onChangePostContent,
     handleModal,
+    savePost,
+    modiPost,
+    delPost,
   } = props;
 
   useEffect(() => {
@@ -305,6 +308,9 @@ const TabPostModal = (props) => {
                   <Button
                     clickEvt={() => {
                       // type === "edit" ? 수정기능 함수 : 등록기능 함수
+                      type === "edit" ? modiPost() : savePost();
+                      handleModal("등록", "게시글이 등록되었습니다.", false, 1);
+                      close();
                     }}
                     active={true}
                     children={type === "edit" ? "수정" : "등록"}
@@ -317,7 +323,9 @@ const TabPostModal = (props) => {
                   <Button
                     className="delButton"
                     clickEvt={() => {
+                      delPost();
                       handleModal("삭제", "삭제하시겠습니까?", true, 1);
+                      close();
                     }}
                     active={true}
                     children="삭제"

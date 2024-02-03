@@ -53,6 +53,7 @@ const MovieInfo = () => {
     <>
       <MovieDetail movieDetail={movieData} movieId={id} />
       <TabMenu
+        movieId={id}
         movieDetail={movieData}
         userImage={userImage}
         userAlias={userAlias}
