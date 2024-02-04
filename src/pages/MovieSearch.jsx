@@ -9,10 +9,16 @@ const MovieSearch = () => {
     console.log("검색 키워드 : " + keyword);
   }, [keyword]);
 
+  const [sortBy, setSortBy] = useState("recent");
+
   return (
     <>
-      <MovieBanner setKeyword={setKeyword} />
-      <MovieList />
+      <MovieBanner
+        setKeyword={setKeyword}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
+      <MovieList keyword={keyword} sortBy={sortBy} setSortBy={setSortBy} />
     </>
   );
 };

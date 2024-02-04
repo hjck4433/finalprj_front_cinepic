@@ -76,7 +76,7 @@ const SearchComp = styled.section`
   }
 `;
 
-const MovieBanner = ({ setKeyword }) => {
+const MovieBanner = ({ setKeyword, setSortBy }) => {
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -113,6 +113,11 @@ const MovieBanner = ({ setKeyword }) => {
                   if (e.key === "Enter") {
                     e.preventDefault(); // 기본 Enter 행동 방지
                     setKeyword(searchInput);
+                    if (searchInput === "") {
+                      setSortBy("recent");
+                    } else {
+                      setSortBy("relevant");
+                    }
                   }
                 }}
               />
@@ -121,6 +126,11 @@ const MovieBanner = ({ setKeyword }) => {
                   icon={faSearch}
                   onClick={() => {
                     setKeyword(searchInput);
+                    if (searchInput === "") {
+                      setSortBy("recent");
+                    } else {
+                      setSortBy("relevant");
+                    }
                   }}
                 />
               </div>
