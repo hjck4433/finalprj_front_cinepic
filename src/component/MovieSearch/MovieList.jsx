@@ -5,9 +5,16 @@ import MovieCard from "./MovieCard";
 import Modal from "../../util/Modal";
 import MovieApi from "../../api/MovieApi";
 import BookmarkApi from "../../api/BookmarkApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const MovieListComp = styled.section`
   padding-bottom: 150px;
+  .noBookmark {
+    text-align: center;
+    font-size: 1.6em;
+    line-height: 2.3;
+  }
+
   .container {
     .sortArea {
       display: flex;
@@ -43,6 +50,7 @@ const MovieListComp = styled.section`
     }
 
     &.mapContainer {
+      min-height: 50vh;
       .mapBox {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -84,6 +92,7 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
       console.log("영화 데이터 불러오는 중 에러 발생 : ", e);
     }
   };
+  const getMovieData = useTokenAxios(fetchMovieData);
 
   const fetchFirstMovieData = async () => {
     try {
@@ -121,7 +130,11 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
         (entries) => {
           if (entries[0].isIntersecting) {
             if (currentPage > 0) {
-              fetchMovieData();
+              if (sortType === "member") {
+                getMovieData();
+              } else {
+                fetchMovieData();
+              }
             }
           }
         },
@@ -139,6 +152,18 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
 
   // 회원 북마크 해제 관련
   const [hideState, setHideState] = useState({});
+
+  useEffect(() => {
+    const hiddenMovieIds = Object.keys(hideState).filter(
+      (movieId) => hideState[movieId]
+    );
+    console.log(`Number of hidden movies: ${hiddenMovieIds.length}`);
+    console.log("무비길이 : " + movieData.length);
+    if (hiddenMovieIds.length === movieData.length) {
+      setMovieData([]);
+    }
+  }, [hideState]);
+
   const hideMovieCard = (movieId) => {
     setHideState((prevHideState) => ({
       ...prevHideState,
@@ -168,48 +193,58 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
   return (
     <>
       <MovieListComp>
+        {sortType === "member" && movieData.length === 0 && (
+          <div className="noBookmark">
+            <p>북마크 된 영화가 없습니다</p>
+            <p>
+              CINEPIC에서 발견한 간직하고 싶은 영화 정보에 하트를 눌러주세요
+            </p>
+          </div>
+        )}
         <div className="container">
-          <ul className="sortArea">
-            {keyword !== "" && (
-              <li
-                className={sortBy === "relevant" ? "active" : ""}
-                onClick={() => {
-                  setSortBy("relevant");
-                }}
-              >
-                관련순
-              </li>
-            )}
+          {sortType !== "member" && (
+            <ul className="sortArea">
+              {keyword !== "" && (
+                <li
+                  className={sortBy === "relevant" ? "active" : ""}
+                  onClick={() => {
+                    setSortBy("relevant");
+                  }}
+                >
+                  관련순
+                </li>
+              )}
 
-            <li
-              className={sortBy === "recent" ? "active" : ""}
-              onClick={() => {
-                setSortBy("recent");
-              }}
-            >
-              최신순
-            </li>
-            {keyword === "" && (
               <li
-                className={sortBy === "former" ? "active" : ""}
+                className={sortBy === "recent" ? "active" : ""}
                 onClick={() => {
-                  setSortBy("former");
+                  setSortBy("recent");
                 }}
               >
-                과거순
+                최신순
               </li>
-            )}
-          </ul>
+              {keyword === "" && (
+                <li
+                  className={sortBy === "former" ? "active" : ""}
+                  onClick={() => {
+                    setSortBy("former");
+                  }}
+                >
+                  과거순
+                </li>
+              )}
+            </ul>
+          )}
         </div>
         <div className="container mapContainer">
           <div className="mapBox">
             {movieData &&
               movieData.map(
                 (movie) =>
-                  !hideState[movie.id] && (
+                  !hideState[movie.movieId] && (
                     <MovieCard
                       movie={movie}
-                      key={movie.id}
+                      key={movie.movieId}
                       handleModal={handleModal}
                       sortType={sortType}
                       hideState={hideState}
