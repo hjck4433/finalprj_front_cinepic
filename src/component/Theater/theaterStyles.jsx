@@ -12,6 +12,7 @@ const TheaterComp = styled.section`
       font-weight: 600;
       .titleIcon {
         margin-right: 15px;
+        color: var(--DARKRED);
       }
     }
 
@@ -74,9 +75,10 @@ const TheaterComp = styled.section`
         h3 {
           font-size: 1.1em;
           color: var(--DARKGREY);
-          margin: 0 0 5% 2%;
+          margin: 0 0 5% 1%;
           position: relative;
           font-weight: 600;
+          padding-left: 5px;
           &::before {
             content: "";
             width: 3px;
@@ -126,11 +128,11 @@ const TheaterComp = styled.section`
         // 스크린관 정보 제목
         h3 {
           color: var(--DARKGREY);
-          margin-bottom: 5%;
-          margin-left: 2%;
+          margin: 0 0 5% 1%;
           position: relative;
           font-size: 1.1em;
           font-weight: 600;
+          padding-left: 5px;
           &::before {
             content: "";
             width: 3px;
@@ -149,7 +151,7 @@ const TheaterComp = styled.section`
           grid-template-columns: 50% 50%;
           grid-template-rows: 20% 20% 20% 20%;
           gap: 5%;
-          padding: 25px 30px;
+          padding: 25px 10px;
           div {
             font-size: 0.9em;
             .title {
@@ -245,6 +247,7 @@ const TheaterComp = styled.section`
             grid-template-columns: 100%;
             grid-template-rows: repeat(7, 13%);
             gap: 1.5%;
+            padding: 25px 30px;
             div {
               width: 100%;
               display: flex;
