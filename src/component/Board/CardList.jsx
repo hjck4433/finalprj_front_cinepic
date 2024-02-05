@@ -3,6 +3,8 @@ import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import ToggleButton from "./ToggleBtn";
+import BoardApi from "../../api/BoardApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const CardListComp = styled.section`
   .container {
@@ -51,7 +53,7 @@ const CardList = ({
   const [totalPage, setTotalPage] = useState(5);
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState("recent");
-  // const [boardData, setBoardData] = useState([]);
+  const [boardData, setBoardData] = useState([]);
   const [gatherType, setGatherType] = useState("온라인");
 
   const handleSetGatherType = useCallback(
@@ -62,34 +64,89 @@ const CardList = ({
     [setGatherType]
   );
 
-  const boardData = [
-    {
-      boardId: 1,
-      memberId: 12345,
-      categoryId: 10,
-      gatherType: "온라인",
-      boardRegDate: "2024-01-24T12:34:56Z",
-      boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
-      boardContent:
-        "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
-      boardImage:
-        "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
-      count: 50,
-    },
-    {
-      boardId: 2,
-      memberId: 12345,
-      categoryId: 10,
-      gatherType: "온라인",
-      boardRegDate: "2024-01-24T12:34:56Z",
-      boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
-      boardContent:
-        "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
-      boardImage:
-        "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
-      count: 50,
-    },
-  ];
+  // 게시글 리스트
+  const fetchBoardList = async (page) => {
+    const res = await BoardApi.getBoardList(
+      page,
+      sortBy,
+      keyword,
+      category,
+      gatherType
+    );
+    if (res.data !== null) {
+      setBoardData(res.data);
+    }
+    // 리스트 불러오는 중이면 true, 로딩 끝나면 false
+    setIsLoading(false);
+  };
+  const getFirstPage = useTokenAxios(() => fetchBoardList(1));
+  const getSelPage = useTokenAxios(() => fetchBoardList(page));
+
+  // 페이지 수
+  const fetchTotalPage = async (page) => {
+    const res = await BoardApi.getTotalPage(keyword, category, gatherType);
+    if (res.data !== null) {
+      setTotalPage(res.data);
+      setPage(page);
+      setKeyword("");
+      if (category === "씨네크루") {
+        setGatherType("");
+      }
+      await getFirstPage();
+    }
+  };
+  const getTotalPage = useTokenAxios(() => fetchTotalPage(1));
+
+  // 회원 게시글 리스트
+  const fetchMemBoardList = async (page) => {
+    setPage(1);
+    const res = await BoardApi.getMemBoardList(page, type);
+    if (res.data !== null) {
+      setBoardData(res.data);
+    }
+    setIsLoading(false);
+  };
+  const getMemBoardList = useTokenAxios(() => fetchMemBoardList(page));
+
+  // 회원 게시글 페이지 수
+  const fetchMemTotalPage = async () => {
+    setPage(1);
+    const res = await BoardApi.getMemTotalPage(type);
+    if (res.data !== null) {
+      setTotalPage(res.data);
+      getMemBoardList();
+    }
+  };
+  const getMemtotalPage = useTokenAxios(fetchMemTotalPage);
+
+  // const boardData = [
+  //   {
+  //     boardId: 1,
+  //     memberId: 12345,
+  //     categoryId: 10,
+  //     gatherType: "온라인",
+  //     boardRegDate: "2024-01-24T12:34:56Z",
+  //     boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
+  //     boardContent:
+  //       "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
+  //     boardImage:
+  //       "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
+  //     count: 50,
+  //   },
+  //   {
+  //     boardId: 2,
+  //     memberId: 12345,
+  //     categoryId: 10,
+  //     gatherType: "온라인",
+  //     boardRegDate: "2024-01-24T12:34:56Z",
+  //     boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
+  //     boardContent:
+  //       "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
+  //     boardImage:
+  //       "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
+  //     count: 50,
+  //   },
+  // ];
   return (
     <>
       <CardListComp>

@@ -15,9 +15,8 @@ import useTokenAxios from "../../hooks/useTokenAxios";
 
 const PostSlide = styled.div`
   width: 100%;
-  .container {
-    padding: 30px 0 40px !important;
-    /* text-align: right; */
+  .post_container {
+    padding: 30px 0 40px;
     .newButton {
       text-align: right;
       button {
@@ -299,7 +298,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   return (
     <>
       <PostSlide>
-        <div className="container">
+        <div className="post_container">
           <div className="newButton">
             <Button
               children="글 작성하기"

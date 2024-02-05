@@ -5,7 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import TheaterApi from "../api/TheaterApi";
 import TheaterBannerComp from "../component/Theater/theaterBanner";
 import Modal from "../util/Modal";
-import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const Theater = () => {
   const mapRef = useRef(null); // 지도 링크
@@ -187,7 +187,7 @@ const Theater = () => {
         <div className="container">
           <h2>
             <div className="titleIcon">
-              <FontAwesomeIcon icon={faMapLocationDot} />
+              <FontAwesomeIcon icon={faLocationDot} />
             </div>
             영화관 지도 검색
           </h2>
