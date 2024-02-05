@@ -72,11 +72,11 @@ const Post = () => {
   };
   const getPostCounter = useTokenAxios(fetchPostCounter);
 
-  // 멤버정보 Api
+  // 멤버 정보 Api
   const fetchUserDetail = async () => {
     const res = await MemberApi.getMemberDetail();
     if (res.data !== null) {
-      // 글쓴이의 닉네임
+      // 멤버 닉네임
       setUserAlias(res.data.alias);
     }
   };

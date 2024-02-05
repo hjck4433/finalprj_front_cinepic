@@ -163,7 +163,6 @@ export const PostComp = styled.section`
               border-radius: 50%;
               overflow: hidden;
               img {
-                outline: 1px solid red;
                 top: 0;
                 left: 0;
                 width: 100%;

@@ -2,7 +2,7 @@ import axios from "axios";
 import Common from "../util/Common";
 
 const BoardApi = {
-  // 새 게시글 저장
+  // 게시글 저장
   saveNewPost: async (categoryName, gatherType, title, image, boardContent) => {
     const data = {
       categoryName: categoryName,
