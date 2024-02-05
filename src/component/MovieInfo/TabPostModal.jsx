@@ -3,6 +3,8 @@ import Button from "../../util/Button";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { storage } from "../../api/firebase";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const PostModalComp = styled.div`
   .modal {
@@ -232,6 +234,25 @@ const TabPostModal = (props) => {
     setImgSrc(postImage);
   }, [open]);
 
+  const onSubmit = () => {
+    if (imgSrc !== "" && imgSrc !== postImage) {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      fileRef.put(file).then(() => {
+        fileRef.getDownloadURL().then((url) => {
+          console.log("저장경로 확인 : " + url);
+          console.log("url" + url);
+          type === "edit" ? modiPost(url) : savePost(url);
+        });
+      });
+    } else {
+      console.log("파이어베이스 생략");
+      type === "edit" ? modiPost(imgSrc) : savePost(imgSrc);
+    }
+  };
+
+  const submitPost = useTokenAxios(onSubmit);
+
   // useEffect(() => {
   //   console.log("imgSrc : " + imgSrc);
   // }, [imgSrc]);
@@ -308,7 +329,8 @@ const TabPostModal = (props) => {
                   <Button
                     clickEvt={() => {
                       // type === "edit" ? 수정기능 함수 : 등록기능 함수
-                      type === "edit" ? modiPost() : savePost();
+                      // type === "edit" ? modiPost() : savePost();
+                      submitPost();
                       handleModal("등록", "게시글이 등록되었습니다.", false, 1);
                       close();
                     }}

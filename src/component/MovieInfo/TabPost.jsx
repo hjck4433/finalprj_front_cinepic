@@ -70,7 +70,7 @@ const PostImg = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${(props) => props.$postImage});
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;

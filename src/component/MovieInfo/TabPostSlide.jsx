@@ -187,7 +187,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   const handleSlideChange = (swiper) => {
     const { activeIndex, slides } = swiper;
     if (
-      activeIndex >= slides.length - 4 &&
+      activeIndex >= slides.length - 4 * (currentPage - 1) &&
       currentPage <= totalPage &&
       !loading
     ) {
@@ -237,10 +237,10 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   };
 
   // 저장
-  const handleSubmitPost = async () => {
+  const savePost = async (url) => {
     const res = await MovieDetailApi.saveMoviePost(
       movieId,
-      postImage,
+      url,
       postTitle,
       postContent
     );
@@ -254,7 +254,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
       fetchTotalPage();
     }
   };
-  const savePost = useTokenAxios(handleSubmitPost);
+  // const savePost = useTokenAxios(handleSubmitPost);
 
   // 수정 버전으로 넣기
   const revise = (type, image, title, content, id, alias) => {
@@ -268,11 +268,11 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   };
 
   // 수정
-  const postModify = async () => {
+  const modiPost = async (url) => {
     console.log("무비포스트 수정 전");
     const res = await MovieDetailApi.modifyMoviePost(
       setEditId,
-      postImage,
+      url,
       postTitle,
       postContent
     );
@@ -280,10 +280,11 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
     if (res.data !== null) {
       console.log("무비포스트 수정 성공");
       // 조회 함수 자리
+      fetchTotalPage();
       closeModal();
     }
   };
-  const modiPost = useTokenAxios(postModify);
+  // const modiPost = useTokenAxios(postModify);
 
   //삭제
   const deletePost = async () => {
@@ -291,6 +292,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
     if (res.data) {
       console.log("무비포스트 삭제 성공");
       // 조회 함수 추가
+      fetchTotalPage();
     }
   };
   const delPost = useTokenAxios(deletePost);
