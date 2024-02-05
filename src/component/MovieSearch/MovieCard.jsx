@@ -50,7 +50,6 @@ const MovieCardComp = styled.div`
         text-align: left;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        overflow: hidden;
         -webkit-line-clamp: 10;
       }
 

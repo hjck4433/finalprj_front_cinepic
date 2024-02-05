@@ -21,6 +21,7 @@ const FaqListComp = styled.section`
       width: 90%;
       margin: 0 auto;
       font-size: 1.3rem;
+      cursor: pointer;
 
       li {
         position: relative;

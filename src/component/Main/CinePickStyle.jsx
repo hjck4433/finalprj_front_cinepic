@@ -66,6 +66,12 @@ const CinePickComp = styled.section`
             line-height: 1.6;
             font-size: 1.2em;
             margin-bottom: 30px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: left;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 6;
           }
         }
 
