@@ -1,3 +1,4 @@
+import CardList from "../component/Board/CardList";
 import MempostSort from "../component/MemberPost/MempostSort";
 import { useState, useEffect } from "react";
 
@@ -26,6 +27,12 @@ const MemberPost = () => {
   return (
     <>
       <MempostSort selType={selType} setSelType={onChange} />
+      <CardList
+        category="member"
+        type={selType}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
     </>
   );
 };

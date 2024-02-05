@@ -13,7 +13,7 @@ const TabPostComp = styled.div`
   }
   .viewBox {
     position: relative;
-    z-index: -1;
+    z-index: 99;
     .img_box {
       width: 100%;
       position: relative;

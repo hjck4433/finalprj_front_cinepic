@@ -380,7 +380,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
           } else {
             closePostModal();
             closeModal();
-            // 삭제함수 부르기
+            delPost();
           }
         }}
       />
@@ -398,7 +398,6 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
         handleModal={handleModal}
         savePost={savePost}
         modiPost={modiPost}
-        delPost={delPost}
       />
     </>
   );

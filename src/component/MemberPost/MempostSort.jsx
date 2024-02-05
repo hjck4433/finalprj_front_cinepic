@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 
 const MempostSortComp = styled.section`
   .container {
-    height: 400px;
     text-align: center;
+    margin-bottom: 100px;
   }
 
   button {

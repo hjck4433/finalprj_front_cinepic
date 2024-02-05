@@ -68,7 +68,6 @@ const BoardApi = {
 
   // 총 페이지 수
   getTotalPage: async (keyword, categoryName, gatherType) => {
-    if (categoryName === "씨네크루") gatherType = "";
     const page = 0;
     const size = 6;
     return await axios.get(
@@ -79,7 +78,6 @@ const BoardApi = {
   },
   // 페이지네이션
   getBoardList: async (page, sort, keyword, categoryName, gatherType) => {
-    if (categoryName === "씨네크루") gatherType = "";
     const size = 6;
     return await axios.get(
       Common.CP_DOMAIN +
@@ -103,7 +101,7 @@ const BoardApi = {
   getMemBoardList: async (page, type) => {
     const size = 6;
     return await axios.get(
-      Common.CP_DOMAIN + `/board/memboard/list?page=${page}&type=${type}`,
+      Common.CP_DOMAIN + `/board/memboard/list?page=${page - 1}&type=${type}`,
       Common.tokenHeader()
     );
   },

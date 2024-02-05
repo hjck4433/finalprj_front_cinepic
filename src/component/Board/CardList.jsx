@@ -3,10 +3,12 @@ import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import ToggleButton from "./ToggleBtn";
+import PaginationUtil from "../../util/Pagination/Pagination";
 import BoardApi from "../../api/BoardApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
 
 const CardListComp = styled.section`
+  padding-bottom: 70px;
   .container {
     .sortArea {
       display: flex;
@@ -35,6 +37,11 @@ const CardListComp = styled.section`
             cursor: default;
           }
         }
+      }
+    }
+    .boardMap {
+      .pagination {
+        margin-top: 50px;
       }
     }
   }
@@ -89,9 +96,6 @@ const CardList = ({
       setTotalPage(res.data);
       setPage(page);
       setKeyword("");
-      if (category === "씨네크루") {
-        setGatherType("");
-      }
       await getFirstPage();
     }
   };
@@ -118,6 +122,22 @@ const CardList = ({
     }
   };
   const getMemtotalPage = useTokenAxios(fetchMemTotalPage);
+
+  // 새로운 조건의 리스트를 불러와야 하는 경우
+  useEffect(() => {
+    if (isLoading) {
+      category === "member" ? getMemtotalPage() : getTotalPage();
+    }
+  }, [isLoading]);
+
+  // 페이지만 변경하는 경우
+  useEffect(() => {
+    category === "member" ? getMemBoardList() : getSelPage();
+  }, [page]);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, [category]);
 
   // const boardData = [
   //   {
@@ -152,34 +172,45 @@ const CardList = ({
       <CardListComp>
         <div className="container">
           <div className="type_filter">
-            <ToggleButton
-              onChange={handleSetGatherType}
-              gatherType={gatherType}
-            />
+            {category !== "member" && (
+              <ToggleButton
+                onChange={handleSetGatherType}
+                gatherType={gatherType}
+              />
+            )}
           </div>
-          <ul className="sortArea">
-            <li
-              className={sortBy === "recent" ? "active" : ""}
-              onClick={() => {
-                setSortBy("recent");
-                setIsLoading(true);
-              }}
-            >
-              최신순
-            </li>
-            <li
-              className={sortBy === "former" ? "active" : ""}
-              onClick={() => {
-                setSortBy("former");
-                setIsLoading(true);
-              }}
-            >
-              과거순
-            </li>
-          </ul>
+          {category !== "member" && (
+            <ul className="sortArea">
+              <li
+                className={sortBy === "recent" ? "active" : ""}
+                onClick={() => {
+                  setSortBy("recent");
+                  setIsLoading(true);
+                }}
+              >
+                최신순
+              </li>
+              <li
+                className={sortBy === "former" ? "active" : ""}
+                onClick={() => {
+                  setSortBy("former");
+                  setIsLoading(true);
+                }}
+              >
+                과거순
+              </li>
+            </ul>
+          )}
+
           <div className="boardMap">
             {boardData &&
-              boardData.map((data) => <Card key={data.title} data={data} />)}
+              boardData.map((data) => <Card key={data.id} data={data} />)}
+            <PaginationUtil
+              totalPage={totalPage}
+              limit={10}
+              page={page}
+              setPage={setPage}
+            />
           </div>
         </div>
       </CardListComp>

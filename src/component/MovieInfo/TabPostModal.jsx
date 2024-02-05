@@ -205,7 +205,6 @@ const TabPostModal = (props) => {
     handleModal,
     savePost,
     modiPost,
-    delPost,
   } = props;
 
   useEffect(() => {
@@ -345,7 +344,6 @@ const TabPostModal = (props) => {
                   <Button
                     className="delButton"
                     clickEvt={() => {
-                      delPost();
                       handleModal("삭제", "삭제하시겠습니까?", true, 1);
                       close();
                     }}

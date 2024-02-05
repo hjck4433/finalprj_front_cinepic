@@ -74,7 +74,7 @@ const PaginationUtil = ({ totalPage, limit, page, setPage }) => {
 
   return (
     <>
-      <PaginationComp>
+      <PaginationComp className="pagination">
         {/* 맨 처음 버튼, 이전 버튼 */}
         <ButtonStyle className="toFirst" onClick={handleToFirst}>
           <FontAwesomeIcon icon={faAnglesLeft} />

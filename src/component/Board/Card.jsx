@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const CardComp = styled.section`
   padding: 0 20px;
+
   .card_container {
     height: 226px;
     display: flex;
@@ -95,16 +96,17 @@ const CardComp = styled.section`
 const ImgComp = styled.div`
   /* width: 100%; */
   height: 100%;
+  min-height: 200px;
   padding-bottom: 70%;
   background-image: url(${(props) => props.$imgsrc});
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 `;
 
 const Card = ({ data }) => {
   const navigate = useNavigate();
-  const toDate = new Date(data.boardRegDate);
+  const toDate = new Date(data.regDate);
   const regDate = toDate.toISOString().split("T")[0];
 
   return (
@@ -113,15 +115,15 @@ const Card = ({ data }) => {
         <div
           className="card_container"
           onClick={() => {
-            navigate(`/board/post/${data.boardId}`);
+            navigate(`/board/post/${data.id}`);
           }}
         >
           <div className="img_box">
-            <ImgComp $imgsrc={data.boardImage} />
+            <ImgComp $imgsrc={data.image} />
           </div>
           <div className="text_box">
             <p className="date">{regDate}</p>
-            <p className="title">{data.boardTitle}</p>
+            <p className="title">{data.title}</p>
             <div className="text_area">
               {data.boardContent.split("\n").map((line, index) => (
                 <p key={index}>{line}</p>
