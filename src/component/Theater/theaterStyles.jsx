@@ -10,7 +10,7 @@ const TheaterComp = styled.section`
       font-size: 1.3em;
       padding-top: 7%;
       font-weight: 600;
-      .titleName {
+      .titleIcon {
         margin-right: 15px;
       }
     }
@@ -184,138 +184,138 @@ const TheaterComp = styled.section`
   @media screen and (max-width: 768px) {
     .container {
       // 제목
-      .titleName {
-        h2 {
-          font-size: 1.3em;
+      h2 {
+        font-size: 1.3em;
+        .titleIcon {
           &::before {
             height: 22%;
             top: 80%;
           }
         }
-        // 지도 영역
-        .mapContainer {
-          margin-top: 40px;
-        }
-        // 정보박스 전체 영역
-        .infoContainer {
-          // 기본정보 박스 영역
-          .basicInfo1 {
-            // 기본정보 제목
-            h3 {
-              font-size: 1.5em;
-              font-weight: 600;
-            }
-            // 박스 안에 내용
-            .content1 {
-              div {
-                font-size: 1.2em;
-                .title {
-                  text-align: left;
-                  width: 70px;
-                  &::after {
-                    display: none;
-                  }
+      }
+      // 지도 영역
+      .mapContainer {
+        margin-top: 40px;
+      }
+      // 정보박스 전체 영역
+      .infoContainer {
+        // 기본정보 박스 영역
+        .basicInfo1 {
+          // 기본정보 제목
+          h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+          }
+          // 박스 안에 내용
+          .content1 {
+            div {
+              font-size: 1.2em;
+              .title {
+                text-align: left;
+                width: 70px;
+                &::after {
+                  display: none;
                 }
-                span {
-                  text-align: right;
-                  &.address {
-                    line-height: 2;
-                  }
+              }
+              span {
+                text-align: right;
+                &.address {
+                  line-height: 2;
                 }
               }
             }
           }
-          // 스크린관 정보 박스 영역
-          .basicInfo2 {
-            // 스크린관 정보 제목
-            h3 {
-              font-size: 1.5em;
-              font-weight: 600;
-            }
-            // 스크린관 정보 내용
-            .content2 {
-              grid-template-columns: 100%;
-              grid-template-rows: repeat(7, 13%);
-              gap: 1.5%;
-              div {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                padding-right: 0;
-                font-size: 1.2em;
-                .title {
-                  margin: 0;
-                  &::after {
-                    display: none;
-                  }
+        }
+        // 스크린관 정보 박스 영역
+        .basicInfo2 {
+          // 스크린관 정보 제목
+          h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+          }
+          // 스크린관 정보 내용
+          .content2 {
+            grid-template-columns: 100%;
+            grid-template-rows: repeat(7, 13%);
+            gap: 1.5%;
+            div {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              padding-right: 0;
+              font-size: 1.2em;
+              .title {
+                margin: 0;
+                &::after {
+                  display: none;
                 }
-                .element {
-                  text-align: right;
-                }
+              }
+              .element {
+                text-align: right;
               }
             }
           }
         }
       }
     }
-    @media screen and (max-width: 600px) {
-      .container {
-        // 정보박스 전체 영역
-        .infoContainer {
-          // 기본정보 박스 영역
-          .basicInfo1 {
-            // 박스 안에 내용
-            .content1 {
-              div {
-                font-size: 1.1em;
-              }
+  }
+  @media screen and (max-width: 600px) {
+    .container {
+      // 정보박스 전체 영역
+      .infoContainer {
+        // 기본정보 박스 영역
+        .basicInfo1 {
+          // 박스 안에 내용
+          .content1 {
+            div {
+              font-size: 1.1em;
             }
           }
-          // 스크린관 정보 박스 영역
-          .basicInfo2 {
-            // 스크린관 정보 내용
-            .content2 {
-              div {
-                font-size: 1.1em;
-              }
+        }
+        // 스크린관 정보 박스 영역
+        .basicInfo2 {
+          // 스크린관 정보 내용
+          .content2 {
+            div {
+              font-size: 1.1em;
             }
           }
         }
       }
     }
-    @media screen and (max-width: 480px) {
-      .container {
-        // 정보박스 전체 영역
-        .infoContainer {
-          width: 95%;
-          padding: 30px;
-          // 기본정보 박스 영역
-          .basicInfo1 {
-            // 박스 안에 내용
-            .content1 {
-              padding: 20px;
-              div {
-                font-size: 1em;
-              }
+  }
+  @media screen and (max-width: 480px) {
+    .container {
+      // 정보박스 전체 영역
+      .infoContainer {
+        width: 95%;
+        padding: 30px;
+        // 기본정보 박스 영역
+        .basicInfo1 {
+          // 박스 안에 내용
+          .content1 {
+            padding: 20px;
+            div {
+              font-size: 1em;
             }
           }
-          // 스크린관 정보 박스 영역
-          .basicInfo2 {
-            // 스크린관 정보 제목
-            h3 {
-            }
-            // 스크린관 정보 내용
-            .content2 {
-              div {
-                .title {
-                  text-align: left;
-                  &::after {
-                    display: none;
-                  }
+        }
+        // 스크린관 정보 박스 영역
+        .basicInfo2 {
+          // 스크린관 정보 제목
+          h3 {
+          }
+          // 스크린관 정보 내용
+          .content2 {
+            div {
+              .title {
+                text-align: left;
+                &::after {
+                  display: none;
                 }
-                span {
-                  text-align: right;
-                }
+              }
+              span {
+                text-align: right;
               }
             }
           }

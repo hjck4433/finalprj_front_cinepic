@@ -186,7 +186,7 @@ const Theater = () => {
         <TheaterBannerComp />
         <div className="container">
           <h2>
-            <div className="titleName">
+            <div className="titleIcon">
               <FontAwesomeIcon icon={faMapLocationDot} />
             </div>
             영화관 지도 검색
