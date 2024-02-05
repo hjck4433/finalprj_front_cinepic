@@ -82,7 +82,6 @@ const TheaterComp = styled.section`
             width: 3px;
             height: 100%;
             position: absolute;
-            margin-left: -8px;
             top: 0;
             left: -8px;
             background-color: var(--RED);
@@ -138,7 +137,6 @@ const TheaterComp = styled.section`
             height: 100%;
             background-color: var(--RED);
             position: absolute;
-            margin-left: -8px;
             top: 0;
             left: -8px;
           }
@@ -151,7 +149,7 @@ const TheaterComp = styled.section`
           grid-template-columns: 50% 50%;
           grid-template-rows: 20% 20% 20% 20%;
           gap: 5%;
-          padding: 25px 10px;
+          padding: 25px 30px;
           div {
             font-size: 0.9em;
             .title {
@@ -185,7 +183,8 @@ const TheaterComp = styled.section`
     .container {
       // 제목
       h2 {
-        font-size: 1.3em;
+        font-size: 1.8em;
+        padding-left: 15px;
         .titleIcon {
           &::before {
             height: 22%;
@@ -196,10 +195,18 @@ const TheaterComp = styled.section`
       // 지도 영역
       .mapContainer {
         margin-top: 40px;
+        width: 95%;
+      }
+      .searchContainer {
+        margin-left: 70%;
       }
       // 정보박스 전체 영역
       .infoContainer {
+        width: 95%;
         // 기본정보 박스 영역
+        h3 {
+          font-size: 1.6em;
+        }
         .basicInfo1 {
           // 기본정보 제목
           h3 {
@@ -262,10 +269,23 @@ const TheaterComp = styled.section`
   @media screen and (max-width: 600px) {
     .container {
       // 정보박스 전체 영역
+      h2 {
+        font-size: 1.5em;
+      }
+      .searchContainer {
+        margin-left: 60%;
+      }
       .infoContainer {
+        h3 {
+          font-size: 1.4em;
+        }
         // 기본정보 박스 영역
         .basicInfo1 {
           // 박스 안에 내용
+          h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+          }
           .content1 {
             div {
               font-size: 1.1em;
@@ -275,6 +295,10 @@ const TheaterComp = styled.section`
         // 스크린관 정보 박스 영역
         .basicInfo2 {
           // 스크린관 정보 내용
+          h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+          }
           .content2 {
             div {
               font-size: 1.1em;
@@ -287,12 +311,20 @@ const TheaterComp = styled.section`
   @media screen and (max-width: 480px) {
     .container {
       // 정보박스 전체 영역
+      h2 {
+        font-size: 1.4em;
+      }
       .infoContainer {
-        width: 95%;
         padding: 30px;
         // 기본정보 박스 영역
+        h3 {
+          font-size: 1.3em;
+        }
         .basicInfo1 {
           // 박스 안에 내용
+          h3 {
+            font-size: 1.2em;
+          }
           .content1 {
             padding: 20px;
             div {
@@ -304,6 +336,7 @@ const TheaterComp = styled.section`
         .basicInfo2 {
           // 스크린관 정보 제목
           h3 {
+            font-size: 1.2em;
           }
           // 스크린관 정보 내용
           .content2 {
