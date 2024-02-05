@@ -17,7 +17,7 @@ const MovieDetailApi = {
   getTotalMoviePostPages: async (movieId) => {
     console.log("씨네포스트 총 페이지 수 :" + movieId);
     const page = 0;
-    const size = 5;
+    const size = 8;
     return await axios.get(
       Common.CP_DOMAIN +
         `/movies/post/page/${movieId}?page=${page}&size=${size}`,
@@ -28,7 +28,7 @@ const MovieDetailApi = {
   getPagedMoviePostList: async (movieId, page) => {
     return await axios.get(
       Common.CP_DOMAIN +
-        `/movies/post/page/list/${movieId}?page=${page - 1}&size=5`,
+        `/movies/post/page/list/${movieId}?page=${page - 1}&size=8`,
       Common.tokenHeader()
     );
   },
