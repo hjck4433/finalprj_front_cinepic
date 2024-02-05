@@ -49,7 +49,7 @@ export const PostComp = styled.section`
       .postTopInfo {
         width: 90%;
         margin-left: 30px;
-        .categotyAndRegDate {
+        .selectedType {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -87,6 +87,7 @@ export const PostComp = styled.section`
             }
           }
         }
+        .count,
         .writtenDate {
           color: var(--GREY);
         }
@@ -258,7 +259,7 @@ export const PostComp = styled.section`
           h3 {
             margin-bottom: 5px;
           }
-          .categotyAndRegDate {
+          .selectedType {
             margin-bottom: 5px;
             .selectedCategory {
               margin-bottom: 0px;
@@ -266,7 +267,7 @@ export const PostComp = styled.section`
           }
         }
         .postTopInfo {
-          .categotyAndRegDate {
+          .selectedType {
             .selectedCategory {
               .selectedTheme,
               .selectedPlace {

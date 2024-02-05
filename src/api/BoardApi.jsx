@@ -17,6 +17,7 @@ const BoardApi = {
       Common.tokenHeader()
     );
   },
+
   // 게시글 수정
   updateBoard: async (
     id,
@@ -40,6 +41,7 @@ const BoardApi = {
       Common.tokenHeader()
     );
   },
+
   // 게시글 삭제
   deleteBoard: async (id) => {
     return await axios.delete(
@@ -47,6 +49,7 @@ const BoardApi = {
       Common.tokenHeader()
     );
   },
+
   // 게시글 리스트 조회
   boardList: async () => {
     return await axios.get(
@@ -54,10 +57,20 @@ const BoardApi = {
       Common.tokenHeader()
     );
   },
+
   // 게시글 상세 조회
   boardDetail: async (postId) => {
     return await axios.get(
       Common.CP_DOMAIN + `/board/post/${postId}`,
+      Common.tokenHeader()
+    );
+  },
+
+  // 조회수
+  boardCounter: async (postId) => {
+    return await axios.put(
+      Common.CP_DOMAIN + `/board/post/counter/`,
+      postId,
       Common.tokenHeader()
     );
   },

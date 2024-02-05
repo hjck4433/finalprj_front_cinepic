@@ -63,6 +63,15 @@ const Post = () => {
   };
   const getPostDetail = useTokenAxios(fetchPostDetail);
 
+  // 조회 수
+  const fetchPostCounter = async () => {
+    const res = await BoardApi.boardCounter(postId);
+    if (res.data) {
+      getBoardData();
+    }
+  };
+  const getPostCounter = useTokenAxios(fetchPostCounter);
+
   // 멤버정보 Api
   const fetchUserDetail = async () => {
     const res = await MemberApi.getMemberDetail();
@@ -96,7 +105,7 @@ const Post = () => {
 
   // 게시글 내용과 멤버정보 가져오기
   useEffect(() => {
-    getPostDetail();
+    getPostCounter();
     getUserDetail();
   }, []);
   return (
@@ -114,7 +123,7 @@ const Post = () => {
               </div>
             </div>
             <div className="postTopInfo">
-              <div className="categotyAndRegDate">
+              <div className="selectedType">
                 <div className="selectedCategory">
                   <div className="selectedTheme">
                     <p>{boardData.categoryName}</p>
@@ -123,6 +132,7 @@ const Post = () => {
                     <p>{boardData.gatherType}</p>
                   </div>
                 </div>
+                <div className="count">조회 수 {boardData.count}</div>
                 <div className="writtenDate">{regDate}</div>
               </div>
               <h3>{boardData.title}</h3>
