@@ -10,7 +10,7 @@ import Modal from "../util/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const Post = (memberInfo) => {
+const Post = () => {
   const navigate = useNavigate();
   const [boardData, setBoardData] = useState("");
   const [userAlias, setUserAlias] = useState("");
@@ -106,8 +106,8 @@ const Post = (memberInfo) => {
           <div className="postTop">
             <div className="profileIcon">
               <div className="profileImage">
-                {memberInfo && memberInfo.image ? (
-                  <img src={memberInfo.image} alt="프로필이미지" />
+                {boardData.memberImage ? (
+                  <img src={boardData.memberImage} alt="userProfileImg" />
                 ) : (
                   <FontAwesomeIcon icon={faUser} />
                 )}

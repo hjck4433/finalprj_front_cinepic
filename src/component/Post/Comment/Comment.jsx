@@ -7,7 +7,7 @@ import EditModal from "./EditCommentModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const Comment = ({ boardComment, fetchCommentList, userAlias, memberInfo }) => {
+const Comment = ({ boardComment, fetchCommentList, userAlias }) => {
   const dateTimeString = boardComment.commentRegDate;
   const toDate = new Date(dateTimeString);
   const regDate = toDate.toISOString().split("T")[0];
@@ -85,8 +85,8 @@ const Comment = ({ boardComment, fetchCommentList, userAlias, memberInfo }) => {
       <div className="commentBox" key={boardComment.commentId}>
         <div className="iconArea">
           <div className="imgBox">
-            {memberInfo && memberInfo.image ? (
-              <img src={memberInfo.image} alt="프로필이미지" />
+            {boardComment.memberImage ? (
+              <img src={boardComment.memberImage} alt="userProfileImg" />
             ) : (
               <FontAwesomeIcon icon={faUser} />
             )}
