@@ -66,6 +66,48 @@ const BoardApi = {
     );
   },
 
+  // 총 페이지 수
+  getTotalPage: async (keyword, categoryName, gatherType) => {
+    if (categoryName === "씨네크루") gatherType = "";
+    const page = 0;
+    const size = 6;
+    return await axios.get(
+      Common.CP_DOMAIN +
+        `/board/totalpages?page=${page}&size=${size}&keyword=${keyword}&categoryName=${categoryName}&gatherType=${gatherType}`,
+      Common.tokenHeader()
+    );
+  },
+  // 페이지네이션
+  getBoardList: async (page, sort, keyword, categoryName, gatherType) => {
+    if (categoryName === "씨네크루") gatherType = "";
+    const size = 6;
+    return await axios.get(
+      Common.CP_DOMAIN +
+        `/board/processedlist?page=${
+          page - 1
+        }&size=${size}&sort=${sort}&keyword=${keyword}&categoryName=${categoryName}&gatherType=${gatherType}`,
+      Common.tokenHeader()
+    );
+  },
+  // 자신이 쓴 글 페이지 수
+  getMemTotalPage: async (type) => {
+    const page = 0;
+    const size = 6;
+    return await axios.get(
+      Common.CP_DOMAIN +
+        `/board/memboard/page?page=${page}&size=${size}&type=${type}`,
+      Common.tokenHeader()
+    );
+  },
+  // 자신이 쓴 글 페이지네이션
+  getMemBoardList: async (page, type) => {
+    const size = 6;
+    return await axios.get(
+      Common.CP_DOMAIN + `/board/memboard/list?page=${page}&type=${type}`,
+      Common.tokenHeader()
+    );
+  },
+
   // 조회수
   boardCounter: async (postId) => {
     return await axios.put(

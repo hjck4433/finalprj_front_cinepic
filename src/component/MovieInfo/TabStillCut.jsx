@@ -3,7 +3,7 @@ import StillCutImg from "./StillCutImg";
 
 const StillCutComp = styled.div`
   padding: 70px 10px;
-  .container {
+  .stil_container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
@@ -31,7 +31,7 @@ const TabStillCut = ({ movieDetail }) => {
 
   return (
     <StillCutComp>
-      <div className="container">
+      <div className="stil_container">
         {stills.length > 0 ? (
           stills.map((still, index) => (
             <StillCutImg className="movieStill" key={index} still={still} />
