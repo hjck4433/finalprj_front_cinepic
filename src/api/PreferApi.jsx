@@ -2,8 +2,6 @@ import axios from "axios";
 import Common from "../util/Common";
 
 const PreferApi = {
-  // 감독 존재 여부
-  // 배우 존재 여부
   // 회원의 취향 정보 가져오기
   getPreferInfo: async () => {
     return await axios.get(
