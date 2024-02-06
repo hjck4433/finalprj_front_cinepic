@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
 import PreferApi from "../../api/PreferApi";
 import MemberApi from "../../api/MemberApi";
+import useTokenAxios from "../../hooks/useTokenAxios";
 
 const ImgComp = styled.div`
   width: 100%;
@@ -31,7 +32,7 @@ const CinePick = () => {
     if (loginStatus) {
       // 로그인 상태일때: 회원 맞춤 영화 추천
       if (isPrefer) {
-        getPreferMovies();
+        preferMovies();
       }
     } else {
       // 비로그인 상태일 때 실행할 작업
@@ -49,6 +50,7 @@ const CinePick = () => {
       setMovieData(res.data);
     }
   };
+  const preferMovies = useTokenAxios(getPreferMovies);
 
   // 장르별 추천 영화 가져오기
   const getGenreRecs = async (genre) => {
