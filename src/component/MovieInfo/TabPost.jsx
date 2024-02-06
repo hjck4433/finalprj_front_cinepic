@@ -20,13 +20,21 @@ const TabPostComp = styled.div`
       padding-bottom: 80%;
     }
     .text_box {
+      height: 265px;
       font-size: 1.1em;
       padding: 10%;
+      position: relative;
       p:nth-child(1) {
         margin-bottom: 15%;
+        color: var(--ORANGE);
       }
       p:nth-child(2) {
-        margin-bottom: 10%;
+        margin-bottom: 12%;
+        line-height: 1.3;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
       p:nth-child(3) {
         margin-bottom: 20%;
@@ -38,8 +46,11 @@ const TabPostComp = styled.div`
       }
       p:nth-child(4) {
         color: var(--GREY);
-        text-align: right;
+        /* text-align: right; */
         /* margin-bottom: 20px; */
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
       }
       button {
         border: 1px solid var(--GREY);
@@ -58,6 +69,7 @@ const TabPostComp = styled.div`
     }
     @media only screen and (max-width: 768px) {
       .text_box {
+        height: 200px;
         font-size: 1.3em;
         button {
           font-size: 1em;

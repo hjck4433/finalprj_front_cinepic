@@ -270,8 +270,14 @@ const TabPostModal = (props) => {
   return (
     <>
       <PostModalComp>
-        <div className={open ? "openModal modal" : "modal"}>
-          <section>
+        <div
+          className={open ? "openModal modal" : "modal"}
+          onClick={() => {
+            close();
+            setIsRevise(false);
+          }}
+        >
+          <section onClick={(e) => e.stopPropagation()}>
             <div className="contentBox">
               <h3>씨네포스트</h3>
               <div

@@ -23,9 +23,8 @@ const PostSlide = styled.div`
         border: 1px solid var(--ORANGE);
         margin-right: 10px;
         color: var(--ORANGE);
-        font-weight: 300;
+        font-weight: 400;
         transition: 0.3s ease-in;
-        /* margin: 2% 10px 2% 0; */
         &:hover {
           color: #fff;
         }

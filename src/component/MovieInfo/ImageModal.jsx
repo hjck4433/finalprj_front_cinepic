@@ -103,7 +103,12 @@ const ImageModal = (props) => {
 
   return (
     <ImgModalStyle>
-      <div className={open ? "openModal modal" : "modal"}>
+      <div
+        className={open ? "openModal modal" : "modal"}
+        onClick={() => {
+          close();
+        }}
+      >
         <section className="modal_header">
           <h3>{movieTitle}</h3>
           <div
@@ -121,7 +126,11 @@ const ImageModal = (props) => {
 
           <div className="input_box">
             <div className="file_box">
-              <img src={movieImage} alt="이미지를 불러올 수 없습니다." />
+              <img
+                src={movieImage}
+                alt="이미지를 불러올 수 없습니다."
+                onClick={(e) => e.stopPropagation()}
+              />
             </div>
           </div>
         </section>

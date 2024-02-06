@@ -77,7 +77,7 @@ const CommentWriteComp = styled.div`
       }
     }
     button {
-      font-weight: 300;
+      font-weight: 400;
       margin: 20px;
     }
   }
