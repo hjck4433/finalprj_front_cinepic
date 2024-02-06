@@ -9,6 +9,9 @@ const AdComp = styled.section`
   width: 100%;
   background-image: url(${adImg});
   background-position: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 300;
   .container {
     /* border: 1px solid blue; */
     width: 100%;
@@ -27,14 +30,20 @@ const AdComp = styled.section`
       @media only screen and (max-width: 768px) {
         padding: 20px;
         p {
-          font-size: 0.9em;
+          font-size: 1.3em;
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        padding: 20px;
+        p {
+          font-size: 1em;
         }
       }
     }
   }
   .imgWrap {
     transform: rotate(-30deg);
-    opacity: 20%;
+    opacity: 15%;
     position: absolute;
     right: 5%;
     .logoImg {

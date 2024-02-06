@@ -142,30 +142,6 @@ const FaqList = () => {
     fetchFaqList();
   }, []);
 
-  // FAQ List 더미데이터
-  // const FaqList = () => {
-  //   const faqData = [
-  //     {
-  //       faqQuestion: "씨네픽은 무엇인가요?",
-  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-  //     },
-  //     {
-  //       faqQuestion: "씨네픽은 무엇인가요?",
-  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-  //     },
-  //     {
-  //       faqQuestion: "씨네픽은 무엇인가요?",
-  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-  //     },
-  //     {
-  //       faqQuestion: "씨네픽은 무엇인가요?",
-  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-  //     },
-  //     {
-  //       faqQuestion: "씨네픽은 무엇인가요?",
-  //       faqAnswer: "사용자 맞춤 영화추천 사이트입니다. ",
-  //     },
-  //   ];
   return (
     <>
       <FaqListComp>

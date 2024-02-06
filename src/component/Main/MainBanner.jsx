@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import mainImg from "../../images/mainImg.jpg";
-import first from "../../images/3.jpg";
+import mainImg from "../../images/3.jpg";
 const MainBannerComp = styled.section`
   width: 100%;
   height: 500px;
-  background-image: url(${first});
+  background-image: url(${mainImg});
   background-size: cover;
   background-position: center;
   .sectionWrapper {
@@ -49,7 +48,7 @@ const MainBanner = () => {
           <div className="container">
             <div className="textBox">
               <h4>당신만을 위한 완벽한 영화 추천</h4>
-              <h2>CINEPICK</h2>
+              <h2>CINEPIC</h2>
             </div>
           </div>
         </div>

@@ -15,10 +15,12 @@ const PaymentComp = styled.div`
       width: 70%;
       padding-bottom: 70%;
       background-image: url(${paymentImg});
-      background-size: cover;
+      /* background-size: cover; */
       position: relative;
       text-align: center;
       .textBox {
+        width: 100%;
+        /* border: 1px solid white; */
         position: absolute;
         left: 50%;
         top: 50%;
@@ -37,11 +39,12 @@ const PaymentComp = styled.div`
           @media only screen and (max-width: 768px) {
             font-size: 1.8em;
           }
-          @media only screen and (max-width: 520px) {
+          @media only screen and (max-width: 600px) {
             font-size: 1.5em;
           }
-          @media only screen and (max-width: 431px) {
-            font-size: 1.3em;
+          @media only screen and (max-width: 480px) {
+            font-size: 1.2em;
+            margin-bottom: 5px;
           }
         }
       }
