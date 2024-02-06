@@ -16,7 +16,8 @@ const MyInfoComp = styled.section`
     h2 {
       text-align: center;
       margin-bottom: 50px;
-      font-size: 3rem;
+      font-size: 1.8rem;
+      font-weight: 800;
     }
     .wrapper {
       display: flex;
@@ -151,7 +152,7 @@ const MyInfo = ({ memberInfo, profile }) => {
     <>
       <MyInfoComp>
         <div className="container">
-          <h2>MY INFO</h2>
+          <h2>마이페이지</h2>
           <div className="wrapper">
             <div className="userProfile">
               <div className="profileImg">
