@@ -262,6 +262,12 @@ const BoardBanner = ({ id, keyword, setKeyword, setIsLoading }) => {
                   placeholder="검색어를 입력해주세요."
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault(); // 기본 Enter 행동 방지
+                      setIsLoading(true);
+                    }
+                  }}
                 />
                 <div className="search_icon">
                   <FontAwesomeIcon

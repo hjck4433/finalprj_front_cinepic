@@ -17,14 +17,14 @@ const StillCutComp = styled.div`
   }
   @media only screen and (max-width: 768px) {
     padding: 50px 0;
-    .container {
+    .stil_container {
       grid-template-columns: repeat(2, 1fr);
       /* gap: 10px; */
     }
   }
 `;
 
-const TabStillCut = ({ movieDetail }) => {
+const TabStillCut = ({ movieDetail, handleImageModal }) => {
   const stills = movieDetail.movieStills
     ? movieDetail.movieStills.split("|")
     : [];
@@ -34,7 +34,12 @@ const TabStillCut = ({ movieDetail }) => {
       <div className="stil_container">
         {stills.length > 0 ? (
           stills.map((still, index) => (
-            <StillCutImg className="movieStill" key={index} still={still} />
+            <StillCutImg
+              className="movieStill"
+              key={index}
+              still={still}
+              handleImageModal={handleImageModal}
+            />
           ))
         ) : (
           <p className="noStillMsg">스틸 컷 정보가 없습니다.</p>

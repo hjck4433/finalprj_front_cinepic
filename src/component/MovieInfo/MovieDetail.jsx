@@ -110,9 +110,10 @@ const ImgComp = styled.div`
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
 `;
 
-const MovieDetail = ({ movieDetail, movieId }) => {
+const MovieDetail = ({ movieDetail, movieId, handleImageModal }) => {
   const navigate = useNavigate();
 
   // 모달 자리
@@ -144,7 +145,12 @@ const MovieDetail = ({ movieDetail, movieId }) => {
       <MovieDetailComp>
         <div className="container">
           <div className="img_box">
-            <ImgComp $imgsrc={movieDetail.moviePoster} />
+            <ImgComp
+              $imgsrc={movieDetail.moviePoster}
+              onClick={() => {
+                handleImageModal(movieDetail.moviePoster);
+              }}
+            />
             <Bookmark movieId={movieId} />
           </div>
           <div className="text_box">

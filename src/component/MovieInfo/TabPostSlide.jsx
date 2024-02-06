@@ -29,6 +29,10 @@ const PostSlide = styled.div`
         &:hover {
           color: #fff;
         }
+        @media only screen and (max-width: 768px) {
+          width: 80px;
+          height: 30px;
+        }
       }
     }
     .movie_post_slider {

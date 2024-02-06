@@ -41,7 +41,13 @@ const TabMenuComp = styled.section`
   }
 `;
 
-const TabMenu = ({ movieId, movieDetail, userImage, userAlias }) => {
+const TabMenu = ({
+  movieId,
+  movieDetail,
+  userImage,
+  userAlias,
+  handleImageModal,
+}) => {
   const [currentTab, setTab] = useState(0);
 
   return (
@@ -84,7 +90,12 @@ const TabMenu = ({ movieId, movieDetail, userImage, userAlias }) => {
           </ul>
           {currentTab === 0 && <TabInfo movieDetail={movieDetail} />}
           {currentTab === 1 && <TabActor movieDetail={movieDetail} />}
-          {currentTab === 2 && <TabStillCut movieDetail={movieDetail} />}
+          {currentTab === 2 && (
+            <TabStillCut
+              movieDetail={movieDetail}
+              handleImageModal={handleImageModal}
+            />
+          )}
           {currentTab === 3 && (
             <TabPostSlide
               movieId={movieId}

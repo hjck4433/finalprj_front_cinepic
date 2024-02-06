@@ -7,6 +7,7 @@ import MovieDetailApi from "../api/MovieDetailApi";
 import { UserContext } from "../context/UserStore";
 import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
+import ImageModal from "../component/MovieInfo/ImageModal";
 
 const MovieInfo = () => {
   const { id } = useParams();
@@ -14,6 +15,18 @@ const MovieInfo = () => {
   const { loginStatus } = context;
 
   const [movieData, setMovieData] = useState({});
+  const [movieImage, setMovieImage] = useState(
+    "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20220509_176%2F1652081912471yhg3N_JPEG%2Fmovie_image.jpg"
+  );
+
+  const [openModal, setModalOpen] = useState(false);
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  const handleImageModal = (image) => {
+    setModalOpen(true);
+    setMovieImage(image);
+  };
 
   const movieInfoData = async () => {
     try {
@@ -51,17 +64,28 @@ const MovieInfo = () => {
 
   return (
     <>
-      <MovieDetail movieDetail={movieData} movieId={id} />
+      <MovieDetail
+        movieDetail={movieData}
+        movieId={id}
+        handleImageModal={handleImageModal}
+      />
       <TabMenu
         movieId={id}
         movieDetail={movieData}
         userImage={userImage}
         userAlias={userAlias}
+        handleImageModal={handleImageModal}
       />
       <CommentContainer
         movieId={id}
         userImage={userImage}
         userAlias={userAlias}
+      />
+      <ImageModal
+        movieTitle={movieData.movieTitle}
+        movieImage={movieImage}
+        open={openModal}
+        close={closeModal}
       />
     </>
   );
