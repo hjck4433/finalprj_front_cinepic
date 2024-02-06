@@ -125,14 +125,15 @@ const Post = () => {
             <div className="postTopInfo">
               <div className="selectedType">
                 <div className="selectedCategory">
-                  <div className="selectedTheme">
+                  <p>{`${boardData.categoryName} / ${boardData.gatherType}`}</p>
+                  {/* <div className="selectedTheme">
                     <p>{boardData.categoryName}</p>
                   </div>
                   <div className="selectedPlace">
                     <p>{boardData.gatherType}</p>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="count">조회 수 {boardData.count}</div>
+                {/* <div className="count">조회 수 {boardData.count}</div> */}
                 <div className="writtenDate">{regDate}</div>
               </div>
               <h3>{boardData.title}</h3>
@@ -142,16 +143,17 @@ const Post = () => {
                 {userAlias === boardData.memberAlias && (
                   <div className="reviseBtnBox">
                     <Button
-                      children="수정하기"
-                      front="var(--GREY)"
+                      children="수정"
+                      front="var(--ORANGE)"
                       back="var(--DARKRED)"
                       active={true}
                       clickEvt={() => clickBtn(1)}
                       width="100%"
                       height="30px"
+                      fontSize="14px"
                     />
                     <Button
-                      children="삭제하기"
+                      children="삭제"
                       front="var(--GREY)"
                       back="var(--DARKGREY)"
                       active={true}
@@ -164,6 +166,7 @@ const Post = () => {
                       }}
                       width="100%"
                       height="30px"
+                      fontSize="14px"
                     />
                   </div>
                 )}
@@ -171,6 +174,7 @@ const Post = () => {
             </div>
           </div>
           <div className="postMain">
+            <div className="count">조회 수 {boardData.count}</div>
             <div className="contents">
               <img src={boardData.image} alt="contentsImg" />
               <div className="contentsText">

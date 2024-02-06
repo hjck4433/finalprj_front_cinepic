@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const PostComp = styled.section`
   .container {
     background-color: white;
-    padding: 3%;
-    border-radius: 5px;
+    padding-top: 3%;
 
     .postTop {
       width: 100%;
@@ -13,7 +12,7 @@ export const PostComp = styled.section`
       align-items: center;
       padding-bottom: 30px;
       margin-top: 10px;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
       position: relative;
 
       .profileIcon {
@@ -60,6 +59,7 @@ export const PostComp = styled.section`
             display: flex;
             text-align: center;
             margin-bottom: 10px;
+            align-items: center;
 
             .selectedTheme {
               width: 100px;
@@ -89,19 +89,22 @@ export const PostComp = styled.section`
         }
         .count,
         .writtenDate {
-          color: var(--GREY);
+          color: #888;
         }
         h3 {
           color: var(--BLACK);
           margin-bottom: 20px;
           font-size: 1.8em;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.3em;
+          }
         }
         .nickAndReviseBtn {
           display: flex;
           justify-content: space-between;
           align-items: center;
           .nickname {
-            font-size: 1.4em;
+            font-size: 1.2em;
           }
         }
         .reviseBtnBox {
@@ -111,16 +114,17 @@ export const PostComp = styled.section`
       }
     }
     .postMain {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2%;
+      /* outline: 1px solid red; */
+      .count {
+        text-align: right;
+        margin-bottom: 50px;
+        color: #888;
+      }
       .contents {
-        width: 90%;
         img {
-          width: 100%;
-          border-radius: 10px;
+          display: block;
+          margin: 0 auto;
+          width: 90%;
         }
         .contentsText {
           width: 100%;
@@ -207,6 +211,9 @@ export const PostComp = styled.section`
             }
           }
         }
+      }
+      .noComment {
+        padding-top: 30px;
       }
       // 댓글 입력창
       .textInputBox {

@@ -94,7 +94,7 @@ const BoardCommentList = ({ id, userAlias }) => {
             />
           </>
         ) : (
-          <p>등록된 댓글이 없습니다.</p>
+          <p className="noComment">등록된 댓글이 없습니다.</p>
         )}
 
         <div className="textInputBox">
