@@ -34,9 +34,10 @@ const PostSlide = styled.div`
     .movie_post_slider {
       width: 100%;
       padding: 30px 20px;
+      /* background: pink; */
 
       .swiper-slide {
-        min-width: 280px;
+        /* min-width: 280px; */
       }
       .swiper-button {
         width: 15px;
@@ -212,9 +213,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   const [editId, setEditId] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postAlias, setPostAlias] = useState("");
-  const [onChangePostTitle, setOnChangePostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
-  const [onChangePostContent, setOnChangePostContent] = useState("");
 
   //post모달 새글 작성 버전으로 열기
   const openNew = () => {
@@ -271,12 +270,12 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
   const modiPost = async (url) => {
     console.log("무비포스트 수정 전");
     const res = await MovieDetailApi.modifyMoviePost(
-      setEditId,
+      editId,
       url,
       postTitle,
       postContent
     );
-    console.log("postId : " + setEditId);
+    console.log("postId : " + editId);
     if (res.data !== null) {
       console.log("무비포스트 수정 성공");
       // 조회 함수 자리
@@ -291,6 +290,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
     const res = await MovieDetailApi.deleteMoviePost(editId);
     if (res.data) {
       console.log("무비포스트 삭제 성공");
+      closePostModal();
       // 조회 함수 추가
       fetchTotalPage();
     }
@@ -342,8 +342,8 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
-              500: {
-                slidesPerView: 1.5,
+              300: {
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
             }}
@@ -353,13 +353,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
             {postData &&
               postData.map((post) => (
                 <SwiperSlide className="slide" key={post.postId}>
-                  <TabPost
-                    // onClick={}
-                    postId={post.postId}
-                    post={post}
-                    revise={revise}
-                    userAlias={userAlias}
-                  />
+                  <TabPost postId={post.postId} post={post} revise={revise} />
                 </SwiperSlide>
               ))}
             <div className="swiper-button-prev swiper-button"></div>
@@ -378,7 +372,6 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
           if (modalConfirm === 0) {
             navigate("/login");
           } else {
-            closePostModal();
             closeModal();
             delPost();
           }
@@ -391,6 +384,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
         postImage={postImage}
         moviePostId={editId}
         postAlias={postAlias}
+        userAlias={userAlias}
         postTitle={postTitle}
         onChangePostTitle={changeTitleInput}
         postContent={postContent}

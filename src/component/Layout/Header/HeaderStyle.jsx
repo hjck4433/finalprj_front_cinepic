@@ -8,7 +8,7 @@ const HeaderComp = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 888;
   border-bottom: 1px solid rgba(204, 204, 204, 0.1);
   .container {
     display: flex;

@@ -198,6 +198,7 @@ const TabPostModal = (props) => {
     postImage,
     moviePostId,
     postAlias,
+    userAlias,
     postTitle,
     onChangePostTitle,
     postContent,
@@ -210,6 +211,8 @@ const TabPostModal = (props) => {
   useEffect(() => {
     console.log("수정할 포스트 아이디 : " + moviePostId);
   }, [moviePostId]);
+  // 수정 선택 여부
+  const [isRevise, setIsRevise] = useState(false);
 
   // 이미지 업로드
   const [imgSrc, setImgSrc] = useState(postImage !== "" ? "" : postImage);
@@ -241,12 +244,12 @@ const TabPostModal = (props) => {
         fileRef.getDownloadURL().then((url) => {
           console.log("저장경로 확인 : " + url);
           console.log("url" + url);
-          type === "edit" ? modiPost(url) : savePost(url);
+          type === "view" ? modiPost(url) : savePost(url);
         });
       });
     } else {
       console.log("파이어베이스 생략");
-      type === "edit" ? modiPost(imgSrc) : savePost(imgSrc);
+      type === "view" ? modiPost(imgSrc) : savePost(imgSrc);
     }
   };
 
@@ -275,6 +278,7 @@ const TabPostModal = (props) => {
                 className="close_btn"
                 onClick={() => {
                   close();
+                  setIsRevise(false);
                 }}
               >
                 <FontAwesomeIcon
@@ -292,7 +296,7 @@ const TabPostModal = (props) => {
                   )}
                 </div>
                 <div className="box">
-                  {type !== "view" && (
+                  {(type === "new" || isRevise) && (
                     <label htmlFor="file">
                       <input
                         type="file"
@@ -309,43 +313,64 @@ const TabPostModal = (props) => {
                 </p>
                 <input
                   type="text"
-                  defaultValue={postTitle}
+                  value={postTitle}
                   className="input_text"
                   placeholder="제목"
                   onChange={onChangePostTitle}
-                  disabled={type === "view" ? true : false}
+                  disabled={isRevise || type === "new" ? false : true}
                 />
                 <textarea
-                  defaultValue={postContent}
+                  value={postContent}
                   placeholder="내용을 입력해 주세요"
                   onChange={onChangePostContent}
-                  disabled={type === "view" ? true : false}
+                  disabled={isRevise || type === "new" ? false : true}
                 ></textarea>
               </div>
 
               <div className="btnBox">
-                {type !== "view" && (
+                {type === "view" && postAlias === userAlias && (
                   <Button
                     clickEvt={() => {
-                      // type === "edit" ? 수정기능 함수 : 등록기능 함수
-                      // type === "edit" ? modiPost() : savePost();
-                      submitPost();
-                      handleModal("등록", "게시글이 등록되었습니다.", false, 1);
-                      close();
+                      if (isRevise) {
+                        submitPost();
+                        handleModal(
+                          "등록",
+                          "게시글이 등록되었습니다.",
+                          false,
+                          1
+                        );
+                        close();
+                        setIsRevise(false);
+                      } else {
+                        setIsRevise(true);
+                      }
                     }}
                     active={true}
-                    children={type === "edit" ? "수정" : "등록"}
+                    children={isRevise ? "등록" : "수정"}
                     width="80px"
                     front="var(--RED)"
                     back={"var(--DARKRED)"}
                   />
                 )}
-                {type === "edit" && (
+                {type === "new" && (
+                  <Button
+                    clickEvt={() => {
+                      submitPost();
+                      handleModal("등록", "게시글이 등록되었습니다.", false, 1);
+                      close();
+                    }}
+                    active={true}
+                    children={"등록"}
+                    width="80px"
+                    front="var(--RED)"
+                    back={"var(--DARKRED)"}
+                  />
+                )}
+                {postAlias === userAlias && type === "view" && (
                   <Button
                     className="delButton"
                     clickEvt={() => {
                       handleModal("삭제", "삭제하시겠습니까?", true, 1);
-                      close();
                     }}
                     active={true}
                     children="삭제"

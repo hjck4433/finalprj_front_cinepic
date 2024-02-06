@@ -91,18 +91,6 @@ const TabPost = ({ post, revise, userAlias }) => {
     );
   };
 
-  const handleEditButtonClick = () => {
-    console.log("수정수정!!!");
-    revise(
-      "edit",
-      post.postImage,
-      post.postTitle,
-      post.postContent,
-      post.postId,
-      post.alias
-    );
-  };
-
   return (
     <>
       <TabPostComp>
@@ -115,18 +103,6 @@ const TabPost = ({ post, revise, userAlias }) => {
             <p>{post.postTitle}</p>
             <p>{post.postContent}</p>
             <p>{regDate}</p>
-            {userAlias && userAlias === post.alias && (
-              <Button
-                children="수정"
-                front="#fff"
-                back="#fff"
-                width="60px"
-                height="36px"
-                fontSize="0.9em"
-                active={true}
-                clickEvt={handleEditButtonClick}
-              />
-            )}
           </div>
         </div>
       </TabPostComp>
