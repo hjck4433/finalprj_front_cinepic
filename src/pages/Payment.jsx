@@ -12,8 +12,8 @@ const PaymentComp = styled.div`
     display: flex;
     justify-content: center;
     .paymentBox {
-      width: 70%;
-      padding-bottom: 70%;
+      width: 60%;
+      padding-bottom: 60%;
       background-image: url(${paymentImg});
       /* background-size: cover; */
       position: relative;
@@ -36,6 +36,9 @@ const PaymentComp = styled.div`
           .yellow {
             color: #ffeb55;
           }
+          @media only screen and (max-width: 992px) {
+            font-size: 1.4em;
+          }
           @media only screen and (max-width: 768px) {
             font-size: 1.8em;
           }
@@ -55,13 +58,19 @@ const PaymentComp = styled.div`
         transform: translate(-50%, -50%);
         margin-top: 30px;
 
+        @media only screen and (max-width: 992px) {
+          margin-top: 50px;
+          button {
+            width: 160px;
+          }
+        }
         @media only screen and (max-width: 768px) {
           margin-top: 50px;
           button {
             width: 150px;
           }
         }
-        @media only screen and (max-width: 431px) {
+        @media only screen and (max-width: 480px) {
           font-size: 1em;
           button {
             width: 100px;
@@ -72,7 +81,7 @@ const PaymentComp = styled.div`
         width: 100%;
         padding-bottom: 100%;
       }
-      @media only screen and (max-width: 431px) {
+      @media only screen and (max-width: 480px) {
         padding-bottom: 120%;
       }
     }
