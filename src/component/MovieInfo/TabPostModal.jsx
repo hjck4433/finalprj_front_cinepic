@@ -345,7 +345,7 @@ const TabPostModal = (props) => {
                         setIsRevise(true);
                       }
                     }}
-                    active={true}
+                    active={postTitle.length > 0 && postContent.length > 0}
                     children={isRevise ? "등록" : "수정"}
                     width="80px"
                     front="var(--RED)"
@@ -359,7 +359,9 @@ const TabPostModal = (props) => {
                       handleModal("등록", "게시글이 등록되었습니다.", false, 1);
                       close();
                     }}
-                    active={true}
+                    active={
+                      postContent.length > 0 && postTitle.length > 0 && isImage
+                    }
                     children={"등록"}
                     width="80px"
                     front="var(--RED)"
