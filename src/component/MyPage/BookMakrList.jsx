@@ -4,9 +4,9 @@ import MovieList from "../MovieSearch/MovieList";
 const BookMarkListComp = styled.section`
   .container {
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      padding-bottom: 60px;
+      padding-bottom: 80px;
     }
   }
 `;
