@@ -30,7 +30,7 @@ const BookmarkComp = styled.div`
 
       .heart {
         font-size: 1.3rem;
-        color: var(--RED);
+        color: var(--ORANGE);
         opacity: 0.6;
         position: relative;
         z-index: 101;

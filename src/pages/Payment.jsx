@@ -68,6 +68,13 @@ const PaymentComp = styled.div`
           }
         }
       }
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        padding-bottom: 100%;
+      }
+      @media only screen and (max-width: 431px) {
+        padding-bottom: 120%;
+      }
     }
   }
 `;
