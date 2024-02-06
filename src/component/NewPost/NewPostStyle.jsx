@@ -44,7 +44,7 @@ export const NewPostComp = styled.section`
       .regDate,
       .postImage {
         display: flex;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         h3 {
           color: var(--BLACK);
           font-weight: 600;
@@ -69,7 +69,7 @@ export const NewPostComp = styled.section`
           background-color: var(--IVORY);
           border: 1px solid var(--ORANGE);
           width: 100%;
-          border-radius: 10px;
+          border-radius: 8px;
           padding: 10px;
           font-size: 1.2em;
         }
@@ -83,6 +83,7 @@ export const NewPostComp = styled.section`
           padding: 10px;
           font-size: 1.2em;
           resize: none;
+          height: 250px;
         }
       }
       .uploadImage {
@@ -136,17 +137,23 @@ export const NewPostComp = styled.section`
     .container {
       padding: 5% 0%;
       .postIntro {
+        text-align: center;
+        margin-bottom: 15px;
         .introTop {
-          text-align: center;
           margin-bottom: 15px;
         }
+      }
 
-        h2 {
-          margin-bottom: 20px;
-          font-size: 1.8em;
-        }
+      h2 {
+        margin-bottom: 20px;
+        font-size: 1.8em;
       }
       .postBox {
+        .author,
+        .regDate,
+        .postImage {
+          margin-bottom: 30px;
+        }
         .contents {
           flex-direction: column;
           width: 100%;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const RadioBox = styled.div`
-  padding: 20px 0;
+  padding: 10px 0;
 
   .themeSelectBtn {
     display: flex;
