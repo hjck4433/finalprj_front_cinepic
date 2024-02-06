@@ -35,6 +35,12 @@ const PostSlide = styled.div`
       width: 100%;
       padding: 30px 20px;
       /* background: pink; */
+      .noPost {
+        text-align: center;
+        line-height: 1.4;
+        font-size: 1.2em;
+        color: #888;
+      }
 
       .swiper-slide {
         /* min-width: 280px; */
@@ -356,6 +362,11 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
                   <TabPost postId={post.postId} post={post} revise={revise} />
                 </SwiperSlide>
               ))}
+            {postData.length === 0 && (
+              <p className="noPost">
+                작성된 포스트가 없습니다. <br /> 첫 포스트를 작성해 보세요!
+              </p>
+            )}
             <div className="swiper-button-prev swiper-button"></div>
             <div className="swiper-button-next swiper-button"></div>
           </Swiper>

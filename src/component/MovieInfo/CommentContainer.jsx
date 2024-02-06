@@ -98,67 +98,6 @@ const CommentContainer = ({ movieId, userImage, userAlias }) => {
   };
   const delComment = useTokenAxios(deleteComment);
 
-  // const commentData = [
-  //   {
-  //     postId: 1,
-  //     movieId: 123,
-  //     image:
-  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //     alias: "nana",
-  //     ratingField: "OST",
-  //     ratingNum: "8",
-  //     ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
-  //     commentRegDate: "2024-01-23T12:34:56Z",
-  //   },
-  //   {
-  //     postId: 2,
-  //     movieId: 123,
-  //     image:
-  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //     alias: "nana",
-  //     ratingField: "OST",
-  //     ratingNum: "8",
-  //     ratingText: "ost가 영화 분위기를 더 살려주는거 같아요",
-  //     commentRegDate: "2024-01-23T12:34:56Z",
-  //   },
-  //   {
-  //     postId: 3,
-  //     movieId: 123,
-  //     image:
-  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //     alias: "씨네픽",
-  //     ratingField: "OST",
-  //     ratingNum: "8",
-  //     ratingText:
-  //       "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
-  //     commentRegDate: "2024-01-24T12:34:56Z",
-  //   },
-  //   {
-  //     postId: 4,
-  //     movieId: 123,
-  //     image:
-  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //     alias: "nana",
-  //     ratingField: "OST",
-  //     ratingNum: "8",
-  //     ratingText:
-  //       "ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ost가 영화 분위기를 더 살려주는거 같아요. ",
-  //     commentRegDate: "2024-01-25T12:34:56Z",
-  //   },
-  //   {
-  //     postId: 5,
-  //     movieId: 123,
-  //     image:
-  //       "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //     alias: "씨네픽",
-  //     ratingField: "OST",
-  //     ratingNum: "8",
-  //     ratingText:
-  //       "밤하늘의 별빛처럼, 당신은 희망과 가능성으로 빛나는 존재입니다. 과거를 뒤로하고 오늘을 살며 내일을 향해 달려나가세요. 당신의 꿈과 열정이 세상을 아름답게 만듭니다. 계속해서 빛나세요.",
-  //     commentRegDate: "2024-01-26T12:34:56Z",
-  //   },
-  // ];
-
   return (
     <>
       <CommentContainerComp>
@@ -184,13 +123,14 @@ const CommentContainer = ({ movieId, userImage, userAlias }) => {
                 />
               ))}
           </div>
-
-          <PaginationUtil
-            totalPage={totalPage}
-            limit={5}
-            page={page}
-            setPage={setPage}
-          />
+          {movieCommentData.length !== 0 && (
+            <PaginationUtil
+              totalPage={totalPage}
+              limit={5}
+              page={page}
+              setPage={setPage}
+            />
+          )}
         </div>
       </CommentContainerComp>
       <Modal
