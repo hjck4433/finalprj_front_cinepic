@@ -25,6 +25,7 @@ export const NewPostComp = styled.section`
       border-radius: 10px;
       padding: 40px;
       .selectTheme {
+        margin-bottom: 20px;
         h3 {
           color: var(--BLACK);
           font-weight: 600;
@@ -32,6 +33,7 @@ export const NewPostComp = styled.section`
         }
       }
       .meetingType {
+        margin-bottom: 20px;
         h3 {
           color: var(--BLACK);
           font-weight: 600;
@@ -40,12 +42,9 @@ export const NewPostComp = styled.section`
       }
       .author,
       .regDate,
-      .postTitle,
-      .postImage,
-      .contents {
+      .postImage {
         display: flex;
         margin-bottom: 30px;
-
         h3 {
           color: var(--BLACK);
           font-weight: 600;
@@ -59,17 +58,31 @@ export const NewPostComp = styled.section`
       }
       .postTitle,
       .contents {
+        h3 {
+          margin-bottom: 20px;
+          letter-spacing: 8px;
+        }
+      }
+      .postTitle {
+        margin-bottom: 30px;
+        input {
+          background-color: var(--IVORY);
+          border: 1px solid var(--ORANGE);
+          width: 100%;
+          border-radius: 10px;
+          padding: 10px;
+          font-size: 1.2em;
+        }
+      }
+      .contents {
         textarea {
           background-color: var(--IVORY);
+          border: 1px solid var(--ORANGE);
           width: 100%;
           border-radius: 10px;
           padding: 10px;
           font-size: 1.2em;
           resize: none;
-        }
-        h3 {
-          margin-bottom: 20px;
-          letter-spacing: 8px;
         }
       }
       .uploadImage {
@@ -91,7 +104,7 @@ export const NewPostComp = styled.section`
           }
         }
         label {
-          padding: 10px 20px;
+          padding: 5px 10px;
           color: white;
           border-radius: 5px;
           font-size: 1em;
@@ -106,18 +119,6 @@ export const NewPostComp = styled.section`
         input {
           display: none;
         }
-      }
-    }
-    .contents {
-      flex-direction: column;
-      width: 100%;
-      textarea {
-        width: 100%;
-        height: 400px;
-        border-radius: 10px;
-        padding: 10px;
-        font-size: 1.1em;
-        resize: none;
       }
     }
     .buttonBox {
@@ -135,10 +136,14 @@ export const NewPostComp = styled.section`
     .container {
       padding: 5% 0%;
       .postIntro {
-        text-align: center;
-        margin-bottom: 15px;
+        .introTop {
+          text-align: center;
+          margin-bottom: 15px;
+        }
+
         h2 {
           margin-bottom: 20px;
+          font-size: 1.8em;
         }
       }
       .postBox {

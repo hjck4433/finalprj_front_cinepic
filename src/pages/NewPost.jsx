@@ -169,7 +169,7 @@ const NewPost = () => {
       <NewPostComp>
         <div className="container">
           <div className="postIntro">
-            <h2>모임과 관련된 글을 등록해주세요.</h2>
+            <h2 className="introTop">모임과 관련된 글을 등록해주세요.</h2>
             <p>함께 만들어가는 건전한 영화모임!</p>
             <p>후기로 추억하는 그 날의 즐거웠던 모임!</p>
           </div>
@@ -238,12 +238,12 @@ const NewPost = () => {
             </div>
             <div className="postTitle">
               <h3>제 목</h3>
-              <textarea
+              <input
                 type="text"
                 value={inputTitle}
-                placeholder="글의 제목을 입력해주세요."
+                placeholder="제목을 입력해주세요."
                 onChange={InputTitleChange}
-              ></textarea>
+              ></input>
             </div>
             <div className="postImage">
               <h3>이미지</h3>
@@ -265,7 +265,7 @@ const NewPost = () => {
               <textarea
                 type="text"
                 value={inputContents}
-                placeholder="글의 내용을 입력해주세요."
+                placeholder="내용을 입력해주세요."
                 onChange={InputContentsChange}
               ></textarea>
             </div>
