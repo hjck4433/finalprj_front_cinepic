@@ -39,6 +39,9 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar {
     width: 15px;
   }
+  textarea {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
 
   /* Track */
   ::-webkit-scrollbar-track {

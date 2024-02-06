@@ -69,7 +69,6 @@ const FaqListComp = styled.section`
           top: 3px;
           right: 0;
           padding: 18px;
-          cursor: pointer;
         }
       }
     }
@@ -108,7 +107,7 @@ const Faq = ({ faqPlus }) => {
   };
   return (
     <>
-      <li>
+      <li onClick={onClick}>
         <div className="faqBox">
           <div className="title">{faqPlus.faqQuestion}</div>
         </div>
@@ -116,7 +115,7 @@ const Faq = ({ faqPlus }) => {
         <div className={`toggle ${active}`}>
           <p>{faqPlus.faqAnswer}</p>
         </div>
-        <FontAwesomeIcon onClick={onClick} icon={icon} />
+        <FontAwesomeIcon icon={icon} />
       </li>
     </>
   );
