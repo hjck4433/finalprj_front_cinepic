@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import mainImg from "../../images/mainImg.jpg";
+import first from "../../images/3.jpg";
 const MainBannerComp = styled.section`
   width: 100%;
   height: 500px;
-  background-image: url(${mainImg});
+  background-image: url(${first});
   background-size: cover;
-  background-position: left;
+  background-position: center;
   .sectionWrapper {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     height: 100%;
     width: 100%;
     .container {
