@@ -22,12 +22,12 @@ const AdminLayout = () => {
   const context = useContext(UserContext);
   const { loginStatus } = context;
 
-  // useEffect(() => {
-  //   if (loginStatus !== "ADMIN") {
-  //     //로그인 하지 않았다면 로그인 페이지로 이동
-  //     navigate("/logina");
-  //   }
-  // }, []); // []<-화면 마운트시 최초 한번 실행
+  useEffect(() => {
+    if (loginStatus !== "ADMIN") {
+      //로그인 하지 않았다면 로그인 페이지로 이동
+      navigate("/loginadmin");
+    }
+  }, []); // []<-화면 마운트시 최초 한번 실행
 
   return (
     <>

@@ -145,7 +145,7 @@ const LoginTypeChart = () => {
     <PieChartBox>
       <h4 className="chartTitle">회원가입 방법 구분</h4>
       <ResponsiveContainer width="100%" height="100%">
-        <PieChartComp width={250} height={250}>
+        <PieChartComp width={300} height={300}>
           <Pie
             activeIndex={activeIndex}
             activeShape={TypeChart}

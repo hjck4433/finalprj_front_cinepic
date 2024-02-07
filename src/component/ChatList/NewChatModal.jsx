@@ -109,6 +109,14 @@ const NewChatModal = (props) => {
                 value={inputVal}
                 placeholder="새로운 무비톡 이름을 적어주세요!"
                 onChange={onChangeInput}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (active) {
+                      confirm();
+                    }
+                  }
+                }}
               />
               <div className="err">{errMsg}</div>
             </div>

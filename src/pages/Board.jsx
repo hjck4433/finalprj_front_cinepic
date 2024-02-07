@@ -19,6 +19,11 @@ const Board = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // 로그인 x → 로그인 페이지로 이동
+  useEffect(() => {
+    if (!loginStatus) {
+      navigate("/login"); // 로그인 하지 않았다면 로그인 페이지로 이동
+    }
+  }, []);
 
   // 카테고리
   useEffect(() => {

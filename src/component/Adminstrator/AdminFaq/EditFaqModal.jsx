@@ -50,7 +50,7 @@ const EditFaqModalComp = styled.div`
         padding: 15px;
         border-radius: 5px;
         margin-bottom: 20px;
-        text-align: center;
+        text-align: left;
       }
       textarea {
         width: 80%;
