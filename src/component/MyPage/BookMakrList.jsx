@@ -4,7 +4,7 @@ import MovieList from "../MovieSearch/MovieList";
 const BookMarkListComp = styled.section`
   .container {
     h2 {
-      font-size: 1.3rem;
+      font-size: 1.8rem;
       font-weight: 800;
       padding-bottom: 80px;
     }

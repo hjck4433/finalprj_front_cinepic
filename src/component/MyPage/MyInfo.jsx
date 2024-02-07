@@ -82,9 +82,9 @@ const MyInfoComp = styled.section`
       margin-top: 40px;
       button {
         margin-left: 50px;
-        letter-spacing: -0.8px;
+        letter-spacing: -0.5px;
         word-break: keep-all;
-        line-height: 1.4;
+        line-height: 1.3;
       }
     }
     @media only screen and (max-width: 768px) {
@@ -113,8 +113,9 @@ const MyInfoComp = styled.section`
             padding-right: 0;
             justify-content: center;
             margin-top: 70px;
+
             button {
-              font-size: 1.2em;
+              /* width: 300px; //왜 버튼 넓이가 넓어지지 않는지? */
             }
           }
         }
@@ -123,10 +124,10 @@ const MyInfoComp = styled.section`
     @media only screen and (max-width: 480px) {
       .wrapper {
         .userContent {
-          padding: 0 10px;
+          padding: 0;
           .userBox {
             p {
-              font-size: 1.2em;
+              font-size: 1.4em;
             }
           }
         }
