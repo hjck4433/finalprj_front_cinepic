@@ -5,34 +5,35 @@ const CardComp = styled.section`
   padding: 0 20px;
 
   .card_container {
-    height: 226px;
     display: flex;
     gap: 30px;
     padding: 30px 0;
-    /* margin-bottom: 100px; */
     border-bottom: 1px solid var(--GREY);
+    /* background-color: pink; */
     cursor: pointer;
     .img_box {
-      width: 22%;
+      width: 26%;
+      min-width: 230px;
       border-radius: 5px;
       overflow: hidden;
     }
     .text_box {
-      width: calc(100% - 22% - 30px - (20px - 20px));
+      width: calc(100% - 26% - 30px - (20px - 20px) - 30px);
       position: relative;
+      padding-top: 20px;
       .date {
         text-align: right;
         color: var(--GREY);
-        margin-bottom: 20px;
 
         position: absolute;
-        top: -20px;
+        top: -10px;
         right: 0;
       }
       .title {
         font-weight: 700;
         font-size: 1.4em;
-        margin-bottom: 20px;
+        margin-bottom: 26px;
+        line-height: normal;
 
         overflow: hidden;
         white-space: nowrap;
@@ -40,6 +41,7 @@ const CardComp = styled.section`
       }
       .text_area {
         margin-bottom: 20px;
+        line-height: 1.4;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
@@ -48,7 +50,7 @@ const CardComp = styled.section`
       .count {
         color: var(--GREY);
         position: absolute;
-        bottom: 0;
+        bottom: 10px;
         left: 0;
       }
     }
@@ -66,16 +68,23 @@ const CardComp = styled.section`
       }
       .text_box {
         width: 100%;
+        padding-top: 6px;
+        padding-bottom: 20px;
         .date {
           font-size: 1.3em;
-          margin-bottom: 10px;
-          position: static;
           top: auto;
-          right: auto;
+          right: 0;
+          bottom: 0;
+          @media only screen and (max-width: 480px) {
+            font-size: 1em;
+          }
         }
         .title {
-          font-weight: 400;
+          font-weight: 600;
           font-size: 1.5em;
+          @media only screen and (max-width: 480px) {
+            font-size: 1.1em;
+          }
         }
         .text_area {
           display: none;
@@ -83,9 +92,11 @@ const CardComp = styled.section`
         .count {
           text-align: right;
           font-size: 1.3em;
-          position: static;
-          bottom: auto;
-          left: auto;
+          bottom: 0;
+          left: 0;
+          @media only screen and (max-width: 480px) {
+            font-size: 1em;
+          }
         }
       }
     }

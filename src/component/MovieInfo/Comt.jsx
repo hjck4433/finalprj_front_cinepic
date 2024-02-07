@@ -79,7 +79,10 @@ const ComtComp = styled.div`
 
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 30px;
+      label:nth-child(1) {
+        padding-top: 2px;
+      }
       label {
         select {
           font-size: 0.9em;
@@ -141,11 +144,14 @@ const ComtComp = styled.div`
     .input_box {
       width: calc(100% - 80px);
       display: block;
-      padding: 2%;
-      /* text-align: right; */
+      padding: 2% 3% 4% 3%;
       .icon_box {
-        top: 20px;
+        top: 22px;
         right: 18px;
+        @media only screen and (max-width: 480px) {
+          top: 18px;
+          right: 18px;
+        }
         .modify {
           font-size: 16px;
         }
@@ -154,13 +160,23 @@ const ComtComp = styled.div`
         }
       }
       .select_box {
-        padding: 0px 16px 8px;
+        padding: 0px 16px 8px 10px;
         justify-content: flex-start;
+        gap: 16px;
+
         label {
-          select:nth-child(1) {
+          select[disabled] {
+            @media only screen and (max-width: 480px) {
+              font-size: 0.9em;
+            }
           }
         }
         .num {
+          select[disabled] {
+            @media only screen and (max-width: 480px) {
+              font-size: 0.9em;
+            }
+          }
         }
       }
       .bar {

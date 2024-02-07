@@ -77,6 +77,9 @@ const CommentWriteComp = styled.div`
       }
     }
     button {
+      width: 58px;
+      height: 38px;
+      font-size: 1em;
       font-weight: 400;
       margin: 20px;
     }
@@ -98,7 +101,10 @@ const CommentWriteComp = styled.div`
         text-align: left;
         padding: 2% 2% 4% 2%;
         label {
-          &:nth-child(1) {
+          select {
+            @media only screen and (max-width: 480px) {
+              font-size: 0.9em;
+            }
           }
         }
       }
@@ -112,9 +118,19 @@ const CommentWriteComp = styled.div`
         margin: 0;
         margin: 20px 0;
         margin-bottom: 3%;
+        @media only screen and (max-width: 480px) {
+          font-size: 1em;
+          margin: 6px 0;
+        }
       }
       button {
-        margin: 10px;
+        margin: 0px;
+        @media only screen and (max-width: 480px) {
+          width: 46px;
+          height: 30px;
+          font-size: 0.9em;
+          margin: 0px;
+        }
       }
     }
   }
@@ -166,18 +182,6 @@ const CommentWrite = ({
     }
   };
   const saveComment = useTokenAxios(handleSubmitComment);
-
-  // const comtWriteData = {
-  //   postId: 1,
-  //   movieId: 123,
-  //   image:
-  //     "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20231106_145%2F169919951043106bD7_JPEG%2Fmovie_image.jpg",
-  //   alias: "Mimi",
-  //   ratingField: "",
-  //   ratingNum: "",
-  //   ratingText: "",
-  //   commentRegDate: "",
-  // };
 
   return (
     <>

@@ -15,9 +15,15 @@ const CineBannerComp = styled.section`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  @media only screen and (max-width: 480px) {
+    max-height: 440px;
+  }
   .cover {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    @media only screen and (max-width: 480px) {
+      max-height: 440px;
+    }
     .container {
       width: 100%;
       height: 100%;
@@ -81,6 +87,11 @@ const CineBannerComp = styled.section`
         width: 100%;
         background-color: #fff;
         .search_bar {
+          @media only screen and (max-width: 480px) {
+            .search_bar {
+              width: 90%;
+            }
+          }
         }
 
         .type_filter {
@@ -100,6 +111,10 @@ const CineBannerComp = styled.section`
             top: auto;
             left: 30px;
             bottom: 30px;
+            @media only screen and (max-width: 480px) {
+              left: 30px;
+              bottom: 200px;
+            }
             .focused_title {
               h2 {
                 font-size: 3em;
@@ -125,6 +140,9 @@ const SearchComp = styled.section`
     .filter {
       .search_area {
         margin: 100px 0 80px;
+        @media only screen and (max-width: 480px) {
+          margin: 50px 0 60px;
+        }
         .search_bar {
           width: 40%;
           display: flex;
@@ -166,17 +184,6 @@ const SearchComp = styled.section`
         .type_filter {
           text-align: center;
           margin-bottom: 50px;
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: 480px) {
-    .container {
-      .filter {
-        .search_area {
-          .search_bar {
-            width: 90%;
-          }
         }
       }
     }
