@@ -223,15 +223,16 @@ export const PostComp = styled.section`
         flex-direction: column;
         align-items: end;
         textarea {
-          background-color: var(--IVORY);
+          /* background-color: var(--IVORY); */
           width: 100%;
           height: 120px;
           padding: 8px;
           font-size: 0.9rem;
           margin-bottom: 10px;
-          border: 1px solid var(--ORANGE);
+          border: 1px solid var(--GREY);
           border-radius: 10px;
           resize: none;
+          outline: none;
         }
         .postBtn {
           align-items: right;
@@ -280,6 +281,13 @@ export const PostComp = styled.section`
                 display: flex;
                 justify-content: center;
                 align-items: center;
+              }
+            }
+          }
+          .nickAndReviseBtn {
+            .reviseBtnBox {
+              button {
+                font-size: 0.8em;
               }
             }
           }
@@ -357,6 +365,13 @@ export const PostComp = styled.section`
               .editBtnBox {
                 display: flex;
                 justify-content: space-between;
+                button {
+                  font-size: 0.8em;
+                  @media only screen and (max-width: 768px) {
+                    width: 46%;
+                    padding: 0;
+                  }
+                }
               }
             }
           }

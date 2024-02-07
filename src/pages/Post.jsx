@@ -55,14 +55,6 @@ const Post = () => {
   };
   const getBoardData = useTokenAxios(fetchBoardData);
 
-  const fetchPostDetail = async () => {
-    const res = await BoardApi.boardDetail(postId);
-    if (res.data) {
-      getBoardData();
-    }
-  };
-  const getPostDetail = useTokenAxios(fetchPostDetail);
-
   // 조회 수
   const fetchPostCounter = async () => {
     const res = await BoardApi.boardCounter(postId);
@@ -126,14 +118,7 @@ const Post = () => {
               <div className="selectedType">
                 <div className="selectedCategory">
                   <p>{`${boardData.categoryName} / ${boardData.gatherType}`}</p>
-                  {/* <div className="selectedTheme">
-                    <p>{boardData.categoryName}</p>
-                  </div>
-                  <div className="selectedPlace">
-                    <p>{boardData.gatherType}</p>
-                  </div> */}
                 </div>
-                {/* <div className="count">조회 수 {boardData.count}</div> */}
                 <div className="writtenDate">{regDate}</div>
               </div>
               <h3>{boardData.title}</h3>

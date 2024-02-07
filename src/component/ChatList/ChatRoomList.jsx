@@ -68,6 +68,7 @@ const ChatRoomListComp = styled.section`
   @media only screen and (max-width: 768px) {
     .buttonBox {
       width: 100%;
+      /* justify-content: center; */
     }
     .container {
       .chatListBox {
