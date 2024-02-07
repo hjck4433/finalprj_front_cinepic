@@ -43,7 +43,7 @@ const Theater = () => {
     const container = mapRef.current; // 지도를 담을 영역의 DOM 레퍼런스
     const options = {
       center: new window.kakao.maps.LatLng(location.lat, location.long),
-      level: 4,
+      level: 3,
     };
 
     const kakaoMap = new window.kakao.maps.Map(container, options);
@@ -159,7 +159,7 @@ const Theater = () => {
       window.kakao.maps.event.addListener(placeMarker, "click", () => {
         setSelectedPlace(place);
         // 장소가 이동 될 때 마커를 누르면 맵 센터로 이동
-        map.setLevel(3);
+        map.setLevel(2);
         map.setCenter(
           new window.kakao.maps.LatLng(place.latitude, place.longitude)
         );
