@@ -18,7 +18,7 @@ const MyInfoComp = styled.section`
       margin-bottom: 50px;
       font-size: 1.8em;
       font-weight: 600;
-      /* padding-left: 20px; */
+      padding-left: 20px;
     }
     .wrapper {
       display: flex;
