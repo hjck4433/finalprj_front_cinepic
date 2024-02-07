@@ -195,6 +195,7 @@ const ComtComp = styled.div`
       }
       .P_comment {
         margin: 0;
+        line-height: 1.5;
       }
     }
   }
@@ -205,7 +206,7 @@ const ComtImg = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${(props) => props.$comtImg});
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
@@ -282,9 +283,6 @@ const Comt = (props) => {
             </div>
           )}
           <div className="select_box">
-            {/* <span>{comt.ratingField}</span>
-            <span>{comt.ratingNum}</span> */}
-
             <label htmlFor="field">
               <select
                 name="rating_field"

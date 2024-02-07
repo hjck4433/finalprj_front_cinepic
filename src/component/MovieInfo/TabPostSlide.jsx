@@ -351,7 +351,7 @@ const TabPostSlide = ({ movieId, userImage, userAlias }) => {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
-              300: {
+              480: {
                 slidesPerView: 2,
                 spaceBetween: 20,
               },
