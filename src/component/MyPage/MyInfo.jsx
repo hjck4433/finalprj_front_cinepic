@@ -16,7 +16,7 @@ const MyInfoComp = styled.section`
     h2 {
       text-align: left;
       margin-bottom: 50px;
-      font-size: 1.8rem;
+      font-size: 1.8em;
       font-weight: 600;
       padding-left: 20px;
     }

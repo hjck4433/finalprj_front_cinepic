@@ -8,11 +8,19 @@ import BookmarkApi from "../../api/BookmarkApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
 
 const MovieListComp = styled.section`
-  padding-bottom: 150px;
+  padding-bottom: 100px;
   .noBookmark {
+    padding-top: 80px;
     text-align: center;
     font-size: 1.6em;
     line-height: 2.3;
+    p {
+      color: #888;
+    }
+    @media only screen and (max-width: 768px) {
+      padding-top: 20px;
+      font-size: 1.4em;
+    }
   }
 
   .container {
@@ -50,7 +58,7 @@ const MovieListComp = styled.section`
     }
 
     &.mapContainer {
-      min-height: 50vh;
+      min-height: 40vh;
       .mapBox {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -58,6 +66,13 @@ const MovieListComp = styled.section`
         @media only screen and (max-width: 768px) {
           grid-template-columns: repeat(2, 1fr);
         }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .container {
+      &.mapContainer {
+        min-height: 10vh;
       }
     }
   }
