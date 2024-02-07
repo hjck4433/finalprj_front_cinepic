@@ -8,10 +8,10 @@ const LoadingComp = styled.section`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 50vh;
+    height: 70vh;
 
     .logo {
-      width: 130px;
+      width: 110px;
     }
     h2 {
       padding-top: 20px;
@@ -26,9 +26,7 @@ const LoadingComp = styled.section`
       flex-direction: column;
       justify-content: center;
       .logo {
-        width: 100px;
-        margin-right: 0;
-        margin-bottom: 40px;
+        width: 80px;
       }
       h2 {
         font-size: 1.4em;
