@@ -14,7 +14,7 @@ const FaqListComp = styled.section`
       h3 {
         font-size: 1.5rem;
         font-weight: 600;
-        padding-left: 5%;
+        /* padding-left: 5%; */
       }
     }
     .faqMap {

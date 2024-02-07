@@ -13,7 +13,7 @@ const MainBannerComp = styled.section`
     .container {
       width: 100%;
       .textBox {
-        padding: 100px;
+        padding: 100px 0;
 
         h4 {
           color: var(--IVORY);

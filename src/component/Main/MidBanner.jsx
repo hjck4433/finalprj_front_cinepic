@@ -12,7 +12,7 @@ const MidBannerComp = styled.section`
       h3 {
         font-size: 1.5em;
         font-weight: 400;
-        padding-left: 5%;
+        /* padding-left: 5%; */
         padding-top: 50px;
         span {
           font-weight: 600;

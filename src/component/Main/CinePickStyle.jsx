@@ -6,7 +6,8 @@ const CinePickComp = styled.section`
       h3 {
         font-size: 1.5rem;
         font-weight: 400;
-        padding: 100px 40px 0px 40px;
+        padding-top: 100px;
+        /* padding: 100px 40px 0px 40px; */
 
         span {
           font-weight: 600;
