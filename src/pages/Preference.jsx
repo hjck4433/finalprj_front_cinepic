@@ -198,7 +198,7 @@ const Preference = () => {
 
   // 취소 버튼 누르면 메인으로 이동
   const clickCancel = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   // 취향 선택 등록하기
@@ -320,8 +320,7 @@ const Preference = () => {
                             <button
                               onClick={() => {
                                 deleteDirector(index);
-                              }}
-                            >
+                              }}>
                               <FontAwesomeIcon icon={faTimes} />
                             </button>
                           </span>
@@ -362,8 +361,7 @@ const Preference = () => {
                               <button
                                 onClick={() => {
                                   deleteActor(index);
-                                }}
-                              >
+                                }}>
                                 <FontAwesomeIcon icon={faTimes} />
                               </button>
                             </span>
