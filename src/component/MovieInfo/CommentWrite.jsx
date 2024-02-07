@@ -269,7 +269,7 @@ const CommentWrite = ({
             width="58px"
             height=""
             fontSize="1em"
-            active={text.length > 0}
+            active={text.length > 0 && text.length <= 100}
             clickEvt={saveComment}
           />
         </div>
