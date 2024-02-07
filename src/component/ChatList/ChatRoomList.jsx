@@ -9,15 +9,15 @@ import useTokenAxios from "../../hooks/useTokenAxios";
 
 const ChatRoomListComp = styled.section`
   width: 100%;
-  .buttonBox {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: end;
-    margin-bottom: 50px;
-  }
   .container {
     padding: 100px 0;
+    .buttonBox {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: end;
+      margin-bottom: 50px;
+    }
     .chatListBox {
       width: 80%;
       margin: 0 auto;
@@ -53,6 +53,7 @@ const ChatRoomListComp = styled.section`
         padding-top: 40px;
         text-align: center;
         p {
+          color: #888;
           font-size: 1.6em;
           line-height: 2.3;
         }
@@ -66,15 +67,21 @@ const ChatRoomListComp = styled.section`
   }
   /* 모바일은 가장 밑에 두고 해야함! */
   @media only screen and (max-width: 768px) {
-    .buttonBox {
-      width: 100%;
-      /* justify-content: center; */
-    }
     .container {
+      padding: 50px 0;
+      .buttonBox {
+        width: 100%;
+        button {
+          width: 120px;
+        }
+      }
       .chatListBox {
         width: 100%;
         .chatBox {
           padding: 45px 10px;
+        }
+        .txtBox {
+          padding-top: 0;
         }
       }
     }

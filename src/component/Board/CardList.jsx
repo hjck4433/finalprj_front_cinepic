@@ -40,6 +40,15 @@ const CardListComp = styled.section`
       }
     }
     .boardMap {
+      .noData {
+        text-align: center;
+        line-height: 1.8;
+        padding-bottom: 100px;
+        p {
+          font-size: 1.4em;
+          color: #888;
+        }
+      }
       .pagination {
         margin-top: 50px;
       }
@@ -139,34 +148,6 @@ const CardList = ({
     setIsLoading(true);
   }, [category]);
 
-  // const boardData = [
-  //   {
-  //     boardId: 1,
-  //     memberId: 12345,
-  //     categoryId: 10,
-  //     gatherType: "온라인",
-  //     boardRegDate: "2024-01-24T12:34:56Z",
-  //     boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
-  //     boardContent:
-  //       "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
-  //     boardImage:
-  //       "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
-  //     count: 50,
-  //   },
-  //   {
-  //     boardId: 2,
-  //     memberId: 12345,
-  //     categoryId: 10,
-  //     gatherType: "온라인",
-  //     boardRegDate: "2024-01-24T12:34:56Z",
-  //     boardTitle: "음악영화 볼 파티원 모집합니다🎸🎵 음악이 좋은 영화도 ok",
-  //     boardContent:
-  //       "장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~\n장르는 음악 영화로 제한합니다!\n 팝콘은 필수! \n매 주 같이 볼 영화 정하기로해요~",
-  //     boardImage:
-  //       "https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/AjV/image/-GRim5L9QwM0BagzxrQgnBuzgTw.png",
-  //     count: 50,
-  //   },
-  // ];
   return (
     <>
       <CardListComp>
@@ -205,12 +186,25 @@ const CardList = ({
           <div className="boardMap">
             {boardData &&
               boardData.map((data) => <Card key={data.id} data={data} />)}
-            <PaginationUtil
-              totalPage={totalPage}
-              limit={10}
-              page={page}
-              setPage={setPage}
-            />
+
+            {boardData && boardData.length === 0 && (
+              <div className="noData">
+                <p>
+                  작성된 {`${type === "comment" ? "댓글" : "게시글"}`}이
+                  없습니다
+                </p>
+                <p>첫 게시글을 작성해 보세요!</p>
+              </div>
+            )}
+
+            {boardData && boardData.length > 0 && (
+              <PaginationUtil
+                totalPage={totalPage}
+                limit={10}
+                page={page}
+                setPage={setPage}
+              />
+            )}
           </div>
         </div>
       </CardListComp>

@@ -14,6 +14,7 @@ const LoginComp = styled.section`
   .container {
     height: 100%;
     padding-top: 120px;
+    padding-bottom: 80px;
     display: flex;
     justify-content: center;
 
@@ -65,6 +66,11 @@ const LoginComp = styled.section`
           margin-bottom: 20px;
         }
       }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .container {
+      padding-top: 80px;
     }
   }
 `;

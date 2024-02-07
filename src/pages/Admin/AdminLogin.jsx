@@ -141,6 +141,14 @@ const AdminLogin = () => {
               placeholder="비밀번호"
               value={inputPw}
               onChange={onChangePw}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  if (isActive) {
+                    loginClick();
+                  }
+                }
+              }}
             />
           </div>
           <Button
