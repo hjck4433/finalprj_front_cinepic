@@ -8,7 +8,6 @@ const BookMarkListComp = styled.section`
       font-size: 1.8em;
       font-weight: 600;
       padding-bottom: 80px;
-      padding-left: 20px;
     }
   }
 `;
