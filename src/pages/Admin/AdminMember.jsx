@@ -190,12 +190,14 @@ const AdminMember = () => {
               </tbody>
             </table>
           </div>
-          <PaginationUtil
-            totalPage={totalPage}
-            limit={10}
-            page={page}
-            setPage={setPage}
-          />
+          {memData.length !== 0 && (
+            <PaginationUtil
+              totalPage={totalPage}
+              limit={10}
+              page={page}
+              setPage={setPage}
+            />
+          )}
         </div>
         <Modal
           open={openModal}
