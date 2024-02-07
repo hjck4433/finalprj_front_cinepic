@@ -76,10 +76,6 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
 
   useEffect(() => {
     if (!isInitialRender.current) {
-      if (categorySel === "씨네크루") {
-        setTypeSel("선택");
-        setGatherActive(true);
-      }
     } else {
       isInitialRender.current = false;
     }
@@ -102,25 +98,36 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
   // 수정버튼
   const clickRevise = () => {
     setCategoryActive(false);
-    if (categorySel !== "씨네크루" && categorySel !== "선택")
-      setGatherActive(false);
+    setGatherActive(false);
     setConfirmRevise(true);
   };
 
   // 대분류 변경
   const onChangeCategory = (e) => {
     setCategorySel(e.target.value);
+    // 대분류
     if (e.target.value !== "씨네크루") {
+      // gatherActive 상태를 false로 설정하여 소분류 선택 상자를 비활성화
       setGatherActive(false);
+    } else {
+      // 대분류가 씨네크루가 아닌 경우
+      // gatherActive 상태를 false로 설정하여 소분류 선택 상자를 비활성화
+      setGatherActive(false);
+
+      // gatherType 빈 문자열인 경우
       if (data.gatherType === "") {
+        // 소분류를 오프라인으로 설정
         setTypeSel("오프라인");
-      } else
+      }
+      // gatherType이 "선택"이 아닌 경우 이전 값을 유지
+      else
         setTypeSel((prevType) => (prevType === "선택" ? "오프라인" : prevType));
     }
   };
 
   // 소분류 변경
   const onChangeType = (e) => {
+    // 소분류 선택 상자의 값이 변경될 때마다 선택된 값으로 setTypeSel을 호출, 상태 업데이트
     setTypeSel(e.target.value);
   };
 
