@@ -40,7 +40,7 @@ const Nav = ({ active, togle }) => {
       <ul className="menu">
         <li>
           <div className="m-title" onClick={() => onClickMenu(1)}>
-            영화추천
+            영화검색
           </div>
         </li>
         <li>

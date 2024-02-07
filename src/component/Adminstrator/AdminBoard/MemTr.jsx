@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import Button from "../../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../../../util/ProfileImg";
 
 const MemTrComp = styled.tr`
   vertical-align: middle;
@@ -25,13 +26,6 @@ const MemTrComp = styled.tr`
           border-radius: 100%;
           overflow: hidden;
           background-color: var(--GREY);
-          img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-          }
           svg {
             width: 80%;
             height: 80%;
@@ -58,7 +52,7 @@ const MemTr = ({ data, index, setId, deleteModal }) => {
         <span className="wrapper">
           <span className="imgBox">
             {data.image && data.image ? (
-              <img src={data.image} alt="profile" />
+              <ProfileImg $imgUrl={data.image} />
             ) : (
               <FontAwesomeIcon icon={faUser} />
             )}

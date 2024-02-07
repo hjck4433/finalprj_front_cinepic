@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../../util/ProfileImg";
 
 const SenderComp = styled.div`
   display: flex;
@@ -18,10 +19,6 @@ const SenderComp = styled.div`
       position: relative;
       border-radius: 50%;
       overflow: hidden;
-      .profile {
-        position: absolute;
-        width: 100%;
-      }
       svg {
         position: absolute;
         top: 20%;
@@ -59,7 +56,7 @@ export const Sender = ({ profile, alias, msg }) => {
       <div className="profileWrap">
         <div className="profileBox">
           {profile ? (
-            <img src={`${profile}`} alt="" className="profile" />
+            <ProfileImg $imgUrl={profile} />
           ) : (
             <FontAwesomeIcon icon={faUser} />
           )}

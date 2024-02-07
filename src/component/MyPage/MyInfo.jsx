@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../../util/ProfileImg";
 
 const MyInfoComp = styled.section`
   width: 100%;
@@ -34,11 +35,6 @@ const MyInfoComp = styled.section`
           overflow: hidden;
           border-radius: 100%;
           background-color: var(--GREY);
-          img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-          }
           svg {
             width: 80%;
             height: 80%;
@@ -175,7 +171,7 @@ const MyInfo = ({ memberInfo, profile }) => {
             <div className="userProfile">
               <div className="profileImg">
                 {memberInfo && memberInfo.image ? (
-                  <img src={memberInfo.image} alt="프로필이미지" />
+                  <ProfileImg $imgUrl={memberInfo.image} />
                 ) : (
                   <FontAwesomeIcon icon={faUser} />
                 )}

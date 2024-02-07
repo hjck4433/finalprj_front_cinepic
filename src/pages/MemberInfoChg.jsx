@@ -11,6 +11,7 @@ import MemberApi from "../api/MemberApi";
 import useTokenAxios from "../hooks/useTokenAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../util/ProfileImg";
 
 const MemberInfoChg = () => {
   const navigate = useNavigate();
@@ -296,7 +297,7 @@ const MemberInfoChg = () => {
           <div className="profile">
             <div className="imgBox">
               {imgSrc ? (
-                <img src={imgSrc} alt="프로필이미지" />
+                <ProfileImg $imgUrl={imgSrc} />
               ) : (
                 <FontAwesomeIcon icon={faUser} />
               )}

@@ -25,11 +25,6 @@ const InfoChgComp = styled.section`
         border-radius: 50%;
         background-color: var(--GREY);
         overflow: hidden;
-        img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-        }
         svg {
           position: absolute;
           top: 20%;

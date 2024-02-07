@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "../../../util/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../../../util/ProfileImg";
 
 const TrComp = styled.tr`
   vertical-align: middle;
@@ -26,13 +27,6 @@ const TrComp = styled.tr`
           border-radius: 100%;
           overflow: hidden;
           background-color: var(--GREY);
-          img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-          }
           svg {
             width: 80%;
             height: 80%;
@@ -139,7 +133,7 @@ const Tr = ({ data, index, revise, setRevise, clickOk, clickDel }) => {
         <span className="wrapper">
           <span className="imgBox">
             {data.memberImage && data.memberImage ? (
-              <img src={data.memberImage} alt="프로필이미지" />
+              <ProfileImg $imgUrl={data.memberImage} />
             ) : (
               <FontAwesomeIcon icon={faUser} />
             )}

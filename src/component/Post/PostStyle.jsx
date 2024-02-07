@@ -24,13 +24,6 @@ export const PostComp = styled.section`
           border-radius: 50%;
           overflow: hidden;
           background-color: var(--GREY);
-          img {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-          }
           svg {
             width: 80%;
             height: 80%;
@@ -166,13 +159,6 @@ export const PostComp = styled.section`
               position: relative;
               border-radius: 50%;
               overflow: hidden;
-              img {
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-              }
               svg {
                 width: 80%;
                 height: 80%;

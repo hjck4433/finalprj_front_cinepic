@@ -9,6 +9,7 @@ import useTokenAxios from "../hooks/useTokenAxios";
 import Modal from "../util/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../util/ProfileImg";
 
 const Post = () => {
   const navigate = useNavigate();
@@ -108,7 +109,7 @@ const Post = () => {
             <div className="profileIcon">
               <div className="profileImage">
                 {boardData.memberImage ? (
-                  <img src={boardData.memberImage} alt="userProfileImg" />
+                  <ProfileImg $imgUrl={boardData.memberImage} />
                 ) : (
                   <FontAwesomeIcon icon={faUser} />
                 )}

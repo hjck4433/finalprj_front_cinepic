@@ -6,6 +6,7 @@ import MovieDetailApi from "../../api/MovieDetailApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import ProfileImg from "../../util/ProfileImg";
 
 const CommentWriteComp = styled.div`
   margin-bottom: 5%;
@@ -137,15 +138,6 @@ const CommentWriteComp = styled.div`
   @media only screen and (max-width: 480px) {
   }
 `;
-const ComtImg = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props) => props.$comtImg});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-`;
 
 const CommentWrite = ({
   fetchPage,
@@ -200,7 +192,7 @@ const CommentWrite = ({
         <div className="user_box">
           <div className="img_box">
             {userImage ? (
-              <ComtImg $comtImg={userImage}></ComtImg>
+              <ProfileImg $imgUrl={userImage}></ProfileImg>
             ) : (
               <FontAwesomeIcon icon={faUser} />
             )}
