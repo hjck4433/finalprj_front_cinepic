@@ -113,6 +113,10 @@ const AdminBoard = () => {
     getTotalPage();
   }, []);
 
+  // 페이지당 게시글 수
+  const itemsPerPage = 10;
+  // 현재 페이지의 첫 번째 항목의 인덱스
+  const startIndex = (page - 1) * itemsPerPage;
   // 모달
   const [openModal, setModalOpen] = useState(false);
   const [modalMsg, setModalMsg] = useState("");
@@ -142,7 +146,7 @@ const AdminBoard = () => {
   // 확인 버튼 클릭
   const clickOk = useCallback(
     (categorySel, typeSel, id) => {
-      handleModal("확인", "수정하시겠습니까", true, 0);
+      handleModal("확인", "수정하시겠습니까?", true, 0);
       setEditCategory(categorySel);
       if (categorySel === "무비추천") {
         setEditType("");
@@ -210,7 +214,7 @@ const AdminBoard = () => {
                     <MemoizedTr
                       key={data.id}
                       data={data}
-                      index={index}
+                      index={startIndex + index}
                       revise={revise}
                       setRevise={setRevise}
                       clickOk={clickOk}

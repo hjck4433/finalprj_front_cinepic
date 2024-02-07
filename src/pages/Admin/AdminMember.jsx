@@ -105,7 +105,7 @@ const AdminMember = () => {
 
   const getTotalPage = useTokenAxios(fetchPageList); // fetchPageList 사용해 전체 페이지 수 가져오기
 
-  //페이지당 회원 수
+  // 페이지당 회원 수
   const itemsPerPage = 10;
   // 현재 페이지의 첫 번째 항목의 인덱스
   const startIndex = (page - 1) * itemsPerPage;
