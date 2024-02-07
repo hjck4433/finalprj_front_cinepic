@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../component/Layout/Header/Header";
 import Footer from "../component/Layout/Footer";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
 import { UserContext } from "../context/UserStore";
 import ScrollToTop from "../component/Layout/ScrollToTop";
 import Modal from "../util/Modal";
@@ -92,6 +92,7 @@ const Layout = () => {
         {/* 로그인 여부를 props로 전달 */}
         {!isMembership && <Ad isLogin={loginStatus} />}
       </main>
+
       <Footer />
       <Modal
         open={openModal}
