@@ -4,18 +4,17 @@ export const NewPostComp = styled.section`
   background-color: white;
   .container {
     padding: 4%;
-    h3 {
-      color: var(--BLACK);
-      font-weight: 600;
-      font-size: 1.4em;
-    }
+
     .postIntro {
       margin-bottom: 30px;
+
       h2 {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        font-size: 1.8em;
       }
       p {
-        margin-bottom: 5px;
+        padding-bottom: 10px;
         font-size: 1.4em;
       }
     }
@@ -24,20 +23,23 @@ export const NewPostComp = styled.section`
       border: 1px solid var(--GREY);
       border-radius: 10px;
       padding: 40px;
+
       .selectTheme {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         h3 {
           color: var(--BLACK);
           font-weight: 600;
-          font-size: 1.4em;
+          font-size: 1.3em;
+          margin-bottom: 5px;
         }
       }
       .meetingType {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         h3 {
           color: var(--BLACK);
           font-weight: 600;
-          font-size: 1.4em;
+          font-size: 1.3em;
+          margin-bottom: 5px;
         }
       }
       .author,
@@ -48,7 +50,7 @@ export const NewPostComp = styled.section`
         h3 {
           color: var(--BLACK);
           font-weight: 600;
-          font-size: 1.4em;
+          font-size: 1.3em;
           width: 100px;
         }
         p {
@@ -59,6 +61,8 @@ export const NewPostComp = styled.section`
       .postTitle,
       .contents {
         h3 {
+          font-weight: 600;
+          font-size: 1.3em;
           margin-bottom: 20px;
           letter-spacing: 8px;
         }
@@ -67,7 +71,7 @@ export const NewPostComp = styled.section`
         margin-bottom: 30px;
         input {
           background-color: var(--IVORY);
-          border: 1px solid var(--ORANGE);
+          border: 1px solid var(--GREY);
           width: 100%;
           border-radius: 8px;
           padding: 10px;
@@ -77,7 +81,7 @@ export const NewPostComp = styled.section`
       .contents {
         textarea {
           background-color: var(--IVORY);
-          border: 1px solid var(--ORANGE);
+          border: 1px solid var(--GREY);
           width: 100%;
           border-radius: 10px;
           padding: 10px;
