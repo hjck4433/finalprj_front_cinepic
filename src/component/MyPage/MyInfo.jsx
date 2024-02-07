@@ -207,24 +207,18 @@ const MyInfo = ({ memberInfo, profile }) => {
                 <Button
                   children="수정하기"
                   active={true}
-                  // height="45px"
-                  // width="24%"
                   fontSize=".9em"
                   clickEvt={toinfochange}
                 />
                 <Button
                   children="내 글 관리하기"
                   active={true}
-                  // height="45px"
-                  // width="24%"
                   fontSize=".9em"
                   clickEvt={tomemberpost}
                 />
                 <Button
                   children="내 취향 관리"
                   active={true}
-                  // height="45px"
-                  // width="24%"
                   fontSize=".9em"
                   clickEvt={toinfopreference}
                 />
