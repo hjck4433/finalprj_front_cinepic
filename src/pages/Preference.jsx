@@ -211,7 +211,6 @@ const Preference = () => {
     );
     if (res.data === true) {
       console.log("저장 성공");
-      // handleModal("성공", "등록이 완료되었습니다.", false, 0);
       setIsPrefer(res.data);
       preferMovieSave();
     } else {
@@ -265,7 +264,6 @@ const Preference = () => {
     );
     if (res.data) {
       console.log("수정 성공");
-      // handleModal("성공", "수정이 완료되었습니다.", false, 1);
       preferMovieSave();
     }
   };
