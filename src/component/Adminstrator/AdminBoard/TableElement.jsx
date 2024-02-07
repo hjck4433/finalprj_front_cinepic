@@ -21,6 +21,7 @@ const TrComp = styled.tr`
         .imgBox {
           width: 30px;
           padding-bottom: 30px;
+          margin-right: 5px;
           position: relative;
           border-radius: 100%;
           overflow: hidden;
@@ -28,12 +29,18 @@ const TrComp = styled.tr`
           img {
             position: absolute;
             width: 100%;
+            height: 100%;
             left: 0;
             top: 0;
           }
-          margin-right: 10px;
-        }
-        span {
+          svg {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            color: var(--DARKGREY);
+          }
         }
       }
     }

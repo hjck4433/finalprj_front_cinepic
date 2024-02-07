@@ -110,7 +110,16 @@ const CinePick = () => {
         <div className="container">
           <div className="cineTitle">
             <h3>
-              오늘은 이 <span>영화</span>어때요?
+              {/* 로그인, 비로그인 상태에 따라 문구가 달라짐 */}
+              {loginStatus ? (
+                <>
+                  <span>취향</span>에 맞춘 영화를 소개할게요!
+                </>
+              ) : (
+                <>
+                  오늘은 이 <span>영화</span>어때요?
+                </>
+              )}
             </h3>
             <div className="pickMovieBox">
               <div className="onePickBox">

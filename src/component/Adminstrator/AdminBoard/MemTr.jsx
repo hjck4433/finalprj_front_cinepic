@@ -41,8 +41,6 @@ const MemTrComp = styled.tr`
             color: var(--DARKGREY);
           }
         }
-        span {
-        }
       }
     }
   }
