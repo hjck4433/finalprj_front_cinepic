@@ -18,7 +18,7 @@ const MainBannerComp = styled.section`
         h4 {
           color: var(--IVORY);
           font-size: 1.2em;
-          margin-bottom: 5px;
+          margin-bottom: 20px;
         }
         h2 {
           color: var(--IVORY);
@@ -34,6 +34,19 @@ const MainBannerComp = styled.section`
           h2 {
             font-size: 2.4em;
           }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    height: 400px;
+  }
+  @media only screen and (max-width: 480px) {
+    height: 300px;
+    .sectionWrapper {
+      .container {
+        .textBox {
+          padding: 60px;
         }
       }
     }
