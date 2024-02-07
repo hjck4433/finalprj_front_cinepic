@@ -145,9 +145,11 @@ const PostRevise = () => {
       <NewPostComp>
         <div className="container">
           <div className="postIntro">
-            <h2 className="introTop">모임과 관련된 글을 등록해주세요.</h2>
-            <p>함께 만들어가는 건전한 영화모임!</p>
-            <p>후기로 추억하는 그 날의 즐거웠던 모임!</p>
+            <h2 className="introTop">새로운 게시글을 작성해보세요!</h2>
+            <p>
+              씨네크루를 만들어 함께 영화를 보고, 크루후기를 남겨 추억을
+              기록하세요.
+            </p>
           </div>
           <div className="postBox">
             <div className="selectTheme">
