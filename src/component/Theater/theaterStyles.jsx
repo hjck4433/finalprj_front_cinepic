@@ -101,7 +101,7 @@ const TheaterComp = styled.section`
             .title {
               display: inline-block;
               width: 100px;
-              margin-right: 10px;
+              margin-right: 15px;
               position: relative;
               font-weight: 600;
               &::after {
