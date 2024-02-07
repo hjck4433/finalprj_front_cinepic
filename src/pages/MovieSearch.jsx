@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MovieBanner from "../component/MovieSearch/MovieBanner";
 import MovieList from "../component/MovieSearch/MovieList";
 
@@ -11,14 +11,22 @@ const MovieSearch = () => {
 
   const [sortBy, setSortBy] = useState("recent");
 
+  const searchCompRef = useRef(null);
+
   return (
     <>
       <MovieBanner
         setKeyword={setKeyword}
         sortBy={sortBy}
         setSortBy={setSortBy}
+        searchCompRef={searchCompRef}
       />
-      <MovieList keyword={keyword} sortBy={sortBy} setSortBy={setSortBy} />
+      <MovieList
+        keyword={keyword}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        searchCompRef={searchCompRef}
+      />
     </>
   );
 };

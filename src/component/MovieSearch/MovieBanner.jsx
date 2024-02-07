@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import movieSearchBanner from "../../images/movieSearch.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -78,7 +78,7 @@ const SearchComp = styled.section`
   }
 `;
 
-const MovieBanner = ({ setKeyword, setSortBy }) => {
+const MovieBanner = ({ setKeyword, setSortBy, searchCompRef }) => {
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const MovieBanner = ({ setKeyword, setSortBy }) => {
           <div className="banner">
             <div className="title">
               <h1>영화검색</h1>
-              <p>보고 싶은 영화를 검색해 보세요.</p>
+              <p ref={searchCompRef}>보고 싶은 영화를 검색해 보세요.</p>
             </div>
           </div>
         </div>

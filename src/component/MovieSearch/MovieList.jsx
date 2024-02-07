@@ -6,6 +6,8 @@ import Modal from "../../util/Modal";
 import MovieApi from "../../api/MovieApi";
 import BookmarkApi from "../../api/BookmarkApi";
 import useTokenAxios from "../../hooks/useTokenAxios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const MovieListComp = styled.section`
   padding-bottom: 100px;
@@ -69,6 +71,20 @@ const MovieListComp = styled.section`
       }
     }
   }
+  svg {
+    padding: 20px;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    font-size: 40px;
+    z-index: 333;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      color: var(--DARKRED);
+      bottom: 10px;
+    }
+  }
   @media only screen and (max-width: 480px) {
     .container {
       &.mapContainer {
@@ -78,7 +94,7 @@ const MovieListComp = styled.section`
   }
 `;
 
-const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
+const MovieList = ({ sortType, keyword, sortBy, setSortBy, searchCompRef }) => {
   const [movieData, setMovieData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -205,6 +221,15 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
     setModalType(type);
   };
 
+  const handleScrollUp = () => {
+    if (searchCompRef.current) {
+      searchCompRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <>
       <MovieListComp>
@@ -270,6 +295,9 @@ const MovieList = ({ sortType, keyword, sortBy, setSortBy }) => {
               )}
           </div>
         </div>
+        {movieData.length > 16 && (
+          <FontAwesomeIcon icon={faCircleChevronUp} onClick={handleScrollUp} />
+        )}
         {isLoading && <div ref={end}></div>}
         <Modal
           open={openModal}

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import MovieList from "../MovieSearch/MovieList";
+import { useRef } from "react";
 
 const BookMarkListComp = styled.section`
   .container {
@@ -13,12 +14,13 @@ const BookMarkListComp = styled.section`
 `;
 
 const BookMarkList = () => {
+  const searchCompRef = useRef(null);
   return (
     <>
       <BookMarkListComp>
         <div className="container">
-          <h2>북마크</h2>
-          <MovieList sortType="member" />
+          <h2 ref={searchCompRef}>북마크</h2>
+          <MovieList sortType="member" searchCompRef={searchCompRef} />
         </div>
       </BookMarkListComp>
     </>
