@@ -275,6 +275,10 @@ const TheaterComp = styled.section`
       h2 {
         font-size: 1.5em;
       }
+      // 지도 영역
+      .mapContainer {
+        height: 400px;
+      }
       .searchContainer {
         margin-left: 60%;
       }
@@ -316,6 +320,10 @@ const TheaterComp = styled.section`
       // 정보박스 전체 영역
       h2 {
         font-size: 1.4em;
+      }
+      // 지도 영역
+      .mapContainer {
+        height: 300px;
       }
       .infoContainer {
         padding: 30px;
