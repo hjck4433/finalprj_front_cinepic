@@ -21,6 +21,9 @@ const TabMenuComp = styled.section`
         text-align: center;
         padding: 2% 5%;
         cursor: pointer;
+        @media only screen and (max-width: 480px) {
+          padding: 3% 4%;
+        }
       }
       .focused {
         color: var(--ORANGE);

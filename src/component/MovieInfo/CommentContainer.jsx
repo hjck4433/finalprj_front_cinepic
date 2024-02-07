@@ -14,15 +14,27 @@ const CommentContainerComp = styled.section`
     padding-bottom: 80px;
     h4 {
       font-size: 1.5em;
+      font-weight: 600;
       margin: 4% 2%;
     }
   }
   @media only screen and (max-width: 768px) {
     .container {
       padding-bottom: 50px;
+      h4 {
+        font-size: 2em;
+        margin: 6% 1%;
+      }
     }
   }
   @media only screen and (max-width: 480px) {
+    .container {
+      padding-bottom: 40px;
+      h4 {
+        font-size: 1.5em;
+        margin: 10% 1%;
+      }
+    }
   }
 `;
 

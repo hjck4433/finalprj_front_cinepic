@@ -67,7 +67,7 @@ const CommentWriteComp = styled.div`
     }
     textarea {
       width: calc(100% - (180px + (20px + 20px)));
-      margin: 20px;
+      margin: 40px 20px;
       border: none;
       resize: none;
       font-size: 1.1em;
@@ -116,7 +116,7 @@ const CommentWriteComp = styled.div`
       textarea {
         width: 100%;
         margin: 0;
-        margin: 20px 0;
+        margin: 20px;
         margin-bottom: 3%;
         @media only screen and (max-width: 480px) {
           font-size: 1em;
@@ -141,7 +141,7 @@ const ComtImg = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${(props) => props.$comtImg});
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;

@@ -32,11 +32,18 @@ const PostModalComp = styled.div`
     animation: modal-show 0.3s;
     overflow: hidden;
     position: relative;
+    @media only screen and (max-width: 480px) {
+      padding: 16px;
+    }
 
     h3 {
       font-size: 26px;
       font-weight: 900;
       margin-bottom: 20px;
+      @media only screen and (max-width: 480px) {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
     }
     .close_btn {
       font-size: 36px;
@@ -47,6 +54,11 @@ const PostModalComp = styled.div`
       right: 26px;
       svg {
       }
+      @media only screen and (max-width: 480px) {
+        font-size: 26px;
+        top: 16px;
+        right: 20px;
+      }
     }
 
     .input_box {
@@ -56,10 +68,16 @@ const PostModalComp = styled.div`
         overflow: hidden;
         p {
           margin-bottom: 20px;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.3em;
+          }
         }
         img {
           height: 300px;
           margin: 20px 0;
+          @media only screen and (max-width: 480px) {
+            height: 200px;
+          }
         }
       }
       .box {
@@ -76,21 +94,26 @@ const PostModalComp = styled.div`
           font-weight: 300;
           font-size: 1em;
           cursor: pointer;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.2em;
+          }
           .input_file {
             display: none;
           }
         }
       }
       p {
-        /* background-color: pink; */
         margin-bottom: 10px;
         text-align: left;
         span {
           padding: 0 3px;
           padding-bottom: 6px;
           color: var(--ORANGE);
-          /* border-right: 4px solid var(--GREY); */
+          font-size: 1.1em;
           display: inline-block;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.3em;
+          }
         }
       }
 
@@ -103,6 +126,9 @@ const PostModalComp = styled.div`
         margin-bottom: 10px;
         font-size: 1.3em;
         background-color: #fff;
+        @media only screen and (max-width: 768px) {
+          font-size: 1.4em;
+        }
       }
       textarea {
         display: inline-block;
@@ -119,6 +145,12 @@ const PostModalComp = styled.div`
         &:focus {
           outline: none;
         }
+        @media only screen and (max-width: 768px) {
+          font-size: 1.3em;
+        }
+        @media only screen and (max-width: 480px) {
+          height: 130px;
+        }
       }
     }
 
@@ -126,8 +158,9 @@ const PostModalComp = styled.div`
       display: flex;
       justify-content: right;
       button {
-        width: auto;
-        padding: 3px 16px;
+        width: 56px;
+        height: 40px;
+        /* padding: 3px 16px; */
         color: #fff;
         font-size: 1em;
         font-weight: 300;
@@ -137,37 +170,20 @@ const PostModalComp = styled.div`
           margin-left: 10px;
           color: var(--RED);
         }
-      }
-    }
-  }
-  @media only screen and (max-width: 768px) {
-    section {
-      .input_box {
-        .file_box {
-          p {
-            font-size: 1.3em;
-          }
-        }
-        .box {
-          label {
-            font-size: 1.2em;
-          }
-        }
-        .input_text {
-          font-size: 1.4em;
-        }
-        textarea {
-          font-size: 1.3em;
-        }
-      }
-      .btnBox {
-        button {
-          width: auto;
+        @media only screen and (max-width: 768px) {
+          /* width: auto; */
           font-size: 1.2em;
         }
+        @media only screen and (max-width: 480px) {
+          width: 48px;
+          height: 34px;
+
+          font-size: 1.1em;
+        }
       }
     }
   }
+
   @media only screen and (max-width: 480px) {
   }
   @keyframes modal-show {
