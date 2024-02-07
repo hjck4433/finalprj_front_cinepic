@@ -87,7 +87,7 @@ const Footer = () => {
             <p>김현지 | 박소현 | 이세웅 | 유현주 | 김지은 | 황선영</p>
             <p>주소: 서울특별시 강남구 역삼로</p>
             <p>전화번호 02-123-4567</p>
-            <p>이메일 : cinepic@naver.com</p>
+            <p>이메일 : cinepic2024@google.com</p>
           </div>
           <div className="copyright">
             CopyRight © 2024 Cinepic All Rights Reserved.

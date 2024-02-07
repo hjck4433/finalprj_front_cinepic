@@ -6,7 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const MovieBannerComp = styled.section`
   width: 100%;
-  height: 640px;
+  height: 630px;
   background-image: url(${movieSearchBanner});
   background-size: cover;
   background-position: center;
@@ -20,11 +20,13 @@ const MovieBannerComp = styled.section`
       position: relative;
       h1 {
         font-size: 2.3em;
+        font-weight: 600;
         color: #fff;
       }
       p {
         font-size: 1.2em;
         color: #fff;
+        font-weight: 300;
       }
       .title {
         position: absolute;

@@ -122,7 +122,7 @@ const Login = () => {
       }
     } catch (err) {
       console.log("로그인 에러 : " + err);
-      if (err.response && err.response.status === 405) {
+      if (err.response && err.response.status === 401) {
         console.log("로그인 실패: 405 Unauthorized");
         setModalOpen(true);
         setModalMsg("잘못된 아이디 또는 비밀번호 입니다.");
@@ -167,6 +167,14 @@ const Login = () => {
                 placeholder="비밀번호"
                 value={inputPw}
                 onChange={onChangePw}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (isActive) {
+                      loginClick();
+                    }
+                  }
+                }}
               />
             </div>
             <Button

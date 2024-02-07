@@ -35,20 +35,29 @@ const Kakao = () => {
   };
 
   const kakaoUser = async (token) => {
-    const res = await KakaoApi.getInfo(token);
-    console.log("kakaoUser", typeof res.data);
-    if (res.data !== "") {
-      setIsMember(!res.data.isMember);
-      if (!res.data.isMember) {
-        setEmail(res.data.userInfo.kakao_account.email);
-        setProfile(res.data.userInfo.kakao_account.profile.profile_image_url);
-        setKakaoId(res.data.userInfo.id);
+    try {
+      const res = await KakaoApi.getInfo(token);
+      console.log("kakaoUser", typeof res.data);
+      if (res.data !== "") {
+        setIsMember(!res.data.isMember);
+        if (!res.data.isMember) {
+          setEmail(res.data.userInfo.kakao_account.email);
+          setProfile(res.data.userInfo.kakao_account.profile.profile_image_url);
+          setKakaoId(res.data.userInfo.id);
+        }
+      } else if (res.data === "") {
+        handleModal("오류", "이미 일반회원으로 사용중인 이메일입니다", false);
       }
-    } else if (res.data === "") {
-      handleModal("오류", "이미 일반회원으로 사용중인 이메일입니다", false);
-    }
-    if (res.data.isMember) {
-      login(res.data.userInfo.kakao_account.email, res.data.userInfo.id);
+      if (res.data.isMember) {
+        login(res.data.userInfo.kakao_account.email, res.data.userInfo.id);
+      }
+    } catch (e) {
+      console.error("카카오 로그인 중 에러 발생 :", e);
+      handleModal(
+        "오류",
+        "오류가 발생 했습니다 \n 로그인창으로 돌아갑니다.",
+        false
+      );
     }
   };
 
@@ -67,6 +76,11 @@ const Kakao = () => {
       }
     } catch (err) {
       console.log("로그인 에러 : " + err);
+      handleModal(
+        "오류",
+        "오류가 발생 했습니다 \n 로그인창으로 돌아갑니다.",
+        false
+      );
     }
   };
 
