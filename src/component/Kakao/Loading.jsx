@@ -3,17 +3,19 @@ import logo from "../../images/cinepic_logo.png";
 
 const LoadingComp = styled.section`
   width: 100;
-  height: 80vh;
   .container {
     display: flex;
     align-items: center;
-    padding-top: 100px;
+    justify-content: center;
+    flex-direction: column;
+    height: 50vh;
+
     .logo {
-      width: 150px;
-      margin-right: 20px;
+      width: 130px;
     }
     h2 {
-      font-size: 1.8;
+      padding-top: 20px;
+      font-size: 1.7em;
       font-weight: 600;
       text-align: center;
       color: var(--BLACK);
@@ -42,7 +44,7 @@ const Loading = () => {
         <div className="container">
           <img className="logo" src={logo} alt="logo" />
           <div className="LoadingBox">
-            <h2>로그인 중입니다 잠시만 기다려 주세요</h2>
+            <h2>로그인 중입니다</h2>
           </div>
         </div>
       </LoadingComp>
