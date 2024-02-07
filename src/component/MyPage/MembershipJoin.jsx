@@ -23,7 +23,7 @@ const MembershipJoinComp = styled.section`
         p {
           text-align: center;
           font-size: 1.9em;
-          font-weight: 600;
+          font-weight: 400;
           color: var(--IVORY);
         }
         margin-bottom: 30px;

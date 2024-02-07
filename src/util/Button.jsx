@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 const ButtonComp = styled.button`
   text-align: center;
   width: ${(props) => props.width || "200px"};
-  height: ${(props) => props.height || "40px"};
+  /* height: ${(props) => props.height || "40px"}; */
+  padding: 10px 0;
   color: ${(props) => props.color || "white"};
   font-weight: 600;
   font-size: ${(props) => props.fontSize || "1em"};

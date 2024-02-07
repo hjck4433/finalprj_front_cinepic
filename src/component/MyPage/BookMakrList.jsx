@@ -5,8 +5,9 @@ const BookMarkListComp = styled.section`
   .container {
     h2 {
       font-size: 1.8rem;
-      font-weight: 800;
+      font-weight: 600;
       padding-bottom: 80px;
+      padding-left: 20px;
     }
   }
 `;

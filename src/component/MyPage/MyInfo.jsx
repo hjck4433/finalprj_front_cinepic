@@ -14,10 +14,11 @@ const MyInfoComp = styled.section`
   .container {
     padding-bottom: 80px;
     h2 {
-      text-align: center;
+      text-align: left;
       margin-bottom: 50px;
       font-size: 1.8rem;
-      font-weight: 800;
+      font-weight: 600;
+      padding-left: 20px;
     }
     .wrapper {
       display: flex;
@@ -77,19 +78,22 @@ const MyInfoComp = styled.section`
     }
     .buttonBox {
       display: flex;
-      justify-content: end;
-      /* outline: 1px solid red; */
+      justify-content: space-between;
       margin-top: 40px;
       button {
-        margin-left: 50px;
         letter-spacing: -0.5px;
         word-break: keep-all;
         line-height: 1.3;
+        padding: 10px;
+        width: 30%;
       }
     }
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 800px) {
+      h2 {
+      }
       .wrapper {
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         width: 100%;
 
@@ -108,14 +112,27 @@ const MyInfoComp = styled.section`
           width: 100%;
           justify-content: center;
           text-align: center;
-          margin-right: 30px;
+
+          .userBox {
+            grid-template-columns: 20% 80%;
+            padding: 0 10px;
+            p {
+              &.title {
+                justify-content: flex-start;
+                align-items: baseline;
+              }
+            }
+          }
+
           .buttonBox {
             padding-right: 0;
-            justify-content: center;
+            justify-content: space-between;
             margin-top: 70px;
 
             button {
-              /* width: 300px; //왜 버튼 넓이가 넓어지지 않는지? */
+              line-height: 1.4;
+              width: 30%;
+              margin: 0;
             }
           }
         }
@@ -126,6 +143,7 @@ const MyInfoComp = styled.section`
         .userContent {
           padding: 0;
           .userBox {
+            grid-template-columns: 30% 70%;
             p {
               font-size: 1.4em;
             }
@@ -189,24 +207,24 @@ const MyInfo = ({ memberInfo, profile }) => {
                 <Button
                   children="수정하기"
                   active={true}
-                  height="45px"
-                  width="24%"
+                  // height="45px"
+                  // width="24%"
                   fontSize=".9em"
                   clickEvt={toinfochange}
                 />
                 <Button
                   children="내 글 관리하기"
                   active={true}
-                  height="45px"
-                  width="24%"
+                  // height="45px"
+                  // width="24%"
                   fontSize=".9em"
                   clickEvt={tomemberpost}
                 />
                 <Button
                   children="내 취향 관리"
                   active={true}
-                  height="45px"
-                  width="24%"
+                  // height="45px"
+                  // width="24%"
                   fontSize=".9em"
                   clickEvt={toinfopreference}
                 />
