@@ -73,6 +73,7 @@ const Join = ({ email, profile, kakaoId }) => {
 
   // 유효성
   const [isEmail, setIsEmail] = useState(false);
+  const [isCodeSent, setIsCodeSent] = useState(false);
   const [isCode, setIsCode] = useState(false);
   const [isPw, setIsPw] = useState(false);
   const [isPw2, setIsPw2] = useState(false);
@@ -147,6 +148,7 @@ const Join = ({ email, profile, kakaoId }) => {
           "인증번호가 발송되었습니다.\n받은 메일함에 없는 경우 스팸메일함을 확인해주세요."
         );
         setModalHeader("확인");
+        setIsCodeSent(true);
       }
     } catch (e) {
       console.log("이메일 err : " + e);
@@ -412,7 +414,7 @@ const Join = ({ email, profile, kakaoId }) => {
                   value={inputCode}
                   changeEvt={onChangeEmailCode}
                   btnChild="확인"
-                  active={isEmail}
+                  active={isCodeSent}
                   clickEvt={checkCode}
                   msg={codeMessage}
                   msgType={isCode}

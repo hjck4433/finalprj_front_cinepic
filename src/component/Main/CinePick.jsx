@@ -146,7 +146,7 @@ const CinePick = () => {
                   children="상세보기"
                   // width="300px"
                   active={true}
-                  front={"var(--DARKRED)"}
+                  front={"var(--RED)"}
                   back={"var(--DARKRED)"}
                   clickEvt={() => {
                     movieData &&
