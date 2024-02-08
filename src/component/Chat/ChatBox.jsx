@@ -225,7 +225,7 @@ const ChatBox = ({ memberInfo, roomId }) => {
             </div>
           </div>
           <Button
-            children="키키 나가기"
+            children="나가기"
             active={true}
             clickEvt={closeMsg}
             width="100%"
