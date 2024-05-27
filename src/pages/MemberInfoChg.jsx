@@ -281,7 +281,8 @@ const MemberInfoChg = () => {
     const res = await MemberApi.withdrawMember();
     if (res.data) {
       setLoginStatus("");
-      setIsKikiMember("");
+      setIsMembership("");
+      setIsPrefer("");
       window.localStorage.clear();
       navigate("/");
     }
